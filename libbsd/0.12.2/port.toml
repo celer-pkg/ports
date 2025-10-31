@@ -1,0 +1,9 @@
+[package]
+url = "https://gitlab.freedesktop.org/libbsd/libbsd.git"
+ref = "0.12.2"
+supported_hosts = ["linux", "darwin"]
+
+[[build_configs]]
+build_system = "makefiles"
+dependencies = ["openssl@3.5.0", "libmd@1.1.0"]
+dev_dependencies = ["macros@1.20.2"]

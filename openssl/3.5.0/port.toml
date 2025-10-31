@@ -30,6 +30,7 @@ options = [
     "no-docs",
     "no-demos",
     "no-tests",
+    "no-asm",
     "--openssldir=ssl",
     "--libdir=lib"
 ]
