@@ -2,9 +2,7 @@
 url = "https://gitlab.freedesktop.org/gstreamer/gstreamer.git"
 ref = "1.26.0"
 
-# ============= Build for Linux ============= #
 [[build_configs]]
-pattern = "*linux*"
 build_system = "meson"
 dependencies = ["boost@1.87.0", "eigen@3.4.0"]
 options_windows = ["--auto-features=disabled"]
