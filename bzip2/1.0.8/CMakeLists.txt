@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 3.5...3.29)
-project(bzip2 C)
+project(bzip2 LANGUAGES C VERSION 1.0.8)
 
 if(CMAKE_BUILD_TYPE STREQUAL Debug)
     add_definitions(-DBZ_DEBUG) # enable extra assertions
@@ -12,13 +12,16 @@ set(BZ2_SOURCES
     randtable.c
     compress.c
     decompress.c
-    bzlib.c)
+    bzlib.c
+)
 
 add_library(bz2 ${BZ2_SOURCES})
 set_target_properties(bz2 PROPERTIES
     DEBUG_POSTFIX d
-    VERSION "${BZ2_VERSION}"
-    SOVERSION 1.0)
+    VERSION "${PROJECT_VERSION}"
+    SOVERSION "${PROJECT_VERSION_MAJOR}.${PROJECT_VERSION_MINOR}"
+)
+
 if(BUILD_SHARED_LIBS)
     target_compile_definitions(bz2 PRIVATE -DBZ_BUILD_DLL)
 endif()
@@ -32,7 +35,8 @@ endif()
 install(TARGETS bz2
     RUNTIME DESTINATION bin
     ARCHIVE DESTINATION lib
-    LIBRARY DESTINATION lib)
+    LIBRARY DESTINATION lib
+)
 
 if(NOT BZIP2_SKIP_TOOLS)
     add_executable(bzip2 bzip2.c ${BZ2_SOURCES})
