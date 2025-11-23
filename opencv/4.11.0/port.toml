@@ -10,14 +10,10 @@ dependencies = [
 options = [
     "-DOPENCV_EXTRA_MODULES_PATH=${BUILDTREES_DIR}/opencv_contrib@4.11.0/src/modules",
     "-DBUILD_LIST=calib3d,core,features2d,flann,highgui,imgcodecs,imgproc,xfeatures2d,aruco,video,videoio,objdetect,tracking,ccalib,stereo",
-    "-DENABLE_NEON=OFF",
     "-DBUILD_TESTING=OFF",
     "-DBUILD_DOCS=OFF",
     "-DBUILD_ANDROID_EXAMPLES=OFF",
     "-DBUILD_EXAMPLES=OFF",
     "-DBUILD_PERF_TESTS=OFF",
     "-DBUILD_TESTS=OFF",
-    "-DWITH_FFMPEG=OFF",
-    "-DWITH_GTK=OFF",
-    "-DWITH_GSTREAMER=OFF",
 ]
