@@ -15,7 +15,8 @@ options = [
     "no-demos",
     "no-tests",
     "--openssldir=ssl",
-    "--libdir=lib"
+    "--libdir=lib",
+    "--cc=${CROSSTOOL_PREFIX}gcc",
 ]
 
 # ============= build for x86_64-linux =========== #
@@ -31,7 +32,8 @@ options = [
     "no-demos",
     "no-tests",
     "--openssldir=ssl",
-    "--libdir=lib"
+    "--libdir=lib",
+    "--cc=${CROSSTOOL_PREFIX}gcc",
 ]
 
 # ============= build for windows =========== #

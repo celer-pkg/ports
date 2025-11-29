@@ -18,6 +18,7 @@ options = [
     "--target-os=linux",
     "--pkg-config=pkgconf",
     "--enable-cross-compile",
+    "--cc=${CROSSTOOL_PREFIX}gcc",
     "--disable-programs",
     "--disable-doc",
     "--enable-pic",

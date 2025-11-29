@@ -9,7 +9,12 @@ pattern = "aarch64-linux*"
 build_system = "makefiles"
 build_shared = "shared"
 build_static = "no-shared"
-options = ["--libdir=lib", "linux-aarch64", "no-tests"]
+options = [
+    "linux-aarch64",
+    "no-tests",
+    "--libdir=lib",
+    "--cc=${CROSSTOOL_PREFIX}gcc",
+]
 
 # ============== build for x86_64-linux ============== #
 [[build_configs]]
@@ -17,7 +22,12 @@ pattern = "x86_64-linux*"
 build_system = "makefiles"
 build_shared = "shared"
 build_static = "no-shared"
-options = ["--libdir=lib", "linux-x86_64", "no-tests"]
+options = [
+    "linux-x86_64",
+    "no-tests",
+    "--libdir=lib",
+    "--cc=${CROSSTOOL_PREFIX}gcc",
+]
 
 # ============== build for windows ============== #
 [[build_configs]]
@@ -25,4 +35,10 @@ pattern = "*windows*"
 build_system = "makefiles"
 build_shared = "shared"
 build_static = "no-shared"
-options = ["VC-WIN64A", "--openssldir=ssl", "--libdir=lib", "no-tests"]
+options = [
+    "VC-WIN64A",
+    "no-tests",
+    "--openssldir=ssl",
+    "--libdir=lib",
+    "--cc=${CROSSTOOL_PREFIX}gcc",
+]
