@@ -1,0 +1,19 @@
+[package]
+url = "https://github.com/coin-or/qpOASES.git"
+ref = "qpOASES_e"
+src_dir = "releases/3.1.2"
+
+[[build_configs]]
+pattern = "*linux*"
+build_system = "freestyle"
+build_in_source = true
+build = [
+    "cmake -E make_directory bin",
+    "make MAKE_STATIC_LIB=1 CC='${CC} --sysroot=${SYSROOT}' CXX='${CXX} --sysroot=${SYSROOT}'",
+]
+install = [
+    "cmake -E make_directory ${PACKAGE_DIR}/include/qpOASES_e",
+    "cmake -E make_directory ${PACKAGE_DIR}/lib",
+    "cmake -E copy_directory ${SRC_DIR}/include/ ${PACKAGE_DIR}/include/qpOASES_e",
+    "cmake -E copy ${SRC_DIR}/bin/libqpOASES_e.* ${PACKAGE_DIR}/lib",
+]
