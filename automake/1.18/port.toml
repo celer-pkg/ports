@@ -1,5 +1,5 @@
 [package]
-url = "https://mirrors.nju.edu.cn/gnu/automake/automake-1.18.tar.xz"
+url = "https://ftp.gnu.org/pub/gnu/automake/automake-1.18.tar.xz"
 ref = "1.18"
 supported_hosts = ["linux", "darwin"]
 

@@ -1,5 +1,5 @@
 [package]
-url = "https://mirrors.nju.edu.cn/gnu/libtool/libtool-2.5.4.tar.xz"
+url = "https://ftp.gnu.org/pub/gnu/libtool/libtool-2.5.4.tar.xz"
 ref = "2.5.4"
 supported_hosts = ["linux", "darwin"]
 

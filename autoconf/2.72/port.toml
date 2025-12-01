@@ -1,5 +1,5 @@
 [package]
-url = "https://mirrors.nju.edu.cn/gnu/autoconf/autoconf-2.72.tar.xz"
+url = "https://ftp.gnu.org/pub/gnu/autoconf/autoconf-2.72.tar.xz"
 ref = "2.72"
 supported_hosts = ["linux", "darwin"]
 

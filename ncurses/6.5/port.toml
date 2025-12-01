@@ -1,5 +1,5 @@
 [package]
-url = "https://mirrors.nju.edu.cn/gnu/ncurses/ncurses-6.5.tar.gz"
+url = "https://ftp.gnu.org/pub/gnu/ncurses/ncurses-6.5.tar.gz"
 ref = "6.5"
 
 [[build_configs]]
