@@ -1,6 +1,7 @@
 [package]
 url = "https://gitlab.freedesktop.org/xorg/proto/glproto.git"
 ref = "glproto-1.4.17"
+depth = 1
 
 # ============== build for aarch64-Linux ============== #
 [[build_configs]]

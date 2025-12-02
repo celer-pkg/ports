@@ -1,6 +1,7 @@
 [package]
 url = "https://gitlab.freedesktop.org/xorg/lib/libxxf86vm.git"
 ref = "libXxf86vm-1.1.6"
+depth = 1
 
 [[build_configs]]
 pattern = "*linux*"

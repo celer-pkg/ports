@@ -1,6 +1,7 @@
 [package]
 url = "https://gitlab.freedesktop.org/xorg/lib/libxtrans.git"
 ref = "xtrans-1.5.2"
+depth = 1
 
 [[build_configs]]
 pattern = "*linux*"

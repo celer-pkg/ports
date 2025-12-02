@@ -1,6 +1,7 @@
 [package]
 url = "https://github.com/llvm/llvm-project.git"
 ref = "llvmorg-15.0.7"
+depth = 1
 src_dir = "llvm"
 
 [[build_configs]]

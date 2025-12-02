@@ -1,6 +1,7 @@
 [package]
 url = "https://bitbucket.org/multicoreware/x265_git.git"
 ref = "4.1"
+depth = 1
 src_dir = "source"
 
 [[build_configs]]

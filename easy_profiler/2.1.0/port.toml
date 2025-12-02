@@ -1,6 +1,7 @@
 [package]
   url = "https://github.com/yse/easy_profiler.git"
   ref = "v2.1.0"
+  depth = 1
 
 [[build_configs]]
   build_system = "cmake"

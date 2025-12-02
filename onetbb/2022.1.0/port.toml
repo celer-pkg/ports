@@ -1,6 +1,7 @@
 [package]
 url = "https://github.com/uxlfoundation/oneTBB.git"
 ref = "v2022.1.0"
+depth = 1
 
 [[build_configs]]
 build_system = "cmake"

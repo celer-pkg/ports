@@ -2,6 +2,7 @@
 [package]
 url = "https://github.com/Airblader/xcb-util-xrm.git"
 ref = "v1.0"
+depth = 1
 
 [[build_configs]]
 pattern = "*linux*"

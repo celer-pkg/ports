@@ -1,6 +1,7 @@
 [package]
 url = "https://github.com/pboettch/json-schema-validator.git"
 ref = "2.3.0"
+depth = 1
 
 [[build_configs]]
 build_system = "cmake"

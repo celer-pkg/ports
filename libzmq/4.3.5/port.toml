@@ -1,6 +1,7 @@
 [package]
   url = "https://github.com/zeromq/libzmq.git"
   ref = "v4.3.5"
+depth = 1
 
 [[build_configs]]
   build_system = "cmake"

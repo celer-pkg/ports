@@ -1,6 +1,7 @@
 [package]
 url = "https://gitlab.freedesktop.org/wayland/wayland.git"
 ref = "1.23.1"
+depth = 1
 
 [[build_configs]]
 pattern = "*linux*"

@@ -1,6 +1,7 @@
 [package]
 url = "https://github.com/KhronosGroup/SPIRV-Tools.git"
 ref = "v2025.1"
+depth = 1
 
 [[build_configs]]
 pattern = "*linux*"

@@ -1,6 +1,7 @@
 [package]
 url = "https://github.com/facebook/zstd.git"
 ref = "v1.5.7"
+depth = 1
 src_dir = "build/cmake"
 
 [[build_configs]]

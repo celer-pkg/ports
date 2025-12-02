@@ -1,6 +1,7 @@
 [package]
 url = "git://git.savannah.gnu.org/readline.git"
 ref = "readline-8.2"
+depth = 1
 
 [[build_configs]]
 pattern = "*linux*"

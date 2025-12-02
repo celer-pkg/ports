@@ -1,6 +1,7 @@
 [package]
 url = "https://gitlab.freedesktop.org/xorg/lib/libxtst.git"
 ref = "libXtst-1.2.5"
+depth = 1
 
 [[build_configs]]
 build_system = "makefiles"

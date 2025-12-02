@@ -1,6 +1,7 @@
 [package]
 url = "https://github.com/libvips/libvips.git"
 ref = "v8.16.1"
+depth = 1
 
 [[build_configs]]
 build_system = "meson"

@@ -1,6 +1,7 @@
 [package]
 url = "https://code.videolan.org/videolan/x264.git"
 ref = "31e19f92f00c7003fa115047ce50978bc98c3a0d"
+depth = 1
 
 [[build_configs]]
 build_system = "makefiles"

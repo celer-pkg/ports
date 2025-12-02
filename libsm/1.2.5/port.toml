@@ -1,6 +1,7 @@
 [package]
 url = "https://gitlab.freedesktop.org/xorg/lib/libsm.git"
 ref = "libSM-1.2.5"
+depth = 1
 
 [[build_configs]]
 pattern = "*linux*"

@@ -1,6 +1,7 @@
 [package]
 url = "https://gitlab.freedesktop.org/mesa/libdrm.git"
 ref = "libdrm-2.4.124"
+depth = 1
 
 # ================ build for aarch64-linux ================ #
 [[build_configs]]

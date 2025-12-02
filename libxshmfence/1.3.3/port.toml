@@ -1,6 +1,7 @@
 [package]
 url = "https://gitlab.freedesktop.org/xorg/lib/libxshmfence.git"
 ref = "libxshmfence-1.3.3"
+depth = 1
 
 [[build_configs]]
 pattern = "*linux*"

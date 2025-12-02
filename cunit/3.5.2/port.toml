@@ -2,6 +2,7 @@
 url = "https://gitlab.com/cunity/cunit.git"
 ref = "3.5.2"
 src_dir = "CUnit"
+depth = 1
 
 [[build_configs]]
 build_system = "cmake"

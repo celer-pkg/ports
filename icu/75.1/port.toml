@@ -2,6 +2,7 @@
 url = "https://github.com/unicode-org/icu.git"
 ref = "release-75-1"
 src_dir = "icu4c/source"
+depth = 1
 
 # ============= build for aarch64-linux ============ #
 [[build_configs]]

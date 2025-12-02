@@ -1,6 +1,7 @@
 [package]
 url = "https://gitlab.freedesktop.org/xorg/proto/dri2proto.git"
 ref = "dri2proto-2.8"
+depth = 1
 
 [[build_configs]]
 patches = ["no_configure.patch"]

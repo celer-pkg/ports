@@ -1,6 +1,7 @@
 [package]
 url = "https://github.com/itstool/itstool.git"
 ref = "2.0.7"
+depth = 1
 
 [[build_configs]]
 build_system = "makefiles"

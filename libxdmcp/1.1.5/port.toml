@@ -1,6 +1,7 @@
 [package]
 url = "https://gitlab.freedesktop.org/xorg/lib/libxdmcp.git"
 ref = "libXdmcp-1.1.5"
+depth = 1
 
 [[build_configs]]
 pattern = "*linux*"

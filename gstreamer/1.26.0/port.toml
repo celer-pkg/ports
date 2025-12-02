@@ -1,6 +1,7 @@
 [package]
 url = "https://gitlab.freedesktop.org/gstreamer/gstreamer.git"
 ref = "1.26.0"
+depth = 1
 
 [[build_configs]]
 build_system = "meson"

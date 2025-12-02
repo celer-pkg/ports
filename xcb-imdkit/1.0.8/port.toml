@@ -1,6 +1,7 @@
 [package]
 url = "https://salsa.debian.org/input-method-team/xcb-imdkit.git"
 ref = "upstream/1.0.8"
+depth = 1
 
 [[build_configs]]
 pattern = "*linux*"

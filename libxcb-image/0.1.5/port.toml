@@ -1,6 +1,7 @@
 [package]
 url = "https://gitlab.freedesktop.org/xorg/lib/libxcb-image.git"
 ref = "xcb-util-image-0.4.1-gitlab"
+depth = 1
 
 [[build_configs]]
 build_system = "makefiles"

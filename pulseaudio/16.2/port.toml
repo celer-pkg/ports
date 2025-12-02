@@ -1,6 +1,7 @@
 [package]
 url = "https://gitlab.freedesktop.org/pulseaudio/pulseaudio.git"
 ref = "v16.2"
+depth = 1
 
 [[build_configs]]
 pattern = "*linux*"

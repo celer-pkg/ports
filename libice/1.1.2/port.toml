@@ -1,6 +1,7 @@
 [package]
 url = "https://gitlab.freedesktop.org/xorg/lib/libice.git"
 ref = "libICE-1.1.2"
+depth = 1
 
 [[build_configs]]
 build_system = "makefiles"

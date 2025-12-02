@@ -1,6 +1,7 @@
 [package]
 url = "https://github.com/libexpat/libexpat.git"
 ref = "R_2_7_1"
+depth = 1
 src_dir = "expat"
 
 [[build_configs]]

@@ -1,6 +1,7 @@
 [package]
 url = "https://gitlab.freedesktop.org/vdpau/libvdpau.git"
 ref = "1.5"
+depth = 1
 
 [[build_configs]]
 pattern = "*linux*"

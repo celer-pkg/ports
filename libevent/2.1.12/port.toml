@@ -1,6 +1,7 @@
 [package]
 url = "https://github.com/libevent/libevent.git"
 ref = "release-2.1.12-stable"
+depth = 1
 
 [[build_configs]]
 build_system = "cmake"

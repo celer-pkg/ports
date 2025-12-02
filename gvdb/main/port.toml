@@ -1,6 +1,7 @@
 [package]
 url = "https://gitlab.gnome.org/GNOME/gvdb.git"
 ref = "main"
+depth = 1
 
 [[build_configs]]
 build_system = "meson"

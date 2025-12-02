@@ -1,6 +1,7 @@
 [package]
 url = "https://github.com/KhronosGroup/glslang.git"
 ref = "15.3.0"
+depth = 1
 
 [[build_configs]]
 build_system = "cmake"

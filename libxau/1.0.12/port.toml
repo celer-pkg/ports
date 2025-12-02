@@ -1,6 +1,7 @@
 [package]
 url = "https://gitlab.freedesktop.org/xorg/lib/libxau.git"
 ref = "libXau-1.0.12"
+depth = 1
 
 [[build_configs]]
 build_system = "makefiles"

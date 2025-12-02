@@ -1,6 +1,7 @@
 [package]
 url = "https://github.com/openssl/openssl.git"
 ref = "openssl-3.5.0"
+depth = 1
 ignore_submodule = true
 
 # ============= build for aarch64-linux =========== #

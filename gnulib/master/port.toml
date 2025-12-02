@@ -1,6 +1,7 @@
 [package]
 url = "https://github.com/coreutils/gnulib.git"
 ref = "master"
+depth = 1
 
 [[build_configs]]
 build_system = "nobuild"

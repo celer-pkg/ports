@@ -1,6 +1,7 @@
 [package]
 url = "https://download-mirror.savannah.gnu.org/releases/libunwind/libunwind-1.6.1.tar.gz"
 ref = "1.6.1"
+depth = 1
 
 [[build_configs]]
 pattern = "*linux*"

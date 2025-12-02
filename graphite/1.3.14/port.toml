@@ -1,6 +1,7 @@
 [package]
   url = "https://github.com/silnrsi/graphite.git"
   ref = "1.3.14"
+  depth = 1
 
 [[build_configs]]
   build_system = "cmake"
