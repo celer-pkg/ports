@@ -6,9 +6,10 @@ depth = 1
 [[build_configs]]
 pattern = "*linux*"
 build_system = "makefiles"
-envs = ["xorg_cv_malloc0_returns_null=yes"]
 dependencies = ["libx11@1.8.11"]
 dev_dependencies = ["macros@1.20.2", "pkgconf@2.4.3"]
+envs = ["xorg_cv_malloc0_returns_null=yes", "NOCONFIGURE=1"]
+pre_configure = ["./autogen.sh"]
 
 # Note:
 # This library support linux only.

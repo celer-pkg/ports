@@ -11,6 +11,8 @@ dev_dependencies = [
     "macros@1.20.2",
     "libtool@2.5.4"
 ]
+envs = ["NOCONFIGURE=1"]
+pre_configure = ["./autogen.sh"]
 
 # Note:
 # This library support linux only.

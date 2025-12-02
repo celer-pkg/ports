@@ -6,11 +6,10 @@ depth = 1
 [[build_configs]]
 pattern = "*linux*"
 build_system = "makefiles"
-dependencies = [
-    "libxcb-image@0.1.5",
-    "xcb-util-renderutil@0.3.10",
-]
+dependencies = ["libxcb-image@0.1.5", "xcb-util-renderutil@0.3.10"]
 dev_dependencies = ["macros@1.20.2", "gperf@3.1"]
+envs = ["NOCONFIGURE=1"]
+pre_configure = ["./autogen.sh"]
 
 # Note:
 # This library support linux only.

@@ -8,6 +8,8 @@ pattern = "*linux*"
 build_system = "makefiles"
 dependencies = ["libxfixes@6.0.1"]
 dev_dependencies = ["macros@1.20.2", "pkgconf@2.4.3"]
+envs = ["NOCONFIGURE=1"]
+pre_configure = ["./autogen.sh"]
 
 # Note:
 # This library support linux only.

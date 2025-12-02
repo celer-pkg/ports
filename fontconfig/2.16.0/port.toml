@@ -9,6 +9,7 @@ build_system = "makefiles"
 envs = [
     "CFLAGS=-isystem ${DEPS_DIR}/include/freetype2",
     "CXXFLAGS=-isystem ${DEPS_DIR}/include/freetype2",
+    "NOCONFIGURE=1",
 ]
 dependencies = ["freetype@2.13.3", "libexpat@2.7.1", "libpng@1.6.49"]
 dev_dependencies = [
@@ -17,3 +18,4 @@ dev_dependencies = [
     "gettext@0.25",
     "gperf@3.1",
 ]
+pre_configure = ["./autogen.sh"]

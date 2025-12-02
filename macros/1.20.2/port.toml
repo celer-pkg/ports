@@ -6,3 +6,5 @@ depth = 1
 [[build_configs]]
 build_system = "makefiles"
 dev_dependencies = ["automake@1.18"]
+envs = ["NOCONFIGURE=1"]
+pre_configure = ["./autogen.sh"]

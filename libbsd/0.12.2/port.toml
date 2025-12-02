@@ -6,5 +6,6 @@ supported_hosts = ["linux", "darwin"]
 
 [[build_configs]]
 build_system = "makefiles"
-pre_configure = ["cd ${REPO_DIR} && ${REPO_DIR}/autogen"]
 dependencies = ["libmd@1.1.0"]
+envs = ["NOCONFIGURE=1"]
+pre_configure = ["${REPO_DIR}/autogen"]

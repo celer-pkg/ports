@@ -8,12 +8,16 @@ depth = 1
 pattern = "aarch64-linux*"
 build_system = "makefiles"
 dev_dependencies = ["macros@1.20.2"]
+envs = ["NOCONFIGURE=1"]
+pre_configure = ["./autogen.sh"]
 
 # ============== build for x86_64-linux ============== #
 [[build_configs]]
 pattern = "x86_64-linux*"
 build_system = "makefiles"
 dev_dependencies = ["macros@1.20.2"]
+envs = ["NOCONFIGURE=1"]
+pre_configure = ["./autogen.sh"]
 
 # Note:
 # This library support linux only.
