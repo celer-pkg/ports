@@ -5,3 +5,5 @@ supported_hosts = ["linux", "darwin"]
 
 [[build_configs]]
 build_system = "makefiles"
+build_shared = "no"
+build_static = "no"
