@@ -42,9 +42,10 @@ post_install = [
 ]
 options = [
     "--toolchain=msvc",
+    "--arch=${SYSTEM_PROCESSOR}",
     "--target-os=win64",
     "--pkg-config=pkgconf",
-    "--disable-programs",
+    "--enable-cross-compile",
     "--disable-doc",
     "--enable-pic",
     "--enable-gpl",
