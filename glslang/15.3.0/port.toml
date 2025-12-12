@@ -1,9 +1,0 @@
-[package]
-url = "https://github.com/KhronosGroup/glslang.git"
-ref = "15.3.0"
-depth = 1
-
-[[build_configs]]
-build_system = "cmake"
-dev_dependencies = ["spirv-tools@2025.1"]
-options = ["-DGLSLANG_TESTS=OFF", "-DALLOW_EXTERNAL_SPIRV_TOOLS=ON"]
