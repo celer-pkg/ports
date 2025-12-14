@@ -7,6 +7,7 @@ depth = 1
 build_system = "cmake"
 dependencies = [
     "opencv_contrib@4.11.0",
+    "ffmpeg@5.1.6"
 ]
 options = [
     "-DOPENCV_EXTRA_MODULES_PATH=${BUILDTREES_DIR}/opencv_contrib@4.11.0/src/modules",
