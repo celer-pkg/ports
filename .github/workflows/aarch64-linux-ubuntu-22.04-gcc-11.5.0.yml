@@ -6,10 +6,10 @@ on:
       - main
       - master
     paths:
-      - 'ports/**'
+      - '*/*/port.toml'
   pull_request:
     paths:
-      - 'ports/**'
+      - '*/*/port.toml'
 
 env:
   PLATFORM: aarch64-linux-ubuntu-22.04-gcc-11.5.0
@@ -36,7 +36,7 @@ jobs:
           fi
           
           # Extract unique port directories
-          PORTS=$(echo "$CHANGED_FILES" | grep '^ports/' | cut -d'/' -f2-3 | sort -u | jq -R -s -c 'split("\n") | map(select(length > 0))')
+          PORTS=$(echo "$CHANGED_FILES" | grep '/port.toml$' | cut -d'/' -f1-2 | sort -u | jq -R -s -c 'split("\n") | map(select(length > 0))')
           
           echo "Changed ports: $PORTS"
           
@@ -66,7 +66,7 @@ jobs:
       - name: Check if port matches platform
         id: check_match
         run: |
-          PORT_TOML="ports/${{ matrix.port }}/port.toml"
+          PORT_TOML="${{ matrix.port }}/port.toml"
           
           if [ ! -f "$PORT_TOML" ]; then
             echo "Port TOML not found: $PORT_TOML"
@@ -104,7 +104,7 @@ jobs:
           
           # Use current checkout instead of cloning ports repo
           rm -rf ports
-          ln -s ${{ github.workspace }}/ports ports
+          ln -s ${{ github.workspace }} ports
 
       - name: Build port
         if: steps.check_match.outputs.should_build == 'true'
