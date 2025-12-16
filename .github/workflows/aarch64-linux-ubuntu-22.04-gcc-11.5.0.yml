@@ -1,0 +1,129 @@
+name: Build Ports - aarch64-linux-ubuntu-22.04-gcc-11.5.0
+
+on:
+  push:
+    branches:
+      - main
+      - master
+    paths:
+      - 'ports/**'
+  pull_request:
+    paths:
+      - 'ports/**'
+
+env:
+  PLATFORM: aarch64-linux-ubuntu-22.04-gcc-11.5.0
+
+jobs:
+  detect-changed-ports:
+    runs-on: ubuntu-22.04
+    outputs:
+      ports: ${{ steps.detect.outputs.ports }}
+    steps:
+      - name: Checkout ports repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 2
+
+      - name: Detect changed ports
+        id: detect
+        run: |
+          # Get changed files
+          if [ "${{ github.event_name }}" = "pull_request" ]; then
+            CHANGED_FILES=$(git diff --name-only ${{ github.event.pull_request.base.sha }} ${{ github.sha }})
+          else
+            CHANGED_FILES=$(git diff --name-only HEAD^ HEAD)
+          fi
+          
+          # Extract unique port directories
+          PORTS=$(echo "$CHANGED_FILES" | grep '^ports/' | cut -d'/' -f2-3 | sort -u | jq -R -s -c 'split("\n") | map(select(length > 0))')
+          
+          echo "Changed ports: $PORTS"
+          echo "ports=$PORTS" >> $GITHUB_OUTPUT
+
+  build-port:
+    needs: detect-changed-ports
+    if: needs.detect-changed-ports.outputs.ports != '[]'
+    runs-on: ubuntu-22.04
+    strategy:
+      matrix:
+        port: ${{ fromJson(needs.detect-changed-ports.outputs.ports) }}
+      fail-fast: false
+    
+    steps:
+      - name: Checkout ports repository
+        uses: actions/checkout@v4
+
+      - name: Check if port matches platform
+        id: check_match
+        run: |
+          PORT_TOML="ports/${{ matrix.port }}/port.toml"
+          
+          if [ ! -f "$PORT_TOML" ]; then
+            echo "Port TOML not found: $PORT_TOML"
+            echo "should_build=false" >> $GITHUB_OUTPUT
+            exit 0
+          fi
+          
+          # Use the check script
+          chmod +x .github/scripts/check-platform-match.sh
+          if .github/scripts/check-platform-match.sh "$PORT_TOML" "$PLATFORM"; then
+            echo "should_build=true" >> $GITHUB_OUTPUT
+          else
+            echo "should_build=false" >> $GITHUB_OUTPUT
+          fi
+
+      - name: Set up QEMU for ARM64
+        if: steps.check_match.outputs.should_build == 'true'
+        uses: docker/setup-qemu-action@v3
+        with:
+          platforms: arm64
+
+      - name: Download celer
+        if: steps.check_match.outputs.should_build == 'true'
+        run: |
+          # Download latest celer release
+          curl -L -o celer https://github.com/celer-pkg/celer/releases/latest/download/celer-linux-amd64
+          chmod +x celer
+          sudo mv celer /usr/local/bin/
+
+      - name: Setup celer workspace
+        if: steps.check_match.outputs.should_build == 'true'
+        run: |
+          # Initialize celer with test-conf repo
+          celer init --url=https://github.com/celer-pkg/test-conf.git
+          
+          # Configure platform
+          celer configure --platform=$PLATFORM
+          
+          # Override ports repo to use current repository
+          export CELER_PORTS_REPO=${{ github.server_url }}/${{ github.repository }}.git
+          git config --global url."https://".insteadOf git://
+
+      - name: Build port
+        if: steps.check_match.outputs.should_build == 'true'
+        run: |
+          PORT_NAME="${{ matrix.port }}"
+          
+          # Install the port
+          celer install "$PORT_NAME" --verbose
+        env:
+          CELER_PORTS_REPO: ${{ github.server_url }}/${{ github.repository }}.git
+
+      - name: Upload build logs on failure
+        if: failure() && steps.check_match.outputs.should_build == 'true'
+        uses: actions/upload-artifact@v4
+        with:
+          name: build-logs-${{ matrix.port }}
+          path: |
+            buildtrees/**/*.log
+          retention-days: 7
+
+      - name: Cache built artifacts
+        if: success() && steps.check_match.outputs.should_build == 'true'
+        uses: actions/cache/save@v4
+        with:
+          path: |
+            installed/
+            packages/
+          key: ${{ env.PLATFORM }}-${{ matrix.port }}-${{ github.sha }}
