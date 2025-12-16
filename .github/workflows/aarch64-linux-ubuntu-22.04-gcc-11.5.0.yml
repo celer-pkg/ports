@@ -86,7 +86,7 @@ jobs:
         if: steps.check_match.outputs.should_build == 'true'
         run: |
           # Download latest celer release
-          curl -L -o celer https://github.com/celer-pkg/celer/releases/latest/download/x86_64-linux.tar.gz
+          curl -L -o x86_64-linux.tar.gz https://github.com/celer-pkg/celer/releases/latest/download/x86_64-linux.tar.gz
           tar -xvzf x86_64-linux.tar.gz -C .
           chmod +x celer
 
