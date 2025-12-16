@@ -110,6 +110,8 @@ jobs:
         if: steps.check_match.outputs.should_build == 'true'
         run: |
           PORT_NAME="${{ matrix.port }}"
+          # Convert path format (poco/1.14.2) to celer format (poco@1.14.2)
+          PORT_NAME=$(echo "$PORT_NAME" | tr '/' '@')
           
           # Install the port
           ./celer install "$PORT_NAME" --verbose
