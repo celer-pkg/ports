@@ -13,9 +13,15 @@ fi
 
 # Install yq if not available (TOML parser)
 if ! command -v yq &> /dev/null; then
-    echo "Installing yq for TOML parsing..."
-    wget -qO /usr/local/bin/yq https://github.com/mikefarah/yq/releases/latest/download/yq_linux_amd64
-    chmod +x /usr/local/bin/yq
+    echo "Installing yq for TOML parsing locally..."
+    wget -qO ./yq https://github.com/mikefarah/yq/releases/latest/download/yq_linux_amd64
+    chmod +x ./yq
+    export PATH="$(pwd):$PATH"
+else
+    # If yq is not in PATH but exists in current dir, add it to PATH
+    if [ -f "./yq" ]; then
+        export PATH="$(pwd):$PATH"
+    fi
 fi
 
 # Check if any build_config has a matching pattern
