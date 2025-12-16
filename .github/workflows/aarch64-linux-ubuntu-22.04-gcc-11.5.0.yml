@@ -39,6 +39,15 @@ jobs:
           PORTS=$(echo "$CHANGED_FILES" | grep '^ports/' | cut -d'/' -f2-3 | sort -u | jq -R -s -c 'split("\n") | map(select(length > 0))')
           
           echo "Changed ports: $PORTS"
+          
+          # Check if more than one port is changed
+          PORT_COUNT=$(echo "$PORTS" | jq 'length')
+          if [ "$PORT_COUNT" -gt 1 ]; then
+            echo "::error::Multiple ports detected in single commit. Please submit one port at a time."
+            echo "::error::Changed ports: $(echo "$PORTS" | jq -r '.[]' | tr '\n' ', ')"
+            exit 1
+          fi
+          
           echo "ports=$PORTS" >> $GITHUB_OUTPUT
 
   build-port:
@@ -73,32 +82,29 @@ jobs:
             echo "should_build=false" >> $GITHUB_OUTPUT
           fi
 
-      - name: Set up QEMU for ARM64
-        if: steps.check_match.outputs.should_build == 'true'
-        uses: docker/setup-qemu-action@v3
-        with:
-          platforms: arm64
-
       - name: Download celer
         if: steps.check_match.outputs.should_build == 'true'
         run: |
           # Download latest celer release
-          curl -L -o celer https://github.com/celer-pkg/celer/releases/latest/download/celer-linux-amd64
+          curl -L -o celer https://github.com/celer-pkg/celer/releases/latest/download/x86_64-linux.tar.gz
+          tar -xvzf x86_64-linux.tar.gz -C .
           chmod +x celer
-          sudo mv celer /usr/local/bin/
 
       - name: Setup celer workspace
         if: steps.check_match.outputs.should_build == 'true'
         run: |
           # Initialize celer with test-conf repo
-          celer init --url=https://github.com/celer-pkg/test-conf.git
+          ./celer init --url=https://github.com/celer-pkg/test-conf.git
           
           # Configure platform
-          celer configure --platform=$PLATFORM
+          ./celer configure --platform=$PLATFORM
           
-          # Override ports repo to use current repository
-          export CELER_PORTS_REPO=${{ github.server_url }}/${{ github.repository }}.git
-          git config --global url."https://".insteadOf git://
+          # Configure project
+          ./celer configure --project=project_test_install
+          
+          # Use current checkout instead of cloning ports repo
+          rm -rf ports
+          ln -s ${{ github.workspace }}/ports ports
 
       - name: Build port
         if: steps.check_match.outputs.should_build == 'true'
@@ -106,9 +112,7 @@ jobs:
           PORT_NAME="${{ matrix.port }}"
           
           # Install the port
-          celer install "$PORT_NAME" --verbose
-        env:
-          CELER_PORTS_REPO: ${{ github.server_url }}/${{ github.repository }}.git
+          ./celer install "$PORT_NAME" --verbose
 
       - name: Upload build logs on failure
         if: failure() && steps.check_match.outputs.should_build == 'true'
