@@ -1,0 +1,8 @@
+[package]
+url = "https://github.com/g-truc/glm.git"
+ref = "1.0.1"
+depth = 1
+
+[[build_configs]]
+build_system = "cmake"
+options = ["-DJSON_BuildTests=OFF"]
