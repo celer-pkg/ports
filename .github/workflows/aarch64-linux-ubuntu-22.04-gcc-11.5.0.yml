@@ -115,21 +115,3 @@ jobs:
           
           # Install the port
           ./celer install "$PORT_NAME" --verbose
-
-      - name: Upload build logs on failure
-        if: failure() && steps.check_match.outputs.should_build == 'true'
-        uses: actions/upload-artifact@v4
-        with:
-          name: build-logs-${{ matrix.port }}
-          path: |
-            buildtrees/**/*.log
-          retention-days: 7
-
-      - name: Cache built artifacts
-        if: success() && steps.check_match.outputs.should_build == 'true'
-        uses: actions/cache/save@v4
-        with:
-          path: |
-            installed/
-            packages/
-          key: ${{ env.PLATFORM }}-${{ matrix.port }}-${{ github.sha }}
