@@ -1,0 +1,194 @@
+name: Manual Port Build
+
+on:
+  workflow_dispatch:
+    inputs:
+      port:
+        description: 'Port name and version (e.g., poco@1.14.2, zlib@1.3.1, opencv@4.11.0)'
+        required: true
+        type: string
+      verbose:
+        description: 'Enable verbose output'
+        required: false
+        type: boolean
+        default: true
+
+jobs:
+  detect-platforms:
+    runs-on: ubuntu-22.04
+    outputs:
+      platforms: ${{ steps.find_platforms.outputs.platforms }}
+      port_name: ${{ steps.parse_port.outputs.port_name }}
+      port_version: ${{ steps.parse_port.outputs.port_version }}
+    
+    steps:
+      - name: Checkout ports repository
+        uses: actions/checkout@v4
+
+      - name: Parse port name and version
+        id: parse_port
+        run: |
+          PORT="${{ inputs.port }}"
+          
+          # Validate format
+          if [[ ! "$PORT" =~ ^[^@]+@[^@]+$ ]]; then
+            echo "::error::Invalid port format. Expected format: name@version (e.g., poco@1.14.2)"
+            exit 1
+          fi
+          
+          # Split by @
+          PORT_NAME=$(echo "$PORT" | cut -d'@' -f1)
+          PORT_VERSION=$(echo "$PORT" | cut -d'@' -f2)
+          
+          echo "port_name=$PORT_NAME" >> $GITHUB_OUTPUT
+          echo "port_version=$PORT_VERSION" >> $GITHUB_OUTPUT
+          
+          echo "Parsed port: ${PORT_NAME}@${PORT_VERSION}"
+
+      - name: Validate port exists
+        run: |
+          PORT_TOML="${{ steps.parse_port.outputs.port_name }}/${{ steps.parse_port.outputs.port_version }}/port.toml"
+          
+          if [ ! -f "$PORT_TOML" ]; then
+            echo "::error::Port TOML not found: $PORT_TOML"
+            exit 1
+          fi
+          
+          echo "✓ -- Port found: $PORT_TOML"
+
+      - name: Find matching platforms
+        id: find_platforms
+        run: |
+          PORT_TOML="${{ steps.parse_port.outputs.port_name }}/${{ steps.parse_port.outputs.port_version }}/port.toml"
+          
+          # List of available platforms to test
+          AVAILABLE_PLATFORMS=(
+            "x86_64-linux-ubuntu-22.04-gcc-11.5.0"
+            "aarch64-linux-ubuntu-22.04-gcc-11.5.0"
+            "x86_64-windows-msvc-enterprise-14.44"
+          )
+          
+          # Make check script executable
+          chmod +x .github/scripts/check-platform-match.sh
+          
+          # Find matching platforms
+          MATCHING_PLATFORMS=()
+          for platform in "${AVAILABLE_PLATFORMS[@]}"; do
+            if .github/scripts/check-platform-match.sh "$PORT_TOML" "$platform" 2>/dev/null; then
+              echo "✓ -- Platform matches: $platform"
+              MATCHING_PLATFORMS+=("$platform")
+            else
+              echo "✗ -- Platform does not match: $platform"
+            fi
+          done
+          
+          # Check if any platforms matched
+          if [ ${#MATCHING_PLATFORMS[@]} -eq 0 ]; then
+            echo "::error::No platforms match the port's build_configs patterns"
+            exit 1
+          fi
+          
+          # Convert array to JSON for matrix
+          PLATFORMS_JSON=$(printf '%s\n' "${MATCHING_PLATFORMS[@]}" | jq -R . | jq -s -c .)
+          echo "platforms=$PLATFORMS_JSON" >> $GITHUB_OUTPUT
+          
+          echo "========================================="
+          echo "Matched platforms: ${MATCHING_PLATFORMS[@]}"
+          echo "========================================="
+
+  build-port:
+    needs: detect-platforms
+    runs-on: ${{ matrix.platform == 'x86_64-windows-msvc-enterprise-14.44' && 'windows-2022' || 'ubuntu-22.04' }}
+    strategy:
+      fail-fast: false
+      matrix:
+        platform: ${{ fromJson(needs.detect-platforms.outputs.platforms) }}
+    
+    steps:
+      - name: Checkout ports repository
+        uses: actions/checkout@v4
+
+      - name: Setup MSVC
+        if: matrix.platform == 'x86_64-windows-msvc-enterprise-14.44'
+        uses: ilammy/msvc-dev-cmd@v1
+        with:
+          arch: amd64
+
+      - name: Download celer (Linux)
+        if: matrix.platform != 'x86_64-windows-msvc-enterprise-14.44'
+        shell: bash
+        run: |
+          curl -L -o x86_64-linux.tar.gz https://github.com/celer-pkg/celer/releases/latest/download/x86_64-linux.tar.gz
+          tar -xvzf x86_64-linux.tar.gz -C .
+          chmod +x celer
+
+      - name: Download celer (Windows)
+        if: matrix.platform == 'x86_64-windows-msvc-enterprise-14.44'
+        shell: bash
+        run: |
+          curl -L -o x86_64-windows.tar.gz https://github.com/celer-pkg/celer/releases/latest/download/x86_64-windows.tar.gz
+          tar -xvzf x86_64-windows.tar.gz -C .
+
+      - name: Setup celer workspace (Linux)
+        if: matrix.platform != 'x86_64-windows-msvc-enterprise-14.44'
+        shell: bash
+        run: |
+          ./celer init --url=https://github.com/celer-pkg/test-conf.git
+          ./celer configure --platform=${{ matrix.platform }}
+          ./celer configure --project=project_test_install
+          
+          rm -rf ports
+          ln -s ${{ github.workspace }} ports
+
+      - name: Setup celer workspace (Windows)
+        if: matrix.platform == 'x86_64-windows-msvc-enterprise-14.44'
+        shell: bash
+        run: |
+          ./celer.exe init --url=https://github.com/celer-pkg/test-conf.git
+          ./celer.exe configure --platform=${{ matrix.platform }}
+          ./celer.exe configure --project=project_test_install
+          
+          rm -rf ports
+          cmd //c "mklink /J ports ${{ github.workspace }}"
+
+      - name: Build port (Linux)
+        if: matrix.platform != 'x86_64-windows-msvc-enterprise-14.44'
+        shell: bash
+        run: |
+          PORT_NAME="${{ needs.detect-platforms.outputs.port_name }}@${{ needs.detect-platforms.outputs.port_version }}"
+          
+          echo "========================================="
+          echo "Building $PORT_NAME on ${{ matrix.platform }}"
+          echo "========================================="
+          
+          if [ "${{ inputs.verbose }}" = "true" ]; then
+            ./celer install "$PORT_NAME" --verbose
+          else
+            ./celer install "$PORT_NAME"
+          fi
+
+      - name: Build port (Windows)
+        if: matrix.platform == 'x86_64-windows-msvc-enterprise-14.44'
+        shell: bash
+        run: |
+          PORT_NAME="${{ needs.detect-platforms.outputs.port_name }}@${{ needs.detect-platforms.outputs.port_version }}"
+          
+          echo "========================================="
+          echo "Building $PORT_NAME on ${{ matrix.platform }}"
+          echo "========================================="
+          
+          if [ "${{ inputs.verbose }}" = "true" ]; then
+            ./celer.exe install "$PORT_NAME" --verbose
+          else
+            ./celer.exe install "$PORT_NAME"
+          fi
+
+      - name: Build summary
+        if: success()
+        shell: bash
+        run: |
+          echo "========================================="
+          echo "✓ Build successful!"
+          echo "  Port: ${{ inputs.port }}"
+          echo "  Platform: ${{ matrix.platform }}"
+          echo "========================================="
