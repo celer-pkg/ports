@@ -82,10 +82,21 @@ jobs:
           
           # Use the check script
           chmod +x .github/scripts/check-platform-match.sh
-          if .github/scripts/check-platform-match.sh "$PORT_TOML" "$PLATFORM"; then
+          
+          # Run the script and capture output
+          set +e  # Temporarily disable exit on error
+          .github/scripts/check-platform-match.sh "$PORT_TOML" "$PLATFORM"
+          SCRIPT_EXIT_CODE=$?
+          set -e  # Re-enable exit on error
+          
+          # Check exit code
+          if [ $SCRIPT_EXIT_CODE -eq 0 ]; then
             echo "should_build=true" >> $GITHUB_OUTPUT
-          else
+          elif [ $SCRIPT_EXIT_CODE -eq 1 ]; then
             echo "should_build=false" >> $GITHUB_OUTPUT
+          else
+            echo "::error::Script failed with exit code $SCRIPT_EXIT_CODE"
+            exit $SCRIPT_EXIT_CODE
           fi
 
       - name: Download celer
