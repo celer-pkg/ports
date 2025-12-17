@@ -15,10 +15,9 @@ env:
   PLATFORM: x86_64-windows-msvc-enterprise-14.44
 
 jobs:
-  detect-changed-ports:
-    runs-on: ubuntu-22.04
-    outputs:
-      ports: ${{ steps.detect.outputs.ports }}
+  build-port:
+    runs-on: windows-2022
+    
     steps:
       - name: Checkout ports repository
         uses: actions/checkout@v4
@@ -27,6 +26,7 @@ jobs:
 
       - name: Detect changed ports
         id: detect
+        shell: bash
         run: |
           # Get changed files
           if [ "${{ github.event_name }}" = "pull_request" ]; then
@@ -36,43 +36,39 @@ jobs:
           fi
           
           # Extract unique port directories
-          PORTS=$(echo "$CHANGED_FILES" | grep '/port.toml$' | cut -d'/' -f1-2 | sort -u | jq -R -s -c 'split("\n") | map(select(length > 0))')
+          PORTS=$(echo "$CHANGED_FILES" | grep '/port.toml$' | cut -d'/' -f1-2 | sort -u)
           
           echo "Changed ports: $PORTS"
           
           # Check if more than one port is changed
-          PORT_COUNT=$(echo "$PORTS" | jq 'length')
+          PORT_COUNT=$(echo "$PORTS" | wc -l)
           if [ "$PORT_COUNT" -gt 1 ]; then
             echo "::error::Multiple ports detected in single commit. Please submit one port at a time."
-            echo "::error::Changed ports: $(echo "$PORTS" | jq -r '.[]' | tr '\n' ', ')"
+            echo "::error::Changed ports: $PORTS"
             exit 1
           fi
           
-          echo "ports=$PORTS" >> $GITHUB_OUTPUT
-
-  build-port:
-    needs: detect-changed-ports
-    if: needs.detect-changed-ports.outputs.ports != '[]'
-    runs-on: windows-2022
-    strategy:
-      matrix:
-        port: ${{ fromJson(needs.detect-changed-ports.outputs.ports) }}
-      fail-fast: false
-    
-    steps:
-      - name: Checkout ports repository
-        uses: actions/checkout@v4
+          # Check if no ports changed
+          if [ -z "$PORTS" ]; then
+            echo "No ports changed, skipping build"
+            echo "port=" >> $GITHUB_OUTPUT
+            exit 0
+          fi
+          
+          echo "port=$PORTS" >> $GITHUB_OUTPUT
 
       - name: Setup MSVC
+        if: steps.detect.outputs.port != ''
         uses: ilammy/msvc-dev-cmd@v1
         with:
           arch: amd64
 
       - name: Check if port matches platform
+        if: steps.detect.outputs.port != ''
         id: check_match
         shell: bash
         run: |
-          PORT_TOML="${{ matrix.port }}/port.toml"
+          PORT_TOML="${{ steps.detect.outputs.port }}/port.toml"
           
           if [ ! -f "$PORT_TOML" ]; then
             echo "Port TOML not found: $PORT_TOML"
@@ -129,7 +125,7 @@ jobs:
         if: steps.check_match.outputs.should_build == 'true'
         shell: bash
         run: |
-          PORT_NAME="${{ matrix.port }}"
+          PORT_NAME="${{ steps.detect.outputs.port }}"
           # Convert path format (poco/1.14.2) to celer format (poco@1.14.2)
           PORT_NAME=$(echo "$PORT_NAME" | tr '/' '@')
           
