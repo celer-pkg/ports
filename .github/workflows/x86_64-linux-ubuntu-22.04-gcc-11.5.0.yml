@@ -1,0 +1,122 @@
+name: Build Ports - x86_64-linux-ubuntu-22.04-gcc-11.5.0
+
+on:
+  push:
+    branches:
+      - main
+      - master
+    paths:
+      - '*/*/port.toml'
+  pull_request:
+    paths:
+      - '*/*/port.toml'
+
+env:
+  PLATFORM: x86_64-linux-ubuntu-22.04-gcc-11.5.0
+
+jobs:
+  build-port:
+    runs-on: ubuntu-22.04
+    
+    steps:
+      - name: Checkout ports repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 2
+
+      - name: Detect changed ports
+        id: detect
+        run: |
+          # Get changed files
+          if [ "${{ github.event_name }}" = "pull_request" ]; then
+            CHANGED_FILES=$(git diff --name-only ${{ github.event.pull_request.base.sha }} ${{ github.sha }})
+          else
+            CHANGED_FILES=$(git diff --name-only HEAD^ HEAD)
+          fi
+          
+          # Extract unique port directories
+          PORTS=$(echo "$CHANGED_FILES" | grep '/port.toml$' | cut -d'/' -f1-2 | sort -u)
+          
+          echo "Changed ports: $PORTS"
+          
+          # Check if more than one port is changed
+          PORT_COUNT=$(echo "$PORTS" | wc -l)
+          if [ "$PORT_COUNT" -gt 1 ]; then
+            echo "::error::Multiple ports detected in single commit. Please submit one port at a time."
+            echo "::error::Changed ports: $PORTS"
+            exit 1
+          fi
+          
+          # Check if no ports changed
+          if [ -z "$PORTS" ]; then
+            echo "No ports changed, skipping build"
+            echo "port=" >> $GITHUB_OUTPUT
+            exit 0
+          fi
+          
+          echo "port=$PORTS" >> $GITHUB_OUTPUT
+
+      - name: Check if port matches platform
+        if: steps.detect.outputs.port != ''
+        id: check_match
+        run: |
+          PORT_TOML="${{ steps.detect.outputs.port }}/port.toml"
+          
+          if [ ! -f "$PORT_TOML" ]; then
+            echo "Port TOML not found: $PORT_TOML"
+            echo "should_build=false" >> $GITHUB_OUTPUT
+            exit 0
+          fi
+          
+          # Use the check script
+          chmod +x .github/scripts/check-platform-match.sh
+          
+          # Run the script and capture output
+          set +e  # Temporarily disable exit on error
+          .github/scripts/check-platform-match.sh "$PORT_TOML" "$PLATFORM"
+          SCRIPT_EXIT_CODE=$?
+          set -e  # Re-enable exit on error
+          
+          # Check exit code
+          if [ $SCRIPT_EXIT_CODE -eq 0 ]; then
+            echo "should_build=true" >> $GITHUB_OUTPUT
+          elif [ $SCRIPT_EXIT_CODE -eq 1 ]; then
+            echo "should_build=false" >> $GITHUB_OUTPUT
+          else
+            echo "::error::Script failed with exit code $SCRIPT_EXIT_CODE"
+            exit $SCRIPT_EXIT_CODE
+          fi
+
+      - name: Download celer
+        if: steps.check_match.outputs.should_build == 'true'
+        run: |
+          # Download latest celer release
+          curl -L -o x86_64-linux.tar.gz https://github.com/celer-pkg/celer/releases/latest/download/x86_64-linux.tar.gz
+          tar -xvzf x86_64-linux.tar.gz -C .
+          chmod +x celer
+
+      - name: Setup celer workspace
+        if: steps.check_match.outputs.should_build == 'true'
+        run: |
+          # Initialize celer with test-conf repo
+          ./celer init --url=https://github.com/celer-pkg/test-conf.git
+          
+          # Configure platform
+          ./celer configure --platform=$PLATFORM
+          
+          # Configure project
+          ./celer configure --project=project_test_install
+          
+          # Use current checkout instead of cloning ports repo
+          rm -rf ports
+          ln -s ${{ github.workspace }} ports
+
+      - name: Build port
+        if: steps.check_match.outputs.should_build == 'true'
+        run: |
+          PORT_NAME="${{ steps.detect.outputs.port }}"
+          # Convert path format (poco/1.14.2) to celer format (poco@1.14.2)
+          PORT_NAME=$(echo "$PORT_NAME" | tr '/' '@')
+          
+          # Install the port
+          ./celer install "$PORT_NAME" --verbose
