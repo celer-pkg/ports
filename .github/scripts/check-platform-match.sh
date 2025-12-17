@@ -14,12 +14,33 @@ fi
 # Install yq if not available (TOML parser)
 if ! command -v yq &> /dev/null; then
     echo "Installing yq for TOML parsing locally..."
-    curl -sSL -o ./yq https://github.com/mikefarah/yq/releases/latest/download/yq_linux_amd64
-    chmod +x ./yq
+    
+    # Detect OS and download appropriate yq binary
+    case "$(uname -s)" in
+        Linux*)
+            YQ_BINARY="yq_linux_amd64"
+            YQ_NAME="yq"
+            ;;
+        Darwin*)
+            YQ_BINARY="yq_darwin_amd64"
+            YQ_NAME="yq"
+            ;;
+        MINGW*|MSYS*|CYGWIN*)
+            YQ_BINARY="yq_windows_amd64.exe"
+            YQ_NAME="yq.exe"
+            ;;
+        *)
+            echo "ERROR: Unsupported OS: $(uname -s)" >&2
+            exit 1
+            ;;
+    esac
+    
+    curl -sSL -o "./$YQ_NAME" "https://github.com/mikefarah/yq/releases/latest/download/$YQ_BINARY"
+    chmod +x "./$YQ_NAME"
     export PATH="$(pwd):$PATH"
 else
     # If yq is not in PATH but exists in current dir, add it to PATH
-    if [ -f "./yq" ]; then
+    if [ -f "./yq" ] || [ -f "./yq.exe" ]; then
         export PATH="$(pwd):$PATH"
     fi
 fi
