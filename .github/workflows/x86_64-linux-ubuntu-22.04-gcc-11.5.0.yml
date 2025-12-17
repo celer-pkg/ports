@@ -1,4 +1,4 @@
-name: Build Ports - aarch64-linux-ubuntu-22.04-gcc-11.5.0
+name: Build Ports - x86_64-linux-ubuntu-22.04-gcc-11.5.0
 
 on:
   push:
@@ -12,7 +12,7 @@ on:
       - '*/*/port.toml'
 
 env:
-  PLATFORM: aarch64-linux-ubuntu-22.04-gcc-11.5.0
+  PLATFORM: x86_64-linux-ubuntu-22.04-gcc-11.5.0
 
 jobs:
   build-port:

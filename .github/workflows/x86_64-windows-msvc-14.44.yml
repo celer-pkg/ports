@@ -1,4 +1,4 @@
-name: Build Ports - aarch64-linux-ubuntu-22.04-gcc-11.5.0
+name: Build Ports - windows-amd64-msvc-14.44
 
 on:
   push:
@@ -12,11 +12,11 @@ on:
       - '*/*/port.toml'
 
 env:
-  PLATFORM: aarch64-linux-ubuntu-22.04-gcc-11.5.0
+  PLATFORM: x86_64-windows-msvc-enterprise-14.44
 
 jobs:
   build-port:
-    runs-on: ubuntu-22.04
+    runs-on: windows-2022
     
     steps:
       - name: Checkout ports repository
@@ -26,6 +26,7 @@ jobs:
 
       - name: Detect changed ports
         id: detect
+        shell: bash
         run: |
           # Get changed files
           if [ "${{ github.event_name }}" = "pull_request" ]; then
@@ -56,9 +57,16 @@ jobs:
           
           echo "port=$PORTS" >> $GITHUB_OUTPUT
 
+      - name: Setup MSVC
+        if: steps.detect.outputs.port != ''
+        uses: ilammy/msvc-dev-cmd@v1
+        with:
+          arch: amd64
+
       - name: Check if port matches platform
         if: steps.detect.outputs.port != ''
         id: check_match
+        shell: bash
         run: |
           PORT_TOML="${{ steps.detect.outputs.port }}/port.toml"
           
@@ -89,34 +97,37 @@ jobs:
 
       - name: Download celer
         if: steps.check_match.outputs.should_build == 'true'
+        shell: bash
         run: |
-          # Download latest celer release
-          curl -L -o x86_64-linux.tar.gz https://github.com/celer-pkg/celer/releases/latest/download/x86_64-linux.tar.gz
-          tar -xvzf x86_64-linux.tar.gz -C .
-          chmod +x celer
+          # Download latest celer release for Windows
+          curl -L -o x86_64-windows.tar.gz https://github.com/celer-pkg/celer/releases/latest/download/x86_64-windows.tar.gz
+          tar -xvzf x86_64-windows.tar.gz -C .
 
       - name: Setup celer workspace
         if: steps.check_match.outputs.should_build == 'true'
+        shell: bash
         run: |
           # Initialize celer with test-conf repo
-          ./celer init --url=https://github.com/celer-pkg/test-conf.git
+          ./celer.exe init --url=https://github.com/celer-pkg/test-conf.git
           
           # Configure platform
-          ./celer configure --platform=$PLATFORM
+          ./celer.exe configure --platform=$PLATFORM
           
           # Configure project
-          ./celer configure --project=project_test_install
+          ./celer.exe configure --project=project_test_install
           
           # Use current checkout instead of cloning ports repo
           rm -rf ports
-          ln -s ${{ github.workspace }} ports
+          # On Windows, use directory junction instead of symlink
+          cmd //c "mklink /J ports ${{ github.workspace }}"
 
       - name: Build port
         if: steps.check_match.outputs.should_build == 'true'
+        shell: bash
         run: |
           PORT_NAME="${{ steps.detect.outputs.port }}"
           # Convert path format (poco/1.14.2) to celer format (poco@1.14.2)
           PORT_NAME=$(echo "$PORT_NAME" | tr '/' '@')
           
           # Install the port
-          ./celer install "$PORT_NAME" --verbose
+          ./celer.exe install "$PORT_NAME" --verbose
