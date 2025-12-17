@@ -105,7 +105,7 @@ jobs:
           # Remove unnecessary pre-installed tools
           rm -rf /c/hostedtoolcache/windows/Ruby
           rm -rf /c/hostedtoolcache/windows/Python
-          rm -rf "C:\\ProgramData\\chocolatey"
+          rm -rf /c/ProgramData/chocolatey
           
           echo "Disk space after cleanup:"
           df -h
