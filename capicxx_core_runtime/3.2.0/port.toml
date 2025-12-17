@@ -1,0 +1,7 @@
+[package]
+  url = "https://github.com/COVESA/capicxx-core-runtime.git"
+  ref = "3.2.0"
+  depth = 1
+
+[[build_configs]]
+  build_system = "cmake"
