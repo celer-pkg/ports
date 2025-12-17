@@ -95,6 +95,21 @@ jobs:
             exit $SCRIPT_EXIT_CODE
           fi
 
+      - name: Free disk space
+        if: steps.check_match.outputs.should_build == 'true'
+        shell: bash
+        run: |
+          echo "Disk space before cleanup:"
+          df -h
+          
+          # Remove unnecessary pre-installed tools
+          rm -rf /c/hostedtoolcache/windows/Ruby
+          rm -rf /c/hostedtoolcache/windows/Python
+          rm -rf "C:\\ProgramData\\chocolatey"
+          
+          echo "Disk space after cleanup:"
+          df -h
+
       - name: Download celer
         if: steps.check_match.outputs.should_build == 'true'
         shell: bash
