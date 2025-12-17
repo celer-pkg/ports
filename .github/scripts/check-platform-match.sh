@@ -14,7 +14,7 @@ fi
 # Install yq if not available (TOML parser)
 if ! command -v yq &> /dev/null; then
     echo "Installing yq for TOML parsing locally..."
-    wget -qO ./yq https://github.com/mikefarah/yq/releases/latest/download/yq_linux_amd64
+    curl -sSL -o ./yq https://github.com/mikefarah/yq/releases/latest/download/yq_linux_amd64
     chmod +x ./yq
     export PATH="$(pwd):$PATH"
 else
