@@ -6,7 +6,7 @@ depth = 1
 
 [[build_configs]]
 pattern = "*linux*"
-build_system = "freestyle"
+build_system = "custom"
 build_in_source = true
 build = [
     "cmake -E make_directory bin",
