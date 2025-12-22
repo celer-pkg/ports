@@ -115,8 +115,9 @@ jobs:
         shell: bash
         run: |
           # Download latest celer release for Windows
-          curl -L -o x86_64-windows.tar.gz https://github.com/celer-pkg/celer/releases/latest/download/x86_64-windows.tar.gz
-          tar -xvzf x86_64-windows.tar.gz -C .
+          curl -L -o celer-windows-amd64.exe.zip https://github.com/celer-pkg/celer/releases/latest/download/celer-windows-amd64.exe.zip
+          tar -xvzf celer-windows-amd64.exe.zip -C .
+          mv celer-windows-amd64.exe celer.exe
 
       - name: Setup celer workspace
         if: steps.check_match.outputs.should_build == 'true'

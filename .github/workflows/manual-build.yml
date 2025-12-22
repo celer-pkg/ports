@@ -118,16 +118,18 @@ jobs:
         if: matrix.platform != 'x86_64-windows-msvc-enterprise-14.44'
         shell: bash
         run: |
-          curl -L -o x86_64-linux.tar.gz https://github.com/celer-pkg/celer/releases/latest/download/x86_64-linux.tar.gz
-          tar -xvzf x86_64-linux.tar.gz -C .
+          curl -L -o celer-amd64-linux.tar.gz https://github.com/celer-pkg/celer/releases/latest/download/celer-amd64-linux.tar.gz
+          tar -xvzf celer-amd64-linux.tar.gz -C .
+          mv celer-amd64-linux celer
           chmod +x celer
 
       - name: Download celer (Windows)
         if: matrix.platform == 'x86_64-windows-msvc-enterprise-14.44'
         shell: bash
         run: |
-          curl -L -o x86_64-windows.tar.gz https://github.com/celer-pkg/celer/releases/latest/download/x86_64-windows.tar.gz
-          tar -xvzf x86_64-windows.tar.gz -C .
+          curl -L -o celer-windows-amd64.exe.zip https://github.com/celer-pkg/celer/releases/latest/download/celer-windows-amd64.exe.zip
+          tar -xvzf celer-windows-amd64.exe.zip -C .
+          mv celer-windows-amd64.exe celer.exe
 
       - name: Setup celer workspace (Linux)
         if: matrix.platform != 'x86_64-windows-msvc-enterprise-14.44'
