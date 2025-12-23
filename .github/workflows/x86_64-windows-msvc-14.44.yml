@@ -87,9 +87,12 @@ jobs:
             # Check exit code
             if [ $SCRIPT_EXIT_CODE -eq 0 ]; then
               echo "should_build=true" >> $GITHUB_OUTPUT
+            elif [ $SCRIPT_EXIT_CODE -eq 1 ]; then
+              echo "Platform mismatch detected"
+              echo "should_build=false" >> $GITHUB_OUTPUT
             else
               echo "::error::Script failed with exit code $SCRIPT_EXIT_CODE"
-              echo "should_build=false" >> $GITHUB_OUTPUT
+              exit $SCRIPT_EXIT_CODE
             fi
           fi
 
@@ -149,8 +152,10 @@ jobs:
       - name: Report skipped status
         if: |
           (steps.detect.outputs.should_build == 'false' || 
-           steps.check_match.outputs.should_build == 'false') &&
-          github.event_name == 'pull_request'
+           (steps.check_match.outputs.should_build == 'false' && steps.check_match.outcome == 'success')) &&
+          github.event_name == 'pull_request' &&
+          job.status != 'failure'
+        shell: bash
         run: |
           echo "✅ No build required for this PR"
           echo ""
