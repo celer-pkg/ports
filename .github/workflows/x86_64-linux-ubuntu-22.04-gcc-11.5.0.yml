@@ -22,7 +22,7 @@ jobs:
       - name: Checkout ports repository
         uses: actions/checkout@v4
         with:
-          fetch-depth: 2
+          fetch-depth: 0
 
       - name: Detect changed ports
         id: detect
@@ -44,6 +44,7 @@ jobs:
           if [ "$PORT_COUNT" -gt 1 ]; then
             echo "::error::Multiple ports detected in single commit. Please submit one port at a time."
             echo "::error::Changed ports: $PORTS"
+            echo "should_build=false" >> $GITHUB_OUTPUT
             exit 1
           fi
           
@@ -51,6 +52,7 @@ jobs:
           if [ -z "$PORTS" ]; then
             echo "No ports changed, skipping build"
             echo "port=" >> $GITHUB_OUTPUT
+            echo "should_build=false" >> $GITHUB_OUTPUT
             exit 0
           fi
           
@@ -80,10 +82,9 @@ jobs:
           # Check exit code
           if [ $SCRIPT_EXIT_CODE -eq 0 ]; then
             echo "should_build=true" >> $GITHUB_OUTPUT
-          elif [ $SCRIPT_EXIT_CODE -eq 1 ]; then
-            echo "should_build=false" >> $GITHUB_OUTPUT
           else
             echo "::error::Script failed with exit code $SCRIPT_EXIT_CODE"
+            echo "should_build=false" >> $GITHUB_OUTPUT
             exit $SCRIPT_EXIT_CODE
           fi
 
