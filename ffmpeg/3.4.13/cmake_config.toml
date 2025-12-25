@@ -1,99 +1,83 @@
 namespace = "FFmpeg"
 
-[linux_shared]
-[[linux_shared.components]]
+[linux]
+[[linux_components]]
 component = "avutil"
-soname = "libavutil.so.55"
-filename = "libavutil.so.55.78.100"
+filename = "libavutil.so.55"
 dependencies = []
 
-[[linux_shared.components]]
+[[linux_components]]
 component = "avcodec"
-soname = "libavcodec.so.57"
-filename = "libavcodec.so.57.107.100"
+filename = "libavcodec.so.57"
 dependencies = ["avutil"]
 
-[[linux_shared.components]]
+[[linux_components]]
 component = "avdevice"
-soname = "libavdevice.so.57"
-filename = "libavdevice.so.57.10.100"
+filename = "libavdevice.so.57"
 dependencies = ["avformat", "avutil"]
 
-[[linux_shared.components]]
+[[linux_components]]
 component = "avfilter"
-soname = "libavfilter.so.6"
-filename = "libavfilter.so.6.107.100"
+filename = "libavfilter.so.6"
 dependencies = ["swscale", "swresample"]
 
-[[linux_shared.components]]
+[[linux_components]]
 component = "avformat"
-soname = "libavformat.so.57"
-filename = "libavformat.so.57.83.100"
+filename = "libavformat.so.57"
 dependencies = ["avcodec", "avutil"]
 
-[[linux_shared.components]]
+[[linux_components]]
 component = "postproc"
-soname = "libpostproc.so.54"
-filename = "libpostproc.so.54.7.100"
+filename = "libpostproc.so.54"
 dependencies = ["avcodec", "swscale", "avutil"]
 
-[[linux_shared.components]]
+[[linux_components]]
 component = "swresample"
-soname = "libswresample.so.2"
-filename = "libswresample.so.2.9.100"
+filename = "libswresample.so.2"
 dependencies = ["avcodec", "swscale", "avutil", "avformat"]
 
-[[linux_shared.components]]
+[[linux_components]]
 component = "swscale"
-soname = "libswscale.so.4"
-filename = "libswscale.so.4.8.100"
+filename = "libswscale.so.4"
 dependencies = ["avcodec", "avutil", "avformat"]
 
-[windows_shared]
-[[windows_shared.components]]
+[windows]
+[[windows_components]]
 component = "avutil"
-impname = "avutil.lib"
-filename = "avutil-55.dll"
+filename = "avutil.lib"
 dependencies = []
 
-[[windows_shared.components]]
+[[windows_components]]
 component = "avcodec"
-impname = "avcodec.lib"
-filename = "avcodec-57.dll"
+filename = "avcodec.lib"
 dependencies = ["avutil"]
 
-[[windows_shared.components]]
+[[windows_components]]
 component = "avdevice"
-impname = "avdevice.lib"
-filename = "avdevice-57.dll"
+filename = "avdevice.lib"
 dependencies = ["avformat", "avutil"]
 
-[[windows_shared.components]]
+[[windows_components]]
 component = "avfilter"
-impname = "avfilter.lib"
-filename = "avfilter-6.dll"
+filename = "avfilter.lib"
 dependencies = ["swscale", "swresample"]
 
-[[windows_shared.components]]
+[[windows_components]]
 component = "avformat"
-impname = "avformat.lib"
-filename = "avformat-57.dll"
+filename = "avformat.lib"
 dependencies = ["avcodec", "avutil"]
 
-[[windows_shared.components]]
+[[windows_components]]
 component = "postproc"
-impname = "postproc.lib"
-filename = "postproc-54.dll"
+filename = "postproc.lib"
 dependencies = ["avcodec", "swscale", "avutil"]
 
-[[windows_shared.components]]
+[[windows_components]]
 component = "swresample"
-impname = "swresample.lib"
-filename = "swresample-2.dll"
+filename = "swresample.lib"
 dependencies = ["avcodec", "swscale", "avutil", "avformat"]
 
-[[windows_shared.components]]
+[[windows_components]]
 component = "swscale"
-impname = "swscale.lib"
-filename = "swscale-4.dll"
+filename = "swscale.lib"
 dependencies = ["avcodec", "avutil", "avformat"]

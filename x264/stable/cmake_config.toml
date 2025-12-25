@@ -1,15 +1,7 @@
 namespace = "x264"
 
-[linux_static]
+[linux]
 filename = "libx264.a"
 
-[linux_shared]
-filename = "libx264.so.164"
-soname = "libx264.so"
-
-[windows_static]
-filename = "x264.lib"
-
-[windows_shared]
-filename = "libx264-164.dll"
-impname = "libx264.lib"
+[windows]
+filename = "libx264.lib"
