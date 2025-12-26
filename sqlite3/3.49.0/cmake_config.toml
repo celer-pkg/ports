@@ -1,15 +1,7 @@
 namespace = "SQLite3"
 
-[linux_static]
-filename = "libsqlite3.a"
-
-[linux_shared]
+[linux]
 filename = "libsqlite3.so"
-soname = "libsqlite3.so"
 
-[windows_static]
+[windows]
 filename = "sqlite3.lib"
-
-[windows_shared]
-filename = "libsqlite3.dll"
-impname = "sqlite3.lib"

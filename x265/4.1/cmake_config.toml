@@ -1,15 +1,7 @@
 namespace = "x265"
 
-[linux_static]
-filename = "x265.a"
+[linux]
+filename = "libx265.so"
 
-[linux_shared]
-filename = "libx265.so.212"
-soname = "libx265.so"
-
-[windows_static]
-filename = "x265-static.lib"
-
-[windows_shared]
-filename = "x265.dll"
-impname = "libx265.lib"
+[windows]
+filename = "libx265.lib"
