@@ -1,0 +1,11 @@
+[package]
+  url = "https://github.com/Taywee/args.git"
+  ref = "6.4.7"
+  depth = 1
+
+[[build_configs]]
+  build_system = "cmake"
+  options = [
+    "-DARGS_BUILD_EXAMPLES=OFF",
+    "-DARGS_BUILD_UNITTESTS=OFF",
+  ]

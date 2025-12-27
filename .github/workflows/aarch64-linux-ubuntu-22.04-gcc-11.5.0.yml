@@ -15,9 +15,11 @@ env:
   PLATFORM: aarch64-linux-ubuntu-22.04-gcc-11.5.0
 
 jobs:
-  build-port:
-    runs-on: ubuntu-22.04
-    
+  detect-ports:
+    runs-on: ubuntu-latest
+    outputs:
+      ports: ${{ steps.detect.outputs.ports }}
+      has-ports: ${{ steps.detect.outputs.has-ports }}
     steps:
       - name: Checkout ports repository
         uses: actions/checkout@v4
@@ -37,54 +39,46 @@ jobs:
           # Extract unique port directories
           PORTS=$(echo "$CHANGED_FILES" | grep '/port.toml$' | cut -d'/' -f1-2 | sort -u)
           
-          echo "Changed ports: $PORTS"
-          
-          # Check if more than one port is changed
-          PORT_COUNT=$(echo "$PORTS" | wc -l)
-          if [ "$PORT_COUNT" -gt 1 ]; then
-            echo "::error::Multiple ports detected in single commit. Please submit one port at a time."
-            echo "::error::Changed ports: $PORTS"
-            exit 1
-          fi
-          
-          # Check if no ports changed
           if [ -z "$PORTS" ]; then
-            echo "No ports changed, skipping build"
-            echo "port=" >> $GITHUB_OUTPUT
+            echo "has-ports=false" >> $GITHUB_OUTPUT
+            echo "ports=[]" >> $GITHUB_OUTPUT
             exit 0
           fi
           
-          echo "port=$PORTS" >> $GITHUB_OUTPUT
+          PORTS_JSON=$(echo "$PORTS" | jq -R -s -c 'split("\n") | map(select(length > 0))')
+          echo "has-ports=true" >> $GITHUB_OUTPUT
+          echo "ports=$PORTS_JSON" >> $GITHUB_OUTPUT
 
-      - name: Check if port matches platform
-        if: steps.detect.outputs.port != ''
+  build-port:
+    needs: detect-ports
+    if: needs.detect-ports.outputs.has-ports == 'true'
+    runs-on: ubuntu-22.04
+    strategy:
+      matrix:
+        port: ${{ fromJson(needs.detect-ports.outputs.ports) }}
+      fail-fast: false
+    
+    steps:
+      - name: Checkout ports repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Check platform match
         id: check_match
         run: |
-          PORT_TOML="${{ steps.detect.outputs.port }}/port.toml"
+          PORT_TOML="${{ matrix.port }}/port.toml"
           
           if [ ! -f "$PORT_TOML" ]; then
-            echo "Port TOML not found: $PORT_TOML"
             echo "should_build=false" >> $GITHUB_OUTPUT
             exit 0
           fi
           
-          # Use the check script
           chmod +x .github/scripts/check-platform-match.sh
-          
-          # Run the script and capture output
-          set +e  # Temporarily disable exit on error
-          .github/scripts/check-platform-match.sh "$PORT_TOML" "$PLATFORM"
-          SCRIPT_EXIT_CODE=$?
-          set -e  # Re-enable exit on error
-          
-          # Check exit code
-          if [ $SCRIPT_EXIT_CODE -eq 0 ]; then
+          if .github/scripts/check-platform-match.sh "$PORT_TOML" "$PLATFORM"; then
             echo "should_build=true" >> $GITHUB_OUTPUT
-          elif [ $SCRIPT_EXIT_CODE -eq 1 ]; then
-            echo "should_build=false" >> $GITHUB_OUTPUT
           else
-            echo "::error::Script failed with exit code $SCRIPT_EXIT_CODE"
-            exit $SCRIPT_EXIT_CODE
+            echo "should_build=false" >> $GITHUB_OUTPUT
           fi
 
       - name: Free disk space
@@ -131,9 +125,18 @@ jobs:
       - name: Build port
         if: steps.check_match.outputs.should_build == 'true'
         run: |
-          PORT_NAME="${{ steps.detect.outputs.port }}"
+          PORT_NAME="${{ matrix.port }}"
           # Convert path format (poco/1.14.2) to celer format (poco@1.14.2)
           PORT_NAME=$(echo "$PORT_NAME" | tr '/' '@')
           
           # Install the port
           ./celer install "$PORT_NAME" --verbose
+
+  build-port-complete:
+    needs: detect-ports
+    if: always()
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check build status
+        run: |
+          echo "Port build workflow completed"

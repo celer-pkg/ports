@@ -1,0 +1,7 @@
+[package]
+  url = "https://github.com/recp/cglm.git"
+  ref = "v0.9.6"
+  depth = 1
+
+[[build_configs]]
+  build_system = "cmake"
