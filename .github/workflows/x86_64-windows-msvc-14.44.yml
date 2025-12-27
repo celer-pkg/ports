@@ -50,7 +50,7 @@ jobs:
           echo "has-ports=true" >> $GITHUB_OUTPUT
           echo "ports=$PORTS_JSON" >> $GITHUB_OUTPUT
 
-  build-port:
+  build-port-matrix:
     needs: detect-ports
     if: needs.detect-ports.outputs.has-ports == 'true'
     runs-on: windows-2022
@@ -141,7 +141,7 @@ jobs:
           # Install the port
           ./celer.exe install "$PORT_NAME" --verbose
 
-  build-port-complete:
+  build-port:
     needs: detect-ports
     if: always()
     runs-on: ubuntu-latest
