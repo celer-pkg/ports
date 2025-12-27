@@ -1,0 +1,10 @@
+[package]
+  url = "https://github.com/catchorg/Catch2.git"
+  ref = "v3.11.0"
+  depth = 1
+
+[[build_configs]]
+  build_system = "cmake"
+  options = [
+    "-DCATCH_INSTALL_DOCS=OFF",
+  ]
