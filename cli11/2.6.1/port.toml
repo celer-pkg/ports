@@ -1,0 +1,8 @@
+[package]
+  url = "https://github.com/CLIUtils/CLI11.git"
+  ref = "v2.6.1"
+  depth = 1
+
+[[build_configs]]
+  build_system = "cmake"
+  options = ["-DCLI11_BUILD_TESTS=OFF", "-DCLI11_BUILD_EXAMPLES=OFF"]
