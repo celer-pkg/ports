@@ -5,5 +5,4 @@
 
 [[build_configs]]
   build_system = "cmake"
-  cxx_standard = "c++17"
   patches = ["fix-msvc-chrono.patch"]

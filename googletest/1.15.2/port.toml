@@ -1,6 +1,6 @@
 [package]
   url = "https://github.com/google/googletest.git"
-  ref = "v1.5.2"
+  ref = "v1.15.2"
   depth = 1
 
 [[build_configs]]

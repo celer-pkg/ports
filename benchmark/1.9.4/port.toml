@@ -1,0 +1,12 @@
+[package]
+  url = "https://github.com/google/benchmark.git"
+  ref = "v1.9.4"
+  depth = 1
+
+[[build_configs]]
+  build_system = "cmake"
+  options = [
+    "-DBENCHMARK_ENABLE_TESTING=OFF",
+    "-DBENCHMARK_ENABLE_GTEST_TESTS=OFF",
+    "-DBENCHMARK_ENABLE_INSTALL=ON"
+  ]
