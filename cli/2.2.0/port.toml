@@ -1,0 +1,8 @@
+[package]
+  url = "https://github.com/daniele77/cli.git"
+  ref = "v2.2.0"
+  depth = 1
+
+[[build_configs]]
+  build_system = "cmake"
+  options = ["-DCLI_BuildExamples=OFF", "-DCLI_BuildTests=OFF"]
