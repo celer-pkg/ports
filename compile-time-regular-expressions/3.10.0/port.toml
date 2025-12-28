@@ -1,0 +1,7 @@
+[package]
+  url = "https://github.com/hanickadot/compile-time-regular-expressions.git"
+  ref = "v3.10.0"
+  depth = 1
+
+[[build_configs]]
+  build_system = "cmake"

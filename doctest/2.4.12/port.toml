@@ -1,0 +1,9 @@
+[package]
+  url = "https://github.com/doctest/doctest.git"
+  ref = "v2.4.12"
+  depth = 1
+
+[[build_configs]]
+  build_system = "cmake"
+  options = ["-DDOCTEST_WITH_TESTS=OFF", "-DDOCTEST_WITH_MAIN_IN_STATIC_LIB=OFF"]
+                                                                                                               

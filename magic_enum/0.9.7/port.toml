@@ -1,0 +1,8 @@
+[package]
+  url = "https://github.com/Neargye/magic_enum.git"
+  ref = "v0.9.7"
+  depth = 1
+
+[[build_configs]]
+  build_system = "cmake"
+  options = ["-DMAGIC_ENUM_OPT_BUILD_EXAMPLES=OFF", "-DMAGIC_ENUM_OPT_BUILD_TESTS=OFF"]

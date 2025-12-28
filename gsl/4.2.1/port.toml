@@ -1,0 +1,8 @@
+[package]
+url = "https://github.com/microsoft/GSL.git"
+ref = "v4.2.1"
+depth = 1
+
+[[build_configs]]
+build_system = "cmake"
+options = ["-DGSL_TESTS=OFF"]

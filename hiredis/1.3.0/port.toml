@@ -1,0 +1,13 @@
+[package]
+  url = "https://github.com/redis/hiredis.git"
+  ref = "v1.3.0"
+  depth = 1
+
+[[build_configs]]
+  build_system = "cmake"
+  options = [
+    "-DDISABLE_TESTS=ON",
+    "-DENABLE_SSL_TESTS=OFF",
+    "-DENABLE_ASYNC_TESTS=OFF",
+    "-DENABLE_NUGET=OFF"
+  ]

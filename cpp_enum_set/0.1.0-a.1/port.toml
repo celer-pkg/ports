@@ -1,0 +1,7 @@
+[package]
+  url = "https://github.com/cdeln/cpp_enum_set.git"
+  ref = "v0.1.0-a.1"
+  depth = 1
+
+[[build_configs]]
+  build_system = "cmake"

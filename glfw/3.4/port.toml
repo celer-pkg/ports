@@ -1,0 +1,12 @@
+[package]
+url = "https://github.com/glfw/glfw.git"
+ref = "3.4"
+depth = 1
+
+[[build_configs]]
+build_system = "cmake"
+options = [
+  "-DGLFW_BUILD_EXAMPLES=OFF",
+  "-DGLFW_BUILD_TESTS=OFF",
+  "-DGLFW_BUILD_DOCS=OFF",
+]

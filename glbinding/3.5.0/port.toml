@@ -1,0 +1,12 @@
+[package]
+url = "https://github.com/cginternals/glbinding.git"
+ref = "v3.5.0"
+depth = 1
+
+[[build_configs]]
+build_system = "cmake"
+options = [
+  "-DOPTION_BUILD_EXAMPLES=OFF",
+  "-DOPTION_BUILD_TESTS=OFF",
+  "-DOPTION_BUILD_DOCS=OFF",
+]
