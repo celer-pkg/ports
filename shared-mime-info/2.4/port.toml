@@ -1,0 +1,9 @@
+[package]
+  url = "https://gitlab.freedesktop.org/xdg/shared-mime-info.git"
+  ref = "2.4"
+  depth = 1
+
+[[build_configs]]
+  build_system = "meson"
+  dev_dependencies = ["gettext@0.25", "pkgconf@2.4.3"]
+  dependencies = ["libxml2@2.13.5"]
