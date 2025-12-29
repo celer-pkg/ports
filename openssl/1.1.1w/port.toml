@@ -14,7 +14,6 @@ options = [
     "linux-aarch64",
     "no-tests",
     "--libdir=lib",
-    "--cc=${CROSSTOOL_PREFIX}gcc",
 ]
 
 # ============== build for x86_64-linux ============== #
@@ -27,7 +26,6 @@ options = [
     "linux-x86_64",
     "no-tests",
     "--libdir=lib",
-    "--cc=${CROSSTOOL_PREFIX}gcc",
 ]
 
 # ============== build for windows ============== #
@@ -41,5 +39,4 @@ options = [
     "no-tests",
     "--openssldir=ssl",
     "--libdir=lib",
-    "--cc=${CROSSTOOL_PREFIX}gcc",
 ]
