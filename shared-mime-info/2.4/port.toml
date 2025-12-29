@@ -5,5 +5,5 @@
 
 [[build_configs]]
   build_system = "meson"
-  dev_dependencies = ["gettext@0.25", "pkgconf@2.4.3"]
-  dependencies = ["libxml2@2.13.5"]
+  dev_dependencies = ["gettext@0.25", "pkgconf@2.4.3", "libxml2@2.13.5"]
+  dependencies = ["libxml2@2.13.5", "glib@2.84.1"]

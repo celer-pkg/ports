@@ -1,11 +1,12 @@
 [package]
-url = "https://gitlab.gnome.org/GNOME/glib.git"
-ref = "2.84.1"
-depth = 1
+  url = "https://gitlab.gnome.org/GNOME/glib.git"
+  ref = "2.84.1"
+  depth = 1
 
 [[build_configs]]
-build_system = "meson"
-build_tools = ["python3:setuptools"]
-options = ["-Dlibmount=enabled"]
-dependencies = ["util-linux@2.41"]
-dev_dependencies = ["pkgconf@2.4.3"]
+  pattern = "*linux*"
+  build_system = "meson"
+  build_tools = ["python3:setuptools"]
+  options = ["-Dlibmount=enabled"]
+  dependencies = ["util-linux@2.41"]
+  dev_dependencies = ["pkgconf@2.4.3"]
