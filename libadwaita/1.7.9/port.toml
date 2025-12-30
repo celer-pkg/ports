@@ -1,0 +1,10 @@
+[package]
+  url = "https://gitlab.gnome.org/GNOME/libadwaita.git"
+  ref = "1.7.9"
+  depth = 1
+
+[[build_configs]]
+  pattern = "*linux*"
+  build_system = "meson"
+  dev_dependencies = ["pkgconf@2.4.3"]
+  dependencies = ["glib@2.84.1", "shared-mime-info@2.4"]

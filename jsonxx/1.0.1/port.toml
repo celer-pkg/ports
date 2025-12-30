@@ -1,0 +1,11 @@
+[package]
+  url = "https://github.com/hjiang/jsonxx.git"
+  ref = "v1.0.1"
+  depth = 1
+
+[[build_configs]]
+  build_system = "nobuild"
+  post_install = [
+    "cmake -E make_directory ${PACKAGE_DIR}/include/jsonxx",
+    "cmake -E copy ${SRC_DIR}/jsonxx.h ${PACKAGE_DIR}/include/jsonxx/jsonxx.h",
+  ]
