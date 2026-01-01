@@ -9,7 +9,7 @@ ignore_submodule = true
 pattern = "aarch64-linux*"
 build_system = "makefiles"
 build_shared = "shared"
-build_static = "no"
+build_static = "_"
 options = [
     "linux-aarch64",
     "no-tests",
@@ -21,7 +21,7 @@ options = [
 pattern = "x86_64-linux*"
 build_system = "makefiles"
 build_shared = "shared"
-build_static = "no"
+build_static = "_"
 options = [
     "linux-x86_64",
     "no-tests",
@@ -33,7 +33,7 @@ options = [
 pattern = "*windows*"
 build_system = "makefiles"
 build_shared = "shared"
-build_static = "no"
+build_static = "_"
 options = [
     "VC-WIN64A",
     "no-tests",

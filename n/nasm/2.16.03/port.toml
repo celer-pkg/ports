@@ -6,8 +6,8 @@ depth = 1
 [[build_configs]]
 pattern = "*linux*"
 build_system = "makefiles"
-build_shared = "no"
-build_static = "no"
+build_shared = "_"
+build_static = "_"
 patches = ["fix_install.patch"]
 build_in_source = true
 dev_dependencies = ["automake@1.18", "libtool@2.5.4"]
