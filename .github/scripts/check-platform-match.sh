@@ -65,8 +65,9 @@ else
             break
         fi
         
-        # Check if pattern matches (exact match or regex)
-        if [[ "$PLATFORM" =~ $PATTERN ]]; then
+        # Check if pattern matches using glob/wildcard pattern (case statement)
+        # This supports patterns like *linux*, *windows*, etc.
+        if [[ "$PLATFORM" == $PATTERN ]]; then
             MATCH_FOUND=true
             echo "Match found: pattern='$PATTERN' matches platform='$PLATFORM'"
             break
