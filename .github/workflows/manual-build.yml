@@ -12,6 +12,11 @@ on:
         required: false
         type: boolean
         default: true
+      dev:
+        description: 'Enable native compilation (--dev)'
+        required: false
+        type: boolean
+        default: false
 
 jobs:
   detect-platforms:
@@ -47,7 +52,9 @@ jobs:
 
       - name: Validate port exists
         run: |
-          PORT_TOML="${{ steps.parse_port.outputs.port_name }}/${{ steps.parse_port.outputs.port_version }}/port.toml"
+          PORT_NAME="${{ steps.parse_port.outputs.port_name }}"
+          FIRST_LETTER="${PORT_NAME:0:1}"
+          PORT_TOML="${FIRST_LETTER}/${PORT_NAME}/${{ steps.parse_port.outputs.port_version }}/port.toml"
           
           if [ ! -f "$PORT_TOML" ]; then
             echo "::error::Port TOML not found: $PORT_TOML"
@@ -59,7 +66,9 @@ jobs:
       - name: Find matching platforms
         id: find_platforms
         run: |
-          PORT_TOML="${{ steps.parse_port.outputs.port_name }}/${{ steps.parse_port.outputs.port_version }}/port.toml"
+          PORT_NAME="${{ steps.parse_port.outputs.port_name }}"
+          FIRST_LETTER="${PORT_NAME:0:1}"
+          PORT_TOML="${FIRST_LETTER}/${PORT_NAME}/${{ steps.parse_port.outputs.port_version }}/port.toml"
           
           # List of available platforms to test
           AVAILABLE_PLATFORMS=(
@@ -163,11 +172,11 @@ jobs:
           echo "Building $PORT_NAME on ${{ matrix.platform }}"
           echo "========================================="
           
-          if [ "${{ inputs.verbose }}" = "true" ]; then
-            ./celer install "$PORT_NAME" --verbose
-          else
-            ./celer install "$PORT_NAME"
-          fi
+          CMD="./celer install \"$PORT_NAME\""
+          [ "${{ inputs.verbose }}" = "true" ] && CMD="$CMD --verbose"
+          [ "${{ inputs.dev }}" = "true" ] && CMD="$CMD --dev"
+          
+          eval $CMD
 
       - name: Build port (Windows)
         if: matrix.platform == 'x86_64-windows-msvc-enterprise-14.44'
@@ -179,11 +188,11 @@ jobs:
           echo "Building $PORT_NAME on ${{ matrix.platform }}"
           echo "========================================="
           
-          if [ "${{ inputs.verbose }}" = "true" ]; then
-            ./celer.exe install "$PORT_NAME" --verbose
-          else
-            ./celer.exe install "$PORT_NAME"
-          fi
+          CMD="./celer.exe install \"$PORT_NAME\""
+          [ "${{ inputs.verbose }}" = "true" ] && CMD="$CMD --verbose"
+          [ "${{ inputs.dev }}" = "true" ] && CMD="$CMD --dev"
+          
+          eval $CMD
 
       - name: Build summary
         if: success()
