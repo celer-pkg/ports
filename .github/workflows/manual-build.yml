@@ -8,7 +8,7 @@ on:
         required: true
         type: string
       verbose:
-        description: 'Enable verbose output'
+        description: 'Enable verbose output (--verbose)'
         required: false
         type: boolean
         default: true
@@ -106,6 +106,7 @@ jobs:
           echo "========================================="
 
   build-port:
+    name: Build ${{ needs.detect-platforms.outputs.port_name }}@${{ needs.detect-platforms.outputs.port_version }} (${{ matrix.platform }})
     needs: detect-platforms
     runs-on: ${{ matrix.platform == 'x86_64-windows-msvc-enterprise-14.44' && 'windows-2022' || 'ubuntu-22.04' }}
     strategy:
@@ -137,7 +138,7 @@ jobs:
         shell: bash
         run: |
           curl -L -o celer-windows-amd64.exe.zip https://github.com/celer-pkg/celer/releases/latest/download/celer-windows-amd64.exe.zip
-          tar -xvzf celer-windows-amd64.exe.zip -C .
+          unzip celer-windows-amd64.exe.zip
           mv celer-windows-amd64.exe celer.exe
 
       - name: Setup celer workspace (Linux)
@@ -162,7 +163,7 @@ jobs:
           rm -rf ports
           cmd //c "mklink /J ports ${{ github.workspace }}"
 
-      - name: Build port (Linux)
+      - name: Build ${{ needs.detect-platforms.outputs.port_name }}@${{ needs.detect-platforms.outputs.port_version }}
         if: matrix.platform != 'x86_64-windows-msvc-enterprise-14.44'
         shell: bash
         run: |
@@ -178,7 +179,7 @@ jobs:
           
           eval $CMD
 
-      - name: Build port (Windows)
+      - name: Build ${{ needs.detect-platforms.outputs.port_name }}@${{ needs.detect-platforms.outputs.port_version }}
         if: matrix.platform == 'x86_64-windows-msvc-enterprise-14.44'
         shell: bash
         run: |
