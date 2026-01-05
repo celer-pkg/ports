@@ -1,0 +1,9 @@
+[package]
+  url = "https://github.com/KhronosGroup/SPIRV-Tools.git"
+  ref = "vulkan-sdk-1.4.335.0"
+  depth = 1
+
+[[build_configs]]
+  build_system = "cmake"
+  dependencies = ["spirv-headers@1.4.335.0"]
+  options = ["-DSPIRV-Headers_SOURCE_DIR=${DEPS_DIR}"]
