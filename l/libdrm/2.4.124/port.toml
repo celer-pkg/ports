@@ -7,8 +7,8 @@ depth = 1
 [[build_configs]]
 pattern = "*linux*"
 build_system = "meson"
-dependencies = ["xcb-proto@1.17.0"]
+dependencies = ["xcb-proto@1.17.0", "libpciaccess@0.18.1"]
 dev_dependencies = ["pkgconf@2.4.3"]
-options = ["-Dtests=false"]
+options = ["-Dtests=false", "-Dintel=enabled"]
 # Note:
 # This library support linux only.
