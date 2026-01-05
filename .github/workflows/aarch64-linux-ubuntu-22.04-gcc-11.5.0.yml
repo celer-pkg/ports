@@ -6,10 +6,10 @@ on:
       - main
       - master
     paths:
-      - '*/*/port.toml'
+      - '*/*/*/port.toml'
   pull_request:
     paths:
-      - '*/*/port.toml'
+      - '*/*/*/port.toml'
 
 env:
   PLATFORM: aarch64-linux-ubuntu-22.04-gcc-11.5.0
@@ -37,7 +37,7 @@ jobs:
           fi
           
           # Extract unique port directories
-          PORTS=$(echo "$CHANGED_FILES" | grep '/port.toml$' | cut -d'/' -f1-2 | sort -u)
+          PORTS=$(echo "$CHANGED_FILES" | grep '/port.toml$' | cut -d'/' -f1-3 | sort -u)
           
           if [ -z "$PORTS" ]; then
             echo "has-ports=false" >> $GITHUB_OUTPUT
