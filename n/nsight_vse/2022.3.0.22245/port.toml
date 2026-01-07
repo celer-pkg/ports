@@ -1,0 +1,7 @@
+[package]
+  ref = "2022.3.0.22245"
+
+[[build_configs]]
+  pattern = "x86_64-windows*"
+  build_system = "prebuilt"
+  url = "https://developer.download.nvidia.cn/compute/cuda/redist/nsight_vse/windows-x86_64/nsight_vse-windows-x86_64-2022.3.0.22245-archive.zip"

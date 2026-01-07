@@ -1,0 +1,7 @@
+[package]
+  ref = "520.61.05"
+
+[[build_configs]]
+  pattern = "x86_64-linux*"
+  build_system = "prebuilt"
+  url = "https://developer.download.nvidia.cn/compute/cuda/redist/libnvidia_nscq/linux-x86_64/libnvidia_nscq-linux-x86_64-520.61.05-archive.tar.xz"
