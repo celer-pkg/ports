@@ -11,4 +11,13 @@ dependencies = [
   "fast_float@8.2.2",
   "libunwind@1.6.1",
   "libevent@2.1.12",
+  "fmt@9.0.0",
+  "glog@0.6.0",
+]
+options = [
+  "-DFOLLY_HAVE_UNALIGNED_ACCESS_EXITCODE=0",
+  "-DFOLLY_HAVE_WEAK_SYMBOLS_EXITCODE=0",
+  "-DFOLLY_HAVE_LINUX_VDSO_EXITCODE=1",
+  "-DFOLLY_HAVE_WCHAR_SUPPORT_EXITCODE=0",
+  "-DHAVE_VSNPRINTF_ERRORS_EXITCODE=1",
 ]
