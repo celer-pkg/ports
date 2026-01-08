@@ -130,7 +130,7 @@ dependencies = [
 
   # math and computer
   "libcublas@11.11.3.6",
-  "libcufft@1.4.0.31",
+  "libcufft@10.9.0.58",
   "libcurand@10.3.0.86",
   "libcusolver@11.4.1.48",
   "libcusparse@11.7.5.86",
