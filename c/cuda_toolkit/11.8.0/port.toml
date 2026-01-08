@@ -28,7 +28,9 @@ dependencies = [
   "cuda_cupti@11.8.87",
   "cuda_nvml_dev@11.8.86",
   "cuda_profiler_api@11.8.86",
-  "cuda_sanitizer_api@11.8.86",
+
+  # core compute
+  "cuda_cccl@11.8.89",
 
   # driver
   "nvidia_fs@2.13.5",
@@ -38,9 +40,9 @@ dev_dependencies = [
   "cuda_documentation@11.8.86",
 
   # build tool
-  "cuda_cccl@11.8.89",
   "cuda_nvcc@11.8.89",
   "cuda_nvprune@11.8.86",
+  "cuda_nvvp@11.8.87",
 
   # binary analysis
   "cuda_cuobjdump@11.8.86",
@@ -49,10 +51,10 @@ dev_dependencies = [
 
   # debug and check
   "cuda_memcheck@11.8.86",
+  "cuda_sanitizer_api@11.8.86",
 
   # performance analysis
   "cuda_nvprof@11.8.87",
-  "cuda_nvvp@11.8.87",
   "nsight_compute@2022.3.0.22",
 ]
 
@@ -81,7 +83,9 @@ dependencies = [
   "cuda_cupti@11.8.87",
   "cuda_nvml_dev@11.8.86",
   "cuda_profiler_api@11.8.86",
-  "cuda_sanitizer_api@11.8.86",
+
+  # core compute
+  "cuda_cccl@11.8.89",
 
   # driver
   "libnvidia_nscq@520.61.05",
@@ -94,9 +98,9 @@ dev_dependencies = [
   "cuda_documentation@11.8.86",
 
   # build tool
-  "cuda_cccl@11.8.89",
   "cuda_nvcc@11.8.89",
   "cuda_nvprune@11.8.86",
+  "cuda_nvvp@11.8.87",
 
   # binary analysis
   "cuda_cuobjdump@11.8.86",
@@ -105,16 +109,11 @@ dev_dependencies = [
 
   # debug and check
   "cuda_memcheck@11.8.86",
+  "cuda_sanitizer_api@11.8.86",
 
   # performance analysis
   "cuda_nvprof@11.8.87",
-  "cuda_nvvp@11.8.87",
   "nsight_compute@2022.3.0.22",
-
-  # dev tool
-  "cuda_nsight@11.8.86",
-  "nsight_systems@2022.4.2.1",
-  "cuda_demo_suite@11.8.86",
 ]
 
 # =============== build for x86_64-windows ============ #
@@ -138,20 +137,22 @@ dependencies = [
   "libnvjpeg@11.9.0.86",
 
   # tool library but optional
-  "cuda_cupti@11.8.87",         # analysis performance
-  "cuda_nvml_dev@11.8.86",      # used to monitt gpu
+  "cuda_cupti@11.8.87",        # analysis performance
+  "cuda_nvml_dev@11.8.86",     # used to monitor gpu
   "cuda_profiler_api@11.8.86",
-  "cuda_sanitizer_api@11.8.86",
   "nsight_nvtx@1.21018621",
+
+  # core compute
+  "cuda_cccl@11.8.89",
 ]
 dev_dependencies = [
   # document
   "cuda_documentation@11.8.86",
 
   # build tool
-  "cuda_cccl@11.8.89",
   "cuda_nvcc@11.8.89",
   "cuda_nvprune@11.8.86",
+  "cuda_nvvp@11.8.87",
 
   # binary analysis
   "cuda_cuobjdump@11.8.86",
@@ -160,10 +161,10 @@ dev_dependencies = [
 
   # debug and check
   "cuda_memcheck@11.8.86",
+  "cuda_sanitizer_api@11.8.86",
 
   # performance analysis
   "cuda_nvprof@11.8.87",
-  "cuda_nvvp@11.8.87",
   "nsight_compute@2022.3.0.22",
 
   # dev tool - Windows Special
