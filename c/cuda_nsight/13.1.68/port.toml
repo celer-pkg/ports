@@ -1,0 +1,7 @@
+[package]
+  ref = "13.1.68"
+
+[[build_configs]]
+  pattern = "x86_64-linux*"
+  build_system = "prebuilt"
+  url = "https://developer.download.nvidia.cn/compute/cuda/redist/cuda_nsight/linux-x86_64/cuda_nsight-linux-x86_64-13.1.68-archive.tar.xz"

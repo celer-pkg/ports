@@ -1,0 +1,7 @@
+[package]
+  ref = "520.61.05"
+
+[[build_configs]]
+  pattern = "x86_64-linux*"
+  build_system = "prebuilt"
+  url = "https://developer.download.nvidia.cn/compute/cuda/redist/nvidia_driver/linux-x86_64/nvidia_driver-linux-x86_64-520.61.05-archive.tar.xz"

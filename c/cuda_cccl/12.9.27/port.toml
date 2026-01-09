@@ -1,0 +1,17 @@
+[package]
+  ref = "12.9.27"
+
+[[build_configs]]
+  pattern = "aarch64-linux*"
+  build_system = "prebuilt"
+  url = "https://developer.download.nvidia.cn/compute/cuda/redist/cuda_cccl/linux-aarch64/cuda_cccl-linux-aarch64-12.9.27-archive.tar.xz"
+
+[[build_configs]]
+  pattern = "x86_64-linux*"
+  build_system = "prebuilt"
+  url = "https://developer.download.nvidia.cn/compute/cuda/redist/cuda_cccl/linux-x86_64/cuda_cccl-linux-x86_64-12.9.27-archive.tar.xz"
+
+[[build_configs]]
+  pattern = "x86_64-windows*"
+  build_system = "prebuilt"
+  url = "https://developer.download.nvidia.cn/compute/cuda/redist/cuda_cccl/windows-x86_64/cuda_cccl-windows-x86_64-12.9.27-archive.zip"

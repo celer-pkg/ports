@@ -1,0 +1,12 @@
+[package]
+  ref = "11.9.0.86"
+
+[[build_configs]]
+  pattern = "x86_64-linux*"
+  build_system = "prebuilt"
+  url = "https://developer.download.nvidia.cn/compute/cuda/redist/libnvjpeg/linux-x86_64/libnvjpeg-linux-x86_64-11.9.0.86-archive.tar.xz"
+
+[[build_configs]]
+  pattern = "x86_64-windows*"
+  build_system = "prebuilt"
+  url = "https://developer.download.nvidia.cn/compute/cuda/redist/libnvjpeg/windows-x86_64/libnvjpeg-windows-x86_64-11.9.0.86-archive.zip"

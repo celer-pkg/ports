@@ -1,0 +1,7 @@
+[package]
+  ref = "11.8.31339915"
+
+[[build_configs]]
+  pattern = "aarch64-linux*"
+  build_system = "prebuilt"
+  url = "https://developer.download.nvidia.cn/compute/cuda/redist/cuda_compat/linux-aarch64/cuda_compat-linux-aarch64-11.8.31339915-archive.tar.xz"
