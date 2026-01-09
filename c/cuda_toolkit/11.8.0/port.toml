@@ -28,6 +28,7 @@ dependencies = [
   "cuda_cupti@11.8.87",
   "cuda_nvml_dev@11.8.86",
   "cuda_profiler_api@11.8.86",
+  "cuda_nvvp@11.8.87",
 
   # core compute
   "cuda_cccl@11.8.89",
@@ -42,7 +43,6 @@ dev_dependencies = [
   # build tool
   "cuda_nvcc@11.8.89",
   "cuda_nvprune@11.8.86",
-  "cuda_nvvp@11.8.87",
 
   # binary analysis
   "cuda_cuobjdump@11.8.86",
@@ -83,6 +83,7 @@ dependencies = [
   "cuda_cupti@11.8.87",
   "cuda_nvml_dev@11.8.86",
   "cuda_profiler_api@11.8.86",
+  "cuda_nvvp@11.8.87",
 
   # core compute
   "cuda_cccl@11.8.89",
@@ -100,7 +101,6 @@ dev_dependencies = [
   # build tool
   "cuda_nvcc@11.8.89",
   "cuda_nvprune@11.8.86",
-  "cuda_nvvp@11.8.87",
 
   # binary analysis
   "cuda_cuobjdump@11.8.86",
@@ -140,6 +140,7 @@ dependencies = [
   "cuda_cupti@11.8.87",        # analysis performance
   "cuda_nvml_dev@11.8.86",     # used to monitor gpu
   "cuda_profiler_api@11.8.86",
+  "cuda_nvvp@11.8.87",
   "nsight_nvtx@1.21018621",
 
   # core compute
@@ -152,7 +153,6 @@ dev_dependencies = [
   # build tool
   "cuda_nvcc@11.8.89",
   "cuda_nvprune@11.8.86",
-  "cuda_nvvp@11.8.87",
 
   # binary analysis
   "cuda_cuobjdump@11.8.86",
