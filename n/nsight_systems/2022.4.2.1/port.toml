@@ -1,0 +1,12 @@
+[package]
+  ref = "2022.4.2.1"
+
+[[build_configs]]
+  pattern = "x86_64-linux*"
+  build_system = "prebuilt"
+  url = "https://developer.download.nvidia.cn/compute/cuda/redist/nsight_systems/linux-x86_64/nsight_systems-linux-x86_64-2022.4.2.1-archive.tar.xz"
+
+[[build_configs]]
+  pattern = "x86_64-windows*"
+  build_system = "prebuilt"
+  url = "https://developer.download.nvidia.cn/compute/cuda/redist/nsight_systems/windows-x86_64/nsight_systems-windows-x86_64-2022.4.2.1-archive.zip"

@@ -1,0 +1,12 @@
+[package]
+  ref = "13.1.80"
+
+[[build_configs]]
+  pattern = "x86_64-linux*"
+  build_system = "prebuilt"
+  url = "https://developer.download.nvidia.cn/compute/cuda/redist/cuda_ctadvisor/linux-x86_64/cuda_ctadvisor-linux-x86_64-13.1.80-archive.tar.xz"
+
+[[build_configs]]
+  pattern = "x86_64-windows*"
+  build_system = "prebuilt"
+  url = "https://developer.download.nvidia.cn/compute/cuda/redist/cuda_ctadvisor/windows-x86_64/cuda_ctadvisor-windows-x86_64-13.1.80-archive.zip"

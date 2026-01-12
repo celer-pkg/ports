@@ -1,0 +1,17 @@
+[package]
+  ref = "12.9.88"
+
+[[build_configs]]
+  pattern = "aarch64-linux*"
+  build_system = "prebuilt"
+  url = "https://developer.download.nvidia.cn/compute/cuda/redist/cuda_nvdisasm/linux-aarch64/cuda_nvdisasm-linux-aarch64-12.9.88-archive.tar.xz"
+
+[[build_configs]]
+  pattern = "x86_64-linux*"
+  build_system = "prebuilt"
+  url = "https://developer.download.nvidia.cn/compute/cuda/redist/cuda_nvdisasm/linux-x86_64/cuda_nvdisasm-linux-x86_64-12.9.88-archive.tar.xz"
+
+[[build_configs]]
+  pattern = "x86_64-windows*"
+  build_system = "prebuilt"
+  url = "https://developer.download.nvidia.cn/compute/cuda/redist/cuda_nvdisasm/windows-x86_64/cuda_nvdisasm-windows-x86_64-12.9.88-archive.zip"
