@@ -1,0 +1,7 @@
+[package]
+  ref = "12.9.19"
+
+[[build_configs]]
+  pattern = "x86_64-linux*"
+  build_system = "prebuilt"
+  url = "https://developer.download.nvidia.cn/compute/cuda/redist/cuda_sandbox_dev/linux-x86_64/cuda_sandbox_dev-linux-x86_64-12.9.19-archive.tar.xz"

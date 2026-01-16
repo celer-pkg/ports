@@ -1,0 +1,7 @@
+[package]
+  ref = "575.57.08"
+
+[[build_configs]]
+  pattern = "x86_64-linux*"
+  build_system = "prebuilt"
+  url = "https://developer.download.nvidia.cn/compute/cuda/redist/fabricmanager/linux-x86_64/fabricmanager-linux-x86_64-575.57.08-archive.tar.xz"

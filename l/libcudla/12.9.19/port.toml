@@ -1,0 +1,7 @@
+[package]
+  ref = "12.9.19"
+
+[[build_configs]]
+  pattern = "aarch64-linux*"
+  build_system = "prebuilt"
+  url = "https://developer.download.nvidia.cn/compute/cuda/redist/libcudla/linux-aarch64/libcudla-linux-aarch64-12.9.19-archive.tar.xz"

@@ -6,7 +6,7 @@ ref = "11.8.0"
 
 [[build_configs]]
 pattern = "aarch64-linux*"
-build_system = "custom"
+build_system = "nobuild"
 dependencies = [
   # core library
   "cuda_compat@11.8.31339915",
@@ -62,7 +62,7 @@ dev_dependencies = [
 
 [[build_configs]]
 pattern = "x86_64-linux*"
-build_system = "custom"
+build_system = "nobuild"
 dependencies = [
   # core library
   "cuda_cudart@11.8.89",
@@ -120,7 +120,7 @@ dev_dependencies = [
 
 [[build_configs]]
 pattern = "x86_64-windows*"
-build_system = "custom"
+build_system = "nobuild"
 dependencies = [
   # core library
   "cuda_cudart@11.8.89",
@@ -171,4 +171,5 @@ dev_dependencies = [
   "nsight_vse@2022.3.0.22245",
   "nsight_systems@2022.4.2.1",
   "cuda_demo_suite@11.8.86",
+  "visual_studio_integration@11.8.86"
 ]

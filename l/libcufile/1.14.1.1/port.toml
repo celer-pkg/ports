@@ -1,0 +1,12 @@
+[package]
+  ref = "1.14.1.1"
+
+[[build_configs]]
+  pattern = "aarch64-linux*"
+  build_system = "prebuilt"
+  url = "https://developer.download.nvidia.cn/compute/cuda/redist/libcufile/linux-aarch64/libcufile-linux-aarch64-1.14.1.1-archive.tar.xz"
+
+[[build_configs]]
+  pattern = "x86_64-linux*"
+  build_system = "prebuilt"
+  url = "https://developer.download.nvidia.cn/compute/cuda/redist/libcufile/linux-x86_64/libcufile-linux-x86_64-1.14.1.1-archive.tar.xz"
