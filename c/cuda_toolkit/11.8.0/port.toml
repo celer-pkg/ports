@@ -8,13 +8,10 @@ ref = "11.8.0"
 pattern = "aarch64-linux*"
 build_system = "nobuild"
 dependencies = [
-  # core library
   "cuda_compat@11.8.31339915",
   "cuda_cudart@11.8.89",
   "cuda_nvrtc@11.8.89",
   "cuda_nvtx@11.8.86",
-
-  # math and computer
   "libcublas@11.11.3.6",
   "libcudla@11.8.86",
   "libcufft@10.9.0.58",
@@ -23,37 +20,20 @@ dependencies = [
   "libcusolver@11.4.1.48",
   "libcusparse@11.7.5.86",
   "libnpp@11.8.0.86",
-
-  # tool library but optional
   "cuda_cupti@11.8.87",
   "cuda_nvml_dev@11.8.86",
   "cuda_profiler_api@11.8.86",
   "cuda_nvvp@11.8.87",
-
-  # core compute
   "cuda_cccl@11.8.89",
-
-  # driver
   "nvidia_fs@2.13.5",
-]
-dev_dependencies = [
-  # document
   "cuda_documentation@11.8.86",
-
-  # build tool
   "cuda_nvcc@11.8.89",
   "cuda_nvprune@11.8.86",
-
-  # binary analysis
   "cuda_cuobjdump@11.8.86",
   "cuda_cuxxfilt@11.8.86",
   "cuda_nvdisasm@11.8.86",
-
-  # debug and check
   "cuda_memcheck@11.8.86",
   "cuda_sanitizer_api@11.8.86",
-
-  # performance analysis
   "cuda_nvprof@11.8.87",
   "nsight_compute@2022.3.0.22",
 ]
@@ -64,12 +44,9 @@ dev_dependencies = [
 pattern = "x86_64-linux*"
 build_system = "nobuild"
 dependencies = [
-  # core library
   "cuda_cudart@11.8.89",
   "cuda_nvrtc@11.8.89",
   "cuda_nvtx@11.8.86",
-
-  # math and computer
   "libcublas@11.11.3.6",
   "libcufft@10.9.0.58",
   "libcufile@1.4.0.31",
@@ -78,40 +55,23 @@ dependencies = [
   "libcusparse@11.7.5.86",
   "libnpp@11.8.0.86",
   "libnvjpeg@11.9.0.86",
-
-  # tool library but optional
   "cuda_cupti@11.8.87",
   "cuda_nvml_dev@11.8.86",
   "cuda_profiler_api@11.8.86",
   "cuda_nvvp@11.8.87",
-
-  # core compute
   "cuda_cccl@11.8.89",
-
-  # driver
   "libnvidia_nscq@520.61.05",
   "nvidia_driver@520.61.05",
   "nvidia_fs@2.13.5",
   "fabricmanager@520.61.05",  # server required only
-]
-dev_dependencies = [
-  # document
   "cuda_documentation@11.8.86",
-
-  # build tool
   "cuda_nvcc@11.8.89",
   "cuda_nvprune@11.8.86",
-
-  # binary analysis
   "cuda_cuobjdump@11.8.86",
   "cuda_cuxxfilt@11.8.86",
   "cuda_nvdisasm@11.8.86",
-
-  # debug and check
   "cuda_memcheck@11.8.86",
   "cuda_sanitizer_api@11.8.86",
-
-  # performance analysis
   "cuda_nvprof@11.8.87",
   "nsight_compute@2022.3.0.22",
 ]
@@ -122,12 +82,9 @@ dev_dependencies = [
 pattern = "x86_64-windows*"
 build_system = "nobuild"
 dependencies = [
-  # core library
   "cuda_cudart@11.8.89",
   "cuda_nvrtc@11.8.89",
   "cuda_nvtx@11.8.86",
-
-  # math and computer
   "libcublas@11.11.3.6",
   "libcufft@10.9.0.58",
   "libcurand@10.3.0.86",
@@ -135,39 +92,22 @@ dependencies = [
   "libcusparse@11.7.5.86",
   "libnpp@11.8.0.86",
   "libnvjpeg@11.9.0.86",
-
-  # tool library but optional
   "cuda_cupti@11.8.87",        # analysis performance
   "cuda_nvml_dev@11.8.86",     # used to monitor gpu
   "cuda_profiler_api@11.8.86",
   "cuda_nvvp@11.8.87",
   "nsight_nvtx@1.21018621",
-
-  # core compute
   "cuda_cccl@11.8.89",
-]
-dev_dependencies = [
-  # document
   "cuda_documentation@11.8.86",
-
-  # build tool
   "cuda_nvcc@11.8.89",
   "cuda_nvprune@11.8.86",
-
-  # binary analysis
   "cuda_cuobjdump@11.8.86",
   "cuda_cuxxfilt@11.8.86",
   "cuda_nvdisasm@11.8.86",
-
-  # debug and check
   "cuda_memcheck@11.8.86",
   "cuda_sanitizer_api@11.8.86",
-
-  # performance analysis
   "cuda_nvprof@11.8.87",
   "nsight_compute@2022.3.0.22",
-
-  # dev tool - Windows Special
   "nsight_vse@2022.3.0.22245",
   "nsight_systems@2022.4.2.1",
   "cuda_demo_suite@11.8.86",
