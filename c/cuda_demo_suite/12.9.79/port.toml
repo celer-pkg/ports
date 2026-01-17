@@ -1,0 +1,12 @@
+[package]
+  ref = "12.9.79"
+
+[[build_configs]]
+  pattern = "x86_64-linux*"
+  build_system = "prebuilt"
+  url = "https://developer.download.nvidia.cn/compute/cuda/redist/cuda_demo_suite/linux-x86_64/cuda_demo_suite-linux-x86_64-12.9.79-archive.tar.xz"
+
+[[build_configs]]
+  pattern = "x86_64-windows*"
+  build_system = "prebuilt"
+  url = "https://developer.download.nvidia.cn/compute/cuda/redist/cuda_demo_suite/windows-x86_64/cuda_demo_suite-windows-x86_64-12.9.79-archive.zip"

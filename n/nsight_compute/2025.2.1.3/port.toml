@@ -1,0 +1,17 @@
+[package]
+  ref = "2025.2.1.3"
+
+[[build_configs]]
+  pattern = "aarch64-linux*"
+  build_system = "prebuilt"
+  url = "https://developer.download.nvidia.cn/compute/cuda/redist/nsight_compute/linux-aarch64/nsight_compute-linux-aarch64-2025.2.1.3-archive.tar.xz"
+
+[[build_configs]]
+  pattern = "x86_64-linux*"
+  build_system = "prebuilt"
+  url = "https://developer.download.nvidia.cn/compute/cuda/redist/nsight_compute/linux-x86_64/nsight_compute-linux-x86_64-2025.2.1.3-archive.tar.xz"
+
+[[build_configs]]
+  pattern = "x86_64-windows*"
+  build_system = "prebuilt"
+  url = "https://developer.download.nvidia.cn/compute/cuda/redist/nsight_compute/windows-x86_64/nsight_compute-windows-x86_64-2025.2.1.3-archive.zip"
