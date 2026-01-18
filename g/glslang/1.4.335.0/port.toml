@@ -5,5 +5,5 @@ depth = 1
 
 [[build_configs]]
 build_system = "cmake"
-dev_dependencies = ["spirv-tools@1.4.335.0"]
+dependencies = ["spirv-tools@1.4.335.0"]
 options = ["-DALLOW_EXTERNAL_SPIRV_TOOLS=ON"]

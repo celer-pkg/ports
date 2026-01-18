@@ -54,6 +54,8 @@ jobs:
     needs: detect-ports
     if: needs.detect-ports.outputs.has-ports == 'true'
     runs-on: windows-2022
+    env:
+      PLATFORM: x86_64-windows-msvc-enterprise-14.44
     strategy:
       matrix:
         port: ${{ fromJson(needs.detect-ports.outputs.ports) }}
@@ -73,6 +75,8 @@ jobs:
       - name: Check platform match
         id: check_match
         shell: bash
+        env:
+          PLATFORM: x86_64-windows-msvc-enterprise-14.44
         run: |
           PORT_TOML="${{ matrix.port }}/port.toml"
           
@@ -115,6 +119,8 @@ jobs:
       - name: Setup celer workspace
         if: steps.check_match.outputs.should_build == 'true'
         shell: bash
+        env:
+          PLATFORM: x86_64-windows-msvc-enterprise-14.44
         run: |
           # Initialize celer with test-conf repo
           ./celer.exe init --url=https://github.com/celer-pkg/test-conf.git
@@ -135,8 +141,8 @@ jobs:
         shell: bash
         run: |
           PORT_NAME="${{ matrix.port }}"
-          # Convert path format (poco/1.14.2) to celer format (poco@1.14.2)
-          PORT_NAME=$(echo "$PORT_NAME" | tr '/' '@')
+          # Convert path format (g/glslang/1.4.335.0) to celer format (glslang@1.4.335.0)
+          PORT_NAME=$(echo "$PORT_NAME" | cut -d'/' -f2-3 | tr '/' '@')
           
           # Install the port
           ./celer.exe install "$PORT_NAME" --verbose
