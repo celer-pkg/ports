@@ -75,6 +75,8 @@ jobs:
       - name: Check platform match
         id: check_match
         shell: bash
+        env:
+          PLATFORM: x86_64-windows-msvc-enterprise-14.44
         run: |
           PORT_TOML="${{ matrix.port }}/port.toml"
           
@@ -117,6 +119,8 @@ jobs:
       - name: Setup celer workspace
         if: steps.check_match.outputs.should_build == 'true'
         shell: bash
+        env:
+          PLATFORM: x86_64-windows-msvc-enterprise-14.44
         run: |
           # Initialize celer with test-conf repo
           ./celer.exe init --url=https://github.com/celer-pkg/test-conf.git
