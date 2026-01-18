@@ -54,6 +54,8 @@ jobs:
     needs: detect-ports
     if: needs.detect-ports.outputs.has-ports == 'true'
     runs-on: windows-2022
+    env:
+      PLATFORM: x86_64-windows-msvc-enterprise-14.44
     strategy:
       matrix:
         port: ${{ fromJson(needs.detect-ports.outputs.ports) }}
