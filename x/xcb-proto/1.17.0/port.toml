@@ -6,8 +6,8 @@ ref = "1.17.0"
 pattern = "*linux*"
 build_system = "makefiles"
 build_tools = ["python3"]
-envs = ["PYTHON=${PYTHON3_PATH}"]
-dev_dependencies = ["macros@1.20.2",]
+envs = ["PYTHON3_PATH=${PYTHON3_PATH}"]
+dev_dependencies = ["macros@1.20.2"]
 
 # Note:
 # This library support linux only.
