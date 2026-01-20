@@ -5,10 +5,6 @@ depth = 1
 
 [[build_configs]]
 pattern = "*linux*"
-envs = [
-    "CFLAGS=-isystem ${DEPS_DIR}/include/libxml2",
-    "CXXFLAGS=-isystem ${DEPS_DIR}/include/libxml2",
-]
 patches = ["fix_cannot_find_wayland_scanner.patch"]
 build_system = "meson"
 options = ["-Ddocumentation=false"]
