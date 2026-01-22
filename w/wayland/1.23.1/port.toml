@@ -5,7 +5,6 @@ depth = 1
 
 [[build_configs]]
 pattern = "*linux*"
-patches = ["fix_cannot_find_wayland_scanner.patch"]
 build_system = "meson"
 options = ["-Ddocumentation=false"]
 dependencies = ["libffi@3.4.8", "libxml2@2.13.5", "libexpat@2.7.1"]
