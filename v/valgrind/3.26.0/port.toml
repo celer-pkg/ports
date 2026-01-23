@@ -1,6 +1,6 @@
 [package]
   url = "git://sourceware.org/git/valgrind.git"
-  ref = "VALGRIND_3_14_0"
+  ref = "VALGRIND_3_26_0"
   depth = 1
 
 [[build_configs]]
