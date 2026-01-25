@@ -1,5 +1,5 @@
 [package]
-url = "https://download.qt.io/official_releases/qt/5.15/5.15.16/single/qt-everywhere-opensource-src-5.15.16.tar.xz"
+url = "https://download.qt.io/archive/qt/5.15/5.15.16/single/qt-everywhere-opensource-src-5.15.16.tar.xz"
 ref = "5.15.16"
 
 [[build_configs]]
@@ -31,7 +31,7 @@ dependencies = [
     "xcb-util-wm@0.4.2",
     "xcb-imdkit@1.0.8",
     "xcb-util-xrm@1.0",
-    "mesa@18.3.6",
+    "mesa@23.3.6",
     "openssl@1.1.1w",
     "icu@75.1",
     "libjpeg@9f",
@@ -97,7 +97,7 @@ dependencies = [
     "xcb-util-wm@0.4.2",
     "xcb-imdkit@1.0.8",
     "xcb-util-xrm@1.0",
-    "mesa@18.3.6",
+    "mesa@23.3.6",
     "openssl@1.1.1w",
     "icu@75.1",
     "libjpeg@9f",
