@@ -5,6 +5,7 @@ ref = "23.3.6"
 [[build_configs]]
 pattern = "*x86_64-linux*"
 build_system = "meson"
+build_tools = ["python3:mako"]
 dependencies = [
     "libxshmfence@1.3.3",
     "libxext@1.3.6",
@@ -49,6 +50,7 @@ options = [
 [[build_configs]]
 pattern = "*aarch64-linux*"
 build_system = "meson"
+build_tools = ["python3:mako"]
 dependencies = [
     "libxshmfence@1.3.3",
     "libxext@1.3.6",
