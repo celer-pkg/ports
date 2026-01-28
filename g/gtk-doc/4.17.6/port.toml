@@ -7,4 +7,4 @@ depth = 1
 build_system = "meson"
 build_tools = ["python3:pygments"]
 dev_dependencies = ["itstool@2.0.7","gettext@0.25"]
-dependencies = ["glib@2.84.1", "libxslt@1.1.42"]
+dependencies = ["libxslt@1.1.42"]

@@ -7,4 +7,4 @@
   pattern = "*linux*"
   build_system = "meson"
   dev_dependencies = ["pkgconf@2.4.3"]
-  dependencies = ["glib@2.84.1", "shared-mime-info@2.4"]
+  dependencies = ["shared-mime-info@2.4"]

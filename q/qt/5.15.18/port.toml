@@ -1,6 +1,6 @@
 [package]
-url = "https://download.qt.io/archive/qt/5.15/5.15.16/single/qt-everywhere-opensource-src-5.15.16.tar.xz"
-ref = "5.15.16"
+url = "https://download.qt.io/archive/qt/5.15/5.15.18/single/qt-everywhere-opensource-src-5.15.18.tar.xz"
+ref = "5.15.18"
 
 [[build_configs]]
 pattern = "x86_64-linux*"
@@ -71,7 +71,7 @@ dependencies = [
 
 [[build_configs]]
 pattern = "aarch64-linux*"
-# patches = ["fix_linux-aarch64-gnu-g++.patch"]
+patches = ["fix_build.patch"]
 build_system = "qmake"
 build_tools = ["llvm"]
 envs = [

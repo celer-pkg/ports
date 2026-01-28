@@ -14,15 +14,15 @@ diff -Naur src/qtbase/mkspecs/linux-x86_64-gnu-g++/qmake.conf src_fix/qtbase/mks
 +include(../common/gcc-base-unix.conf)
 +include(../common/g++-unix.conf)
 +
-+QMAKE_INCDIR_OPENGL     = $(OPENGL_INC_DIR)
-+QMAKE_LIBDIR_OPENGL     = $(OPENGL_LIB_DIR)
++QMAKE_INCDIR_OPENGL     = $$(OPENGL_INC_DIR)
++QMAKE_LIBDIR_OPENGL     = $$(OPENGL_LIB_DIR)
 +
-+QMAKE_INCDIR_OPENGL_ES2 = $(OPENGL_INC_DIR)
-+QMAKE_LIBDIR_OPENGL_ES2 = $(OPENGL_LIB_DIR)
-+QMAKE_INCDIR_EGL        = $(OPENGL_INC_DIR)
-+QMAKE_LIBDIR_EGL        = $(OPENGL_LIB_DIR)
-+QMAKE_LIBS_OPENGL_ES2   = $(OPENGL_LIB_DIR)
-+QMAKE_LIBS_EGL          = $(OPENGL_LIB_DIR)
++QMAKE_INCDIR_OPENGL_ES2 = $$(OPENGL_INC_DIR)
++QMAKE_LIBDIR_OPENGL_ES2 = $$(OPENGL_LIB_DIR)
++QMAKE_INCDIR_EGL        = $$(OPENGL_INC_DIR)
++QMAKE_LIBDIR_EGL        = $$(OPENGL_LIB_DIR)
++QMAKE_LIBS_OPENGL_ES2   = $$(OPENGL_LIB_DIR)
++QMAKE_LIBS_EGL          = $$(OPENGL_LIB_DIR)
 +
 +QMAKE_LFLAGS            += -Wl,--rpath-link,$$QMAKE_LIBDIR_OPENGL
 +

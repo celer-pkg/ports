@@ -6,6 +6,7 @@ depth = 1
 [[build_configs]]
 pattern = "*linux*"
 build_system = "makefiles"
+patches = ["fix_submodule_url.sh"]
 dependencies = ["libxcb@1.17.0"]
 dev_dependencies = ["macros@1.20.2", "libtool@2.5.4"]
 envs = ["NOCONFIGURE=1"]

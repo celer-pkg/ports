@@ -1,6 +1,6 @@
 [package]
 url = "https://gitlab.freedesktop.org/xorg/lib/libxcb-cursor.git"
-ref = "xcb-util-cursor-0.1.5"
+ref = "xcb-util-cursor-0.1.6"
 depth = 1
 
 [[build_configs]]
