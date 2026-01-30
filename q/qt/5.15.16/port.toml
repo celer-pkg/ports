@@ -4,7 +4,7 @@ ref = "5.15.16"
 
 [[build_configs]]
 pattern = "x86_64-linux*"
-# patches = ["add_linux-x86_64-gnu-g++.patch"]
+patches = ["add-linux-x86_64-gnu-g++.patch"]
 build_system = "qmake"
 build_tools = ["llvm"]
 envs = [
@@ -17,11 +17,10 @@ options = [
     "-opensource",
     "-optimize-size",
     "-static",
-    "-static-runtime",
+    # "-static-runtime", # works for windows
     "-xcb",
     "-fontconfig",
     "-dbus",
-    # "-openssl-linked",
     "-opengl desktop",
     "-bundled-xcb-xinput",
     "-make-tool make",
@@ -36,7 +35,6 @@ dependencies = [
     "xcb-imdkit@1.0.8",
     "xcb-util-xrm@1.0",
     "mesa@23.3.6",
-    # "openssl@1.1.1w",
     "icu@75.1",
     "libjpeg@9f",
     "freetype@2.13.3",
@@ -71,7 +69,7 @@ dependencies = [
 
 [[build_configs]]
 pattern = "aarch64-linux*"
-# patches = ["fix_linux-aarch64-gnu-g++.patch"]
+patches = ["fix-linux-aarch64-gnu-g++.patch"]
 build_system = "qmake"
 build_tools = ["llvm"]
 envs = [
@@ -84,11 +82,10 @@ options = [
     "-opensource",
     "-optimize-size",
     "-static",
-    "-static-runtime",
+    # "-static-runtime", # works for windows
     "-xcb",
     "-fontconfig",
     "-dbus",
-    # "-openssl-linked",
     "-opengl es2",
     "-bundled-xcb-xinput",
     "-make-tool make",
@@ -103,7 +100,6 @@ dependencies = [
     "xcb-imdkit@1.0.8",
     "xcb-util-xrm@1.0",
     "mesa@23.3.6",
-    # "openssl@1.1.1w",
     "icu@75.1",
     "libjpeg@9f",
     "freetype@2.13.3",

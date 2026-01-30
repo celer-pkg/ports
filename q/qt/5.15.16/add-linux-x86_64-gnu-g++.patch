@@ -1,7 +1,9 @@
-diff -Naur src/qtbase/mkspecs/linux-x86_64-gnu-g++/qmake.conf src_fix/qtbase/mkspecs/linux-x86_64-gnu-g++/qmake.conf
---- src/qtbase/mkspecs/linux-x86_64-gnu-g++/qmake.conf	1970-01-01 08:00:00.000000000 +0800
-+++ src_fix/qtbase/mkspecs/linux-x86_64-gnu-g++/qmake.conf	2025-07-21 22:53:58.098050688 +0800
-@@ -0,0 +1,36 @@
+diff --git a/qtbase/mkspecs/linux-x86_64-gnu-g++/qmake.conf b/qtbase/mkspecs/linux-x86_64-gnu-g++/qmake.conf
+new file mode 100644
+index 0000000000..aba10930f4
+--- /dev/null
++++ b/qtbase/mkspecs/linux-x86_64-gnu-g++/qmake.conf
+@@ -0,0 +1,34 @@
 +#
 +# qmake configuration for building with x86_64-linux-gnu-g++
 +#
@@ -14,34 +16,34 @@ diff -Naur src/qtbase/mkspecs/linux-x86_64-gnu-g++/qmake.conf src_fix/qtbase/mks
 +include(../common/gcc-base-unix.conf)
 +include(../common/g++-unix.conf)
 +
-+QMAKE_INCDIR_OPENGL     = $$(OPENGL_INC_DIR)
-+QMAKE_LIBDIR_OPENGL     = $$(OPENGL_LIB_DIR)
-+
-+QMAKE_INCDIR_OPENGL_ES2 = $$(OPENGL_INC_DIR)
-+QMAKE_LIBDIR_OPENGL_ES2 = $$(OPENGL_LIB_DIR)
-+QMAKE_INCDIR_EGL        = $$(OPENGL_INC_DIR)
-+QMAKE_LIBDIR_EGL        = $$(OPENGL_LIB_DIR)
-+QMAKE_LIBS_OPENGL_ES2   = $$(OPENGL_LIB_DIR)
-+QMAKE_LIBS_EGL          = $$(OPENGL_LIB_DIR)
-+
-+QMAKE_LFLAGS            += -Wl,--rpath-link,$$QMAKE_LIBDIR_OPENGL
-+
 +# modifications to g++.conf
-+QMAKE_CC                = $(CROSSTOOL_PREFIX)gcc
-+QMAKE_CXX               = $(CROSSTOOL_PREFIX)g++
-+QMAKE_LINK              = $(CROSSTOOL_PREFIX)g++
-+QMAKE_LINK_SHLIB        = $(CROSSTOOL_PREFIX)g++
++QMAKE_CC                = x86_64-linux-gnu-gcc
++QMAKE_CXX               = x86_64-linux-gnu-g++
++QMAKE_LINK              = x86_64-linux-gnu-g++
++QMAKE_LINK_SHLIB        = x86_64-linux-gnu-g++
 +
 +# modifications to linux.conf
-+QMAKE_AR                = $(CROSSTOOL_PREFIX)ar cqs
-+QMAKE_OBJCOPY           = $(CROSSTOOL_PREFIX)objcopy
-+QMAKE_NM                = $(CROSSTOOL_PREFIX)nm -P
-+QMAKE_STRIP             = $(CROSSTOOL_PREFIX)strip
++QMAKE_AR                = x86_64-linux-gnu-ar cqs
++QMAKE_OBJCOPY           = x86_64-linux-gnu-objcopy
++QMAKE_NM                = x86_64-linux-gnu-nm -P
++QMAKE_STRIP             = x86_64-linux-gnu-strip
++
++# add sysroot paths to rpath
++QMAKE_RPATHLINKDIR_POST += \
++    $$[QT_SYSROOT]/usr/lib \
++    $$[QT_SYSROOT]/usr/lib/x86_64-linux-gnu \
++    $$[QT_SYSROOT]/lib/x86_64-linux-gnu
++
++# pass LDFLAGS from environment to the linker
++QMAKE_LFLAGS += $(LDFLAGS)
++
 +load(qt_config)
 \ No newline at end of file
-diff -Naur src/qtbase/mkspecs/linux-x86_64-gnu-g++/qplatformdefs.h src_fix/qtbase/mkspecs/linux-x86_64-gnu-g++/qplatformdefs.h
---- src/qtbase/mkspecs/linux-x86_64-gnu-g++/qplatformdefs.h	1970-01-01 08:00:00.000000000 +0800
-+++ src_fix/qtbase/mkspecs/linux-x86_64-gnu-g++/qplatformdefs.h	2025-07-21 22:55:03.489882304 +0800
+diff --git a/qtbase/mkspecs/linux-x86_64-gnu-g++/qplatformdefs.h b/qtbase/mkspecs/linux-x86_64-gnu-g++/qplatformdefs.h
+new file mode 100644
+index 0000000000..e28e160525
+--- /dev/null
++++ b/qtbase/mkspecs/linux-x86_64-gnu-g++/qplatformdefs.h
 @@ -0,0 +1,40 @@
 +/****************************************************************************
 +**

@@ -8,6 +8,7 @@ ref = "2.6.4"
 [[build_configs]]
 pattern = "*linux*"
 build_system = "makefiles"
+dev_dependencies = ["m4@1.4.19"]
 
 # Note:
 # This library support linux only.

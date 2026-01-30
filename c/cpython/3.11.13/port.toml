@@ -6,8 +6,8 @@
 [[build_configs]]
   pattern = "*linux*"
   build_system = "makefiles"
+  build_tools = ["python3"]
   dev_dependencies = ["cpython@3.11.13"]
-  dependencies = ["openssl@1.1.1w"]
   options = [
     "--build=${SYSTEM_PROCESSOR}",
     "--with-build-python=${DEPS_DEV_DIR}/bin/python3",
