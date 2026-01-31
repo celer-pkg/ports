@@ -5,5 +5,4 @@ depth = 1
 
 [[build_configs]]
 build_system = "meson"
-dependencies = ["libbsd@0.12.2", "sqlite3@3.49.0", "util-linux@2.41"]
-dev_dependencies = ["pkgconf@2.4.3", "gtk-doc@4.17.6"]
+options = ["-Denable-string-pooling=false"]

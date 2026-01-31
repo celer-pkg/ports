@@ -1,15 +1,14 @@
 [package]
-  url = "https://github.com/python/cpython.git"
-  ref = "v3.11.13"
-  depth = 1
+url = "https://github.com/python/cpython.git"
+ref = "v3.11.13"
+depth = 1
 
 [[build_configs]]
-  pattern = "*linux*"
-  build_system = "makefiles"
+pattern = "*linux*"
+build_system = "makefiles"
   build_tools = ["python3"]
   dev_dependencies = ["cpython@3.11.13"]
   options = [
-    "--build=${SYSTEM_PROCESSOR}",
     "--with-build-python=${DEPS_DEV_DIR}/bin/python3",
     "--disable-ipv6",
     "--enable-optimizations",

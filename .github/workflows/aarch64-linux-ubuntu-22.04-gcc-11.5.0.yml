@@ -26,6 +26,12 @@ jobs:
         with:
           fetch-depth: 0
 
+      - name: Install build-tools
+        run: sudo apt update && sudo apt install -y \ 
+          build-essential \
+          git \
+          python3-libxml2
+
       - name: Detect changed ports
         id: detect
         run: |

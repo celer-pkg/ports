@@ -7,11 +7,13 @@ depth = 1
 pattern = "*linux*"
 build_system = "makefiles"
 dependencies = ["sqlite3@3.49.0"]
+envs = ["NOCONFIGURE=1"]
 dev_dependencies = [
     "autoconf@2.72",
     "gettext@0.25",
     "flex@2.6.4",
     "bison@3.8.2",
+    "libtool@2.5.4",
 ]
 pre_configure = ["./autogen.sh"]
 options = [

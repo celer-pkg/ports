@@ -21,6 +21,12 @@ jobs:
       ports: ${{ steps.detect.outputs.ports }}
       has-ports: ${{ steps.detect.outputs.has-ports }}
     steps:
+      - name: Install build-tools
+        run: sudo apt update && sudo apt install -y \ 
+          build-essential \
+          git \
+          python3-libxml2
+
       - name: Checkout ports repository
         uses: actions/checkout@v4
         with:
