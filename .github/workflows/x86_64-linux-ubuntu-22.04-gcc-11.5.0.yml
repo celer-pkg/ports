@@ -21,9 +21,6 @@ jobs:
       ports: ${{ steps.detect.outputs.ports }}
       has-ports: ${{ steps.detect.outputs.has-ports }}
     steps:
-      - name: Install build-tools
-        run: sudo apt update && sudo apt install -y build-essential git python3-libxml2
-
       - name: Checkout ports repository
         uses: actions/checkout@v4
         with:
@@ -131,6 +128,9 @@ jobs:
           PORT_NAME="${{ matrix.port }}"
           # Convert path format (g/glslang/1.4.335.0) to celer format (glslang@1.4.335.0)
           PORT_NAME=$(echo "$PORT_NAME" | cut -d'/' -f2-3 | tr '/' '@')
+
+          # Required by itstool@2.0.7
+          sudo apt update && sudo apt install -y python3-libxml2
           
           # Install the port
           ./celer install "$PORT_NAME" --verbose
