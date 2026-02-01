@@ -5,7 +5,12 @@ depth = 1
 
 [[build_configs]]
 build_system = "meson"
-dev_dependencies = ["libtool@2.5.4", "macros@1.20.2", "gtk-doc@4.17.6"]
+dev_dependencies = [
+    "libtool@2.5.4",
+    "macros@1.20.2",
+    "gtk-doc@4.17.6",
+    "pkgconf@2.4.3",
+]
 dependencies = [
     "fontconfig@2.16.0",
     "freetype@2.13.3",
@@ -14,5 +19,5 @@ dependencies = [
     "pixman@0.44.2",
 ]
 post_install = [
-    "cmake -E copy ${PACKAGE_DIR}/lib/pkgconfig/cairo.pc ${PACKAGE_DIR}/lib/pkgconfig/cairo-xlib.pc"
+    "cmake -E copy ${PACKAGE_DIR}/lib/pkgconfig/cairo.pc ${PACKAGE_DIR}/lib/pkgconfig/cairo-xlib.pc",
 ]
