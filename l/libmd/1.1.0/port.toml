@@ -4,6 +4,7 @@ ref = "1.1.0"
 depth = 1
 
 [[build_configs]]
+pattern = "*linux*"
 build_system = "makefiles"
 build_in_source = true
 dev_dependencies = ["libtool@2.5.4", "macros@1.20.2"]

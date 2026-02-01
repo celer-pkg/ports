@@ -14,7 +14,12 @@ dependencies = [
     "libxcb@1.17.0",
     "xz@5.8.1",
 ]
-options = ["-Ddoxygen=false", "-Ddatabase=gdbm", "-Ddaemon=false"]
+options = [
+    "-Ddoxygen=false",
+    "-Ddatabase=gdbm",
+    "-Ddaemon=false",
+    "-Dman=false",
+]
 
 # Note:
 # This library support linux only.

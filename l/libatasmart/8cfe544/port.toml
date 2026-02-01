@@ -4,6 +4,7 @@ ref = "8cfe544"
 depth = 1
 
 [[build_configs]]
+pattern = "*linux*"
 build_system = "meson"
 dev_dependencies = ["pkgconf@2.4.3"]
 options = ["-Denable-string-pooling=false"]

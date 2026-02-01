@@ -19,6 +19,7 @@ dependencies = [
     "wayland-protocols@1.44",
     "zstd@1.5.7",
     "glslang@1.4.335.0",
+    "openssl@1.1.1w",
 ]
 dev_dependencies = [
     "pkgconf@2.4.3",
@@ -63,6 +64,7 @@ dependencies = [
     "wayland-protocols@1.44",
     "zstd@1.5.7",
     "glslang@1.4.335.0",
+    "openssl@1.1.1w",
 ]
 dev_dependencies = [
     "pkgconf@2.4.3",

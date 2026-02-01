@@ -6,4 +6,5 @@ depth = 1
 [[build_configs]]
 build_system = "meson"
 options = ["-Db_lundef=false", "-Dtests=disabled"]
-post_install = ["cmake -E copy ${PACKAGE_DIR}/bin/pkgconf ${PACKAGE_DIR}/bin/pkg-config"]
+post_install_linux = ["cmake -E copy ${PACKAGE_DIR}/bin/pkgconf ${PACKAGE_DIR}/bin/pkg-config"]
+post_install_windows = ["cmake -E copy ${PACKAGE_DIR}/bin/pkgconf.exe ${PACKAGE_DIR}/bin/pkg-config.exe"]

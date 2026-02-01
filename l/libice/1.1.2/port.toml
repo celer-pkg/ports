@@ -4,6 +4,7 @@ ref = "libICE-1.1.2"
 depth = 1
 
 [[build_configs]]
+pattern = "*linux*"
 build_system = "makefiles"
 dependencies = ["xorgproto@2024.1", "libxtrans@1.5.2"]
 dev_dependencies = ["macros@1.20.2", "libtool@2.5.4"]

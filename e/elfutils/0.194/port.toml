@@ -3,6 +3,7 @@ url = "https://sourceware.org/elfutils/ftp/0.194/elfutils-0.194.tar.bz2"
 ref = "0.194"
 
 [[build_configs]]
+pattern = "*linux*"
 build_system = "makefiles"
 envs = [
   "CFLAGS=-Wno-error=maybe-uninitialized -Wno-error=null-dereference",
