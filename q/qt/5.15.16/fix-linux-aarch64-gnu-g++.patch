@@ -1,0 +1,19 @@
+diff --git a/qtbase/mkspecs/linux-aarch64-gnu-g++/qmake.conf b/qtbase/mkspecs/linux-aarch64-gnu-g++/qmake.conf
+index 2dc57b09fa..7a6d8347d4 100644
+--- a/qtbase/mkspecs/linux-aarch64-gnu-g++/qmake.conf
++++ b/qtbase/mkspecs/linux-aarch64-gnu-g++/qmake.conf
+@@ -21,4 +21,14 @@ QMAKE_AR                = aarch64-linux-gnu-ar cqs
+ QMAKE_OBJCOPY           = aarch64-linux-gnu-objcopy
+ QMAKE_NM                = aarch64-linux-gnu-nm -P
+ QMAKE_STRIP             = aarch64-linux-gnu-strip
++
++# add sysroot paths to rpath
++QMAKE_RPATHLINKDIR_POST += \
++    $$[QT_SYSROOT]/usr/lib \
++    $$[QT_SYSROOT]/usr/lib/aarch64-linux-gnu \
++    $$[QT_SYSROOT]/lib/aarch64-linux-gnu
++
++# pass LDFLAGS from environment to the linker
++QMAKE_LFLAGS += $(LDFLAGS)
++
+ load(qt_config)

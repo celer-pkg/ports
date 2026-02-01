@@ -1,0 +1,95 @@
+[package]
+url = "https://archive.mesa3d.org/mesa-23.3.6.tar.xz"
+ref = "23.3.6"
+
+[[build_configs]]
+pattern = "*x86_64-linux*"
+build_system = "meson"
+build_tools = ["python3:mako", "llvm"]
+dependencies = [
+    "libxshmfence@1.3.3",
+    "libxext@1.3.6",
+    "libdrm@2.4.124",
+    "libxfixes@6.0.1",
+    "libxxf86vm@1.1.6",
+    "libxrandr@1.5.4",
+    "elfutils@0.194",
+    "valgrind@3.26.0",
+    "wayland@1.23.1",
+    "wayland-protocols@1.44",
+    "zstd@1.5.7",
+    "glslang@1.4.335.0",
+    "openssl@1.1.1w",
+]
+dev_dependencies = [
+    "pkgconf@2.4.3",
+    "byacc@20241231",
+    "flex@2.6.4",
+    "bison@3.8.2",
+]
+envs = [
+    "LLVM_CONFIG=${DEPS_DEV_DIR}/bin/llvm-config",
+    "CFLAGS=-I${DEPS_DIR}/include/valgrind",
+    "CXXFLAGS=-I${DEPS_DIR}/include/valgrind",
+]
+options = [
+    "-Dshared-llvm=disabled",
+    "-Dcpp_rtti=false",
+    "-Dopengl=true",
+    "-Dgles2=enabled",
+    "-Degl=enabled",
+    "-Dglx=dri",
+    "-Dgbm=enabled",
+    "-Dgallium-drivers=iris,radeonsi,nouveau,swrast",
+    "-Dvulkan-drivers=intel,amd",
+    "-Dplatforms=x11,wayland",
+    "-Dsse2=true",
+    "-Dshader-cache=enabled",
+]
+
+[[build_configs]]
+pattern = "*aarch64-linux*"
+build_system = "meson"
+build_tools = ["python3:mako", "llvm"]
+dependencies = [
+    "libxshmfence@1.3.3",
+    "libxext@1.3.6",
+    "libdrm@2.4.124",
+    "libxfixes@6.0.1",
+    "libxxf86vm@1.1.6",
+    "libxrandr@1.5.4",
+    "elfutils@0.194",
+    "valgrind@3.26.0",
+    "wayland@1.23.1",
+    "wayland-protocols@1.44",
+    "zstd@1.5.7",
+    "glslang@1.4.335.0",
+    "openssl@1.1.1w",
+]
+dev_dependencies = [
+    "pkgconf@2.4.3",
+    "byacc@20241231",
+    "flex@2.6.4",
+    "bison@3.8.2",
+]
+envs = [
+    "LLVM_CONFIG=${DEPS_DEV_DIR}/bin/llvm-config",
+    "CFLAGS=-I${DEPS_DIR}/include/valgrind",
+    "CXXFLAGS=-I${DEPS_DIR}/include/valgrind",
+]
+options = [
+    "-Dshared-llvm=disabled",
+    "-Dcpp_rtti=false",
+    "-Dopengl=true",
+    "-Dgles2=enabled",
+    "-Degl=enabled",
+    "-Dglx=dri",
+    "-Dgbm=enabled",
+    "-Dgallium-drivers=panfrost,lima,swrast",
+    "-Dvulkan-drivers=freedreno",
+    "-Dplatforms=x11,wayland",
+    "-Dsse2=false",
+    "-Dshader-cache=enabled",
+]
+# Note:
+# This library support linux only.

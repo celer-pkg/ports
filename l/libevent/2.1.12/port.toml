@@ -6,3 +6,4 @@ depth = 1
 [[build_configs]]
 build_system = "cmake"
 dependencies = ["openssl@1.1.1w"]
+options = ["-DEVENT__DISABLE_TESTS=ON"]

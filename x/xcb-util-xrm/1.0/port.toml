@@ -7,9 +7,11 @@ depth = 1
 [[build_configs]]
 pattern = "*linux*"
 build_system = "makefiles"
-patches = ["fix_configure.patch"]
+patches = ["fix_configure.patch", "fix_submodule_url.patch"]
 dependencies = ["libxcb@1.17.0", "xcb-util@0.4.1"]
 dev_dependencies = ["macros@1.20.2", "libtool@2.5.4", "pkgconf@2.4.3"]
+envs = ["NOCONFIGURE=1"]
+pre_configure = ["./autogen.sh"]
 
 # Note:
 # This library support linux only.

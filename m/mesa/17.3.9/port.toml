@@ -7,20 +7,13 @@ pattern = "*linux*"
 patches = ["fix_duplicate_symbols_hash.patch"]
 build_system = "makefiles"
 dependencies = [
-    "glproto@1.4.14",
-    "dri2proto@2.8",
     "libxshmfence@1.3.3",
-    "openssl@1.1.1w",
     "libexpat@2.7.1",
     "libdrm@2.4.124",
-    "zlib@1.3.1",
-    "libxcb@1.17.0",
-    "libx11@1.8.11",
     "libxext@1.3.6",
     "libxfixes@6.0.1",
     "libxdamage@1.1.6",
-    "libunwind@1.6.1",
-    "libglvnd@1.7.0"
+    "llvm@17.0.6",
 ]
 dev_dependencies = [
     "macros@1.20.2",
@@ -36,7 +29,6 @@ options = [
     "--enable-shared-glapi",
     "--enable-dri",
     "--enable-shared-dricore",
-    "--disable-llvm",
     "--enable-gallium-egl",
     "--enable-glx",
     "--disable-libglvnd",

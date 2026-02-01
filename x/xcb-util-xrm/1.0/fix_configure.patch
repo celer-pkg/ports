@@ -1,12 +1,10 @@
-diff -urN src/autogen.sh src_fix/autogen.sh
---- src/autogen.sh	2016-01-17 20:06:50.000000000 +0800
-+++ src_fix/autogen.sh	2025-03-07 22:04:40.757449485 +0800
-@@ -22,6 +22,4 @@
- fi
+diff --git a/autogen.sh b/autogen.sh
+index 126ba5b..370d9fa 100755
+--- a/autogen.sh
++++ b/autogen.sh
+@@ -23,5 +23,3 @@ fi
  
  autoreconf -v --install || exit 1
--cd $ORIGDIR || exit $?
+ cd $ORIGDIR || exit $?
 -
 -$srcdir/configure --enable-maintainer-mode "$@"
-+cd $ORIGDIR || exit $?
-\ No newline at end of file
