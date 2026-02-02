@@ -5,4 +5,5 @@
 
 [[build_configs]]
   build_system = "makefiles"
+  envs = ["CFLAGS=\"-D_GNU_SOURCE -D_DEFAULT_SOURCE\""]
   post_install = ["ln -sf ${PACKAGE_DIR}/bin/yacc ${PACKAGE_DIR}/bin/byacc"]
