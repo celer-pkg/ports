@@ -5,7 +5,7 @@ This directory contains CI workflows to automatically validate new ports when th
 ## 📋 Current Workflows
 
 - **aarch64-linux-ubuntu-22.04-gcc-11.5.0.yml** - Validates ports for ARM64 Linux Ubuntu 22.04 with GCC 11.5.0
-- **x86_64-windows-msvc-14.44.yml** - Validates ports for x86_64 Windows with MSVC 14.44
+- **x86_64-windows-msvc-14.yml** - Validates ports for x86_64 Windows with MSVC 14
 
 ## 🚀 How It Works
 
@@ -61,7 +61,7 @@ To add validation for another platform (e.g., `x86_64-linux-ubuntu-22.04-clang-2
 cp aarch64-linux-ubuntu-22.04-gcc-11.5.0.yml x86_64-linux-ubuntu-22.04-clang-21.1.4.yml
 
 # For Windows platforms
-cp x86_64-windows-msvc-14.44.yml x86_64-windows-clang-cl-14.44.yml
+cp x86_64-windows-msvc-14.yml x86_64-windows-clang-cl-14.yml
 ```
 
 ### Step 2: Update Platform Details
@@ -125,7 +125,7 @@ jobs:
 
 - Go to **Actions** tab in the repository
 - Click on a workflow run to see build status
-- Each platform shows as a single check (e.g., "Build Ports - windows-amd64-msvc-14.44")
+- Each platform shows as a single check (e.g., "Build Ports - windows-amd64-msvc-14")
 - View step-by-step logs within each job
 - Skipped builds show as "should_build=false" in logs
 
@@ -156,7 +156,7 @@ chmod +x .github/scripts/check-platform-match.sh
 
 This is expected if the port's `pattern` doesn't match the platform. Check the logs:
 ```
-Platform x86_64-windows-msvc-enterprise-14.44 is NOT supported by this port
+Platform x86_64-windows-msvc-enterprise-14 is NOT supported by this port
 should_build=false
 ```
 
