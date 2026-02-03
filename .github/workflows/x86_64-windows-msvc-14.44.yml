@@ -1,4 +1,4 @@
-name: Build Ports - windows-amd64-msvc-14.44
+name: Build Ports - windows-amd64-msvc-14
 
 on:
   push:
@@ -12,7 +12,7 @@ on:
       - '*/*/*/port.toml'
 
 env:
-  PLATFORM: x86_64-windows-msvc-enterprise-14.44
+  PLATFORM: x86_64-windows-msvc-enterprise-14
 
 jobs:
   detect-ports:
@@ -53,9 +53,9 @@ jobs:
   build-port-matrix:
     needs: detect-ports
     if: needs.detect-ports.outputs.has-ports == 'true'
-    runs-on: windows-2022
+    runs-on: windows-2025
     env:
-      PLATFORM: x86_64-windows-msvc-enterprise-14.44
+      PLATFORM: x86_64-windows-msvc-enterprise-14
     strategy:
       matrix:
         port: ${{ fromJson(needs.detect-ports.outputs.ports) }}
@@ -76,7 +76,7 @@ jobs:
         id: check_match
         shell: bash
         env:
-          PLATFORM: x86_64-windows-msvc-enterprise-14.44
+          PLATFORM: x86_64-windows-msvc-enterprise-14
         run: |
           PORT_TOML="${{ matrix.port }}/port.toml"
           
@@ -120,7 +120,7 @@ jobs:
         if: steps.check_match.outputs.should_build == 'true'
         shell: bash
         env:
-          PLATFORM: x86_64-windows-msvc-enterprise-14.44
+          PLATFORM: x86_64-windows-msvc-enterprise-14
         run: |
           # Initialize celer with test-conf repo
           ./celer.exe init --url=https://github.com/celer-pkg/test-conf.git
