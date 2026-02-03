@@ -74,7 +74,7 @@ jobs:
           AVAILABLE_PLATFORMS=(
             "x86_64-linux-ubuntu-22.04-gcc-11.5.0"
             "aarch64-linux-ubuntu-22.04-gcc-11.5.0"
-            "x86_64-windows-msvc-enterprise-14.44"
+            "x86_64-windows-msvc-enterprise-14"
           )
           
           # Make check script executable
@@ -108,7 +108,7 @@ jobs:
   build-port:
     name: Build ${{ needs.detect-platforms.outputs.port_name }}@${{ needs.detect-platforms.outputs.port_version }} (${{ matrix.platform }})
     needs: detect-platforms
-    runs-on: ${{ matrix.platform == 'x86_64-windows-msvc-enterprise-14.44' && 'windows-2022' || 'ubuntu-22.04' }}
+    runs-on: ${{ matrix.platform == 'x86_64-windows-msvc-enterprise-14' && 'windows-2022' || 'ubuntu-22.04' }}
     strategy:
       fail-fast: false
       matrix:
@@ -119,13 +119,13 @@ jobs:
         uses: actions/checkout@v4
 
       - name: Setup MSVC
-        if: matrix.platform == 'x86_64-windows-msvc-enterprise-14.44'
+        if: matrix.platform == 'x86_64-windows-msvc-enterprise-14'
         uses: ilammy/msvc-dev-cmd@v1
         with:
           arch: amd64
 
       - name: Download celer (Linux)
-        if: matrix.platform != 'x86_64-windows-msvc-enterprise-14.44'
+        if: matrix.platform != 'x86_64-windows-msvc-enterprise-14'
         shell: bash
         run: |
           curl -L -o celer-amd64-linux.tar.gz https://github.com/celer-pkg/celer/releases/latest/download/celer-amd64-linux.tar.gz
@@ -134,7 +134,7 @@ jobs:
           chmod +x celer
 
       - name: Download celer (Windows)
-        if: matrix.platform == 'x86_64-windows-msvc-enterprise-14.44'
+        if: matrix.platform == 'x86_64-windows-msvc-enterprise-14'
         shell: bash
         run: |
           curl -L -o celer-windows-amd64.exe.zip https://github.com/celer-pkg/celer/releases/latest/download/celer-windows-amd64.exe.zip
@@ -142,7 +142,7 @@ jobs:
           mv celer-windows-amd64.exe celer.exe
 
       - name: Setup celer workspace (Linux)
-        if: matrix.platform != 'x86_64-windows-msvc-enterprise-14.44'
+        if: matrix.platform != 'x86_64-windows-msvc-enterprise-14'
         shell: bash
         run: |
           ./celer init --url=https://github.com/celer-pkg/test-conf.git
@@ -153,7 +153,7 @@ jobs:
           ln -s ${{ github.workspace }} ports
 
       - name: Setup celer workspace (Windows)
-        if: matrix.platform == 'x86_64-windows-msvc-enterprise-14.44'
+        if: matrix.platform == 'x86_64-windows-msvc-enterprise-14'
         shell: bash
         run: |
           ./celer.exe init --url=https://github.com/celer-pkg/test-conf.git
@@ -164,7 +164,7 @@ jobs:
           cmd //c "mklink /J ports ${{ github.workspace }}"
 
       - name: Build ${{ needs.detect-platforms.outputs.port_name }}@${{ needs.detect-platforms.outputs.port_version }}
-        if: matrix.platform != 'x86_64-windows-msvc-enterprise-14.44'
+        if: matrix.platform != 'x86_64-windows-msvc-enterprise-14'
         shell: bash
         run: |
           PORT_NAME="${{ needs.detect-platforms.outputs.port_name }}@${{ needs.detect-platforms.outputs.port_version }}"
@@ -180,7 +180,7 @@ jobs:
           eval $CMD
 
       - name: Build ${{ needs.detect-platforms.outputs.port_name }}@${{ needs.detect-platforms.outputs.port_version }}
-        if: matrix.platform == 'x86_64-windows-msvc-enterprise-14.44'
+        if: matrix.platform == 'x86_64-windows-msvc-enterprise-14'
         shell: bash
         run: |
           PORT_NAME="${{ needs.detect-platforms.outputs.port_name }}@${{ needs.detect-platforms.outputs.port_version }}"
