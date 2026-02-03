@@ -53,7 +53,7 @@ jobs:
   build-port-matrix:
     needs: detect-ports
     if: needs.detect-ports.outputs.has-ports == 'true'
-    runs-on: windows-2022
+    runs-on: windows-2025
     env:
       PLATFORM: x86_64-windows-msvc-enterprise-14
     strategy:
