@@ -1,5 +1,5 @@
 [package]
-url = "https://mirrors.nju.edu.cn/pub/gnu/libiconv/libiconv-1.14.tar.gz"
+url = "https://ftp.gnu.org/pub/gnu/libiconv/libiconv-1.14.tar.gz"
 ref = "1.14"
 depth = 1
 

@@ -4,6 +4,7 @@ ref = "1.35.1"
 depth = 1
 
 [[build_configs]]
+pattern = "*linux*"
 build_system = "meson"
 build_tools = ["python3:pygments"]
 dev_dependencies = [
