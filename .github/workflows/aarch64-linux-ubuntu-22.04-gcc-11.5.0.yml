@@ -97,7 +97,7 @@ jobs:
           echo "Disk space after cleanup:"
           df -h
 
-      - name: Download celer
+      - name: Download artifact
         if: steps.check_match.outputs.should_build == 'true'
         run: |
           # Download latest celer release
@@ -106,7 +106,7 @@ jobs:
           mv celer-amd64-linux celer
           chmod +x celer
 
-      - name: Setup celer workspace
+      - name: Setup workspace
         if: steps.check_match.outputs.should_build == 'true'
         run: |
           # Initialize celer with test-conf repo

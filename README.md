@@ -1,6 +1,6 @@
 <div align="center">
 
-# 📦 celer-ports.
+# 📦 celer-ports
 </div>
 
 This directory contains configuration files for managing third-party C++ libraries and build tools. It provides a centralized repository of port definitions that specify how to download, configure, and build various open-source packages.
