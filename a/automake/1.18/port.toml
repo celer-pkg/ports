@@ -2,6 +2,7 @@
 url = "https://ftp.gnu.org/gnu/automake/automake-1.18.tar.xz"
 ref = "1.18"
 supported_hosts = ["linux", "darwin"]
+native = true
 
 [[build_configs]]
 build_system = "makefiles"
