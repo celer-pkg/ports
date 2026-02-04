@@ -1,8 +1,0 @@
-[package]
-url = "https://ftp.gnu.org/pub/gnu/libiconv/libiconv-1.14.tar.gz"
-ref = "1.14"
-depth = 1
-
-[[build_configs]]
-build_system = "cmake"
-patches = ["fix_build_error.patch"]
