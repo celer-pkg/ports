@@ -4,4 +4,5 @@ ref = "1.18"
 depth = 1
 
 [[build_configs]]
+pattern = "*linux*"
 build_system = "makefiles"

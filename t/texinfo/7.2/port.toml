@@ -1,5 +1,5 @@
 [package]
-url = "https://mirrors.tuna.tsinghua.edu.cn/gnu/texinfo/texinfo-7.2.tar.xz"
+url = "https://ftp.gnu.org/gnu/texinfo/texinfo-7.2.tar.xz"
 ref = "7.2"
 supported_hosts = ["linux", "darwin"]
 
