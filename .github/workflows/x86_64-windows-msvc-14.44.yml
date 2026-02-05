@@ -107,7 +107,7 @@ jobs:
           echo "Disk space after cleanup:"
           df -h
 
-      - name: Download celer
+      - name: Download artifact
         if: steps.check_match.outputs.should_build == 'true'
         shell: bash
         run: |
@@ -116,7 +116,7 @@ jobs:
           unzip celer-windows-amd64.exe.zip
           mv celer-windows-amd64.exe celer.exe
 
-      - name: Setup celer workspace
+      - name: Setup workspace
         if: steps.check_match.outputs.should_build == 'true'
         shell: bash
         env:

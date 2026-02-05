@@ -1,0 +1,24 @@
+[package]
+url = "https://gitlab.freedesktop.org/cairo/cairo.git"
+ref = "1.18.4"
+depth = 1
+
+[[build_configs]]
+pattern = "*linux*"
+build_system = "meson"
+dev_dependencies = [
+    "libtool@2.5.4",
+    "macros@1.20.2",
+    "gtk-doc@4.17.6",
+    "pkgconf@2.4.3",
+]
+dependencies = [
+    "fontconfig@2.16.0",
+    "freetype@2.13.3",
+    "libpng@1.6.49",
+    "gperf@3.1",
+    "pixman@0.44.2",
+]
+post_install = [
+    "cmake -E copy ${PACKAGE_DIR}/lib/pkgconfig/cairo.pc ${PACKAGE_DIR}/lib/pkgconfig/cairo-xlib.pc",
+]

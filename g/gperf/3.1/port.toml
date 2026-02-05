@@ -1,5 +1,5 @@
 [package]
-url = "https://mirrors.tuna.tsinghua.edu.cn/gnu/gperf/gperf-3.1.tar.gz"
+url = "https://ftp.gnu.org/gnu/gperf/gperf-3.1.tar.gz"
 ref = "3.1"
 depth = 1
 

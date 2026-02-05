@@ -1,23 +1,26 @@
 [package]
-url = "https://download.qt.io/official_releases/qt/5.15/5.15.16/single/qt-everywhere-opensource-src-5.15.16.tar.xz"
+url = "https://download.qt.io/archive/qt/5.15/5.15.16/single/qt-everywhere-opensource-src-5.15.16.tar.xz"
 ref = "5.15.16"
 
 [[build_configs]]
 pattern = "x86_64-linux*"
-patches = ["add_linux-x86_64-gnu-g++.patch"]
+patches = ["add-linux-x86_64-gnu-g++.patch"]
 build_system = "qmake"
+build_tools = ["llvm"]
+envs = [
+    "OPENGL_INC_DIR=${DEPS_DIR}/include",
+    "OPENGL_LIB_DIR=${DEPS_DIR}/lib",
+]
 options = [
     "-xplatform linux-x86_64-gnu-g++",
-    "-sysroot ${SYSROOT}",
-    "-extprefix ${PACKAGE_DIR}",
     "-confirm-license",
     "-opensource",
     "-optimize-size",
-    "-static-runtime",
+    "-static",
+    # "-static-runtime", # works for windows
     "-xcb",
     "-fontconfig",
     "-dbus",
-    "-openssl-linked",
     "-opengl desktop",
     "-bundled-xcb-xinput",
     "-make-tool make",
@@ -27,12 +30,11 @@ options = [
     "-skip qtwebengine",
 ]
 dependencies = [
-    "libxcb-cursor@0.1.5",
+    "libxcb-cursor@0.1.6",
     "xcb-util-wm@0.4.2",
     "xcb-imdkit@1.0.8",
     "xcb-util-xrm@1.0",
-    "mesa@18.3.6",
-    "openssl@1.1.1w",
+    "mesa@23.3.6",
     "icu@75.1",
     "libjpeg@9f",
     "freetype@2.13.3",
@@ -62,28 +64,28 @@ dependencies = [
     "fontconfig@2.16.0",
     "pulseaudio@16.2",
     "zstd@1.5.7",
+    "pcre2@10.44",
 ]
 
 [[build_configs]]
 pattern = "aarch64-linux*"
-patches = ["fix_linux-aarch64-gnu-g++.patch"]
+patches = ["fix-linux-aarch64-gnu-g++.patch"]
 build_system = "qmake"
+build_tools = ["llvm"]
 envs = [
     "OPENGL_INC_DIR=${DEPS_DIR}/include",
     "OPENGL_LIB_DIR=${DEPS_DIR}/lib",
 ]
 options = [
     "-xplatform linux-aarch64-gnu-g++",
-    "-sysroot ${SYSROOT}",
-    "-extprefix ${PACKAGE_DIR}",
     "-confirm-license",
     "-opensource",
     "-optimize-size",
-    "-static-runtime",
+    "-static",
+    # "-static-runtime", # works for windows
     "-xcb",
     "-fontconfig",
     "-dbus",
-    "-openssl-linked",
     "-opengl es2",
     "-bundled-xcb-xinput",
     "-make-tool make",
@@ -93,12 +95,11 @@ options = [
     "-skip qtwebengine",
 ]
 dependencies = [
-    "libxcb-cursor@0.1.5",
+    "libxcb-cursor@0.1.6",
     "xcb-util-wm@0.4.2",
     "xcb-imdkit@1.0.8",
     "xcb-util-xrm@1.0",
-    "mesa@18.3.6",
-    "openssl@1.1.1w",
+    "mesa@23.3.6",
     "icu@75.1",
     "libjpeg@9f",
     "freetype@2.13.3",
@@ -128,4 +129,5 @@ dependencies = [
     "fontconfig@2.16.0",
     "pulseaudio@16.2",
     "zstd@1.5.7",
+    "pcre2@10.44",
 ]

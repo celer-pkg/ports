@@ -1,6 +1,6 @@
 [package]
 url = "https://gitlab.freedesktop.org/wayland/wayland.git"
-ref = "1.23.1"
+ref = "1.24.0"
 depth = 1
 
 [[build_configs]]
@@ -8,7 +8,7 @@ pattern = "*linux*"
 build_system = "meson"
 options = ["-Ddocumentation=false"]
 dependencies = ["libffi@3.4.8", "libxml2@2.13.5", "libexpat@2.7.1"]
-dev_dependencies = ["pkgconf@2.4.3", "wayland@1.23.1"]
+dev_dependencies = ["pkgconf@2.4.3", "wayland@1.24.0"]
 
 # Note:
 # This library support linux only.

@@ -8,14 +8,18 @@ pattern = "*linux*"
 build_system = "meson"
 dependencies = [
     "libsndfile@1.2.2",
-    "glib@2.84.1",
     "libxtst@1.2.5",
     "check@0.15.2",
     "gdbm@1.25",
     "libxcb@1.17.0",
     "xz@5.8.1",
 ]
-options = ["-Ddoxygen=false", "-Ddatabase=gdbm", "-Ddaemon=false"]
+options = [
+    "-Ddoxygen=false",
+    "-Ddatabase=gdbm",
+    "-Ddaemon=false",
+    "-Dman=false",
+]
 
 # Note:
 # This library support linux only.

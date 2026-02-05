@@ -124,7 +124,7 @@ jobs:
         with:
           arch: amd64
 
-      - name: Download celer (Linux)
+      - name: Download artifact (Linux)
         if: matrix.platform != 'x86_64-windows-msvc-enterprise-14'
         shell: bash
         run: |
@@ -133,7 +133,7 @@ jobs:
           mv celer-amd64-linux celer
           chmod +x celer
 
-      - name: Download celer (Windows)
+      - name: Download artifact (Windows)
         if: matrix.platform == 'x86_64-windows-msvc-enterprise-14'
         shell: bash
         run: |
@@ -141,7 +141,7 @@ jobs:
           unzip celer-windows-amd64.exe.zip
           mv celer-windows-amd64.exe celer.exe
 
-      - name: Setup celer workspace (Linux)
+      - name: Setup workspace (Linux)
         if: matrix.platform != 'x86_64-windows-msvc-enterprise-14'
         shell: bash
         run: |
@@ -152,7 +152,7 @@ jobs:
           rm -rf ports
           ln -s ${{ github.workspace }} ports
 
-      - name: Setup celer workspace (Windows)
+      - name: Setup workspace (Windows)
         if: matrix.platform == 'x86_64-windows-msvc-enterprise-14'
         shell: bash
         run: |

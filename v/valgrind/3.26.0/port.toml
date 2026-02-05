@@ -1,0 +1,10 @@
+[package]
+  url = "git://sourceware.org/git/valgrind.git"
+  ref = "VALGRIND_3_26_0"
+  depth = 1
+
+[[build_configs]]
+  pattern = "*linux*"
+  build_system = "makefiles"
+  dev_dependencies = ["macros@1.20.2"]
+  pre_configure = ["./autogen.sh"]

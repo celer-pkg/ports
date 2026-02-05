@@ -1,5 +1,5 @@
 [package]
-url = "https://mirrors.tuna.tsinghua.edu.cn/gnu/gettext/gettext-0.25.tar.xz"
+url = "https://ftp.gnu.org/gnu/gettext/gettext-0.25.tar.xz"
 ref = "v0.25"
 supported_hosts = ["linux", "darwin"]
 
