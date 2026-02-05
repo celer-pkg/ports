@@ -6,6 +6,7 @@ depth = 1
 [[build_configs]]
 build_system = "cmake"
 dependencies_linux = ["libiconv@1.18"]
+options_linux = ["-DLIBXML2_WITH_PYTHON=OFF"]
 options_windows = ["-DLIBXML2_WITH_PYTHON=OFF", "-DLIBXML2_WITH_ICONV=OFF"]
 post_install = [
     "cmake -E rename ${PACKAGE_DIR}/lib/cmake/libxml2-2.13.5 ${PACKAGE_DIR}/lib/cmake/libxml2",
