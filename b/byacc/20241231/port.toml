@@ -1,7 +1,6 @@
 [package]
   url = "https://invisible-island.net/archives/byacc/byacc-20241231.tgz"
   ref = "20241231"
-  native = true
 
 [[build_configs]]
   build_system = "makefiles"

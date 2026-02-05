@@ -2,7 +2,6 @@
 url = "https://ftp.gnu.org/gnu/autoconf/autoconf-2.72.tar.xz"
 ref = "2.72"
 supported_hosts = ["linux", "darwin"]
-native = true
 
 [[build_configs]]
 build_system = "makefiles"
