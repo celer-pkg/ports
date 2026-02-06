@@ -1,8 +1,9 @@
 [package]
 url = "https://ftp.gnu.org/gnu/autoconf/autoconf-2.72.tar.xz"
 ref = "2.72"
-supported_hosts = ["linux", "darwin"]
+build_tool = true
 
 [[build_configs]]
+pattern = "*linux*"
 build_system = "makefiles"
 dev_dependencies = ["m4@1.4.19"]
