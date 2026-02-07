@@ -1,0 +1,13 @@
+diff --git a/main.c b/main.c
+index 5848b5a..26587b5 100644
+--- a/main.c
++++ b/main.c
+@@ -740,7 +740,7 @@ my_mkstemp(char *temp)
+     }
+     if ((name = tempnam(dname, fname)) != 0)
+     {
+-	fd = open(name, O_CREAT | O_EXCL | O_RDWR);
++	fd = open(name, O_CREAT | O_EXCL | O_RDWR, 0600);
+ 	strcpy(temp, name);
+     }
+     else
