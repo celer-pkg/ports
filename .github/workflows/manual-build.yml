@@ -23,6 +23,7 @@ jobs:
     runs-on: ubuntu-22.04
     outputs:
       platforms: ${{ steps.find_platforms.outputs.platforms }}
+      port_path: ${{ steps.validate_port.outputs.port_path }}
       port_name: ${{ steps.parse_port.outputs.port_name }}
       port_version: ${{ steps.parse_port.outputs.port_version }}
     
@@ -51,24 +52,28 @@ jobs:
           echo "Parsed port: ${PORT_NAME}@${PORT_VERSION}"
 
       - name: Validate port exists
+        id: validate_port
         run: |
           PORT_NAME="${{ steps.parse_port.outputs.port_name }}"
-          FIRST_LETTER="${PORT_NAME:0:1}"
-          PORT_TOML="${FIRST_LETTER}/${PORT_NAME}/${{ steps.parse_port.outputs.port_version }}/port.toml"
+          PORT_VERSION="${{ steps.parse_port.outputs.port_version }}"
+          # Letter directory is lowercase (ports use a/, b/, c/, ...)
+          FIRST_LETTER=$(echo "${PORT_NAME:0:1}" | tr '[:upper:]' '[:lower:]')
+          PORT_PATH="${FIRST_LETTER}/${PORT_NAME}/${PORT_VERSION}"
+          PORT_TOML="${PORT_PATH}/port.toml"
           
           if [ ! -f "$PORT_TOML" ]; then
-            echo "::error::Port TOML not found: $PORT_TOML"
+            echo "::error::Port TOML not found: $PORT_TOML (layout: letter/name/version/port.toml)"
             exit 1
           fi
           
+          echo "port_path=$PORT_PATH" >> $GITHUB_OUTPUT
           echo "✓ -- Port found: $PORT_TOML"
 
       - name: Find matching platforms
         id: find_platforms
         run: |
-          PORT_NAME="${{ steps.parse_port.outputs.port_name }}"
-          FIRST_LETTER="${PORT_NAME:0:1}"
-          PORT_TOML="${FIRST_LETTER}/${PORT_NAME}/${{ steps.parse_port.outputs.port_version }}/port.toml"
+          PORT_PATH="${{ steps.validate_port.outputs.port_path }}"
+          PORT_TOML="${PORT_PATH}/port.toml"
           
           # List of available platforms to test
           AVAILABLE_PLATFORMS=(
@@ -167,13 +172,13 @@ jobs:
         if: matrix.platform != 'x86_64-windows-msvc-enterprise-14'
         shell: bash
         run: |
-          PORT_NAME="${{ needs.detect-platforms.outputs.port_name }}@${{ needs.detect-platforms.outputs.port_version }}"
+          PORT_INSTALL="${{ needs.detect-platforms.outputs.port_name }}@${{ needs.detect-platforms.outputs.port_version }}"
           
           echo "========================================="
-          echo "Building $PORT_NAME on ${{ matrix.platform }}"
+          echo "Building $PORT_INSTALL on ${{ matrix.platform }}"
           echo "========================================="
           
-          CMD="./celer install \"$PORT_NAME\""
+          CMD="./celer install \"$PORT_INSTALL\""
           [ "${{ inputs.verbose }}" = "true" ] && CMD="$CMD --verbose"
           [ "${{ inputs.dev }}" = "true" ] && CMD="$CMD --dev"
           
@@ -183,13 +188,13 @@ jobs:
         if: matrix.platform == 'x86_64-windows-msvc-enterprise-14'
         shell: bash
         run: |
-          PORT_NAME="${{ needs.detect-platforms.outputs.port_name }}@${{ needs.detect-platforms.outputs.port_version }}"
+          PORT_INSTALL="${{ needs.detect-platforms.outputs.port_name }}@${{ needs.detect-platforms.outputs.port_version }}"
           
           echo "========================================="
-          echo "Building $PORT_NAME on ${{ matrix.platform }}"
+          echo "Building $PORT_INSTALL on ${{ matrix.platform }}"
           echo "========================================="
           
-          CMD="./celer.exe install \"$PORT_NAME\""
+          CMD="./celer.exe install \"$PORT_INSTALL\""
           [ "${{ inputs.verbose }}" = "true" ] && CMD="$CMD --verbose"
           [ "${{ inputs.dev }}" = "true" ] && CMD="$CMD --dev"
           
