@@ -78,6 +78,7 @@ envs = [
     "LLVM_CONFIG=${DEPS_DEV_DIR}/bin/llvm-config",
     "CFLAGS=-I${DEPS_DIR}/include/valgrind",
     "CXXFLAGS=-I${DEPS_DIR}/include/valgrind",
+    "LDFLAGS=-liconv",
 ]
 options = [
     "-Dshared-llvm=disabled",
