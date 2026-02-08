@@ -52,7 +52,7 @@ options = [
 [[build_configs]]
 pattern = "*aarch64-linux*"
 build_system = "meson"
-build_tools = ["python3:mako", "python3:packaging", "llvm"]
+build_tools = ["python3:mako", "python3:packaging"]
 dependencies = [
     "libxshmfence@1.3.3",
     "libxext@1.3.6",
@@ -68,6 +68,7 @@ dependencies = [
     "glslang@1.4.335.0",
     "openssl@1.1.1w",
     "libiconv@1.18",
+    "llvm@17.0.6",
 ]
 dev_dependencies = [
     "pkgconf@2.4.3",
