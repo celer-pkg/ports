@@ -21,7 +21,6 @@ dependencies = [
     "glslang@1.4.335.0",
     "openssl@1.1.1w",
     "libiconv@1.18",
-    "llvm@17.0.6",
 ]
 dev_dependencies = [
     "pkgconf@2.4.3",
@@ -69,7 +68,6 @@ dependencies = [
     "glslang@1.4.335.0",
     "openssl@1.1.1w",
     "libiconv@1.18",
-    "llvm@17.0.6",
 ]
 dev_dependencies = [
     "pkgconf@2.4.3",
