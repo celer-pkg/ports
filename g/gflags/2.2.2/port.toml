@@ -5,8 +5,4 @@ depth = 1
 
 [[build_configs]]
 build_system = "cmake"
-options = [
-    "-DBUILD_SHARED_LIBS=ON",
-    "-DBUILD_STATIC_LIBS=OFF",
-    "-DBUILD_TESTING=OFF",
-]
+options = ["-DBUILD_TESTING=OFF"]
