@@ -1,11 +1,11 @@
 [package]
-url = "https://github.com/Distrotech/help2man.git"
-ref = "master"
-depth = 1
+  url = "https://github.com/Distrotech/help2man.git"
+  ref = "master"
+  depth = 1
 
 [[build_configs]]
-pattern = "*linux*"
-build_system = "makefiles"
+  system_name = "linux"
+  build_system = "makefiles"
 
 # Note:
 # This library support linux only.

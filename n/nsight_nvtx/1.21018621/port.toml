@@ -2,6 +2,7 @@
   ref = "1.21018621"
 
 [[build_configs]]
-  pattern = "x86_64-windows*"
+  system_name = "windows"
+  system_processor = "x86_64"
   build_system = "prebuilt"
   url = "https://developer.download.nvidia.cn/compute/cuda/redist/nsight_nvtx/windows-x86_64/nsight_nvtx-windows-x86_64-1.21018621-archive.zip"

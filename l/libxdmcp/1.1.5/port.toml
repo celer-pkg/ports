@@ -4,7 +4,7 @@ ref = "libXdmcp-1.1.5"
 depth = 1
 
 [[build_configs]]
-pattern = "*linux*"
+system_name = "linux"
 build_system = "makefiles"
 dependencies = ["xorgproto@2024.1"]
 dev_dependencies = [

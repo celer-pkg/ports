@@ -3,7 +3,7 @@ url = "https://ftp.gnu.org/gnu/ncurses/ncurses-6.5.tar.gz"
 ref = "6.5"
 
 [[build_configs]]
-pattern = "*linux*"
+system_name = "linux"
 build_system = "makefiles"
 build_shared = "--with-shared"
 options = [

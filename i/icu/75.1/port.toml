@@ -1,27 +1,30 @@
 [package]
-url = "https://github.com/unicode-org/icu.git"
-ref = "release-75-1"
-src_dir = "icu4c/source"
-depth = 1
+  url = "https://github.com/unicode-org/icu.git"
+  ref = "release-75-1"
+  src_dir = "icu4c/source"
+  depth = 1
 
 # ============= build for aarch64-linux ============ #
 [[build_configs]]
-pattern = "aarch64-linux*"
-build_system = "makefiles"
-options = ["--with-cross-build=${BUILD_DIR}/../x86_64-linux-dev"]
-dev_dependencies = ["icu@75.1"]
+  system_name = "linux"
+  system_processor = "aarch64"
+  build_system = "makefiles"
+  options = ["--with-cross-build=${BUILD_DIR}/../x86_64-linux-dev"]
+  dev_dependencies = ["icu@75.1"]
 
 # ============= build for x86_64-linux ============= #
 [[build_configs]]
-pattern = "x86_64-linux*"
-build_system = "makefiles"
+  system_name = "linux"
+  system_processor = "x86_64"
+  build_system = "makefiles"
 
 # ============= build for windows ================== #
 [[build_configs]]
-pattern = "*windows*"
-build_system = "makefiles"
-cxx_standard = "c++17"
-build_tools = ["python3"]
+  system_name = "windows"
+  system_processor = "x86_64"
+  build_system = "makefiles"
+  cxx_standard = "c++17"
+  build_tools = ["python3"]
 
 # Note:
 # This library support linux only.

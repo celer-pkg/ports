@@ -4,7 +4,7 @@ ref = "1.23.1"
 depth = 1
 
 [[build_configs]]
-pattern = "*linux*"
+system_name = "linux"
 build_system = "meson"
 options = ["-Ddocumentation=false"]
 dependencies = ["libffi@3.4.8", "libxml2@2.13.5", "libexpat@2.7.1"]

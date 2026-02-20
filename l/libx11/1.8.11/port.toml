@@ -4,7 +4,7 @@ ref = "libX11-1.8.11"
 depth = 1
 
 [[build_configs]]
-pattern = "*linux*"
+system_name = "linux"
 build_system = "makefiles"
 dependencies = [
     "xorgproto@2024.1",

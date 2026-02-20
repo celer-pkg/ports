@@ -4,7 +4,7 @@ ref = "libXdamage-1.1.6"
 depth = 1
 
 [[build_configs]]
-pattern = "*linux*"
+system_name = "linux"
 build_system = "makefiles"
 dependencies = [
     "libunwind@1.6.1",

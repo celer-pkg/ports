@@ -4,7 +4,7 @@ ref = "1.5"
 depth = 1
 
 [[build_configs]]
-pattern = "*linux*"
+system_name = "linux"
 build_system = "meson"
 dependencies = ["libx11@1.8.11"]
 

@@ -4,7 +4,7 @@
   depth = 1
 
 [[build_configs]]
-  pattern = "*linux*"
+  system_name = "linux"
   build_system = "meson"
   build_tools = ["python3:setuptools"]
   options = ["-Dlibmount=enabled"]

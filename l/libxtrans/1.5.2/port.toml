@@ -4,7 +4,7 @@ ref = "xtrans-1.5.2"
 depth = 1
 
 [[build_configs]]
-pattern = "*linux*"
+system_name = "linux"
 build_system = "makefiles"
 patches = ["fix_autogen.patch"]
 dependencies = ["xorg-sgml-doctools@1.12.1"]

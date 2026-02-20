@@ -4,7 +4,7 @@ url = "https://www.x.org/releases/individual/xcb/xcb-util-wm-0.4.2.tar.xz"
 ref = "0.4.2"
 
 [[build_configs]]
-pattern = "*linux*"
+system_name = "linux"
 build_system = "makefiles"
 dev_dependencies = ["macros@1.20.2", "libtool@2.5.4"]
 

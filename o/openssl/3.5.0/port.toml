@@ -6,7 +6,8 @@ ignore_submodule = true
 
 # ============= build for aarch64-linux =========== #
 [[build_configs]]
-pattern = "aarch64-linux*"
+system_name = "linux"
+system_processor = "aarch64"
 build_system = "makefiles"
 build_shared = "shared"
 build_static = "_"
@@ -21,7 +22,8 @@ options = [
 
 # ============= build for x86_64-linux =========== #
 [[build_configs]]
-pattern = "x86_64-linux*"
+system_name = "linux"
+system_processor = "x86_64"
 build_system = "makefiles"
 build_shared = "shared"
 build_static = "_"
@@ -37,7 +39,7 @@ options = [
 
 # ============= build for windows =========== #
 [[build_configs]]
-pattern = "*windows*"
+system_name = "windows"
 build_system = "makefiles"
 build_tools = ["perl"]
 build_shared = "shared"

@@ -4,7 +4,7 @@ ref = "v3.11.13"
 depth = 1
 
 [[build_configs]]
-pattern = "*linux*"
+system_name = "linux"
 build_system = "makefiles"
   build_tools = ["python3"]
   dev_dependencies = ["cpython@3.11.13"]

@@ -2,6 +2,7 @@
   ref = "575.57.08"
 
 [[build_configs]]
-  pattern = "x86_64-linux*"
+  system_name = "linux"
+  system_processor = "x86_64"
   build_system = "prebuilt"
   url = "https://developer.download.nvidia.cn/compute/cuda/redist/libnvidia_nscq/linux-x86_64/libnvidia_nscq-linux-x86_64-575.57.08-archive.tar.xz"

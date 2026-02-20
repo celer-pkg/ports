@@ -1,12 +1,12 @@
 [package]
-url = "https://download-mirror.savannah.gnu.org/releases/libunwind/libunwind-1.6.1.tar.gz"
-ref = "1.6.1"
-depth = 1
+  url = "https://download-mirror.savannah.gnu.org/releases/libunwind/libunwind-1.6.1.tar.gz"
+  ref = "1.6.1"
+  depth = 1
 
 [[build_configs]]
-pattern = "*linux*"
-build_system = "makefiles"
-envs = ["LDFLAGS=-Wl,-rpath-link,${BUILD_DIR}/src/.libs"]
+  system_name = "linux"
+  build_system = "makefiles"
+  envs = ["LDFLAGS=-Wl,-rpath-link,${BUILD_DIR}/src/.libs"]
 
 # Note:
 # This library support linux only.

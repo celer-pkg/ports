@@ -5,7 +5,7 @@ src_dir = "releases/3.1.2"
 depth = 1
 
 [[build_configs]]
-pattern = "*linux*"
+system_name = "linux"
 build_system = "custom"
 build_in_source = true
 build = [

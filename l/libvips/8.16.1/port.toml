@@ -4,7 +4,7 @@ ref = "v8.16.1"
 depth = 1
 
 [[build_configs]]
-pattern = "*linux*"
+system_name = "linux"
 build_system = "meson"
 patches = ["fix_build_error.patch"]
 dependencies = ["libexpat@2.7.1", "libjpeg@9f"]

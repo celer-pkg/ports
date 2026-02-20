@@ -3,7 +3,8 @@ url = "https://download.qt.io/archive/qt/5.15/5.15.16/single/qt-everywhere-opens
 ref = "5.15.16"
 
 [[build_configs]]
-pattern = "x86_64-linux*"
+system_name = "linux"
+system_processor = "x86_64"
 patches = ["add-linux-x86_64-gnu-g++.patch"]
 build_system = "qmake"
 build_tools = ["llvm"]
@@ -68,7 +69,8 @@ dependencies = [
 ]
 
 [[build_configs]]
-pattern = "aarch64-linux*"
+system_name = "linux"
+system_processor = "aarch64"
 patches = ["fix-linux-aarch64-gnu-g++.patch"]
 build_system = "qmake"
 build_tools = ["llvm"]

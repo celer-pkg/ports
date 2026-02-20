@@ -2,6 +2,7 @@
   ref = "11.8.86"
 
 [[build_configs]]
-  pattern = "aarch64-linux*"
+  system_name = "linux"
+  system_processor = "aarch64"
   build_system = "prebuilt"
   url = "https://developer.download.nvidia.cn/compute/cuda/redist/libcudla/linux-aarch64/libcudla-linux-aarch64-11.8.86-archive.tar.xz"

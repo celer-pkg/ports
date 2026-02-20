@@ -1,14 +1,14 @@
 [package]
-url = "https://gitlab.freedesktop.org/mesa/libdrm.git"
-ref = "libdrm-2.4.124"
-depth = 1
+  url = "https://gitlab.freedesktop.org/mesa/libdrm.git"
+  ref = "libdrm-2.4.124"
+  depth = 1
 
 # ================ build for aarch64-linux ================ #
 [[build_configs]]
-pattern = "*linux*"
-build_system = "meson"
-dependencies = ["xcb-proto@1.17.0", "libpciaccess@0.18.1"]
-dev_dependencies = ["pkgconf@2.4.3"]
-options = ["-Dtests=false", "-Dintel=enabled"]
+  system_name = "linux"
+  build_system = "meson"
+  dependencies = ["xcb-proto@1.17.0", "libpciaccess@0.18.1"]
+  dev_dependencies = ["pkgconf@2.4.3"]
+  options = ["-Dtests=false", "-Dintel=enabled"]
 # Note:
 # This library support linux only.

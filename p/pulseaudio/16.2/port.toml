@@ -4,7 +4,7 @@ ref = "v16.2"
 depth = 1
 
 [[build_configs]]
-pattern = "*linux*"
+system_name = "linux"
 build_system = "meson"
 dependencies = [
     "libsndfile@1.2.2",

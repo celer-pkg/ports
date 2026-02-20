@@ -2,11 +2,13 @@
 ref = "17.0.6"
 
 [[build_configs]]
-pattern = "x86_64-linux*"
+system_name = "linux"
+system_processor = "x86_64"
 url = "https://github.com/llvm/llvm-project/releases/download/llvmorg-17.0.6/clang+llvm-17.0.6-x86_64-linux-gnu-ubuntu-22.04.tar.xz"
 build_system = "prebuilt"
 
 [[build_configs]]
-pattern = "aarch64-linux*"
+system_name = "linux"
+system_processor = "aarch64"
 url = "https://github.com/llvm/llvm-project/releases/download/llvmorg-17.0.6/clang+llvm-17.0.6-aarch64-linux-gnu.tar.xz"
 build_system = "prebuilt"
