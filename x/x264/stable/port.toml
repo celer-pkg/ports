@@ -12,5 +12,4 @@ dev_dependencies = ["nasm@2.16.03"]
 options = [
     "--sysroot=${SYSROOT}",
     "--cross-prefix=${CROSSTOOL_PREFIX}",
-    "--enable-pic",
 ]
