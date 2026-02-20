@@ -119,7 +119,7 @@ jobs:
   build-port:
     name: Build ${{ needs.detect-platforms.outputs.port_name }}@${{ needs.detect-platforms.outputs.port_version }} (${{ matrix.platform }})
     needs: detect-platforms
-    runs-on: ${{ matrix.platform == 'x86_64-windows-msvc-enterprise-14' && 'windows-2022' || 'ubuntu-22.04' }}
+    runs-on: ${{ matrix.platform == 'x86_64-windows-msvc-enterprise-14' && 'windows-2025' || 'ubuntu-22.04' }}
     strategy:
       fail-fast: false
       matrix:
