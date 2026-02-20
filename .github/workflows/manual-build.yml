@@ -98,7 +98,7 @@ jobs:
           
           # Check if any platforms matched
           if [ ${#MATCHING_PLATFORMS[@]} -eq 0 ]; then
-            echo "::error::No platforms match the port's build_configs patterns"
+            echo "::error::No platforms match the port's build_configs selectors (system_name/system_processor)"
             exit 1
           fi
           
