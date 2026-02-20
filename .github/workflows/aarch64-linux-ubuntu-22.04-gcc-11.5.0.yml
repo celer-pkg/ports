@@ -64,6 +64,14 @@ jobs:
         with:
           fetch-depth: 0
 
+      - name: Prepare platform metadata
+        run: |
+          curl -L -o celer-amd64-linux.tar.gz https://github.com/celer-pkg/celer/releases/latest/download/celer-amd64-linux.tar.gz
+          tar -xvzf celer-amd64-linux.tar.gz -C .
+          mv celer-amd64-linux celer
+          chmod +x celer
+          ./celer init --url=https://github.com/celer-pkg/test-conf.git
+
       - name: Check platform match
         id: check_match
         run: |
@@ -100,11 +108,14 @@ jobs:
       - name: Download artifact
         if: steps.check_match.outputs.should_build == 'true'
         run: |
-          # Download latest celer release
-          curl -L -o celer-amd64-linux.tar.gz https://github.com/celer-pkg/celer/releases/latest/download/celer-amd64-linux.tar.gz
-          tar -xvzf celer-amd64-linux.tar.gz -C .
-          mv celer-amd64-linux celer
-          chmod +x celer
+          if [ -x ./celer ]; then
+            echo "celer already prepared"
+          else
+            curl -L -o celer-amd64-linux.tar.gz https://github.com/celer-pkg/celer/releases/latest/download/celer-amd64-linux.tar.gz
+            tar -xvzf celer-amd64-linux.tar.gz -C .
+            mv celer-amd64-linux celer
+            chmod +x celer
+          fi
 
       - name: Setup workspace
         if: steps.check_match.outputs.should_build == 'true'
