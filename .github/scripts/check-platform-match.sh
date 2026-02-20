@@ -11,8 +11,11 @@ if [ ! -f "$PORT_TOML" ]; then
     exit 1
 fi
 PLATFORM_TOML="conf/platforms/${PLATFORM}.toml"
+if [ ! -f "$PLATFORM_TOML" ] && [ -f "../$PLATFORM_TOML" ]; then
+    PLATFORM_TOML="../$PLATFORM_TOML"
+fi
 if [ ! -f "$PLATFORM_TOML" ]; then
-    echo "ERROR: Platform TOML not found in workspace: $PLATFORM_TOML" >&2
+    echo "ERROR: Platform TOML not found in workspace: conf/platforms/${PLATFORM}.toml" >&2
     exit 1
 fi
 
@@ -50,7 +53,7 @@ else
     fi
 fi
 
-# Parse platform selectors from platform.toml.
+# Parse platform selectors from platform.toml only.
 PLATFORM_SYSTEM_NAME=$(yq eval '.toolchain.system_name // ""' "$PLATFORM_TOML" | tr '[:upper:]' '[:lower:]')
 PLATFORM_PROCESSOR=$(yq eval '.toolchain.system_processor // ""' "$PLATFORM_TOML" | tr '[:upper:]' '[:lower:]')
 if [ "$PLATFORM_SYSTEM_NAME" = "null" ]; then
