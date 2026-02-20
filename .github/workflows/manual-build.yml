@@ -72,6 +72,12 @@ jobs:
       - name: Find matching platforms
         id: find_platforms
         run: |
+          curl -L -o celer-amd64-linux.tar.gz https://github.com/celer-pkg/celer/releases/latest/download/celer-amd64-linux.tar.gz
+          tar -xvzf celer-amd64-linux.tar.gz -C .
+          mv celer-amd64-linux celer
+          chmod +x celer
+          ./celer init --url=https://github.com/celer-pkg/test-conf.git
+
           PORT_PATH="${{ steps.validate_port.outputs.port_path }}"
           PORT_TOML="${PORT_PATH}/port.toml"
           
