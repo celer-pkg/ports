@@ -2,16 +2,19 @@
   ref = "10.3.10.19"
 
 [[build_configs]]
-  pattern = "aarch64-linux*"
+  system_name = "linux"
+  system_processor = "aarch64"
   build_system = "prebuilt"
   url = "https://developer.download.nvidia.cn/compute/cuda/redist/libcurand/linux-aarch64/libcurand-linux-aarch64-10.3.10.19-archive.tar.xz"
 
 [[build_configs]]
-  pattern = "x86_64-linux*"
+  system_name = "linux"
+  system_processor = "x86_64"
   build_system = "prebuilt"
   url = "https://developer.download.nvidia.cn/compute/cuda/redist/libcurand/linux-x86_64/libcurand-linux-x86_64-10.3.10.19-archive.tar.xz"
 
 [[build_configs]]
-  pattern = "x86_64-windows*"
+  system_name = "windows"
+  system_processor = "x86_64"
   build_system = "prebuilt"
   url = "https://developer.download.nvidia.cn/compute/cuda/redist/libcurand/windows-x86_64/libcurand-windows-x86_64-10.3.10.19-archive.zip"

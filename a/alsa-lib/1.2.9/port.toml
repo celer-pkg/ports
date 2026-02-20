@@ -4,7 +4,7 @@ url = "https://www.alsa-project.org/files/pub/lib/alsa-lib-1.2.9.tar.bz2"
 ref = "1.2.9"
 
 [[build_configs]]
-pattern = "*linux*"
+system_name = "linux"
 build_system = "makefiles"
 
 # Note:

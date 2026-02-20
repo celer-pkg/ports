@@ -4,49 +4,49 @@ ref = "5.1.6"
 
 # ================ build for Linux ================ #
 [[build_configs]]
-pattern = "*linux*"
-build_system = "makefiles"
-envs = [
-    "CFLAGS=-Wno-pointer-sign -Wno-incompatible-pointer-types -Wno-stringop-overread -Wno-stringop-truncation",
-]
-dev_dependencies = ["nasm@2.16.03"]
-options = [
-    "--sysroot=${SYSROOT}",
-    "--cross-prefix=${CROSSTOOL_PREFIX}",
-    "--arch=${SYSTEM_PROCESSOR}",
-    "--target-os=linux",
-    "--pkg-config=pkgconf",
-    "--enable-cross-compile",
-    "--disable-doc",
-    "--enable-pic",
-    "--enable-gpl",
-]
+  system_name = "linux"
+  build_system = "makefiles"
+  envs = [
+      "CFLAGS=-Wno-pointer-sign -Wno-incompatible-pointer-types -Wno-stringop-overread -Wno-stringop-truncation",
+  ]
+  dev_dependencies = ["nasm@2.16.03"]
+  options = [
+      "--sysroot=${SYSROOT}",
+      "--cross-prefix=${CROSSTOOL_PREFIX}",
+      "--arch=${SYSTEM_PROCESSOR}",
+      "--target-os=linux",
+      "--pkg-config=pkgconf",
+      "--enable-cross-compile",
+      "--disable-doc",
+      "--enable-pic",
+      "--enable-gpl",
+  ]
 
 # ================ build for Windows ================ #
 [[build_configs]]
-pattern = "*windows*"
-build_system = "makefiles"
-patches = [
-    "fix_windows_build.patch"
-]
-dev_dependencies = ["nasm@2.16.03"]
-post_install = [
-    "cmake -E rename ${PACKAGE_DIR}/bin/avcodec.lib ${PACKAGE_DIR}/lib/avcodec.lib",
-    "cmake -E rename ${PACKAGE_DIR}/bin/avdevice.lib ${PACKAGE_DIR}/lib/avdevice.lib",
-    "cmake -E rename ${PACKAGE_DIR}/bin/avfilter.lib ${PACKAGE_DIR}/lib/avfilter.lib",
-    "cmake -E rename ${PACKAGE_DIR}/bin/avformat.lib ${PACKAGE_DIR}/lib/avformat.lib",
-    "cmake -E rename ${PACKAGE_DIR}/bin/avutil.lib ${PACKAGE_DIR}/lib/avutil.lib",
-    "cmake -E rename ${PACKAGE_DIR}/bin/postproc.lib ${PACKAGE_DIR}/lib/postproc.lib",
-    "cmake -E rename ${PACKAGE_DIR}/bin/swresample.lib ${PACKAGE_DIR}/lib/swresample.lib",
-    "cmake -E rename ${PACKAGE_DIR}/bin/swscale.lib ${PACKAGE_DIR}/lib/swscale.lib",
-]
-options = [
-    "--toolchain=msvc",
-    "--arch=${SYSTEM_PROCESSOR}",
-    "--target-os=win64",
-    "--pkg-config=pkgconf",
-    "--enable-cross-compile",
-    "--disable-doc",
-    "--enable-pic",
-    "--enable-gpl",
-]
+  system_name = "windows"
+  build_system = "makefiles"
+  patches = [
+      "fix_windows_build.patch"
+  ]
+  dev_dependencies = ["nasm@2.16.03"]
+  post_install = [
+      "cmake -E rename ${PACKAGE_DIR}/bin/avcodec.lib ${PACKAGE_DIR}/lib/avcodec.lib",
+      "cmake -E rename ${PACKAGE_DIR}/bin/avdevice.lib ${PACKAGE_DIR}/lib/avdevice.lib",
+      "cmake -E rename ${PACKAGE_DIR}/bin/avfilter.lib ${PACKAGE_DIR}/lib/avfilter.lib",
+      "cmake -E rename ${PACKAGE_DIR}/bin/avformat.lib ${PACKAGE_DIR}/lib/avformat.lib",
+      "cmake -E rename ${PACKAGE_DIR}/bin/avutil.lib ${PACKAGE_DIR}/lib/avutil.lib",
+      "cmake -E rename ${PACKAGE_DIR}/bin/postproc.lib ${PACKAGE_DIR}/lib/postproc.lib",
+      "cmake -E rename ${PACKAGE_DIR}/bin/swresample.lib ${PACKAGE_DIR}/lib/swresample.lib",
+      "cmake -E rename ${PACKAGE_DIR}/bin/swscale.lib ${PACKAGE_DIR}/lib/swscale.lib",
+  ]
+  options = [
+      "--toolchain=msvc",
+      "--arch=${SYSTEM_PROCESSOR}",
+      "--target-os=win64",
+      "--pkg-config=pkgconf",
+      "--enable-cross-compile",
+      "--disable-doc",
+      "--enable-pic",
+      "--enable-gpl",
+  ]

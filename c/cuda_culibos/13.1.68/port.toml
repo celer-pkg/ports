@@ -2,6 +2,7 @@
   ref = "13.1.68"
 
 [[build_configs]]
-  pattern = "x86_64-linux*"
+  system_name = "linux"
+  system_processor = "x86_64"
   build_system = "prebuilt"
   url = "https://developer.download.nvidia.cn/compute/cuda/redist/cuda_culibos/linux-x86_64/cuda_culibos-linux-x86_64-13.1.68-archive.tar.xz"

@@ -4,7 +4,7 @@
   depth = 1
 
 [[build_configs]]
-  pattern = "*linux*"
+  system_name = "linux"
   build_system = "makefiles"
   dev_dependencies = ["macros@1.20.2"]
   pre_configure = ["./autogen.sh"]

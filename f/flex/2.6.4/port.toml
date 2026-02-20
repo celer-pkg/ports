@@ -1,21 +1,21 @@
 [package]
-# Use release archive instead of git repo.
-# otherwise, compiling flex requires bootstrapping, 
-# which means you need to install a lower version of flex locally in advance.
-url = "https://github.com/westes/flex/releases/download/v2.6.4/flex-2.6.4.tar.gz"
-ref = "2.6.4"
+  # Use release archive instead of git repo.
+  # otherwise, compiling flex requires bootstrapping, 
+  # which means you need to install a lower version of flex locally in advance.
+  url = "https://github.com/westes/flex/releases/download/v2.6.4/flex-2.6.4.tar.gz"
+  ref = "2.6.4"
 
 [[build_configs]]
-pattern = "*linux*"
-build_system = "makefiles"
-dev_dependencies = ["m4@1.4.19"]
-# For cross-compilation, override malloc detection which fails in cross-compile.
-# Also set CC_FOR_BUILD to use native compiler for bootstrap tools.
-options = [
-    "ac_cv_func_malloc_0_nonnull=yes",
-    "ac_cv_func_realloc_0_nonnull=yes",
-    "CC_FOR_BUILD=gcc",
-]
+  system_name = "linux"
+  build_system = "makefiles"
+  dev_dependencies = ["m4@1.4.19"]
+  # For cross-compilation, override malloc detection which fails in cross-compile.
+  # Also set CC_FOR_BUILD to use native compiler for bootstrap tools.
+  options = [
+      "ac_cv_func_malloc_0_nonnull=yes",
+      "ac_cv_func_realloc_0_nonnull=yes",
+      "CC_FOR_BUILD=gcc",
+  ]
 
 # Note:
 # This library support linux only.

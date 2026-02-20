@@ -1,37 +1,37 @@
 [package]
-url = "https://ffmpeg.org/releases/ffmpeg-3.4.13.tar.xz"
-ref = "3.4.13"
+  url = "https://ffmpeg.org/releases/ffmpeg-3.4.13.tar.xz"
+  ref = "3.4.13"
 
 # ================ build for Linux ================ #
 [[build_configs]]
-pattern = "*linux*"
-build_system = "makefiles"
-patches = ["fix_windows_build.patch"]
-envs = [
-    "CFLAGS=-Wno-pointer-sign -Wno-incompatible-pointer-types -Wno-stringop-overread -Wno-stringop-truncation",
-]
-dev_dependencies = ["pkgconf@2.4.3", "nasm@2.16.03"]
-options = [
-    "--sysroot=${SYSROOT}",
-    "--cross-prefix=${CROSSTOOL_PREFIX}",
-    "--arch=${SYSTEM_PROCESSOR}",
-    "--target-os=linux",
-    "--pkg-config=pkgconf",
-    "--enable-cross-compile",
-    "--cc=${CROSSTOOL_PREFIX}gcc",
-    "--disable-programs",
-    "--disable-doc",
-    "--enable-pic",
-    "--enable-gpl",
-]
+  system_name = "linux"
+  build_system = "makefiles"
+  patches = ["fix_windows_build.patch"]
+  envs = [
+      "CFLAGS=-Wno-pointer-sign -Wno-incompatible-pointer-types -Wno-stringop-overread -Wno-stringop-truncation",
+  ]
+  dev_dependencies = ["pkgconf@2.4.3", "nasm@2.16.03"]
+  options = [
+      "--sysroot=${SYSROOT}",
+      "--cross-prefix=${CROSSTOOL_PREFIX}",
+      "--arch=${SYSTEM_PROCESSOR}",
+      "--target-os=linux",
+      "--pkg-config=pkgconf",
+      "--enable-cross-compile",
+      "--cc=${CROSSTOOL_PREFIX}gcc",
+      "--disable-programs",
+      "--disable-doc",
+      "--enable-pic",
+      "--enable-gpl",
+  ]
 
 # ================ build for Windows ================ #
 [[build_configs]]
-pattern = "*windows*"
-build_system = "makefiles"
-patches = ["fix_windows_build.patch"]
-dev_dependencies = ["pkgconf@2.4.3", "nasm@2.16.03"]
-post_install = [
+  system_name = "windows"
+  build_system = "makefiles"
+  patches = ["fix_windows_build.patch"]
+  dev_dependencies = ["pkgconf@2.4.3", "nasm@2.16.03"]
+  post_install = [
     "cmake -E rename ${PACKAGE_DIR}/bin/avcodec.lib ${PACKAGE_DIR}/lib/avcodec.lib",
     "cmake -E rename ${PACKAGE_DIR}/bin/avdevice.lib ${PACKAGE_DIR}/lib/avdevice.lib",
     "cmake -E rename ${PACKAGE_DIR}/bin/avfilter.lib ${PACKAGE_DIR}/lib/avfilter.lib",
@@ -40,8 +40,8 @@ post_install = [
     "cmake -E rename ${PACKAGE_DIR}/bin/postproc.lib ${PACKAGE_DIR}/lib/postproc.lib",
     "cmake -E rename ${PACKAGE_DIR}/bin/swresample.lib ${PACKAGE_DIR}/lib/swresample.lib",
     "cmake -E rename ${PACKAGE_DIR}/bin/swscale.lib ${PACKAGE_DIR}/lib/swscale.lib",
-]
-options = [
+  ]
+  options = [
     "--toolchain=msvc",
     "--target-os=win64",
     "--pkg-config=pkgconf",
@@ -49,4 +49,4 @@ options = [
     "--disable-doc",
     "--enable-pic",
     "--enable-gpl",
-]
+  ]

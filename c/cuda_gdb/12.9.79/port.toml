@@ -2,11 +2,13 @@
   ref = "12.9.79"
 
 [[build_configs]]
-  pattern = "aarch64-linux*"
+  system_name = "linux"
+  system_processor = "aarch64"
   build_system = "prebuilt"
   url = "https://developer.download.nvidia.cn/compute/cuda/redist/cuda_gdb/linux-aarch64/cuda_gdb-linux-aarch64-12.9.79-archive.tar.xz"
 
 [[build_configs]]
-  pattern = "x86_64-linux*"
+  system_name = "linux"
+  system_processor = "x86_64"
   build_system = "prebuilt"
   url = "https://developer.download.nvidia.cn/compute/cuda/redist/cuda_gdb/linux-x86_64/cuda_gdb-linux-x86_64-12.9.79-archive.tar.xz"

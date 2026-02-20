@@ -4,7 +4,7 @@ ref = "1.44"
 depth = 1
 
 [[build_configs]]
-pattern = "*linux*"
+system_name = "linux"
 build_system = "meson"
 patches = [ "fix_cannot_find_wayland_scanner.patch"]
 dependencies = ["wayland@1.23.1"]

@@ -4,7 +4,7 @@ ref = "4.36"
 src_dir = "nspr"
 
 [[build_configs]]
-pattern = "*linux*"
+system_name = "linux"
 build_system = "makefiles"
 patches = ["fix_negative_array_size.patch"]
 pre_configure = [

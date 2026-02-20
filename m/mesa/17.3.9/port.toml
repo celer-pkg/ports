@@ -3,7 +3,7 @@ url = "https://archive.mesa3d.org/older-versions/17.x/mesa-17.3.9.tar.gz"
 ref = "17.3.9"
 
 [[build_configs]]
-pattern = "*linux*"
+system_name = "linux"
 patches = ["fix_duplicate_symbols_hash.patch"]
 build_system = "makefiles"
 dependencies = [

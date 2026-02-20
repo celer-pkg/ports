@@ -3,7 +3,7 @@ url = "https://xcb.freedesktop.org/dist/xcb-util-keysyms-0.4.1.tar.xz"
 ref = "0.4.1"
 
 [[build_configs]]
-pattern = "*linux*"
+system_name = "linux"
 build_system = "makefiles"
 dependencies = ["libxcb@1.17.0"]
 dev_dependencies = ["macros@1.20.2", "libtool@2.5.4", "pkgconf@2.4.3"]

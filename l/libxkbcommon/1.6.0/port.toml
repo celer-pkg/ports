@@ -3,7 +3,7 @@ url = "https://xkbcommon.org/download/libxkbcommon-1.6.0.tar.xz"
 ref = "1.6.0"
 
 [[build_configs]]
-pattern = "*linux*"
+system_name = "linux"
 patches = ["fix_cannot_find_wayland_scanner.patch"]
 build_system = "meson"
 envs = [
