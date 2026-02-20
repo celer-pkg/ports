@@ -10,6 +10,11 @@ if [ ! -f "$PORT_TOML" ]; then
     echo "ERROR: Port TOML not found: $PORT_TOML" >&2
     exit 1
 fi
+PLATFORM_TOML="conf/platforms/${PLATFORM}.toml"
+if [ ! -f "$PLATFORM_TOML" ]; then
+    echo "ERROR: Platform TOML not found in workspace: $PLATFORM_TOML" >&2
+    exit 1
+fi
 
 # Install yq if not available (TOML parser)
 if ! command -v yq &> /dev/null; then
@@ -45,14 +50,24 @@ else
     fi
 fi
 
-# Parse platform as "<processor>-<system>-...".
-PLATFORM_PROCESSOR=$(echo "$PLATFORM" | cut -d'-' -f1 | tr '[:upper:]' '[:lower:]')
-PLATFORM_SYSTEM_NAME=$(echo "$PLATFORM" | cut -d'-' -f2 | tr '[:upper:]' '[:lower:]')
+# Parse platform selectors from platform.toml.
+PLATFORM_SYSTEM_NAME=$(yq eval '.toolchain.system_name // ""' "$PLATFORM_TOML" | tr '[:upper:]' '[:lower:]')
+PLATFORM_PROCESSOR=$(yq eval '.toolchain.system_processor // ""' "$PLATFORM_TOML" | tr '[:upper:]' '[:lower:]')
+if [ "$PLATFORM_SYSTEM_NAME" = "null" ]; then
+    PLATFORM_SYSTEM_NAME=""
+fi
+if [ "$PLATFORM_PROCESSOR" = "null" ]; then
+    PLATFORM_PROCESSOR=""
+fi
 
 # system_name is extensible (e.g. linux/windows/darwin/qnx/mcu...),
 # so only validate format.
-if ! [[ "$PLATFORM_SYSTEM_NAME" =~ ^[a-z0-9_]+$ ]]; then
-    echo "ERROR: Invalid platform system_name '$PLATFORM_SYSTEM_NAME' parsed from '$PLATFORM'" >&2
+if [ -z "$PLATFORM_SYSTEM_NAME" ] || ! [[ "$PLATFORM_SYSTEM_NAME" =~ ^[a-z0-9_]+$ ]]; then
+    echo "ERROR: Invalid platform system_name '$PLATFORM_SYSTEM_NAME' in $PLATFORM_TOML" >&2
+    exit 2
+fi
+if [ -n "$PLATFORM_PROCESSOR" ] && ! [[ "$PLATFORM_PROCESSOR" =~ ^[a-z0-9_]+$ ]]; then
+    echo "ERROR: Invalid platform system_processor '$PLATFORM_PROCESSOR' in $PLATFORM_TOML" >&2
     exit 2
 fi
 
@@ -110,16 +125,16 @@ else
 
         if [ "$SYSTEM_NAME_MATCH" = "true" ] && [ "$SYSTEM_PROCESSOR_MATCH" = "true" ]; then
             MATCH_FOUND=true
-            echo "Match found: system_name='${SYSTEM_NAME:-*}', system_processor='${SYSTEM_PROCESSOR:-*}' matches platform='$PLATFORM'"
+            echo "Match found: system_name='${SYSTEM_NAME:-*}', system_processor='${SYSTEM_PROCESSOR:-*}' matches platform selectors from '$PLATFORM_TOML'"
             break
         fi
     done
 fi
 
 if [ "$MATCH_FOUND" = "true" ]; then
-    echo "Platform $PLATFORM is supported by this port"
+    echo "Platform ($PLATFORM_SYSTEM_NAME/$PLATFORM_PROCESSOR) is supported by this port"
     exit 0
 else
-    echo "Platform $PLATFORM is NOT supported by this port"
+    echo "Platform ($PLATFORM_SYSTEM_NAME/$PLATFORM_PROCESSOR) is NOT supported by this port"
     exit 1
 fi

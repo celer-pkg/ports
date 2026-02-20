@@ -13,7 +13,7 @@ When a new port is submitted or modified:
 
 1. **Detect Changes** - Identifies which port was modified (only allows one port per commit)
 2. **Parse TOML** - Reads `port.toml` and extracts `build_configs[].system_name/system_processor`
-3. **Match Platform** - Checks if selectors match the workflow's platform
+3. **Match Platform** - Checks if selectors match the workflow platform
 4. **Build & Validate** - If matched, downloads celer and compiles the port
 5. **Report Results** - Shows success/failure with detailed logs
 
@@ -48,7 +48,7 @@ Common selectors:
 - `system_name = "linux"` + `system_processor = "aarch64"` - AArch64 Linux only
 - Both omitted - All platforms (default)
 
-Matching uses exact comparison on provided selector values.
+Matching uses exact comparison against selectors loaded from `conf/platforms/<platform>.toml`.
 
 ## ➕ Adding a New Platform Workflow
 
@@ -120,6 +120,7 @@ jobs:
   - `x86_64-linux.tar.gz` for Linux workflows
   - `x86_64-windows.tar.gz` for Windows workflows
 - Platform configuration must exist in `test-conf` repository
+- Platform configuration must exist in `conf/platforms/`
 
 ## 📊 Viewing Results
 
@@ -149,32 +150,6 @@ TOML parser to check if a port matches platform selectors.
 chmod +x .github/scripts/check-platform-match.sh
 .github/scripts/check-platform-match.sh poco/1.14.2/port.toml x86_64-linux-ubuntu-22.04-gcc-11.5.0
 ```
-
-## 🐛 Troubleshooting
-
-### Workflow Shows Green but Port Wasn't Built
-
-This is expected if selectors don't match the platform. Check the logs:
-```
-Platform x86_64-windows-msvc-enterprise-14 is NOT supported by this port
-should_build=false
-```
-
-### Script Errors (wget/binary format/etc.)
-
-These now properly fail the workflow with a red ✗. Check:
-1. OS detection in `check-platform-match.sh` is correct
-2. `yq` binary download URL is accessible
-3. Network connectivity
-
-### Multiple Ports Rejected
-
-Error message:
-```
-Multiple ports detected in single commit. Please submit one port at a time.
-```
-
-**Solution:** Split changes into separate commits, one port per commit.
 
 ## 🎯 Best Practices
 
