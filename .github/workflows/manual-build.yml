@@ -178,15 +178,19 @@ jobs:
         if: matrix.platform != 'x86_64-windows-msvc-enterprise-14'
         shell: bash
         run: |
-          PORT_INSTALL="${{ needs.detect-platforms.outputs.port_name }}@${{ needs.detect-platforms.outputs.port_version }}"
+          PORT_NAME="${{ needs.detect-platforms.outputs.port_name }}@${{ needs.detect-platforms.outputs.port_version }}"
+          PORT_TOML="${{ needs.detect-platforms.outputs.port_path }}/port.toml"
           
           echo "========================================="
-          echo "Building $PORT_INSTALL on ${{ matrix.platform }}"
+          echo "Building $PORT_NAME on ${{ matrix.platform }}"
           echo "========================================="
           
-          CMD="./celer install \"$PORT_INSTALL\""
+          CMD="./celer install \"$PORT_NAME\""
           [ "${{ inputs.verbose }}" = "true" ] && CMD="$CMD --verbose"
           [ "${{ inputs.dev }}" = "true" ] && CMD="$CMD --dev"
+          if [ "${{ inputs.dev }}" != "true" ] && grep -Eq '^[[:space:]]*build_tool[[:space:]]*=[[:space:]]*true' "$PORT_TOML"; then
+            CMD="$CMD --dev"
+          fi
           
           eval $CMD
 
@@ -194,15 +198,19 @@ jobs:
         if: matrix.platform == 'x86_64-windows-msvc-enterprise-14'
         shell: bash
         run: |
-          PORT_INSTALL="${{ needs.detect-platforms.outputs.port_name }}@${{ needs.detect-platforms.outputs.port_version }}"
+          PORT_NAME="${{ needs.detect-platforms.outputs.port_name }}@${{ needs.detect-platforms.outputs.port_version }}"
+          PORT_TOML="${{ needs.detect-platforms.outputs.port_path }}/port.toml"
           
           echo "========================================="
-          echo "Building $PORT_INSTALL on ${{ matrix.platform }}"
+          echo "Building $PORT_NAME on ${{ matrix.platform }}"
           echo "========================================="
           
-          CMD="./celer.exe install \"$PORT_INSTALL\""
+          CMD="./celer.exe install \"$PORT_NAME\""
           [ "${{ inputs.verbose }}" = "true" ] && CMD="$CMD --verbose"
           [ "${{ inputs.dev }}" = "true" ] && CMD="$CMD --dev"
+          if [ "${{ inputs.dev }}" != "true" ] && grep -Eq '^[[:space:]]*build_tool[[:space:]]*=[[:space:]]*true' "$PORT_TOML"; then
+            CMD="$CMD --dev"
+          fi
           
           eval $CMD
 

@@ -2,7 +2,7 @@
 url = "https://gitlab.freedesktop.org/libbsd/libbsd.git"
 ref = "0.12.2"
 depth = 1
-supported_hosts = ["linux", "darwin"]
+build_tool = true
 
 [[build_configs]]
 build_system = "makefiles"
