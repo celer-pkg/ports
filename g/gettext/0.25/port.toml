@@ -1,7 +1,7 @@
 [package]
 url = "https://ftp.gnu.org/gnu/gettext/gettext-0.25.tar.xz"
 ref = "v0.25"
-supported_hosts = ["linux", "darwin"]
+build_tool = true
 
 [[build_configs]]
 build_system = "makefiles"
