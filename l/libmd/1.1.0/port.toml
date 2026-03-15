@@ -1,15 +1,15 @@
 [package]
-url = "https://github.com/guillemj/libmd.git"
-ref = "1.1.0"
-depth = 1
+  url = "https://github.com/guillemj/libmd.git"
+  ref = "1.1.0"
+  depth = 1
 
 [[build_configs]]
-pattern = "*linux*"
-build_system = "makefiles"
-build_in_source = true
-dev_dependencies = ["libtool@2.5.4", "macros@1.20.2"]
-envs = ["NOCONFIGURE=1"]
-pre_configure = ["./autogen"]
+  system_name = "linux"
+  build_system = "makefiles"
+  build_in_source = true
+  dev_dependencies = ["libtool@2.5.4", "macros@1.20.2"]
+  envs = ["NOCONFIGURE=1"]
+  pre_configure = ["./autogen"]
 
 # Note:
 # This library support linux only.

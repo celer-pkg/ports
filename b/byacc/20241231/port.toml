@@ -7,4 +7,5 @@
   pattern = "*linux*"
   build_system = "makefiles"
   build_shared = "_"
+  patches = ["fix_build.patch"]
   post_install = ["ln -sf ${PACKAGE_DIR}/bin/yacc ${PACKAGE_DIR}/bin/byacc"]

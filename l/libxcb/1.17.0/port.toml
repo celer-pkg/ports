@@ -4,7 +4,7 @@ ref = "libxcb-1.17.0"
 depth = 1
 
 [[build_configs]]
-pattern = "*linux*"
+system_name = "linux"
 build_system = "makefiles"
 dependencies = ["libxau@1.0.12", "xcb-proto@1.17.0"]
 dev_dependencies = ["macros@1.20.2"]

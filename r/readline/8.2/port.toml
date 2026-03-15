@@ -4,7 +4,7 @@ ref = "readline-8.2"
 depth = 1
 
 [[build_configs]]
-pattern = "*linux*"
+system_name = "linux"
 build_system = "makefiles"
 
 # Note:

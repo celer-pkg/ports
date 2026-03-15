@@ -4,5 +4,6 @@
   build_tool = true
 
 [[build_configs]]
-  pattern = "*linux*"
+  system_name = "linux"
+  system_processor = "x86_64"
   build_system = "makefiles"

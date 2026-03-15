@@ -4,7 +4,7 @@ ref = "libXxf86vm-1.1.6"
 depth = 1
 
 [[build_configs]]
-pattern = "*linux*"
+system_name = "linux"
 build_system = "makefiles"
 dependencies = ["libx11@1.8.11", "libxext@1.3.6"]
 dev_dependencies = ["macros@1.20.2", "libtool@2.5.4", "pkgconf@2.4.3"]

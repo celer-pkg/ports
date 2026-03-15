@@ -4,7 +4,7 @@ ref = "3.8.2"
 build_tool = true
 
 [[build_configs]]
-pattern = "*linux*"
+system_name = "linux"
 build_system = "makefiles"
 dev_dependencies = ["m4@1.4.19"]
 

@@ -2,16 +2,19 @@
   ref = "11.8.87"
 
 [[build_configs]]
-  pattern = "aarch64-linux*"
+  system_name = "linux"
+  system_processor = "aarch64"
   build_system = "prebuilt"
   url = "https://developer.download.nvidia.cn/compute/cuda/redist/cuda_profiler_api/linux-aarch64/cuda_profiler_api-linux-aarch64-11.8.86-archive.tar.xz"
 
 [[build_configs]]
-  pattern = "x86_64-linux*"
+  system_name = "linux"
+  system_processor = "x86_64"
   build_system = "prebuilt"
   url = "https://developer.download.nvidia.cn/compute/cuda/redist/cuda_profiler_api/linux-x86_64/cuda_profiler_api-linux-x86_64-11.8.86-archive.tar.xz"
 
 [[build_configs]]
-  pattern = "x86_64-windows*"
+  system_name = "windows"
+  system_processor = "x86_64"
   build_system = "prebuilt"
   url = "https://developer.download.nvidia.cn/compute/cuda/redist/cuda_profiler_api/windows-x86_64/cuda_profiler_api-windows-x86_64-11.8.86-archive.zip"

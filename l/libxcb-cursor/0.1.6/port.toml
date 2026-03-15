@@ -4,7 +4,7 @@ ref = "xcb-util-cursor-0.1.6"
 depth = 1
 
 [[build_configs]]
-pattern = "*linux*"
+system_name = "linux"
 build_system = "makefiles"
 dependencies = ["libxcb-image@0.1.5", "xcb-util-renderutil@0.3.10"]
 dev_dependencies = ["pkgconf@2.4.3", "macros@1.20.2", "gperf@3.1"]

@@ -2,16 +2,19 @@
   ref = "10.9.0.58"
 
 [[build_configs]]
-  pattern = "aarch64-linux*"
+  system_name = "linux"
+  system_processor = "aarch64"
   build_system = "prebuilt"
   url = "https://developer.download.nvidia.cn/compute/cuda/redist/libcufft/linux-aarch64/libcufft-linux-aarch64-10.9.0.58-archive.tar.xz"
 
 [[build_configs]]
-  pattern = "x86_64-linux*"
+  system_name = "linux"
+  system_processor = "x86_64"
   build_system = "prebuilt"
   url = "https://developer.download.nvidia.cn/compute/cuda/redist/libcufft/linux-x86_64/libcufft-linux-x86_64-10.9.0.58-archive.tar.xz"
 
 [[build_configs]]
-  pattern = "x86_64-windows*"
+  system_name = "windows"
+  system_processor = "x86_64"
   build_system = "prebuilt"
   url = "https://developer.download.nvidia.cn/compute/cuda/redist/libcufft/windows-x86_64/libcufft-windows-x86_64-10.9.0.58-archive.zip"

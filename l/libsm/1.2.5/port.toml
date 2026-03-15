@@ -1,15 +1,15 @@
 [package]
-url = "https://gitlab.freedesktop.org/xorg/lib/libsm.git"
-ref = "libSM-1.2.5"
-depth = 1
+  url = "https://gitlab.freedesktop.org/xorg/lib/libsm.git"
+  ref = "libSM-1.2.5"
+  depth = 1
 
 [[build_configs]]
-pattern = "*linux*"
-build_system = "makefiles"
-dependencies = ["libice@1.1.2"]
-dev_dependencies = ["macros@1.20.2"]
-envs = ["NOCONFIGURE=1"]
-pre_configure = ["./autogen.sh"]
+  system_name = "linux"
+  build_system = "makefiles"
+  dependencies = ["libice@1.1.2"]
+  dev_dependencies = ["macros@1.20.2"]
+  envs = ["NOCONFIGURE=1"]
+  pre_configure = ["./autogen.sh"]
 
 # Note:
 # This library support linux only.

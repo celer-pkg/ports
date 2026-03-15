@@ -2,11 +2,13 @@
   ref = "2.25.7"
 
 [[build_configs]]
-  pattern = "aarch64-linux*"
+  system_name = "linux"
+  system_processor = "aarch64"
   build_system = "prebuilt"
   url = "https://developer.download.nvidia.cn/compute/cuda/redist/nvidia_fs/linux-aarch64/nvidia_fs-linux-aarch64-2.25.7-archive.tar.xz"
 
 [[build_configs]]
-  pattern = "x86_64-linux*"
+  system_name = "linux"
+  system_processor = "x86_64"
   build_system = "prebuilt"
   url = "https://developer.download.nvidia.cn/compute/cuda/redist/nvidia_fs/linux-x86_64/nvidia_fs-linux-x86_64-2.25.7-archive.tar.xz"

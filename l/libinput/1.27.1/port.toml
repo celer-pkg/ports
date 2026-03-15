@@ -1,12 +1,12 @@
 [package]
-url = "https://gitlab.freedesktop.org/libinput/libinput.git"
-ref = "1.27.1"
-depth = 1
+  url = "https://gitlab.freedesktop.org/libinput/libinput.git"
+  ref = "1.27.1"
+  depth = 1
 
 [[build_configs]]
-pattern = "*linux*"
-build_system = "meson"
-dev_dependencies = ["pkgconf@2.4.3"]
+  system_name = "linux"
+  build_system = "meson"
+  dev_dependencies = ["pkgconf@2.4.3"]
 
 # Note:
 # This library support linux only.

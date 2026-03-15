@@ -1,21 +1,21 @@
 [package]
-url = "https://gitlab.freedesktop.org/fontconfig/fontconfig.git"
-ref = "2.16.0"
-depth = 1
+  url = "https://gitlab.freedesktop.org/fontconfig/fontconfig.git"
+  ref = "2.16.0"
+  depth = 1
 
 [[build_configs]]
-pattern = "*linux*"
-build_system = "makefiles"
-envs = [
-    "CFLAGS=-isystem ${DEPS_DIR}/include/freetype2",
-    "CXXFLAGS=-isystem ${DEPS_DIR}/include/freetype2",
-    "NOCONFIGURE=1",
-]
-dependencies = ["freetype@2.13.3", "libexpat@2.7.1", "libpng@1.6.49"]
-dev_dependencies = [
-    "macros@1.20.2",
-    "libtool@2.5.4",
-    "gettext@0.25",
-    "gperf@3.1",
-]
-pre_configure = ["./autogen.sh"]
+  system_name = "linux"
+  build_system = "makefiles"
+  envs = [
+      "CFLAGS=-isystem ${DEPS_DIR}/include/freetype2",
+      "CXXFLAGS=-isystem ${DEPS_DIR}/include/freetype2",
+      "NOCONFIGURE=1",
+  ]
+  dependencies = ["freetype@2.13.3", "libexpat@2.7.1", "libpng@1.6.49"]
+  dev_dependencies = [
+      "macros@1.20.2",
+      "libtool@2.5.4",
+      "gettext@0.25",
+      "gperf@3.1",
+  ]
+  pre_configure = ["./autogen.sh"]

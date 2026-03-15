@@ -4,7 +4,7 @@ ref = "v2.41"
 depth = 1
 
 [[build_configs]]
-pattern = "*linux*"
+system_name = "linux"
 build_system = "makefiles"
 dependencies = ["sqlite3@3.49.0"]
 envs = ["NOCONFIGURE=1"]

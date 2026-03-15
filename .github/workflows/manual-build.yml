@@ -23,6 +23,7 @@ jobs:
     runs-on: ubuntu-22.04
     outputs:
       platforms: ${{ steps.find_platforms.outputs.platforms }}
+      port_path: ${{ steps.validate_port.outputs.port_path }}
       port_name: ${{ steps.parse_port.outputs.port_name }}
       port_version: ${{ steps.parse_port.outputs.port_version }}
       port_path: ${{ steps.parse_port.outputs.port_path }}
@@ -54,24 +55,34 @@ jobs:
           echo "Parsed port: ${PORT_NAME}@${PORT_VERSION}"
 
       - name: Validate port exists
+        id: validate_port
         run: |
           PORT_NAME="${{ steps.parse_port.outputs.port_name }}"
-          FIRST_LETTER="${PORT_NAME:0:1}"
-          PORT_TOML="${FIRST_LETTER}/${PORT_NAME}/${{ steps.parse_port.outputs.port_version }}/port.toml"
+          PORT_VERSION="${{ steps.parse_port.outputs.port_version }}"
+          # Letter directory is lowercase (ports use a/, b/, c/, ...)
+          FIRST_LETTER=$(echo "${PORT_NAME:0:1}" | tr '[:upper:]' '[:lower:]')
+          PORT_PATH="${FIRST_LETTER}/${PORT_NAME}/${PORT_VERSION}"
+          PORT_TOML="${PORT_PATH}/port.toml"
           
           if [ ! -f "$PORT_TOML" ]; then
-            echo "::error::Port TOML not found: $PORT_TOML"
+            echo "::error::Port TOML not found: $PORT_TOML (layout: letter/name/version/port.toml)"
             exit 1
           fi
           
+          echo "port_path=$PORT_PATH" >> $GITHUB_OUTPUT
           echo "✓ -- Port found: $PORT_TOML"
 
       - name: Find matching platforms
         id: find_platforms
         run: |
-          PORT_NAME="${{ steps.parse_port.outputs.port_name }}"
-          FIRST_LETTER="${PORT_NAME:0:1}"
-          PORT_TOML="${FIRST_LETTER}/${PORT_NAME}/${{ steps.parse_port.outputs.port_version }}/port.toml"
+          curl -L -o celer-amd64-linux.tar.gz https://github.com/celer-pkg/celer/releases/latest/download/celer-amd64-linux.tar.gz
+          tar -xvzf celer-amd64-linux.tar.gz -C .
+          mv celer-amd64-linux celer
+          chmod +x celer
+          ./celer init --url=https://github.com/celer-pkg/test-conf.git
+
+          PORT_PATH="${{ steps.validate_port.outputs.port_path }}"
+          PORT_TOML="${PORT_PATH}/port.toml"
           
           # List of available platforms to test
           AVAILABLE_PLATFORMS=(
@@ -96,7 +107,7 @@ jobs:
           
           # Check if any platforms matched
           if [ ${#MATCHING_PLATFORMS[@]} -eq 0 ]; then
-            echo "::error::No platforms match the port's build_configs patterns"
+            echo "::error::No platforms match the port's build_configs selectors (system_name/system_processor)"
             exit 1
           fi
           
@@ -111,7 +122,7 @@ jobs:
   build-port:
     name: Build ${{ needs.detect-platforms.outputs.port_name }}@${{ needs.detect-platforms.outputs.port_version }} (${{ matrix.platform }})
     needs: detect-platforms
-    runs-on: ${{ matrix.platform == 'x86_64-windows-msvc-enterprise-14' && 'windows-2022' || 'ubuntu-22.04' }}
+    runs-on: ${{ matrix.platform == 'x86_64-windows-msvc-enterprise-14' && 'windows-2025' || 'ubuntu-22.04' }}
     strategy:
       fail-fast: false
       matrix:
@@ -174,10 +185,10 @@ jobs:
           PORT_TOML="${{ needs.detect-platforms.outputs.port_path }}/port.toml"
           
           echo "========================================="
-          echo "Building $PORT_NAME on ${{ matrix.platform }}"
+          echo "Building $PORT_INSTALL on ${{ matrix.platform }}"
           echo "========================================="
           
-          CMD="./celer install \"$PORT_NAME\""
+          CMD="./celer install \"$PORT_INSTALL\""
           [ "${{ inputs.verbose }}" = "true" ] && CMD="$CMD --verbose"
           [ "${{ inputs.dev }}" = "true" ] && CMD="$CMD --dev"
           if [ "${{ inputs.dev }}" != "true" ] && grep -Eq '^[[:space:]]*build_tool[[:space:]]*=[[:space:]]*true' "$PORT_TOML"; then
@@ -194,10 +205,10 @@ jobs:
           PORT_TOML="${{ needs.detect-platforms.outputs.port_path }}/port.toml"
           
           echo "========================================="
-          echo "Building $PORT_NAME on ${{ matrix.platform }}"
+          echo "Building $PORT_INSTALL on ${{ matrix.platform }}"
           echo "========================================="
           
-          CMD="./celer.exe install \"$PORT_NAME\""
+          CMD="./celer.exe install \"$PORT_INSTALL\""
           [ "${{ inputs.verbose }}" = "true" ] && CMD="$CMD --verbose"
           [ "${{ inputs.dev }}" = "true" ] && CMD="$CMD --dev"
           if [ "${{ inputs.dev }}" != "true" ] && grep -Eq '^[[:space:]]*build_tool[[:space:]]*=[[:space:]]*true' "$PORT_TOML"; then

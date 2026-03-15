@@ -1,8 +1,8 @@
 [package]
-url = "https://ftp.gnu.org/gnu/libiconv/libiconv-1.18.tar.gz"
-ref = "1.18"
-depth = 1
+  url = "https://ftp.gnu.org/gnu/libiconv/libiconv-1.18.tar.gz"
+  ref = "1.18"
+  depth = 1
 
 [[build_configs]]
-pattern = "*linux*"
-build_system = "makefiles"
+  system_name = "linux"
+  build_system = "makefiles"

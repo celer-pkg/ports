@@ -72,6 +72,14 @@ jobs:
         with:
           arch: amd64
 
+      - name: Prepare platform metadata
+        shell: bash
+        run: |
+          curl -L -o celer-windows-amd64.exe.zip https://github.com/celer-pkg/celer/releases/latest/download/celer-windows-amd64.exe.zip
+          unzip celer-windows-amd64.exe.zip
+          mv celer-windows-amd64.exe celer.exe
+          ./celer.exe init --url=https://github.com/celer-pkg/test-conf.git
+
       - name: Check platform match
         id: check_match
         shell: bash
@@ -111,10 +119,13 @@ jobs:
         if: steps.check_match.outputs.should_build == 'true'
         shell: bash
         run: |
-          # Download latest celer release for Windows
-          curl -L -o celer-windows-amd64.exe.zip https://github.com/celer-pkg/celer/releases/latest/download/celer-windows-amd64.exe.zip
-          unzip celer-windows-amd64.exe.zip
-          mv celer-windows-amd64.exe celer.exe
+          if [ -f ./celer.exe ]; then
+            echo "celer.exe already prepared"
+          else
+            curl -L -o celer-windows-amd64.exe.zip https://github.com/celer-pkg/celer/releases/latest/download/celer-windows-amd64.exe.zip
+            unzip celer-windows-amd64.exe.zip
+            mv celer-windows-amd64.exe celer.exe
+          fi
 
       - name: Setup workspace
         if: steps.check_match.outputs.should_build == 'true'
