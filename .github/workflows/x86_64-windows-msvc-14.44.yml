@@ -140,12 +140,17 @@ jobs:
         if: steps.check_match.outputs.should_build == 'true'
         shell: bash
         run: |
+          PORT_TOML="${{ matrix.port }}/port.toml"
           PORT_NAME="${{ matrix.port }}"
           # Convert path format (g/glslang/1.4.335.0) to celer format (glslang@1.4.335.0)
           PORT_NAME=$(echo "$PORT_NAME" | cut -d'/' -f2-3 | tr '/' '@')
           
           # Install the port
-          ./celer.exe install "$PORT_NAME" --verbose
+          CMD="./celer.exe install \"$PORT_NAME\" --verbose"
+          if grep -Eq '^[[:space:]]*build_tool[[:space:]]*=[[:space:]]*true' "$PORT_TOML"; then
+            CMD="$CMD --dev"
+          fi
+          eval "$CMD"
 
   build-port:
     needs: detect-ports

@@ -25,6 +25,7 @@ jobs:
       platforms: ${{ steps.find_platforms.outputs.platforms }}
       port_name: ${{ steps.parse_port.outputs.port_name }}
       port_version: ${{ steps.parse_port.outputs.port_version }}
+      port_path: ${{ steps.parse_port.outputs.port_path }}
     
     steps:
       - name: Checkout ports repository
@@ -44,9 +45,11 @@ jobs:
           # Split by @
           PORT_NAME=$(echo "$PORT" | cut -d'@' -f1)
           PORT_VERSION=$(echo "$PORT" | cut -d'@' -f2)
+          PORT_PATH="${PORT_NAME:0:1}/${PORT_NAME}/${PORT_VERSION}"
           
           echo "port_name=$PORT_NAME" >> $GITHUB_OUTPUT
           echo "port_version=$PORT_VERSION" >> $GITHUB_OUTPUT
+          echo "port_path=$PORT_PATH" >> $GITHUB_OUTPUT
           
           echo "Parsed port: ${PORT_NAME}@${PORT_VERSION}"
 
@@ -168,6 +171,7 @@ jobs:
         shell: bash
         run: |
           PORT_NAME="${{ needs.detect-platforms.outputs.port_name }}@${{ needs.detect-platforms.outputs.port_version }}"
+          PORT_TOML="${{ needs.detect-platforms.outputs.port_path }}/port.toml"
           
           echo "========================================="
           echo "Building $PORT_NAME on ${{ matrix.platform }}"
@@ -176,6 +180,9 @@ jobs:
           CMD="./celer install \"$PORT_NAME\""
           [ "${{ inputs.verbose }}" = "true" ] && CMD="$CMD --verbose"
           [ "${{ inputs.dev }}" = "true" ] && CMD="$CMD --dev"
+          if [ "${{ inputs.dev }}" != "true" ] && grep -Eq '^[[:space:]]*build_tool[[:space:]]*=[[:space:]]*true' "$PORT_TOML"; then
+            CMD="$CMD --dev"
+          fi
           
           eval $CMD
 
@@ -184,6 +191,7 @@ jobs:
         shell: bash
         run: |
           PORT_NAME="${{ needs.detect-platforms.outputs.port_name }}@${{ needs.detect-platforms.outputs.port_version }}"
+          PORT_TOML="${{ needs.detect-platforms.outputs.port_path }}/port.toml"
           
           echo "========================================="
           echo "Building $PORT_NAME on ${{ matrix.platform }}"
@@ -192,6 +200,9 @@ jobs:
           CMD="./celer.exe install \"$PORT_NAME\""
           [ "${{ inputs.verbose }}" = "true" ] && CMD="$CMD --verbose"
           [ "${{ inputs.dev }}" = "true" ] && CMD="$CMD --dev"
+          if [ "${{ inputs.dev }}" != "true" ] && grep -Eq '^[[:space:]]*build_tool[[:space:]]*=[[:space:]]*true' "$PORT_TOML"; then
+            CMD="$CMD --dev"
+          fi
           
           eval $CMD
 
