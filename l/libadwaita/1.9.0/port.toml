@@ -5,5 +5,5 @@
 
 [[build_configs]]
   build_system = "meson"
-  dev_dependencies = ["pkgconf`@2.4.3"]
-  dependencies = ["glib`@2.72.1"]
+  dev_dependencies = ["pkgconf@2.4.3"]
+  dependencies = ["glib@2.72.1", "shared-mime-info@2.4"]
