@@ -1,9 +1,16 @@
 [package]
-  url = "https://gitlab.gnome.org/GNOME/libadwaita.git"
-  ref = "1.9.0"
-  depth = 1
+url = "https://gitlab.gnome.org/GNOME/libadwaita.git"
+ref = "1.9.0"
+depth = 1
 
 [[build_configs]]
-  build_system = "meson"
-  dev_dependencies = ["pkgconf@2.4.3"]
-  dependencies = ["glib@2.72.1", "shared-mime-info@2.4", "cairo@1.18.4"]
+build_system = "meson"
+dev_dependencies = ["pkgconf@2.4.3"]
+dependencies = [
+  "glib@2.72.1",
+  "shared-mime-info@2.4",
+  "cairo@1.18.4",
+  "wayland@1.24.0",
+  "xorgproto@2024.1",
+  "libxdamage@1.1.6"
+]

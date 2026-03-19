@@ -1,0 +1,6 @@
+[package]
+  url = "https://www.x.org/releases/individual/proto/xproto-7.0.31.tar.gz"
+  ref = "7.0.31"
+
+[[build_configs]]
+  build_system = "makefiles"

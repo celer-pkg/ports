@@ -13,7 +13,7 @@ dev_dependencies = [
   "pkgconf@2.4.3",
 ]
 dependencies = [
-  "fontconfig@2.16.0",
+  "fontconfig@2.17.1",
   "freetype@2.13.3",
   "libpng@1.6.49",
   "gperf@3.1",

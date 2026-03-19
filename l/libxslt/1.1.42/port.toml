@@ -6,7 +6,4 @@ depth = 1
 [[build_configs]]
 build_system = "cmake"
 dependencies = ["libxml2@2.13.5"]
-options = [
-  "-DLIBXSLT_WITH_PYTHON=OFF",
-  "-DLIBXSLT_WITH_CRYPTO=OFF",
-]
+options = ["-DLIBXSLT_WITH_PYTHON=OFF"]

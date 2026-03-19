@@ -5,3 +5,12 @@ depth = 1
 
 [[build_configs]]
 build_system = "meson"
+dependencies = [
+    "glib@2.84.1",
+    "shared-mime-info@2.4",
+    "cairo@1.18.4",
+    "wayland@1.24.0",
+    "libxrandr@1.5.4",
+    "wayland-protocols@1.44",
+    "libxdamage@1.1.6",
+]
