@@ -5,4 +5,4 @@ depth = 1
 
 [[build_configs]]
 build_system = "meson"
-dependencies = ["cpython@3.11.13"]
+dependencies_linux = ["cpython@3.11.13"]
