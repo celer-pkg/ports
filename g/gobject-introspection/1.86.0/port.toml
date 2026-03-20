@@ -1,8 +1,9 @@
 [package]
-url = "https://gitlab.gnome.org/GNOME/gobject-introspection.git"
-ref = "1.86.0"
-depth = 1
+  url = "https://gitlab.gnome.org/GNOME/gobject-introspection.git"
+  ref = "1.86.0"
+  depth = 1
 
 [[build_configs]]
-build_system = "meson"
-dependencies_linux = ["cpython@3.11.13"]
+  system_name = "linux"
+  build_system = "meson"
+  dependencies = ["cpython@3.11.13"]
