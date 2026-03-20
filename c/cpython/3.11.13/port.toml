@@ -1,11 +1,10 @@
 [package]
-url = "https://github.com/python/cpython.git"
-ref = "v3.11.13"
-depth = 1
+  url = "https://github.com/python/cpython.git"
+  ref = "v3.11.13"
+  depth = 1
 
 [[build_configs]]
-system_name = "linux"
-build_system = "makefiles"
+  build_system = "makefiles"
   build_tools = ["python3"]
   dev_dependencies = ["cpython@3.11.13"]
   options = [
