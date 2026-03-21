@@ -4,6 +4,7 @@
   depth = 1
 
 [[build_configs]]
+  system_name = "linux"
   build_system = "meson"
   patches = ["skip_native_appstream_for_cross_build.patch"]
   options = [
