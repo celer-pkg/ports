@@ -4,6 +4,7 @@
   depth = 1
 
 [[build_configs]]
+  system_name = "linux"
   build_system = "makefiles"
   pre_configure = ["autoreconf --force --install"]
   dependencies = ["libsass@3.6.6"]

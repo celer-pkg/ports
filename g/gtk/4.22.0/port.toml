@@ -4,6 +4,7 @@
   depth = 1
 
 [[build_configs]]
+  system_name = "linux"
   build_system = "meson"
   options = [
     "-Dvulkan=disabled",
@@ -13,7 +14,7 @@
     "-Dbuild-tests=false",
     "-Dbuild-testsuite=false",
   ]
-  dependencies = [
+  dependencies_linux = [
     "glib@2.84.1",
     "shared-mime-info@2.4",
     "cairo@1.18.4",

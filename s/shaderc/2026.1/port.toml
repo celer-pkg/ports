@@ -4,6 +4,7 @@
   depth = 1
 
 [[build_configs]]
+  system_name = "linux"
   build_system = "cmake"
   dependencies = ["spirv-tools@1.4.335.0", "spirv-headers@1.4.335.0", "glslang@1.4.335.0"]
   options = [
