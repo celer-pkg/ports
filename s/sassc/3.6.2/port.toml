@@ -1,0 +1,10 @@
+[package]
+  url = "https://github.com/sass/sassc.git"
+  ref = "3.6.2"
+  depth = 1
+
+[[build_configs]]
+  build_system = "makefiles"
+  pre_configure = ["autoreconf --force --install"]
+  dependencies = ["libsass@3.6.6"]
+  dev_dependencies = ["autoconf@2.72", "libtool@2.5.4"]

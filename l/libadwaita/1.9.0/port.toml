@@ -5,12 +5,17 @@ depth = 1
 
 [[build_configs]]
 build_system = "meson"
-dev_dependencies = ["pkgconf@2.4.3"]
+dev_dependencies = ["pkgconf@2.4.3", "shaderc@2026.1", "sassc@3.6.2"]
 dependencies = [
-  "glib@2.72.1",
+  "glib@2.84.1",
+  "gtk@4.22.0",
   "shared-mime-info@2.4",
   "cairo@1.18.4",
   "wayland@1.24.0",
   "xorgproto@2024.1",
-  "libxdamage@1.1.6"
+  "libxdamage@1.1.6",
+  "curl@8.11.1",
+  "libfyaml@0.9.6",
+  "zstd@1.5.7",
+  "appstream@1.1.2"
 ]
