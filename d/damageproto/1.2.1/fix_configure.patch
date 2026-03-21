@@ -1,10 +1,13 @@
 diff --git a/autogen.sh b/autogen.sh
-index 904cd67..a4fa9a2 100755
+index 904cd67..09d7bee 100755
 --- a/autogen.sh
 +++ b/autogen.sh
-@@ -8,5 +8,3 @@ cd $srcdir
+@@ -7,6 +7,4 @@ ORIGDIR=`pwd`
+ cd $srcdir
  
  autoreconf -v --install || exit 1
- cd $ORIGDIR || exit $?
+-cd $ORIGDIR || exit $?
 -
 -$srcdir/configure --enable-maintainer-mode "$@"
++cd $ORIGDIR || exit $?
+\ No newline at end of file
