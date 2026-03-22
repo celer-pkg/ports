@@ -6,4 +6,4 @@ depth = 1
 [[build_configs]]
 build_system = "meson"
 dependencies = ["libdrm@2.4.124", "libxfixes@6.0.1"]
-dev_dependencies = ["wayland@1.23.1"]
+dev_dependencies = ["wayland@1.24.0"]

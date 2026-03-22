@@ -1,0 +1,1 @@
+In Linux distributions, util-linux is typically included as part of the rootfs, so it should not be necessary to build it from source by default.
