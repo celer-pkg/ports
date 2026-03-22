@@ -1,11 +1,22 @@
 [package]
-url = "https://ftp.gnu.org/gnu/gettext/gettext-0.25.tar.xz"
-ref = "v0.25"
-build_tool = true
+  url = "https://ftp.gnu.org/gnu/gettext/gettext-0.25.tar.xz"
+  ref = "v0.25"
+  build_tool = true
 
 [[build_configs]]
-build_system = "makefiles"
-dependencies = ["gnulib@master"]
-dev_dependencies = ["automake@1.18"]
-envs = ["GNULIB_SRCDIR=${BUILDTREES_DIR}/gnulib@master/src"]
-options = ["--disable-java", "--disable-d", "--disable-csharp"]
+  build_system = "makefiles"
+  dependencies = ["gnulib@1.0"]
+  dev_dependencies = ["automake@1.18"]
+  envs = ["GNULIB_SRCDIR=${BUILDTREES_DIR}/gnulib@master/src"]
+  options = [
+    "--disable-java",
+    "--disable-d",
+    "--disable-csharp",
+    "--disable-nls",
+    "--disable-curses",
+    "--disable-openmp",
+    "--disable-acl",
+    "--disable-xattr",
+    "--without-emacs",
+    "--without-git",
+  ]

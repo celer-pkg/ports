@@ -1,6 +1,6 @@
 [package]
 url = "https://github.com/coreutils/gnulib.git"
-ref = "master"
+ref = "v1.0"
 depth = 1
 
 [[build_configs]]
