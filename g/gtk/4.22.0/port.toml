@@ -6,6 +6,7 @@
 [[build_configs]]
   build_system = "meson"
   options = [
+    "--wrap-mode=nofallback",
     "-Dvulkan=disabled",
     "-Dmedia-gstreamer=disabled",
     "-Dbuild-demos=false",

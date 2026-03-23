@@ -5,4 +5,5 @@ depth = 1
 
 [[build_configs]]
 build_system = "cmake"
-dependencies = ["freetype@2.13.3", "bzip2@1.0.8", "icu@75.1"]
+dependencies = ["freetype@2.13.3"]
+options = ["-DHB_HAVE_FREETYPE=ON"]
