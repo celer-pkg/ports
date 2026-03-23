@@ -1,0 +1,16 @@
+[package]
+  url = "https://github.com/google/shaderc.git"
+  ref = "v2026.1"
+  depth = 1
+
+[[build_configs]]
+  system_name = "linux"
+  build_system = "cmake"
+  dependencies = ["spirv-tools@1.4.335.0", "spirv-headers@1.4.335.0", "glslang@1.4.335.0"]
+  options = [
+    "-DSHADERC_SKIP_TESTS=ON",
+    "-DSHADERC_SKIP_EXAMPLES=ON",
+    "-DSHADERC_SPIRV_TOOLS_DIR=${BUILDTREES_DIR}/spirv-tools@1.4.335.0/src",
+    "-DSHADERC_SPIRV_HEADERS_DIR=${BUILDTREES_DIR}/spirv-headers@1.4.335.0/src",
+    "-DSHADERC_GLSLANG_DIR=${BUILDTREES_DIR}/glslang@1.4.335.0/src"
+  ]
