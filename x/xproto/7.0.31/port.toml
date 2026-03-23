@@ -4,3 +4,12 @@
 
 [[build_configs]]
   build_system = "makefiles"
+  system_name = "linux"
+  system_processor = "aarch64"
+  options = ["--host=arm-linux"]
+
+[[build_configs]]
+  build_system = "makefiles"
+  system_name = "linux"
+  system_processor = "x86_64"
+  options = ["--host=x86_64-linux"]
