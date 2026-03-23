@@ -1,10 +1,10 @@
 [package]
-url = "https://ftp.gnu.org/gnu/libtool/libtool-2.5.4.tar.xz"
-ref = "2.5.4"
-depth = 1
-build_tool = true
+  url = "https://ftp.gnu.org/gnu/libtool/libtool-2.5.4.tar.xz"
+  ref = "2.5.4"
+  depth = 1
+  build_tool = true
 
 [[build_configs]]
-pattern = "*linux*"
-build_system = "makefiles"
-dev_dependencies = ["m4@1.4.19"]
+  system_name = "linux"
+  build_system = "makefiles"
+  dev_dependencies = ["m4@1.4.19"]

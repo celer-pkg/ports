@@ -1,0 +1,28 @@
+[package]
+url = "https://github.com/ximion/appstream.git"
+ref = "v1.1.2"
+depth = 1
+
+[[build_configs]]
+system_name = "linux"
+build_system = "meson"
+patches = ["skip_native_appstream_for_cross_build.patch"]
+options = [
+  "-Dstemming=false",
+  "-Dgir=false",
+  "-Dbash-completion=false",
+  "-Dman=false",
+]
+dev_dependencies = [
+  "gperf@3.1",
+  "gettext@0.25",
+  "itstool@2.0.7",
+  "pkgconf@2.4.3",
+]
+dependencies = [
+  "curl@8.11.1",
+  "libxml2@2.13.5",
+  "libfyaml@0.9.6",
+  "zstd@1.5.7",
+  "libiconv@1.18",
+]

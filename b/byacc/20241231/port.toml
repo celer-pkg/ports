@@ -4,7 +4,7 @@
   build_tool = true
 
 [[build_configs]]
-  pattern = "*linux*"
+  system_name = "linux"
   build_system = "makefiles"
   build_shared = "_"
   patches = ["fix_build.patch"]

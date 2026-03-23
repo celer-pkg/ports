@@ -3,7 +3,7 @@
 
 [[build_configs]]
   system_name = "linux"
-  system_processor = "x86_64"
+  system_processor = "aarch64"
   build_system = "prebuilt"
   url = "https://developer.download.nvidia.cn/compute/cuda/redist/cuda_cupti/linux-aarch64/cuda_cupti-linux-aarch64-11.8.87-archive.tar.xz"
 

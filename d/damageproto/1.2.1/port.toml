@@ -1,0 +1,11 @@
+[package]
+  url = "https://gitlab.freedesktop.org/xorg/proto/damageproto.git"
+  ref = "damageproto-1.2.1"
+  depth = 1
+
+[[build_configs]]
+  system_name = "linux"
+  build_system = "makefiles"
+  patches = ["fix_configure.patch"]
+  dev_dependencies = ["macros@1.20.2"]
+  pre_configure = ["./autogen.sh"]
