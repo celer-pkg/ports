@@ -4,6 +4,7 @@
   depth = 1
 
 [[build_configs]]
+  system_name = "linux"
   build_system = "makefiles"
   pre_configure = ["autoreconf --force --install"]
   dev_dependencies = ["autoconf@2.72", "automake@1.18", "libtool@2.5.4"]
