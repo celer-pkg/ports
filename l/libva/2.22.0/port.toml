@@ -4,6 +4,7 @@ ref = "2.22.0"
 depth = 1
 
 [[build_configs]]
+system_name = "linux"
 build_system = "meson"
 dependencies = ["libdrm@2.4.124", "libxfixes@6.0.1"]
 dev_dependencies = ["wayland@1.24.0"]
