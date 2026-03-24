@@ -5,6 +5,7 @@
 
 [[build_configs]]
   build_system = "meson"
+  system_name = "linux"
   options = [
     "--wrap-mode=nofallback",
     "-Dvulkan=disabled",

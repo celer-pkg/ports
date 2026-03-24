@@ -5,6 +5,7 @@
 
 [[build_configs]]
   build_system = "cmake"
+  system_name = "linux"
   dependencies = ["freetype@2.13.3", "glib@2.84.1"]
   options = ["-DHB_HAVE_FREETYPE=ON", "-DHB_HAVE_GLIB=ON"]
 

@@ -5,5 +5,6 @@
 
 [[build_configs]]
   build_system = "meson"
+  system_name = "linux"
   dependencies = ["shared-mime-info@2.4"]
   options = ["--wrap-mode=nofallback", "-Dglycin=disabled", "-Dman=false"]

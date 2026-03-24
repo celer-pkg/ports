@@ -5,6 +5,7 @@
 
 [[build_configs]]
   build_system = "meson"
+  system_name = "linux"
   dev_dependencies = ["pkgconf@2.4.3"]
   dependencies = [
     "cairo@1.18.4",
