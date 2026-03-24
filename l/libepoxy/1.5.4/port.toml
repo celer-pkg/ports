@@ -8,6 +8,6 @@
   options = [
     "-Dtests=False",
     "-Ddocs=False",
-    "-Degl=no",
-    "-Dglx=no"
+    "-Degl=yes",
+    "-Dglx=yes"
   ]

@@ -1,9 +1,11 @@
 [package]
-url = "https://github.com/harfbuzz/harfbuzz.git"
-ref = "11.2.1"
-depth = 1
+  url = "https://github.com/harfbuzz/harfbuzz.git"
+  ref = "11.2.1"
+  depth = 1
 
 [[build_configs]]
-build_system = "cmake"
-dependencies = ["freetype@2.13.3"]
-options = ["-DHB_HAVE_FREETYPE=ON"]
+  build_system = "cmake"
+  dependencies = ["freetype@2.13.3", "glib@2.84.1"]
+  options = ["-DHB_HAVE_FREETYPE=ON", "-DHB_HAVE_GLIB=ON"]
+
+# freetype and glib are required for generating hb-glib.h

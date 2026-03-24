@@ -1,0 +1,8 @@
+[package]
+  url = "https://github.com/libjxl/libjxl.git"
+  ref = "v0.11.2"
+  depth = 1
+
+[[build_configs]]
+  build_system = "cmake"
+  options = ["-DBUILD_TESTING=OFF"]
