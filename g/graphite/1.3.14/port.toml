@@ -5,4 +5,5 @@
 
 [[build_configs]]
   build_system = "cmake"
+  system_name = "linux"
   dependencies = ["libpng@1.6.49"]

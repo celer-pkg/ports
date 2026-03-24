@@ -1,0 +1,13 @@
+[package]
+  url = "https://github.com/strukturag/libheif.git"
+  ref = "v1.21.2"
+  depth = 1
+
+[[build_configs]]
+  build_system = "cmake"
+  options = [
+    "-DWITH_GDK_PIXBUF=OFF",
+    "-DWITH_EXAMPLE_HEIF_VIEW=OFF",
+    "-DBUILD_DOCUMENTATION=OFF",
+    "-DBUILD_TESTING=OFF",
+  ]

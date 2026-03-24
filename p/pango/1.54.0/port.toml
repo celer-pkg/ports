@@ -1,0 +1,23 @@
+[package]
+  url = "https://gitlab.gnome.org/GNOME/pango.git"
+  ref = "1.54.0"
+  depth = 1
+
+[[build_configs]]
+  build_system = "meson"
+  system_name = "linux"
+  dev_dependencies = ["pkgconf@2.4.3"]
+  dependencies = [
+    "cairo@1.18.4",
+    "harfbuzz@11.2.1",
+    "fontconfig@2.17.1",
+    "freetype@2.13.3",
+  ]
+  options = [
+    "-Ddocumentation=false",
+    "-Dbuild-testsuite=false",
+    "-Dbuild-examples=false",
+    "-Dintrospection=disabled",
+    "-Dlibthai=disabled",
+    "-Dxft=disabled",
+  ]
