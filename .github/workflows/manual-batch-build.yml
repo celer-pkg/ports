@@ -8,6 +8,10 @@ on:
         required: false
         type: string
         default: 'a'
+  pull_request:
+    branches:
+      - master
+      - main
 
 jobs:
   parse-groups:
