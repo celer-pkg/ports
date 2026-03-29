@@ -125,6 +125,14 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
+
+          # Required by gyp/meson and some ports.
+          sudo apt update
+          sudo apt install -y python3-pip
+
+          # Required by itstool@2.0.7
+          sudo apt install -y python3-libxml2
+
           ./celer init --url=https://github.com/celer-pkg/test-conf.git
           ./celer configure --platform=${{ matrix.platform }}
           ./celer configure --project=project_test_install
