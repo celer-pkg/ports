@@ -5,4 +5,5 @@ depth = 1
 
 [[build_configs]]
 build_system = "cmake"
+cxx_standard = "c++17"
 options = ["-DABSL_PROPAGATE_CXX_STD=ON"]

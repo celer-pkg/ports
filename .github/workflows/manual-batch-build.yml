@@ -62,6 +62,7 @@ jobs:
               exit 1
             fi
 
+            # Make sure each group is only added once, even if duplicated in input.
             if [ -z "${SEEN[$token]+x}" ]; then
               VALID_GROUPS+=("$token")
               SEEN[$token]=1
