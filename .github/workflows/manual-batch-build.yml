@@ -35,6 +35,7 @@ jobs:
           else
             RAW_GROUPS="${{ inputs.groups }}"
           fi
+          
           NORMALIZED_GROUPS=$(printf '%s' "$RAW_GROUPS" | tr '[:upper:]' '[:lower:]' | tr -d '[:space:]')
 
           if [ -z "$NORMALIZED_GROUPS" ]; then
@@ -147,6 +148,7 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
+          LOGS_DIR="build-logs"
 
           GROUP="${{ matrix.group }}"
           PLATFORM="${{ matrix.platform }}"
@@ -155,6 +157,7 @@ jobs:
           if [ "$PLATFORM" = "x86_64-windows-msvc-enterprise-14" ]; then
             CELER_BIN="./celer.exe"
           fi
+          mkdir -p "$LOGS_DIR"
 
           chmod +x .github/scripts/check-platform-match.sh
 
@@ -175,6 +178,7 @@ jobs:
             PORT_VERSION=$(basename "$PORT_DIR")
             PORT_NAME=$(basename "$(dirname "$PORT_DIR")")
             PORT_REF="${PORT_NAME}@${PORT_VERSION}"
+            PORT_LOG="$LOGS_DIR/${PORT_NAME}_${PORT_VERSION}_${PLATFORM//\//_}.log"
 
             echo "========================================="
             echo "Checking $PORT_REF for $PLATFORM"
@@ -190,12 +194,14 @@ jobs:
               if [ "$MATCH_STATUS" -eq 1 ]; then
                 echo "Skipping $PORT_REF on $PLATFORM: platform does not match selectors"
                 SKIPPED_COUNT=$((SKIPPED_COUNT + 1))
+                echo "SKIPPED" >> "$PORT_LOG"
                 continue
               fi
 
               echo "::error::Selector check failed for $PORT_REF on $PLATFORM"
               FAILED_COUNT=$((FAILED_COUNT + 1))
               FAILED_PORTS+=("$PORT_REF (selector check error)")
+              echo "Selector check error" >> "$PORT_LOG"
               continue
             fi
 
@@ -208,13 +214,20 @@ jobs:
             printf '  %q' "${CMD[@]}"
             echo
 
-            if "${CMD[@]}"; then
+            echo "[$(date '+%Y-%m-%d %H:%M:%S')] Building $PORT_REF on $PLATFORM" | tee -a "$PORT_LOG"
+            
+            if "${CMD[@]}" >> "$PORT_LOG" 2>&1; then
               BUILT_COUNT=$((BUILT_COUNT + 1))
               echo "✓ Build successful: $PORT_REF on $PLATFORM"
+              echo "[SUCCESS]" >> "$PORT_LOG"
             else
               FAILED_COUNT=$((FAILED_COUNT + 1))
               FAILED_PORTS+=("$PORT_REF")
               echo "::error::Build failed for $PORT_REF on $PLATFORM"
+              echo "[FAILED]" >> "$PORT_LOG"
+              echo "---ERROR LOG for $PORT_REF---"
+              tail -50 "$PORT_LOG"
+              echo "---END LOG---"
             fi
           done
 
@@ -224,6 +237,23 @@ jobs:
             echo "- Group: $GROUP"
             echo "- Platform: $PLATFORM"
             echo "- Total ports discovered: ${#PORT_TOMLS[@]}"
+            echo ""
+            echo "| Port | Status |"
+            echo "|------|--------|"
+            for log_file in "$LOGS_DIR"/*_${PLATFORM//\//_}.log; do
+              if [ -f "$log_file" ]; then
+                filename=$(basename "$log_file")
+                port_name=$(echo "$filename" | sed 's/_[^_]*_[^_]*_[^_]*\.log$//')
+                if grep -q "\[SUCCESS\]" "$log_file"; then
+                  echo "| $port_name | ✅ SUCCESS |"
+                elif grep -q "\[FAILED\]" "$log_file"; then
+                  echo "| $port_name | ❌ FAILED |"
+                else
+                  echo "| $port_name | ⏭️ SKIPPED |"
+                fi
+              fi
+            done
+            echo ""
             echo "- Matched this platform: $MATCHED_COUNT"
             echo "- Built successfully: $BUILT_COUNT"
             echo "- Skipped (platform mismatch): $SKIPPED_COUNT"
@@ -245,3 +275,12 @@ jobs:
           echo "========================================="
           echo "✓ Batch build successful for group '$GROUP' on '$PLATFORM'"
           echo "========================================="
+
+      - name: Upload build logs
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: build-logs-${{ matrix.group }}-${{ matrix.platform }}
+          path: build-logs/
+          retention-days: 30
+          if-no-files-found: ignore
