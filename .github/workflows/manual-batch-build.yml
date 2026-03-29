@@ -5,8 +5,9 @@ on:
     inputs:
       groups:
         description: 'Top-level groups, comma-separated (e.g., a,b,c,d)'
-        required: true
+        required: false
         type: string
+        default: 'a'
 
 jobs:
   parse-groups:
