@@ -1,0 +1,284 @@
+name: Manual Batch Port Build
+
+on:
+  workflow_dispatch:
+    inputs:
+      groups:
+        description: 'Top-level groups, comma-separated (e.g., a,b,c,d)'
+        required: true
+        type: string
+
+jobs:
+  parse-groups:
+    runs-on: ubuntu-22.04
+    outputs:
+      groups: ${{ steps.parse.outputs.groups }}
+
+    steps:
+      - name: Checkout ports repository
+        uses: actions/checkout@v4
+
+      - name: Parse and validate groups
+        id: parse
+        shell: bash
+        run: |
+          set -euo pipefail
+
+          RAW_GROUPS="${{ inputs.groups }}"
+          NORMALIZED_GROUPS=$(printf '%s' "$RAW_GROUPS" | tr '[:upper:]' '[:lower:]' | tr -d '[:space:]')
+
+          if [ -z "$NORMALIZED_GROUPS" ]; then
+            echo "::error::No groups were provided. Example: a,b,c,d"
+            exit 1
+          fi
+
+          IFS=',' read -r -a TOKENS <<< "$NORMALIZED_GROUPS"
+          declare -A SEEN=()
+          VALID_GROUPS=()
+
+          for token in "${TOKENS[@]}"; do
+            if [ -z "$token" ]; then
+              continue
+            fi
+
+            if [[ ! "$token" =~ ^[a-z]$ ]]; then
+              echo "::error::Invalid group '$token'. Only single letters such as a,b,c,d are supported."
+              exit 1
+            fi
+
+            if [ ! -d "$token" ]; then
+              echo "::error::Group directory does not exist: $token"
+              exit 1
+            fi
+
+            # Make sure each group is only added once, even if duplicated in input.
+            if [ -z "${SEEN[$token]+x}" ]; then
+              VALID_GROUPS+=("$token")
+              SEEN[$token]=1
+            fi
+          done
+
+          if [ ${#VALID_GROUPS[@]} -eq 0 ]; then
+            echo "::error::No valid groups were found after parsing input: $RAW_GROUPS"
+            exit 1
+          fi
+
+          GROUPS_JSON=$(printf '%s\n' "${VALID_GROUPS[@]}" | jq -R . | jq -s -c .)
+          echo "groups=$GROUPS_JSON" >> "$GITHUB_OUTPUT"
+
+          echo "Selected groups: ${VALID_GROUPS[*]}"
+
+  build-groups:
+    name: Build group ${{ matrix.group }} (${{ matrix.platform }})
+    needs: parse-groups
+    runs-on: ${{ matrix.platform == 'x86_64-windows-msvc-enterprise-14' && 'windows-2025' || 'ubuntu-22.04' }}
+    strategy:
+      fail-fast: false
+      matrix:
+        group: ${{ fromJson(needs.parse-groups.outputs.groups) }}
+        platform:
+          - x86_64-linux-ubuntu-22.04-gcc-11.5.0
+          - aarch64-linux-ubuntu-22.04-gcc-11.5.0
+          - x86_64-windows-msvc-enterprise-14
+
+    steps:
+      - name: Checkout ports repository
+        uses: actions/checkout@v4
+
+      - name: Setup MSVC
+        if: matrix.platform == 'x86_64-windows-msvc-enterprise-14'
+        uses: ilammy/msvc-dev-cmd@v1
+        with:
+          arch: amd64
+
+      - name: Download artifact (Linux)
+        if: matrix.platform != 'x86_64-windows-msvc-enterprise-14'
+        shell: bash
+        run: |
+          set -euo pipefail
+          curl -L -o celer-amd64-linux.tar.gz https://github.com/celer-pkg/celer/releases/latest/download/celer-amd64-linux.tar.gz
+          tar -xvzf celer-amd64-linux.tar.gz -C .
+          mv celer-amd64-linux celer
+          chmod +x celer
+
+      - name: Download artifact (Windows)
+        if: matrix.platform == 'x86_64-windows-msvc-enterprise-14'
+        shell: bash
+        run: |
+          set -euo pipefail
+          curl -L -o celer-windows-amd64.exe.zip https://github.com/celer-pkg/celer/releases/latest/download/celer-windows-amd64.exe.zip
+          unzip celer-windows-amd64.exe.zip
+          mv celer-windows-amd64.exe celer.exe
+
+      - name: Setup workspace (Linux)
+        if: matrix.platform != 'x86_64-windows-msvc-enterprise-14'
+        shell: bash
+        run: |
+          set -euo pipefail
+
+          # Required by gyp/meson and some ports.
+          sudo apt update
+          sudo apt install -y python3-pip
+
+          # Required by itstool@2.0.7
+          sudo apt install -y python3-libxml2
+
+          ./celer init --url=https://github.com/celer-pkg/test-conf.git
+          ./celer configure --platform=${{ matrix.platform }}
+          ./celer configure --project=project_test_install
+
+          rm -rf ports
+          ln -s "${{ github.workspace }}" ports
+
+      - name: Setup workspace (Windows)
+        if: matrix.platform == 'x86_64-windows-msvc-enterprise-14'
+        shell: bash
+        run: |
+          set -euo pipefail
+          ./celer.exe init --url=https://github.com/celer-pkg/test-conf.git
+          ./celer.exe configure --platform=${{ matrix.platform }}
+          ./celer.exe configure --project=project_test_install
+
+          rm -rf ports
+          cmd //c "mklink /J ports ${{ github.workspace }}"
+
+      - name: Build selected group
+        shell: bash
+        run: |
+          set -euo pipefail
+          LOGS_DIR="build-logs"
+
+          GROUP="${{ matrix.group }}"
+          PLATFORM="${{ matrix.platform }}"
+          MATCH_LOG=".check-platform-match.log"
+          CELER_BIN="./celer"
+          if [ "$PLATFORM" = "x86_64-windows-msvc-enterprise-14" ]; then
+            CELER_BIN="./celer.exe"
+          fi
+          mkdir -p "$LOGS_DIR"
+
+          chmod +x .github/scripts/check-platform-match.sh
+
+          mapfile -t PORT_TOMLS < <(find "$GROUP" -type f -name port.toml | sort)
+          if [ ${#PORT_TOMLS[@]} -eq 0 ]; then
+            echo "::error::No port.toml files found under group '$GROUP'"
+            exit 1
+          fi
+
+          BUILT_COUNT=0
+          SKIPPED_COUNT=0
+          FAILED_COUNT=0
+          MATCHED_COUNT=0
+          FAILED_PORTS=()
+
+          for PORT_TOML in "${PORT_TOMLS[@]}"; do
+            PORT_DIR=$(dirname "$PORT_TOML")
+            PORT_VERSION=$(basename "$PORT_DIR")
+            PORT_NAME=$(basename "$(dirname "$PORT_DIR")")
+            PORT_REF="${PORT_NAME}@${PORT_VERSION}"
+            PORT_LOG="$LOGS_DIR/${PORT_NAME}_${PORT_VERSION}_${PLATFORM//\//_}.log"
+
+            echo "========================================="
+            echo "Checking $PORT_REF for $PLATFORM"
+            echo "========================================="
+
+            if .github/scripts/check-platform-match.sh "$PORT_TOML" "$PLATFORM" >"$MATCH_LOG" 2>&1; then
+              MATCHED_COUNT=$((MATCHED_COUNT + 1))
+              cat "$MATCH_LOG"
+            else
+              MATCH_STATUS=$?
+              cat "$MATCH_LOG"
+
+              if [ "$MATCH_STATUS" -eq 1 ]; then
+                echo "Skipping $PORT_REF on $PLATFORM: platform does not match selectors"
+                SKIPPED_COUNT=$((SKIPPED_COUNT + 1))
+                echo "SKIPPED" >> "$PORT_LOG"
+                continue
+              fi
+
+              echo "::error::Selector check failed for $PORT_REF on $PLATFORM"
+              FAILED_COUNT=$((FAILED_COUNT + 1))
+              FAILED_PORTS+=("$PORT_REF (selector check error)")
+              echo "Selector check error" >> "$PORT_LOG"
+              continue
+            fi
+
+            CMD=("$CELER_BIN" "install" "$PORT_REF")
+            if grep -Eq '^[[:space:]]*build_tool[[:space:]]*=[[:space:]]*true' "$PORT_TOML"; then
+              CMD+=("--dev")
+            fi
+
+            echo "Running build command:"
+            printf '  %q' "${CMD[@]}"
+            echo
+
+            echo "[$(date '+%Y-%m-%d %H:%M:%S')] Building $PORT_REF on $PLATFORM" | tee -a "$PORT_LOG"
+            
+            if "${CMD[@]}" >> "$PORT_LOG" 2>&1; then
+              BUILT_COUNT=$((BUILT_COUNT + 1))
+              echo "✓ Build successful: $PORT_REF on $PLATFORM"
+              echo "[SUCCESS]" >> "$PORT_LOG"
+            else
+              FAILED_COUNT=$((FAILED_COUNT + 1))
+              FAILED_PORTS+=("$PORT_REF")
+              echo "::error::Build failed for $PORT_REF on $PLATFORM"
+              echo "[FAILED]" >> "$PORT_LOG"
+              echo "---ERROR LOG for $PORT_REF---"
+              tail -50 "$PORT_LOG"
+              echo "---END LOG---"
+            fi
+          done
+
+          {
+            echo "### Batch build summary"
+            echo ""
+            echo "- Group: $GROUP"
+            echo "- Platform: $PLATFORM"
+            echo "- Total ports discovered: ${#PORT_TOMLS[@]}"
+            echo ""
+            echo "| Port | Status |"
+            echo "|------|--------|"
+            for log_file in "$LOGS_DIR"/*_${PLATFORM//\//_}.log; do
+              if [ -f "$log_file" ]; then
+                filename=$(basename "$log_file")
+                port_name=$(echo "$filename" | sed 's/_[^_]*_[^_]*_[^_]*\.log$//')
+                if grep -q "\[SUCCESS\]" "$log_file"; then
+                  echo "| $port_name | ✅ SUCCESS |"
+                elif grep -q "\[FAILED\]" "$log_file"; then
+                  echo "| $port_name | ❌ FAILED |"
+                else
+                  echo "| $port_name | ⏭️ SKIPPED |"
+                fi
+              fi
+            done
+            echo ""
+            echo "- Matched this platform: $MATCHED_COUNT"
+            echo "- Built successfully: $BUILT_COUNT"
+            echo "- Skipped (platform mismatch): $SKIPPED_COUNT"
+            echo "- Failed: $FAILED_COUNT"
+            if [ ${#FAILED_PORTS[@]} -gt 0 ]; then
+              echo ""
+              echo "Failed ports:"
+              for failed_port in "${FAILED_PORTS[@]}"; do
+                echo "- $failed_port"
+              done
+            fi
+          } >> "$GITHUB_STEP_SUMMARY"
+
+          if [ "$FAILED_COUNT" -gt 0 ]; then
+            echo "::error::Batch build finished with failures for group '$GROUP' on '$PLATFORM'"
+            exit 1
+          fi
+
+          echo "========================================="
+          echo "✓ Batch build successful for group '$GROUP' on '$PLATFORM'"
+          echo "========================================="
+
+      - name: Upload build logs
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: build-logs-${{ matrix.group }}-${{ matrix.platform }}
+          path: build-logs/
+          retention-days: 10
+          if-no-files-found: ignore
