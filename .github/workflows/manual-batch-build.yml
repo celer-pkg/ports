@@ -176,7 +176,7 @@ jobs:
             PORT_VERSION=$(basename "$PORT_DIR")
             PORT_NAME=$(basename "$(dirname "$PORT_DIR")")
             PORT_REF="${PORT_NAME}@${PORT_VERSION}"
-            PORT_LOG="$LOGS_DIR/${PORT_NAME}_${PORT_VERSION}_${PLATFORM//\//_}.log"
+            PORT_LOG="$LOGS_DIR/${PORT_NAME}@${PORT_VERSION}_${PLATFORM//\//_}.log"
 
             echo "========================================="
             echo "Checking $PORT_REF for $PLATFORM"
@@ -238,16 +238,16 @@ jobs:
             echo ""
             echo "| Port | Status |"
             echo "|------|--------|"
-            for log_file in "$LOGS_DIR"/*_${PLATFORM//\//_}.log; do
+            for log_file in "$LOGS_DIR"/*@*_${PLATFORM//\//_}.log; do
               if [ -f "$log_file" ]; then
-                filename=$(basename "$log_file")
-                port_name=$(echo "$filename" | sed 's/_[^_]*_[^_]*_[^_]*\.log$//')
+                filename=$(basename "$log_file" .log)
+                port_name_version="${filename%_*}"
                 if grep -q "\[SUCCESS\]" "$log_file"; then
-                  echo "| $port_name | ✅ SUCCESS |"
+                  echo "| $port_name_version | ✅ SUCCESS |"
                 elif grep -q "\[FAILED\]" "$log_file"; then
-                  echo "| $port_name | ❌ FAILED |"
+                  echo "| $port_name_version | ❌ FAILED |"
                 else
-                  echo "| $port_name | ⏭️ SKIPPED |"
+                  echo "| $port_name_version | ⏭️ SKIPPED |"
                 fi
               fi
             done
