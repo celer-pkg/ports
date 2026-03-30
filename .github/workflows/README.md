@@ -2,11 +2,6 @@
 
 This directory contains CI workflows to automatically validate new ports when they are submitted.
 
-## 📋 Current Workflows
-
-- **aarch64-linux-ubuntu-22.04-gcc-11.5.0.yml** - Validates ports for ARM64 Linux Ubuntu 22.04 with GCC 11.5.0
-- **x86_64-windows-msvc-14.yml** - Validates ports for x86_64 Windows with MSVC 14
-
 ## 🚀 How It Works
 
 When a new port is submitted or modified:

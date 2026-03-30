@@ -5,4 +5,3 @@
 
 [[build_configs]]
   build_system = "cmake"
-  options = ["-DCMAKE_CXX_FLAGS='-Wno-pedantic'"]
