@@ -29,7 +29,7 @@ jobs:
     
     steps:
       - name: Checkout ports repository
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
 
       - name: Parse port name and version
         id: parse_port
@@ -127,7 +127,7 @@ jobs:
     
     steps:
       - name: Checkout ports repository
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
 
       - name: Setup MSVC
         if: matrix.platform == 'x86_64-windows-msvc-enterprise-14'
