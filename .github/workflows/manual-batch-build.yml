@@ -16,7 +16,7 @@ jobs:
 
     steps:
       - name: Checkout ports repository
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
 
       - name: Parse and validate groups
         id: parse
@@ -83,7 +83,7 @@ jobs:
 
     steps:
       - name: Checkout ports repository
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
 
       - name: Setup MSVC
         if: matrix.platform == 'x86_64-windows-msvc-enterprise-14'
@@ -276,7 +276,7 @@ jobs:
 
       - name: Upload build logs
         if: always()
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v5
         with:
           name: build-logs-${{ matrix.group }}-${{ matrix.platform }}
           path: build-logs/
