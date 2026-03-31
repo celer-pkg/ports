@@ -5,4 +5,4 @@
 
 [[build_configs]]
   build_system = "cmake"
-  patches = ["fix-msvc-chrono.patch"]
+  patches = ["fix-msvc-chrono.patch", "fix-sigstksz.patch"]
