@@ -1,3 +1,5 @@
+diff --git a/unittests/catch.hpp b/unittests/catch.hpp
+index ecd8907..873fe3f 100644
 --- a/unittests/catch.hpp
 +++ b/unittests/catch.hpp
 @@ -7438,7 +7438,7 @@ namespace Catch {
@@ -8,3 +10,4 @@
 +    char FatalConditionHandler::altStackMem[32768] = {};
  
  } // namespace Catch
+ 
