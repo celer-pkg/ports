@@ -5,3 +5,4 @@ depth = 1
 
 [[build_configs]]
 build_system = "cmake"
+build_tools = ["python3", "msys2:flex"]
