@@ -5,6 +5,8 @@
 
 [[build_configs]]
   build_system = "cmake"
+  dev_dependencies = ["pkgconf@2.4.3"]
+  dependencies = ["lz4@1.9.4"]
   options = [
     "-DBUILD_DOC=OFF",
     "-DBUILD_EXAMPLES=OFF",
