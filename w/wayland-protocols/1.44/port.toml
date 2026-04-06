@@ -1,14 +1,13 @@
 [package]
-url = "https://gitlab.freedesktop.org/wayland/wayland-protocols.git"
-ref = "1.44"
-depth = 1
+  url = "https://gitlab.freedesktop.org/wayland/wayland-protocols.git"
+  ref = "1.44"
+  depth = 1
 
 [[build_configs]]
-system_name = "linux"
-build_system = "meson"
-patches = [ "fix_cannot_find_wayland_scanner.patch"]
-dependencies = ["wayland@1.24.0"]
-dev_dependencies = ["pkgconf@2.4.3", "wayland@1.24.0"]
+  system_name = "linux"
+  build_system = "meson"
+  dependencies = ["wayland@1.24.0"]
+  dev_dependencies = ["pkgconf@2.4.3", "wayland@1.24.0"]
 
 # Note:
 # This library support linux only.

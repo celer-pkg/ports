@@ -1,13 +1,24 @@
 [package]
-url = "https://gitlab.freedesktop.org/gstreamer/gstreamer.git"
-ref = "1.26.0"
-depth = 1
+  url = "https://gitlab.freedesktop.org/gstreamer/gstreamer.git"
+  ref = "1.26.0"
+  depth = 1
 
 [[build_configs]]
-build_system = "meson"
-dependencies = ["boost@1.87.0", "eigen@3.4.0"]
-options_windows = ["--auto-features=disabled"]
-
-# Note:
-# Currently I don't known how many features can turn on in windows os,
-# so I use "--auto-features=disabled" instead.
+  build_system = "meson"
+  dependencies = [
+    "boost@1.87.0",
+    "eigen@3.4.0",
+    "abseil-cpp@20250814.0",
+    "cairo@1.18.4",
+    "libdv@meson",
+    "fdk-aac@2.0.3",
+    "ffmpeg@5.1.6",
+    "flac@1.5.0",
+    "fontconfig@2.17.1",
+    "freetype@2.13.3",
+    "fribidi@1.0.16",
+    "glib@2.84.1",
+    "gl-headers@master",
+    "googletest@1.15.2",
+  ]
+  options = ["--wrap-mode=nofallback"]

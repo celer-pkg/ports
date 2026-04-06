@@ -1,0 +1,8 @@
+[package]
+  url = "https://github.com/libproxy/libproxy.git"
+  ref = "0.5.12"
+  depth = 1
+
+[[build_configs]]
+  build_system = "meson"
+  dependencies = ["curl@8.11.1"]

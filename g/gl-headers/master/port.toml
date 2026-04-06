@@ -1,0 +1,7 @@
+[package]
+  url = "https://gitlab.freedesktop.org/gstreamer/meson-ports/gl-headers.git"
+  ref = "master"
+  depth = 1
+
+[[build_configs]]
+  build_system = "meson"

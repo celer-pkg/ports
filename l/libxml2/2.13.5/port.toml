@@ -1,17 +1,19 @@
 [package]
-url = "https://gitlab.gnome.org/GNOME/libxml2.git"
-ref = "v2.13.5"
-depth = 1
+  url = "https://gitlab.gnome.org/GNOME/libxml2.git"
+  ref = "v2.13.5"
+  depth = 1
 
 [[build_configs]]
-build_system = "cmake"
-dependencies_linux = ["libiconv@1.18"]
-options_linux = [
+  build_system = "cmake"
+  dependencies_linux = ["libiconv@1.18"]
+  options_linux = [
+    "-DLIBXML2_WITH_ICONV=ON",
     "-DLIBXML2_WITH_PYTHON=OFF",
+    "-DIconv_IS_BUILT_IN=OFF",
     "-DCMAKE_SHARED_LINKER_FLAGS=-lm",
     "-DCMAKE_EXE_LINKER_FLAGS=-lm",
-]
-options_windows = ["-DLIBXML2_WITH_PYTHON=OFF", "-DLIBXML2_WITH_ICONV=OFF"]
-post_install = [
+  ]
+  options_windows = ["-DLIBXML2_WITH_PYTHON=OFF", "-DLIBXML2_WITH_ICONV=OFF"]
+  post_install = [
     "cmake -E rename ${PACKAGE_DIR}/lib/cmake/libxml2-2.13.5 ${PACKAGE_DIR}/lib/cmake/libxml2",
-]
+  ]
