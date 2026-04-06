@@ -6,3 +6,4 @@
 [[build_configs]]
   build_system = "meson"
   dependencies = ["gobject-introspection@1.86.0"]
+  dev_dependencies = ["gobject-introspection@1.86.0"]
