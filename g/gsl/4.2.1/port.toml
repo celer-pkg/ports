@@ -5,4 +5,4 @@
 
 [[build_configs]]
   build_system = "cmake"
-  options = ["-DGSL_TESTS=OFF"]
+  options = ["-DGSL_TEST=OFF"]
