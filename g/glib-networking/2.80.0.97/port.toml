@@ -1,9 +1,0 @@
-[package]
-  url = "https://gitlab.gnome.org/GNOME/glib-networking.git"
-  ref = "2.80.0.97"
-  depth = 1
-
-[[build_configs]]
-  build_system = "meson"
-  dependencies = ["glib@2.84.1"]
-  options = ["--wrap-mode=nofallback"]
