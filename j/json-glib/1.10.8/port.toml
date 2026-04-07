@@ -1,7 +1,0 @@
-[package]
-  url = "https://gitlab.gnome.org/GNOME/json-glib.git"
-  ref = "1.10.8"
-  depth = 1
-
-[[build_configs]]
-  build_system = "meson"

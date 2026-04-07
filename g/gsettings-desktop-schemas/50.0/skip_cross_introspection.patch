@@ -1,0 +1,14 @@
+diff --git a/headers/meson.build b/headers/meson.build
+index 46f746c..fcd049c 100644
+--- a/headers/meson.build
++++ b/headers/meson.build
+@@ -19,7 +19,7 @@ enums_xml = custom_target(
+   install: true,
+   install_dir: schemasdir)
+ 
+-if get_option('introspection')
++if get_option('introspection') and not meson.is_cross_build()
+   gir_sources = headers
+ 
+   # Use a dummy .c source; Visual Studio and meson 1.9.0 do not accept
+
