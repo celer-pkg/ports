@@ -223,3 +223,24 @@ jobs:
           echo "  Port: ${{ inputs.port }}"
           echo "  Platform: ${{ matrix.platform }}"
           echo "========================================="
+
+      - name: Upload build logs
+        if: failure()
+        uses: actions/upload-artifact@v5
+        with:
+          name: build-logs-${{ needs.detect-platforms.outputs.port_name }}-${{ needs.detect-platforms.outputs.port_version }}-${{ matrix.platform }}
+          path: |
+            build-logs/**
+            buildtrees/**/*.log
+            buildtrees/**/meson-logs/**
+            buildtrees/**/meson-info/**
+            buildtrees/**/CMakeFiles/CMakeOutput.log
+            buildtrees/**/CMakeFiles/CMakeError.log
+            buildtrees/**/cross_file.toml
+            buildtrees/**/native_file.toml
+            buildtrees/**/pkg-config.sh
+            buildtrees/**/build.ninja
+            buildtrees/**/*.def
+            buildtrees/**/*.ver
+          retention-days: 10
+          if-no-files-found: ignore

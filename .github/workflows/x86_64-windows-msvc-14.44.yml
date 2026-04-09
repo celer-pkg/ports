@@ -163,6 +163,35 @@ jobs:
           fi
           eval "$CMD"
 
+      - name: Prepare log artifact metadata
+        id: log_artifact
+        if: steps.check_match.outputs.should_build == 'true'
+        shell: bash
+        run: |
+          PORT_KEY=$(echo "${{ matrix.port }}" | tr '/:@ ' '----')
+          echo "name=build-logs-$PORT_KEY-$PLATFORM" >> "$GITHUB_OUTPUT"
+
+      - name: Upload build logs
+        if: failure() && steps.check_match.outputs.should_build == 'true'
+        uses: actions/upload-artifact@v5
+        with:
+          name: ${{ steps.log_artifact.outputs.name }}
+          path: |
+            build-logs/**
+            buildtrees/**/*.log
+            buildtrees/**/meson-logs/**
+            buildtrees/**/meson-info/**
+            buildtrees/**/CMakeFiles/CMakeOutput.log
+            buildtrees/**/CMakeFiles/CMakeError.log
+            buildtrees/**/cross_file.toml
+            buildtrees/**/native_file.toml
+            buildtrees/**/pkg-config.sh
+            buildtrees/**/build.ninja
+            buildtrees/**/*.def
+            buildtrees/**/*.ver
+          retention-days: 10
+          if-no-files-found: ignore
+
   build-port:
     needs: detect-ports
     if: always()
