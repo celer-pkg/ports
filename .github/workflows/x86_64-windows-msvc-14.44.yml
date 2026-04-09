@@ -165,7 +165,7 @@ jobs:
 
       - name: Prepare log artifact metadata
         id: log_artifact
-        if: steps.check_match.outputs.should_build == 'true'
+        if: always() && steps.check_match.outputs.should_build == 'true'
         shell: bash
         run: |
           PORT_KEY=$(echo "${{ matrix.port }}" | tr '/:@ ' '----')
