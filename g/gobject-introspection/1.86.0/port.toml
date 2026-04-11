@@ -13,11 +13,6 @@
     "gettext@0.25",
   ]
   dependencies = ["glib@2.84.1", "libiconv@1.18"]
-  pkg_config_tools = [
-    "g_ir_scanner",
-    "g_ir_compiler",
-    "g_ir_generate",
-  ]
   options = [
     "--wrap-mode=nofallback",
     "-Dpython=${DEPS_DEV_DIR}/bin/python3",

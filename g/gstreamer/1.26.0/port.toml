@@ -6,3 +6,4 @@
 [[build_configs]]
   build_system = "meson"
   system_name = "linux"
+  dependencies = ["openssl@1.1.1w"]
