@@ -8,8 +8,10 @@
   system_name = "linux"
   build_tools = ["git-lfs"]
   dependencies = ["boost@1.87.0", "eigen@3.4.0"]
-  options_windows = ["--auto-features=disabled"]
-
-# Note:
-# Currently I don't known how many features can turn on in windows os,
-# so I use "--auto-features=disabled" instead.
+  options = [
+    "-Dpython=disabled",
+    "-Dlibxml2:python=false",
+    "-Dtests=disabled",
+    "-Dexamples=disabled",
+    "-Dbenchmarks=disabled",
+  ]

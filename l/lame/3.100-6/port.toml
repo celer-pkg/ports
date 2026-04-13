@@ -1,0 +1,8 @@
+[package]
+  url = "https://salsa.debian.org/multimedia-team/lame.git"
+  ref = "debian/3.100-6"
+  depth = 1
+
+[[build_configs]]
+  build_system = "makefiles"
+  system_name = "linux"

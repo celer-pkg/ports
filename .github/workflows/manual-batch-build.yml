@@ -279,6 +279,18 @@ jobs:
         uses: actions/upload-artifact@v5
         with:
           name: build-logs-${{ matrix.group }}-${{ matrix.platform }}
-          path: build-logs/
+          path: |
+            build-logs/**
+            buildtrees/**/*.log
+            buildtrees/**/meson-logs/**
+            buildtrees/**/meson-info/**
+            buildtrees/**/CMakeFiles/CMakeOutput.log
+            buildtrees/**/CMakeFiles/CMakeError.log
+            buildtrees/**/cross_file.toml
+            buildtrees/**/native_file.toml
+            buildtrees/**/pkg-config.sh
+            buildtrees/**/build.ninja
+            buildtrees/**/*.def
+            buildtrees/**/*.ver
           retention-days: 10
           if-no-files-found: ignore

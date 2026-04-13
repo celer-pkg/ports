@@ -1,0 +1,7 @@
+[package]
+  url = "https://github.com/xiph/ogg.git"
+  ref = "v1.3.6"
+  depth = 1
+
+[[build_configs]]
+  build_system = "cmake"

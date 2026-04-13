@@ -1,0 +1,11 @@
+[package]
+  url = "https://gitlab.gnome.org/GNOME/gsettings-desktop-schemas.git"
+  ref = "50.0"
+  depth = 1
+
+[[build_configs]]
+  build_system = "meson"
+  system_name = "linux"
+  patches = ["skip_cross_introspection.patch"]
+  dependencies = ["gobject-introspection@1.86.0"]
+  dev_dependencies = ["gobject-introspection@1.86.0"]
