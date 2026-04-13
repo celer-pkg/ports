@@ -6,8 +6,13 @@
 [[build_configs]]
   build_system = "meson"
   system_name = "linux"
-  dependencies = ["openssl@1.1.1w"]
+  build_tools = ["git-lfs"]
+  dependencies = ["boost@1.87.0", "eigen@3.4.0"]
+  patches = ["skip_libsoup_examples_in_cross_build.patch"]
   options = [
     "-Dpython=disabled",
     "-Dlibxml2:python=false",
+    "-Dtests=disabled",
+    "-Dexamples=disabled",
+    "-Dbenchmarks=disabled",
   ]

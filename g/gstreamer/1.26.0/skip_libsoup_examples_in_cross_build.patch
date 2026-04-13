@@ -1,0 +1,13 @@
+--- a/subprojects/libsoup-2.74.3/meson.build
++++ b/subprojects/libsoup-2.74.3/meson.build
+@@ -398,7 +398,9 @@
+ if find_program('xgettext', required : false).found()
+   subdir('po')
+ endif
+-subdir('examples')
++if not meson.is_cross_build()
++  subdir('examples')
++endif
+ 
+ if get_option('tests')
+   subdir('tests')
