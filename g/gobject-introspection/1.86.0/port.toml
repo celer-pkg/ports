@@ -12,9 +12,7 @@
     "bison@3.8.2",
     "gettext@0.25",
   ]
-  dependencies = ["glib@2.84.1", "libiconv@1.18"]
   options = [
-    "--wrap-mode=nofallback",
     "-Dpython=${DEPS_DEV_DIR}/bin/python3",
     "-Dbuild_introspection_data=false"
   ]
