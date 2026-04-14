@@ -16,7 +16,6 @@ env:
 
 jobs:
   detect-ports:
-    name: detect-ports-x86_64-linux-ubuntu-22.04-gcc-11.5.0
     runs-on: ubuntu-latest
     outputs:
       ports: ${{ steps.detect.outputs.ports }}
@@ -51,7 +50,6 @@ jobs:
           echo "ports=$PORTS_JSON" >> $GITHUB_OUTPUT
 
   build-port-matrix:
-    name: build-port-matrix-x86_64-linux-ubuntu-22.04-gcc-11.5.0
     needs: detect-ports
     if: needs.detect-ports.outputs.has-ports == 'true'
     runs-on: ubuntu-22.04
@@ -187,7 +185,7 @@ jobs:
           if-no-files-found: ignore
 
   build-port:
-    name: build-port-x86_64-linux-ubuntu-22.04-gcc-11.5.0
+    name: x86_64-linux-ubuntu-22.04-gcc-11.5.0
     needs:
       - detect-ports
       - build-port-matrix
