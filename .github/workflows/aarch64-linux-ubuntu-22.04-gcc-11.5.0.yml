@@ -186,7 +186,7 @@ jobs:
           retention-days: 10
           if-no-files-found: ignore
 
-  build-port:
+  check-result:
     name: aarch64-linux-ubuntu-22.04-gcc-11.5.0
     needs:
       - detect-ports
