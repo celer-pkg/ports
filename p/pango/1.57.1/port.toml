@@ -1,9 +1,9 @@
 [package]
-url = "https://gitlab.gnome.org/GNOME/pango.git"
-ref = "1.57.1"
-depth = 1
+  url = "https://gitlab.gnome.org/GNOME/pango.git"
+  ref = "1.57.1"
+  depth = 1
 
 [[build_configs]]
-system_name = "linux"
-build_system = "meson"
-dependencies = ["libexpat@2.7.1"]
+  system_name = "linux"
+  build_system = "meson"
+  dependencies = ["libexpat@2.7.1", "glib@2.84.1"]
