@@ -1,13 +1,14 @@
 [package]
   url = "https://gitlab.freedesktop.org/gstreamer/gstreamer.git"
-  ref = "1.26.0"
+  ref = "1.28.0"
   depth = 1
 
 [[build_configs]]
   build_system = "meson"
   system_name = "linux"
   build_tools = ["git-lfs"]
-  dependencies = ["boost@1.87.0", "eigen@3.4.0"]
+  dependencies = ["libexpat@2.7.1"]
+  dev_dependencies = ["pkgconf@2.4.3", "flex@2.6.4", "bison@3.8.2"]
   options = [
     "-Dpython=disabled",
     "-Dlibxml2:python=false",
