@@ -185,10 +185,22 @@ jobs:
           if-no-files-found: ignore
 
   build-port:
-    needs: detect-ports
+    needs:
+      - detect-ports
+      - build-port-matrix
     if: always()
     runs-on: ubuntu-latest
     steps:
       - name: Check build status
         run: |
-          echo "Port build workflow completed"
+          if [ "${{ needs.detect-ports.outputs.has-ports }}" != "true" ]; then
+            echo "No changed ports detected"
+            exit 0
+          fi
+
+          if [ "${{ needs.build-port-matrix.result }}" != "success" ]; then
+            echo "Port build matrix finished with status: ${{ needs.build-port-matrix.result }}"
+            exit 1
+          fi
+
+          echo "Port build workflow completed successfully"
