@@ -184,8 +184,11 @@ jobs:
           retention-days: 10
           if-no-files-found: ignore
 
-  build-port:
-    needs: detect-ports
+  check-result:
+    name: x86_64-linux-ubuntu-22.04-gcc-11.5.0
+    needs:
+      - detect-ports
+      - build-port-matrix
     if: always()
     runs-on: ubuntu-latest
     steps:

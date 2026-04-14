@@ -192,8 +192,11 @@ jobs:
           retention-days: 10
           if-no-files-found: ignore
 
-  build-port:
-    needs: detect-ports
+  check-result:
+    name: x86_64-windows-msvc-14
+    needs:
+      - detect-ports
+      - build-port-matrix
     if: always()
     runs-on: ubuntu-latest
     steps:
