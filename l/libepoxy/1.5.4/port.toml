@@ -5,6 +5,7 @@
 
 [[build_configs]]
   build_system = "meson"
+  dependencies = ["libglvnd@1.7.0"]
   system_name = "linux"
   options = [
     "-Dtests=False",
