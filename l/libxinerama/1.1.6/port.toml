@@ -1,0 +1,8 @@
+[package]
+  url = "https://gitlab.freedesktop.org/xorg/lib/libxinerama.git"
+  ref = "libXinerama-1.1.6"
+  depth = 1
+
+[[build_configs]]
+  build_system = "meson"
+  dependencies = ["libx11@1.8.11", "libxext@1.3.6"]

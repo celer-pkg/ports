@@ -7,7 +7,6 @@
   build_system = "meson"
   system_name = "linux"
   options = [
-    "--wrap-mode=nofallback",
     "-Dvulkan=disabled",
     "-Dmedia-gstreamer=disabled",
     "-Dbuild-demos=false",
@@ -15,21 +14,26 @@
     "-Dbuild-tests=false",
     "-Dbuild-testsuite=false",
   ]
-  dev_dependencies = ["sassc@3.6.2"]
+  dev_dependencies = ["sassc@3.6.2", "pkgconf@2.4.3"]
   dependencies = [
-    "glib@2.84.1",
     "shared-mime-info@2.4",
     "cairo@1.18.4",
     "wayland@1.24.0",
+    "libxkbcommon@1.6.0",
     "libxrandr@1.5.4",
-    "wayland-protocols@1.44",
+    "libxi@1.8.2",
+    "libxcursor@1.2.3",
     "libxdamage@1.1.6",
-    "libepoxy@1.5.4",
-    "libtiff@4.1.0",
-    "harfbuzz@11.2.1",
-    "libjpeg-turbo@3.1.0",
-    "pango@1.57.1",
-    "gdk-pixbuf@2.44.5",
-    "graphene@1.10.8",
-    "sqlite3@3.49.0"
+    "libxinerama@1.1.6",
+    "libdrm@2.4.124",
+    # "glib@2.84.1",
+    # "wayland-protocols@1.44",
+    # "libepoxy@1.5.4",
+    # "libtiff@4.1.0",
+    # "harfbuzz@11.2.1",
+    # "libjpeg-turbo@3.1.0",
+    # "pango@1.57.1",
+    # "gdk-pixbuf@2.44.5",
+    # "graphene@1.10.8",
+    # "sqlite3@3.49.0"
   ]
