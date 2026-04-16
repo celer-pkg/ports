@@ -1,18 +1,18 @@
 [package]
-url = "https://download.qt.io/archive/qt/5.15/5.15.16/single/qt-everywhere-opensource-src-5.15.16.tar.xz"
-ref = "5.15.16"
+  url = "https://download.qt.io/archive/qt/5.15/5.15.16/single/qt-everywhere-opensource-src-5.15.16.tar.xz"
+  ref = "5.15.16"
 
 [[build_configs]]
-system_name = "linux"
-system_processor = "x86_64"
-patches = ["add-linux-x86_64-gnu-g++.patch"]
-build_system = "qmake"
-build_tools = ["llvm"]
-envs = [
+  system_name = "linux"
+  system_processor = "x86_64"
+  patches = ["add-linux-x86_64-gnu-g++.patch"]
+  build_system = "qmake"
+  build_tools = ["llvm"]
+  envs = [
     "OPENGL_INC_DIR=${DEPS_DIR}/include",
     "OPENGL_LIB_DIR=${DEPS_DIR}/lib",
-]
-options = [
+  ]
+  options = [
     "-xplatform linux-x86_64-gnu-g++",
     "-confirm-license",
     "-opensource",
@@ -29,8 +29,8 @@ options = [
     "-nomake examples",
     "-skip qtdoc",
     "-skip qtwebengine",
-]
-dependencies = [
+  ]
+  dependencies = [
     "libxcb-cursor@0.1.6",
     "xcb-util-wm@0.4.2",
     "xcb-imdkit@1.0.8",
@@ -62,23 +62,23 @@ dependencies = [
     "libxscrnsaver@1.2.4",
     "libevent@2.1.12",
     "nss@3.55",
-    "fontconfig@2.16.0",
+    "fontconfig@2.17.1",
     "pulseaudio@16.2",
     "zstd@1.5.7",
     "pcre2@10.44",
-]
+  ]
 
 [[build_configs]]
-system_name = "linux"
-system_processor = "aarch64"
-patches = ["fix-linux-aarch64-gnu-g++.patch"]
-build_system = "qmake"
-build_tools = ["llvm"]
-envs = [
+  system_name = "linux"
+  system_processor = "aarch64"
+  patches = ["fix-linux-aarch64-gnu-g++.patch"]
+  build_system = "qmake"
+  build_tools = ["llvm"]
+  envs = [
     "OPENGL_INC_DIR=${DEPS_DIR}/include",
     "OPENGL_LIB_DIR=${DEPS_DIR}/lib",
-]
-options = [
+  ]
+  options = [
     "-xplatform linux-aarch64-gnu-g++",
     "-confirm-license",
     "-opensource",
@@ -95,8 +95,8 @@ options = [
     "-nomake examples",
     "-skip qtdoc",
     "-skip qtwebengine",
-]
-dependencies = [
+  ]
+  dependencies = [
     "libxcb-cursor@0.1.6",
     "xcb-util-wm@0.4.2",
     "xcb-imdkit@1.0.8",
@@ -128,8 +128,8 @@ dependencies = [
     "libxscrnsaver@1.2.4",
     "libevent@2.1.12",
     "nss@3.55",
-    "fontconfig@2.16.0",
+    "fontconfig@2.17.1",
     "pulseaudio@16.2",
     "zstd@1.5.7",
     "pcre2@10.44",
-]
+  ]
