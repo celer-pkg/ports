@@ -193,7 +193,7 @@ jobs:
           if-no-files-found: ignore
 
   check-result:
-    name: x86_64-windows-msvc-14
+    name: check-result
     needs:
       - detect-ports
       - build-port-matrix
