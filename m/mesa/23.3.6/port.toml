@@ -80,6 +80,7 @@ envs = [
     "CXXFLAGS=-I${DEPS_DIR}/include/valgrind",
 ]
 options = [
+    "-Dllvm=disabled",
     "-Dshared-llvm=disabled",
     "-Dcpp_rtti=false",
     "-Dopengl=true",
