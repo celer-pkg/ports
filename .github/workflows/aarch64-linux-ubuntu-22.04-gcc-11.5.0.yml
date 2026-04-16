@@ -185,7 +185,7 @@ jobs:
           if-no-files-found: ignore
 
   check-result:
-    name: check-result
+    name: aarch64-linux-ubuntu-22.04-gcc-11.5.0
     needs:
       - detect-ports
       - build-port-matrix
