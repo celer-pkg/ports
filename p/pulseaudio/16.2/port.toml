@@ -12,10 +12,8 @@ dependencies = [
     "check@0.15.2",
     "gdbm@1.25",
     "libxcb@1.17.0",
-    "libiconv@1.18",
     "xz@5.8.1",
 ]
-envs = ["LDFLAGS=-liconv"]
 options = [
     "-Ddoxygen=false",
     "-Ddatabase=gdbm",
