@@ -1,0 +1,15 @@
+[package]
+  url = "https://github.com/hughsie/libxmlb.git"
+  ref = "0.3.26"
+  depth = 1
+
+[[build_configs]]
+  build_system = "meson"
+  system_name = "linux"
+  build_tools = ["cmake"]
+  dependencies = ["glib@2.84.1"]
+  options = [
+    "-Dintrospection=false",
+    "-Dgtkdoc=false",
+    "-Dtests=false"
+  ]
