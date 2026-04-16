@@ -21,7 +21,6 @@ dependencies = [
     "zstd@1.5.7",
     "glslang@1.4.335.0",
     "openssl@1.1.1w",
-    "libiconv@1.18",
 ]
 dev_dependencies = [
     "pkgconf@2.4.3",
@@ -33,7 +32,6 @@ dev_dependencies = [
 envs = [
     "CFLAGS=-I${DEPS_DIR}/include/valgrind",
     "CXXFLAGS=-I${DEPS_DIR}/include/valgrind",
-    "LDFLAGS=-liconv",
 ]
 options = [
     "-Dshared-llvm=disabled",
@@ -69,7 +67,6 @@ dependencies = [
     "zstd@1.5.7",
     "glslang@1.4.335.0",
     "openssl@1.1.1w",
-    "libiconv@1.18",
     "llvm@17.0.6",
 ]
 dev_dependencies = [
@@ -81,7 +78,6 @@ dev_dependencies = [
 envs = [
     "CFLAGS=-I${DEPS_DIR}/include/valgrind",
     "CXXFLAGS=-I${DEPS_DIR}/include/valgrind",
-    "LDFLAGS=-liconv",
 ]
 options = [
     "-Dshared-llvm=disabled",
