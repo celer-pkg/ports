@@ -7,7 +7,6 @@
   build_system = "meson"
   system_name = "linux"
   options = [
-    "--wrap-mode=nofallback",
     "-Dvulkan=disabled",
     "-Dmedia-gstreamer=disabled",
     "-Dbuild-demos=false",
@@ -15,7 +14,7 @@
     "-Dbuild-tests=false",
     "-Dbuild-testsuite=false",
   ]
-  dev_dependencies = ["sassc@3.6.2"]
+  dev_dependencies = ["sassc@3.6.2", "pkgconf@2.4.3"]
   dependencies = [
     "glib@2.84.1",
     "shared-mime-info@2.4",
@@ -31,5 +30,10 @@
     "pango@1.57.1",
     "gdk-pixbuf@2.44.5",
     "graphene@1.10.8",
-    "sqlite3@3.49.0"
+    "sqlite3@3.49.0",
+    "libxkbcommon@1.6.0",
+    "libxi@1.8.2",
+    "libxcursor@1.2.3",
+    "libxinerama@1.1.6",
+    "libdrm@2.4.124"
   ]
