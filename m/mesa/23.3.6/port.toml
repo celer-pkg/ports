@@ -1,13 +1,13 @@
 [package]
-url = "https://archive.mesa3d.org/mesa-23.3.6.tar.xz"
-ref = "23.3.6"
+  url = "https://archive.mesa3d.org/mesa-23.3.6.tar.xz"
+  ref = "23.3.6"
 
 [[build_configs]]
-system_name = "linux"
-system_processor = "x86_64"
-build_system = "meson"
-build_tools = ["python3:mako", "python3:packaging", "llvm"]
-dependencies = [
+  system_name = "linux"
+  system_processor = "x86_64"
+  build_system = "meson"
+  build_tools = ["python3:mako", "python3:packaging", "llvm"]
+  dependencies = [
     "libxshmfence@1.3.3",
     "libxext@1.3.6",
     "libdrm@2.4.124",
@@ -21,19 +21,19 @@ dependencies = [
     "zstd@1.5.7",
     "glslang@1.4.335.0",
     "openssl@1.1.1w",
-]
-dev_dependencies = [
+  ]
+  dev_dependencies = [
     "pkgconf@2.4.3",
     "byacc@20241231",
     "flex@2.6.4",
     "bison@3.8.2",
     "glslang@1.4.335.0",
-]
-envs = [
+  ]
+  envs = [
     "CFLAGS=-I${DEPS_DIR}/include/valgrind",
     "CXXFLAGS=-I${DEPS_DIR}/include/valgrind",
-]
-options = [
+  ]
+  options = [
     "-Dshared-llvm=disabled",
     "-Dcpp_rtti=false",
     "-Dopengl=true",
@@ -46,14 +46,14 @@ options = [
     "-Dplatforms=x11,wayland",
     "-Dsse2=true",
     "-Dshader-cache=enabled",
-]
+  ]
 
 [[build_configs]]
-system_name = "linux"
-system_processor = "aarch64"
-build_system = "meson"
-build_tools = ["python3:mako", "python3:packaging"]
-dependencies = [
+  system_name = "linux"
+  system_processor = "aarch64"
+  build_system = "meson"
+  build_tools = ["python3:mako", "python3:packaging"]
+  dependencies = [
     "libxshmfence@1.3.3",
     "libxext@1.3.6",
     "libdrm@2.4.124",
@@ -68,19 +68,18 @@ dependencies = [
     "glslang@1.4.335.0",
     "openssl@1.1.1w",
     "llvm@17.0.6",
-]
-dev_dependencies = [
+  ]
+  dev_dependencies = [
     "pkgconf@2.4.3",
     "byacc@20241231",
     "flex@2.6.4",
     "bison@3.8.2",
-]
-envs = [
+  ]
+  envs = [
     "CFLAGS=-I${DEPS_DIR}/include/valgrind",
     "CXXFLAGS=-I${DEPS_DIR}/include/valgrind",
-]
-options = [
-    "-Dllvm=disabled",
+  ]
+  options = [
     "-Dshared-llvm=disabled",
     "-Dcpp_rtti=false",
     "-Dopengl=true",
@@ -93,6 +92,6 @@ options = [
     "-Dplatforms=x11,wayland",
     "-Dsse2=false",
     "-Dshader-cache=enabled",
-]
-# Note:
-# This library support linux only.
+  ]
+  # Note:
+  # This library support linux only.
