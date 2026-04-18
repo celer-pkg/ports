@@ -1,14 +1,15 @@
 [package]
-url = "https://github.com/USCiLab/cereal.git"
-ref = "v1.3.2"
-depth = 1
+  url = "https://github.com/USCiLab/cereal.git"
+  ref = "v1.3.2"
+  depth = 1
 
 [[build_configs]]
-build_system = "cmake"
-dependencies = ["boost@1.87.0"]
-options = [
-  "-DTHREAD_SAFE=ON",
-  "-DBUILD_DOC=OFF",
-  "-DWITH_WERROR=OFF",
-  "-DBUILD_TESTS=OFF",
-]
+  build_system = "cmake"
+  options = [
+    "-DTHREAD_SAFE=ON",
+    "-DBUILD_DOC=OFF",
+    "-DWITH_WERROR=OFF",
+    "-DBUILD_TESTS=OFF",
+    "-DBUILD_SANDBOX=OFF",
+    "-DSKIP_PERFORMANCE_COMPARISON=ON"
+  ]
