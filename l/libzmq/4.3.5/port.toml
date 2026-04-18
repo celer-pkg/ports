@@ -1,12 +1,18 @@
 [package]
   url = "https://github.com/zeromq/libzmq.git"
   ref = "v4.3.5"
-depth = 1
+  depth = 1
 
 [[build_configs]]
   build_system = "cmake"
-  options = [
+  options_linux = [
     "-DWITH_PERF_TOOL=OFF",
     "-DZMQ_BUILD_TESTS=OFF",
-    "-DENABLE_CPACK=OFF"
+    "-DENABLE_CPACK=OFF",
+  ]
+  options_windows = [
+    "-DWITH_PERF_TOOL=OFF",
+    "-DZMQ_BUILD_TESTS=OFF",
+    "-DENABLE_CPACK=OFF",
+    "-DZMQ_WIN32_WINNT=0x0602" #  Explicitly sets the Windows version to Windows Vista (0x0602), compatible with VS 2022.
   ]
