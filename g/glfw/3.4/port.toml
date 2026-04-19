@@ -1,12 +1,23 @@
 [package]
-  url = "https://github.com/glfw/glfw.git"
-  ref = "3.4"
+  url   = "https://github.com/glfw/glfw.git"
+  ref   = "3.4"
   depth = 1
 
 [[build_configs]]
   build_system = "cmake"
-options = [
-  "-DGLFW_BUILD_EXAMPLES=OFF",
-  "-DGLFW_BUILD_TESTS=OFF",
-  "-DGLFW_BUILD_DOCS=OFF",
-]
+  system_name = "linux"
+  dependencies = [
+    "libx11@1.8.11",
+    "libxrandr@1.5.4",
+    "libxinerama@1.1.6",
+    "libxcursor@1.2.3",
+    "libxi@1.8.2",
+    "libxkbcommon@1.6.0",
+    "wayland@1.24.0",
+  ]
+  options = [
+    "-DGLFW_BUILD_EXAMPLES=OFF",
+    "-DGLFW_BUILD_TESTS=OFF",
+    "-DGLFW_BUILD_DOCS=OFF",
+    "-DWAYLAND_SCANNER_EXECUTABLE=${DEPS_DEV_DIR}/bin/wayland-scanner"
+  ]
