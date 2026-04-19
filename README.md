@@ -103,21 +103,21 @@ See `docs/en-US/article_port.md` and `docs/en-US/article_expvars.md` for deeper 
 
 ```toml
 [package]
-url = "https://github.com/google/googletest.git"
-ref = "v1.17.0"
+  url = "https://github.com/google/googletest.git"
+  ref = "v1.17.0"
 
 [[build_configs]]
-build_system = "cmake"
-options = [
-  "-DBUILD_TESTING=OFF",
-  "-DBUILD_SHARED_LIBS=ON",
-]
-options_windows = [
-  "-DBUILD_TESTING=OFF",
-  "-DBUILD_SHARED_LIBS=ON",
-  "-Dgtest_force_shared_crt=ON",
-]
-dev_dependencies = ["pkgconf@2.4.3"]
+  build_system = "cmake"
+  options = [
+    "-DBUILD_TESTING=OFF",
+    "-DBUILD_SHARED_LIBS=ON",
+  ]
+  options_windows = [
+    "-DBUILD_TESTING=OFF",
+    "-DBUILD_SHARED_LIBS=ON",
+    "-Dgtest_force_shared_crt=ON",
+  ]
+  dev_dependencies = ["pkgconf@2.4.3"]
 ```
 
 On Windows, `options_windows` replaces `options`, so repeat any shared options you still need.
