@@ -6,6 +6,9 @@
 [[build_configs]]
   system_name = "linux"
   build_system = "makefiles"
+  build_shared = "_"
+  build_static = "_"
+  options = ["--disable-nls"]
 
 # Note:
 # This library support linux only.
