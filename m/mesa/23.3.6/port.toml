@@ -14,6 +14,7 @@
     "libxfixes@6.0.1",
     "libxxf86vm@1.1.6",
     "libxrandr@1.5.4",
+    "libglvnd@1.7.0",
     "elfutils@0.194",
     "valgrind@3.26.0",
     "wayland@1.24.0",
@@ -35,6 +36,7 @@
   ]
   options = [
     "-Dshared-llvm=disabled",
+    "-Dglvnd=true",
     "-Dcpp_rtti=false",
     "-Dopengl=true",
     "-Dgles2=enabled",
@@ -60,6 +62,7 @@
     "libxfixes@6.0.1",
     "libxxf86vm@1.1.6",
     "libxrandr@1.5.4",
+    "libglvnd@1.7.0",
     "elfutils@0.194",
     "valgrind@3.26.0",
     "wayland@1.24.0",
@@ -81,6 +84,7 @@
   ]
   options = [
     "-Dshared-llvm=disabled",
+    "-Dglvnd=true",
     "-Dcpp_rtti=false",
     "-Dopengl=true",
     "-Dgles2=enabled",
