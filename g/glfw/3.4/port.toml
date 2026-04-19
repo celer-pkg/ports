@@ -10,7 +10,9 @@
     "libxrandr@1.5.4",
     "libxinerama@1.1.6",
     "libxcursor@1.2.3",
-    "libxi@1.8.2"
+    "libxi@1.8.2",
+    "libxkbcommon@1.6.0",
+    "wayland@1.24.0",
   ]
   options = [
     "-DGLFW_BUILD_EXAMPLES=OFF",
