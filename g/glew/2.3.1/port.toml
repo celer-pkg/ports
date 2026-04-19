@@ -7,5 +7,6 @@
 
 [[build_configs]]
   build_system = "cmake"
+  system_name = "linux"
   dependencies = ["mesa@23.3.6"]
   options = ["-DBUILD_UTILS=OFF"]
