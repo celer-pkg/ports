@@ -5,3 +5,4 @@
 
 [[build_configs]]
   build_system = "cmake"
+  options = ["-DDISABLE_DMAKE=ON"]
