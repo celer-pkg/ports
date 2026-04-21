@@ -1,14 +1,20 @@
 [package]
-url = "https://gitlab.freedesktop.org/xorg/lib/libxmu.git"
-ref = "libXmu-1.2.1"
-depth = 1
+  url = "https://gitlab.freedesktop.org/xorg/lib/libxmu.git"
+  ref = "libXmu-1.2.1"
+  depth = 1
 
 [[build_configs]]
-system_name = "linux"
-build_system = "makefiles"
-dev_dependencies = ["macros@1.20.2"]
-envs = ["NOCONFIGURE=1"]
-pre_configure = ["./autogen.sh"]
+  system_name = "linux"
+  build_system = "makefiles"
+  dependencies = [
+    "libx11@1.8.11",
+    "libxext@1.3.6",
+    "libxt@1.3.1",
+    "xorgproto@2024.1",
+  ]
+  dev_dependencies = ["macros@1.20.2"]
+  envs = ["NOCONFIGURE=1"]
+  pre_configure = ["./autogen.sh"]
 
 # Note:
 # This library support linux only.
