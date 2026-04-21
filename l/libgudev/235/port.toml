@@ -1,0 +1,10 @@
+[package]
+  url = "https://gitlab.gnome.org/GNOME/libgudev.git"
+  ref = "235"
+  depth = 1
+
+[[build_configs]]
+  build_system = "meson"
+  system_name = "linux"
+  dependencies = ["glib@2.84.1"]
+  options = ["-Dtests=disabled", "-Dintrospection=disabled", "-Dgtk_doc=false"]
