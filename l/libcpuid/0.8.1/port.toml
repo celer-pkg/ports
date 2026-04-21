@@ -1,7 +1,11 @@
 [package]
-url = "https://github.com/anrieff/libcpuid.git"
-ref = "v0.8.1"
-depth = 1
+  url   = "https://github.com/anrieff/libcpuid.git"
+  ref   = "v0.8.1"
+  depth = 1
 
 [[build_configs]]
-build_system = "cmake"
+  build_system = "cmake"
+  options = [
+    "-DLIBCPUID_ENABLE_TESTS=OFF",
+    "-DLIBCPUID_BUILD_DRIVERS=OFF",
+  ]
