@@ -7,5 +7,5 @@ depth = 1
 system_name = "linux"
 build_system = "meson"
 patches = ["fix_build_error.patch"]
-dependencies = ["libexpat@2.7.1", "libjpeg@9f"]
+dependencies = ["libexpat@2.7.1", "libjpeg@9f", "glib@2.84.1"]
 dev_dependencies = ["pkgconf@2.4.3"]
