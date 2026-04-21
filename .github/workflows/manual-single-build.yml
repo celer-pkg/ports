@@ -1,4 +1,5 @@
 name: Manual Single Port Build
+run-name: Manual Single Port Build(${{ inputs.port }})
 
 on:
   workflow_dispatch:

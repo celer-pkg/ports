@@ -5,7 +5,6 @@
 
 [[build_configs]]
   build_system = "cmake"
-  dev_dependencies = ["pkgconf@2.4.3"]
   options_linux = [
     "-DLIBXML2_WITH_PYTHON=OFF",
     "-DCMAKE_SHARED_LINKER_FLAGS=-lm",
