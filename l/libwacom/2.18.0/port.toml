@@ -5,6 +5,7 @@
 
 [[build_configs]]
   build_system = "meson"
+  system_name = "linux"
   dev_dependencies = ["pkgconf@2.4.3"]
   dependencies = ["libgudev@235", "libevdev@1.13.6"]
   options = ["-Ddocumentation=disabled", "-Dtests=disabled"]
