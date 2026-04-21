@@ -5,6 +5,7 @@
 
 [[build_configs]]
   build_system = "cmake"
+  system_name = "linux"
   options = [
     "-DLIBCPUID_ENABLE_TESTS=OFF",
     "-DLIBCPUID_BUILD_DRIVERS=OFF",
