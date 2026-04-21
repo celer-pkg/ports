@@ -1,0 +1,10 @@
+[package]
+  url = "https://github.com/linuxwacom/libwacom.git"
+  ref = "libwacom-2.18.0"
+  depth = 1
+
+[[build_configs]]
+  build_system = "meson"
+  dev_dependencies = ["pkgconf@2.4.3"]
+  dependencies = ["libgudev@235", "libevdev@1.13.6"]
+  options = ["-Ddocumentation=disabled", "-Dtests=disabled"]
