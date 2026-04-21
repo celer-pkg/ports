@@ -1,4 +1,5 @@
 name: Manual Batch Port Build
+run-name: Manual Batch Port Build(${{ inputs.groups }})
 
 on:
   workflow_dispatch:
