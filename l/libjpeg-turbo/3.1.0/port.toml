@@ -5,3 +5,4 @@
 
 [[build_configs]]
   build_system = "cmake"
+  options_windows = ["-DWITH_CRT_DLL=ON"]
