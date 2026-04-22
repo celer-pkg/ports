@@ -7,9 +7,8 @@ system_name = "linux"
 build_system = "makefiles"
 build_shared = "--with-shared"
 options = [
-    "--disable-stripping",
-    "--with-termlib",
-    "--disable-widec"
+  "--disable-stripping",
+  "--with-termlib",
 ]
 
 # Note:

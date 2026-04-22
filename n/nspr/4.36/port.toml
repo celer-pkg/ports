@@ -1,25 +1,26 @@
 [package]
-url = "https://archive.mozilla.org/pub/nspr/releases/v4.36/src/nspr-4.36.tar.gz"
-ref = "4.36"
-src_dir = "nspr"
+  url = "https://archive.mozilla.org/pub/nspr/releases/v4.36/src/nspr-4.36.tar.gz"
+  ref = "4.36"
+  src_dir = "nspr"
 
 [[build_configs]]
-system_name = "linux"
-build_system = "makefiles"
-patches = ["fix_negative_array_size.patch"]
-pre_configure = [
+  system_name = "linux"
+  build_system = "makefiles"
+  patches = ["fix_negative_array_size.patch"]
+  dev_dependencies = ["nspr@4.36"]
+  pre_configure = [
     "sed -i '/^RELEASE/s|^|#|' ${REPO_DIR}/nspr/pr/src/misc/Makefile.in",
     "sed -i 's|$(LIBRARY) ||' ${REPO_DIR}/nspr/config/rules.mk",
-]
-fix_build = [
+  ]
+  fix_build = [
     "cmake -E copy ${BUILD_DIR}/../x86_64-linux-dev/config/nsinstall ${BUILD_DIR}/config",
-]
-options = [
+  ]
+  options = [
     "--enable-64bit",
     "--with-pthreads",
     "--with-mozilla",
     "$([ $(uname -m) = x86_64 ] && echo --enable-64bit)",
-]
+  ]
 
 # Note:
 # This library support linux only.
