@@ -1,14 +1,15 @@
 [package]
-url = "https://gitlab.freedesktop.org/xorg/lib/libxcb-image.git"
-ref = "xcb-util-image-0.4.1-gitlab"
-depth = 1
+  url = "https://gitlab.freedesktop.org/xorg/lib/libxcb-image.git"
+  ref = "xcb-util-image-0.4.1-gitlab"
+  depth = 1
 
 [[build_configs]]
-build_system = "makefiles"
-dependencies = ["xcb-util@0.4.1"]
-dev_dependencies = ["macros@1.20.2"]
-envs = ["NOCONFIGURE=1"]
-pre_configure = ["./autogen.sh"]
+  build_system = "makefiles"
+  system_name = "linux"
+  dependencies = ["xcb-util@0.4.1"]
+  dev_dependencies = ["macros@1.20.2"]
+  envs = ["NOCONFIGURE=1"]
+  pre_configure = ["./autogen.sh"]
 
 # Note:
 # This library support linux only.
