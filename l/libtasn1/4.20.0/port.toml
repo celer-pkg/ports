@@ -1,9 +1,8 @@
 [package]
-url = "https://ftp.gnu.org/gnu/libtasn1/libtasn1-v4.20.0-src.tar.gz"
-ref = "v4.20.0"
-depth = 1
+  url = "https://ftp.gnu.org/gnu/libtasn1/libtasn1-4.20.0.tar.gz"
+  ref = "4.20.0"
+  depth = 1
 
 [[build_configs]]
-build_system = "makefiles"
-dev_dependencies = ["bison@3.8.2"]
-pre_configure = ["./bootstrap"]
+  build_system = "makefiles"
+  system_name = "linux"
