@@ -1,11 +1,12 @@
 [package]
-url = "https://gitlab.freedesktop.org/glvnd/libglvnd.git"
-ref = "v1.7.0"
-depth = 1
+  url = "https://gitlab.freedesktop.org/glvnd/libglvnd.git"
+  ref = "v1.7.0"
+  depth = 1
 
 [[build_configs]]
-build_system = "makefiles"
-dependencies = ["libx11@1.8.11", "libxext@1.3.6"]
-dev_dependencies = ["macros@1.20.2"]
-envs = ["NOCONFIGURE=1"]
-pre_configure = ["./autogen.sh"]
+  build_system = "makefiles"
+  system_name = "linux"
+  dependencies = ["libx11@1.8.11", "libxext@1.3.6"]
+  dev_dependencies = ["macros@1.20.2"]
+  envs = ["NOCONFIGURE=1"]
+  pre_configure = ["./autogen.sh"]
