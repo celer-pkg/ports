@@ -1,7 +1,10 @@
 [package]
-url = "https://archives.boost.io/release/1.87.0/source/boost_1_87_0.tar.gz"
-ref = "1.87.0"
+  url = "https://archives.boost.io/release/1.87.0/source/boost_1_87_0.tar.gz"
+  ref = "1.87.0"
 
 [[build_configs]]
-build_system = "b2"
-options = ["--without-python", "--without-mpi"]
+  build_system = "b2"
+  system_name = "linux"
+  options = ["--without-python", "--without-mpi"]
+
+# In windows, boost-1.87.0 can only build with visual studio 2022 or earlier version.
