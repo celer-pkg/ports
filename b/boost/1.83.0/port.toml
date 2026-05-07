@@ -1,7 +1,8 @@
 [package]
-url = "https://archives.boost.io/release/1.83.0/source/boost_1_83_0.tar.gz"
-ref = "1.83.0"
+  url = "https://archives.boost.io/release/1.83.0/source/boost_1_83_0.tar.gz"
+  ref = "1.83.0"
 
 [[build_configs]]
-build_system = "b2"
-options = ["--without-python", "--without-mpi"]
+  build_system = "b2"
+  system_name = "linux"
+  options = ["--without-python", "--without-mpi"]
