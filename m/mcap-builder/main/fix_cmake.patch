@@ -1,0 +1,95 @@
+diff --git a/CMakeLists.txt b/CMakeLists.txt
+index fc29912..104cb2d 100644
+--- a/CMakeLists.txt
++++ b/CMakeLists.txt
+@@ -11,22 +11,28 @@ project(mcap_builder LANGUAGES CXX VERSION ${VERSION})
+ set(CMAKE_CXX_STANDARD 17)
+ set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
+ 
+-include(FetchContent)
+-
+-if(${CMAKE_VERSION} VERSION_GREATER_EQUAL "3.29")
+-  set(DOWNLOAD_EXTRACT_TIMESTAMP_ARG "DOWNLOAD_EXTRACT_TIMESTAMP;TRUE")
+-else()
+-  set(DOWNLOAD_EXTRACT_TIMESTAMP_ARG "")
+-endif()
+-set(MCAP_TAG "releases/cpp/v${VERSION}")
+-FetchContent_Declare(
+-  mcap
+-  URL https://github.com/foxglove/mcap/archive/refs/tags/${MCAP_TAG}.tar.gz
+-  ${DOWNLOAD_EXTRACT_TIMESTAMP_ARG}
+-)
+-FetchContent_MakeAvailable(mcap)
++if (NOT mcap_SOURCE_DIR)
++    include(FetchContent)
++    
++    if(${CMAKE_VERSION} VERSION_GREATER_EQUAL "3.29")
++      set(DOWNLOAD_EXTRACT_TIMESTAMP_ARG "DOWNLOAD_EXTRACT_TIMESTAMP;TRUE")
++    else()
++      set(DOWNLOAD_EXTRACT_TIMESTAMP_ARG "")
++    endif()
++    set(MCAP_TAG "releases/cpp/v${VERSION}")
++    FetchContent_Declare(
++      mcap
++      URL https://github.com/foxglove/mcap/archive/refs/tags/${MCAP_TAG}.tar.gz
++      ${DOWNLOAD_EXTRACT_TIMESTAMP_ARG}
++    )
++    FetchContent_MakeAvailable(mcap)
++endif ()
++
+ set(MCAP_INCLUDE_DIR ${mcap_SOURCE_DIR}/cpp/mcap/include/)
+ 
++find_package(lz4 QUIET)
++find_package(zstd QUIET)
++
+ add_subdirectory(src)
+ 
+ 
+diff --git a/cmake/mcap-config.cmake.in b/cmake/mcap-config.cmake.in
+index 2131565..fc3f8d4 100644
+--- a/cmake/mcap-config.cmake.in
++++ b/cmake/mcap-config.cmake.in
+@@ -4,4 +4,11 @@
+ 
+ @PACKAGE_INIT@
+ 
++if(@lz4_FOUND@)
++    find_package(lz4 REQUIRED)
++endif()
++if(@zstd_FOUND@)
++    find_package(zstd REQUIRED)
++endif()
++
+ include ( "${CMAKE_CURRENT_LIST_DIR}/mcap-targets.cmake" )
+diff --git a/src/CMakeLists.txt b/src/CMakeLists.txt
+index d788aa7..ef58cdf 100644
+--- a/src/CMakeLists.txt
++++ b/src/CMakeLists.txt
+@@ -7,16 +7,14 @@ target_include_directories(mcap PUBLIC
+ 
+ set(DEPENDENCIES "")
+ 
+-find_package(lz4 QUIET)
+ if (${lz4_FOUND})
+   message(STATUS "Found lz4 from ${lz4_DIR}")
+-  list(APPEND DEPENDENCIES LZ4::lz4)
++  list(APPEND DEPENDENCIES LZ4::lz4_shared)
+ else()
+   message(WARNING "Dependency LZ4 not found, disabling")
+   target_compile_definitions(mcap PUBLIC "MCAP_COMPRESSION_NO_LZ4")
+ endif()
+ 
+-find_package(zstd QUIET)
+ if (${zstd_FOUND})
+   message(STATUS "Found zstd from ${zstd_DIR}")
+   list(APPEND DEPENDENCIES zstd::libzstd)
+diff --git a/src/lib.cpp b/src/lib.cpp
+index 3c15ea9..fe9c14e 100644
+--- a/src/lib.cpp
++++ b/src/lib.cpp
+@@ -3,4 +3,5 @@
+ //=================================================================================================
+ 
+ #define MCAP_IMPLEMENTATION
++#include <cstdint>
+ #include <mcap/mcap.hpp>

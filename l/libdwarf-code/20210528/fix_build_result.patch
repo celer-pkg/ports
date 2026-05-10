@@ -1,0 +1,254 @@
+diff --git a/CMakeLists.txt b/CMakeLists.txt
+index 0c564d19..47e92a9c 100644
+--- a/CMakeLists.txt
++++ b/CMakeLists.txt
+@@ -247,20 +247,20 @@ else()
+    message(STATUS "Using struct Elf in libdwarf.h, no actual elf.h used")
+ endif()
+ 
+-check_c_source_runs("
+-  static unsigned foo( unsigned x, 
+-      __attribute__ ((unused)) int y)
+-  {  
+-      unsigned x2 = x + 1;
+-      return x2;
+-  } 
++# check_c_source_runs("
++#   static unsigned foo( unsigned x, 
++#       __attribute__ ((unused)) int y)
++#   {  
++#       unsigned x2 = x + 1;
++#       return x2;
++#   } 
+   
+-  int main(void) {
+-      unsigned y = 0;
+-      y = foo(12,y);
+-      return 0;
+-  }"    HAVE_UNUSED_ATTRIBUTE)
+-message(STATUS "Checking compiler supports __attribute__ unused... ${HAVE_UNUSED_ATTRIBUTE}")
++#   int main(void) {
++#       unsigned y = 0;
++#       y = foo(12,y);
++#       return 0;
++#   }"    HAVE_UNUSED_ATTRIBUTE)
++# message(STATUS "Checking compiler supports __attribute__ unused... ${HAVE_UNUSED_ATTRIBUTE}")
+ 
+ check_c_source_compiles([=[
+   #include "stdafx.h"
+@@ -320,16 +320,16 @@ if (HAVE_ZLIB)
+   set(DW_FZLIB "z")
+ endif()
+ 
+-check_c_source_compiles([=[
+-#include <stdint.h>
+-int main()
+-{
+-    intptr_t p; 
+-    p = 27;
+-    return 0;
+-}]=] HAVE_INTPTR_T)
++# check_c_source_compiles([=[
++# #include <stdint.h>
++# int main()
++# {
++#     intptr_t p; 
++#     p = 27;
++#     return 0;
++# }]=] HAVE_INTPTR_T)
+ 
+-message(STATUS "CMAKE_SIZEOF_VOID_P ... " ${CMAKE_SIZEOF_VOID_P} )
++# message(STATUS "CMAKE_SIZEOF_VOID_P ... " ${CMAKE_SIZEOF_VOID_P} )
+ 
+ # libdwarf default-disabled shared
+ option(BUILD_SHARED "build shared library libdwarf.so and use it if present" FALSE)
+@@ -396,15 +396,12 @@ list(APPEND CMAKE_REQUIRED_INCLUDES ${LIBELF_INCLUDE_DIRS})
+ 
+ configure_file(config.h.in.cmake config.h)
+ 
+-if(BUILD_NON_SHARED)
+-	set(DWARF_TARGETS dwarf-static)
+-	set(DWARF_TYPES STATIC)
+-	set(dwarf-target dwarf-static)
+-endif()
+-if(BUILD_SHARED)
+-	list(APPEND DWARF_TARGETS dwarf-shared)
+-	list(APPEND DWARF_TYPES SHARED)
+-	set(dwarf-target dwarf-shared)
++set(DWARF_TARGETS dwarf)
++set(dwarf-target dwarf)
++if(BUILD_SHARED_LIBS)
++	set(DWARF_TYPES SHARED)
++else()
++  set(DWARF_TYPES STATIC)
+ endif()
+ 
+ add_subdirectory(libdwarf)
+diff --git a/cmake/FindLibElf.cmake b/cmake/FindLibElf.cmake
+index 777d7aa0..21c9fe9a 100644
+--- a/cmake/FindLibElf.cmake
++++ b/cmake/FindLibElf.cmake
+@@ -58,9 +58,10 @@ endif()
+ include (FindPackageHandleStandardArgs)
+ 
+ # handle the QUIETLY and REQUIRED arguments and set LIBELF_FOUND to TRUE if all listed variables are TRUE
+-FIND_PACKAGE_HANDLE_STANDARD_ARGS(LibElf DEFAULT_MSG
+-  LIBELF_LIBRARIES
+-  LIBELF_INCLUDE_DIRS)
++FIND_PACKAGE_HANDLE_STANDARD_ARGS(LibElf
++  FOUND_VAR LIBELF_FOUND
++  REQUIRED_VARS LIBELF_LIBRARIES LIBELF_INCLUDE_DIRS
++)
+ 
+ set(CMAKE_REQUIRED_LIBRARIES elf)
+ include(CheckCSourceCompiles)
+@@ -73,4 +74,12 @@ int main() {
+ }" ELF_GETSHDRSTRNDX)
+ unset(CMAKE_REQUIRED_LIBRARIES)
+ 
++if (LIBELF_FOUND AND NOT TARGET libelf::libelf)
++  add_library(libelf::libelf UNKNOWN IMPORTED)
++  set_target_properties(libelf::libelf PROPERTIES
++      IMPORTED_LOCATION "${LIBELF_LIBRARIES}"
++      INTERFACE_INCLUDE_DIRECTORIES "${LIBELF_INCLUDE_DIRS}"
++  )
++endif()
++
+ mark_as_advanced(LIBELF_INCLUDE_DIRS LIBELF_LIBRARIES ELF_GETSHDRSTRNDX)
+diff --git a/dwarfdump/CMakeLists.txt b/dwarfdump/CMakeLists.txt
+index 8a019bd9..6d5e8ea2 100644
+--- a/dwarfdump/CMakeLists.txt
++++ b/dwarfdump/CMakeLists.txt
+@@ -188,9 +188,9 @@ if (DO_TESTING)
+     add_test(NAME selfdwarfdumpelf COMMAND sh -c "${execelfdd} -vvv -a ${elfobj} | head -700 > junk.testoutelf ; diff ${elfbase} junk.testoutelf" )
+ endif()
+ 
+-if(${CMAKE_SIZEOF_VOID_P} EQUAL 8)
+-	set(SUFFIX 64)
+-endif()
++# if(${CMAKE_SIZEOF_VOID_P} EQUAL 8)
++# 	set(SUFFIX 64)
++# endif()
+ set(LIBDIR lib${SUFFIX})
+ set(BINDIR bin${SUFFIX})
+ 
+diff --git a/libdwarf/CMakeLists.txt b/libdwarf/CMakeLists.txt
+index 76b13049..a3835344 100644
+--- a/libdwarf/CMakeLists.txt
++++ b/libdwarf/CMakeLists.txt
+@@ -82,11 +82,8 @@ set_source_group(CONFIGURATION_FILES "Configuration Files"
+     ${CMAKE_SOURCE_DIR}/config.h.in.cmake 
+     ${CMAKE_BINARY_DIR}/config.h)
+ 
+-
+-	
+ list(LENGTH DWARF_TARGETS targetCount)
+ math(EXPR targetCount "${targetCount} - 1")
+-list(APPEND DWARF_LIBS ${LIBELF_LIBRARIES})
+ if(UNIX)
+     list(APPEND DWARF_LIBS z)
+ endif()
+@@ -98,22 +95,23 @@ foreach(i RANGE ${targetCount})
+ 
+ 	set_folder(${target} libdwarf)
+ 	target_include_directories(${target} PUBLIC 
+-            ${LIBELF_INCLUDE_DIRS})
+-        target_compile_options(${target} PRIVATE ${DW_FWALL})
++        $<INSTALL_INTERFACE:include/libdwarf>
++    )
++    target_compile_options(${target} PRIVATE ${DW_FWALL})
+ 	msvc_posix(${target})
+ 
+-	target_link_libraries(${target} PUBLIC ${LIBELF_LIBRARIES})
++	target_link_libraries(${target} PUBLIC libelf::libelf)
+ 	
+ 	set_target_properties(${target} PROPERTIES OUTPUT_NAME dwarf)
+ 
+-	set(SUFFIX $<$<EQUAL:${CMAKE_SIZEOF_VOID_P},8>:64>)
+-	set(LIBDIR lib${SUFFIX})
+-	set(BINDIR bin${SUFFIX})
++	# set(SUFFIX $<$<EQUAL:${CMAKE_SIZEOF_VOID_P},8>:64>)
++	# set(LIBDIR lib${SUFFIX})
++	# set(BINDIR bin${SUFFIX})
+ 
+-	install(TARGETS ${target}
+-		RUNTIME DESTINATION ${BINDIR}		
+-		LIBRARY DESTINATION ${LIBDIR}
+-		ARCHIVE DESTINATION ${LIBDIR})
++	# install(TARGETS ${target}
++	# 	RUNTIME DESTINATION ${BINDIR}		
++	# 	LIBRARY DESTINATION ${LIBDIR}
++	# 	ARCHIVE DESTINATION ${LIBDIR})
+ endforeach()
+ 
+ if (DO_TESTING)
+@@ -141,20 +139,44 @@ endif()
+ # for cmake before cmake 3.13. This also works
+ # for newer cmake.
+ add_custom_target(dd DEPENDS ${DWARF_TARGETS} dwarfdump)
++
++include(CMakePackageConfigHelpers)
++configure_package_config_file(
++    cmake/libdwarf-config.cmake libdwarf-config.cmake
++    INSTALL_DESTINATION lib/cmake/${PROJECT_NAME}
++)
++
+ install(TARGETS ${DWARF_TARGETS} EXPORT libdwarfTargets
+     ARCHIVE DESTINATION lib
+-    LIBRARY DESTINATION lib)
++    LIBRARY DESTINATION lib
++)
++
+ install(EXPORT libdwarfTargets
+     FILE libdwarf-targets.cmake
+     NAMESPACE libdwarf::
+     DESTINATION lib/cmake/libdwarf
+ )
++
++configure_package_config_file(
++    cmake/libdwarf-config.cmake libdwarf-config.cmake
++    INSTALL_DESTINATION lib/cmake/libdwarf
++)
++
+ install(
+-    FILES cmake/libdwarf-config.cmake
++    FILES ${CMAKE_CURRENT_BINARY_DIR}/libdwarf-config.cmake
+     DESTINATION lib/cmake/libdwarf
+ )
++
+ install(DIRECTORY libdwarf DESTINATION include/
+     FILES_MATCHING PATTERN "*.h")
++
++install(
++    FILES ${CMAKE_CURRENT_BINARY_DIR}/libdwarf.h
++          dwarf.h
++    DESTINATION include/libdwarf
++)
++
+ install(
+-    FILES ${CMAKE_CURRENT_BINARY_DIR}/libdwarf/libdwarf.h
+-    DESTINATION include/libdwarf)
++    FILES ${CMAKE_SOURCE_DIR}/cmake/FindLibElf.cmake
++    DESTINATION ${CMAKE_INSTALL_PREFIX}/lib/cmake/libdwarf
++)
+\ No newline at end of file
+diff --git a/libdwarf/cmake/libdwarf-config.cmake b/libdwarf/cmake/libdwarf-config.cmake
+index 604c563c..faaf948c 100644
+--- a/libdwarf/cmake/libdwarf-config.cmake
++++ b/libdwarf/cmake/libdwarf-config.cmake
+@@ -1,3 +1,11 @@
+-if (NOT TARGET libdwarf::libdwarf)
+-    include(${CMAKE_CURRENT_LIST_DIR}/libdwarf-targets.cmake)
+-endif()
++@PACKAGE_INIT@
++
++get_filename_component(_CURRENT_PATH "${CMAKE_CURRENT_LIST_FILE}" PATH)
++list(APPEND CMAKE_MODULE_PATH ${_CURRENT_PATH})
++
++set(DWARF_WITH_LIBELF ON)
++find_package(LibElf REQUIRED)
++
++include("${CMAKE_CURRENT_LIST_DIR}/@PROJECT_NAME@-targets.cmake")
++
++check_required_components("@PROJECT_NAME@")
+\ No newline at end of file

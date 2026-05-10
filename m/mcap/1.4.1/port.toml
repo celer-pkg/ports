@@ -1,0 +1,9 @@
+[package]
+  url = "https://github.com/foxglove/mcap.git"
+  ref = "releases/cpp/v1.4.1"
+  depth = 1
+
+[[build_configs]]
+  build_system = "nobuild"
+  system_name = "linux"
+  dependencies = ["lz4@1.9.4", "zstd@1.5.7"]
