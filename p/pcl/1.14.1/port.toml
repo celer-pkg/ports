@@ -1,0 +1,9 @@
+[package]
+  url = "https://github.com/PointCloudLibrary/pcl.git"
+  ref = "pcl-1.14.1"
+  depth = 1
+
+[[build_configs]]
+  build_system = "cmake"
+  dependencies = ["eigen@3.4.0", "boost@1.83.0", "flann@1.9.2"]
+  options = ["-DWITH_OPENGL=OFF"]

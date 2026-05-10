@@ -1,0 +1,8 @@
+[package]
+  url = "https://github.com/leethomason/tinyxml2.git"
+  ref = "10.0.0"
+  depth = 1
+
+[[build_configs]]
+  build_system = "cmake"
+  options = ["-Dtinyxml2_BUILD_TESTING=OFF"]

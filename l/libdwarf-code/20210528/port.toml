@@ -1,0 +1,13 @@
+[package]
+  url = "https://github.com/davea42/libdwarf-code.git"
+  ref = "20210528"
+  depth = 1
+
+[[build_configs]]
+  build_system = "cmake"
+  patches = ["fix_build_result.patch"]
+  dependencies = ["elfutils@0.194"]
+  options = [
+    "-DCMAKE_INSTALL_LIBDIR=lib",
+    "-DCMAKE_INSTALL_BINDIR=bin"
+  ]

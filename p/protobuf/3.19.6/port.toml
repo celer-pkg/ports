@@ -1,0 +1,16 @@
+[package]
+  url = "https://github.com/protocolbuffers/protobuf.git"
+  ref = "v3.19.6"
+  depth = 1
+  src_dir = "cmake"
+
+[[build_configs]]
+  build_system = "cmake"
+  cxx_standard = "c++17"
+  envs = ["PATH=${BUILD_DIR}/bin"]
+  options = [
+    "-DTHREADS_PREFER_PTHREAD_FLAG=TRUE",
+    "-Dprotobuf_BUILD_TESTS=OFF",
+    "-Dprotobuf_BUILD_EXAMPLES=OFF",
+  ]
+  dev_dependencies = ["protobuf@3.19.6"]
