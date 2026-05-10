@@ -5,6 +5,7 @@
 
 [[build_configs]]
   build_system = "cmake"
+  system_name = "linux"
   patches = ["fix_cmake.patch"]
   dependencies = ["mcap@1.4.1"]
   options = ["-Dmcap_SOURCE_DIR=${BUILDTREES_DIR}/mcap@1.4.1/src"]

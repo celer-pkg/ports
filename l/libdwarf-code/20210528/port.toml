@@ -5,6 +5,7 @@
 
 [[build_configs]]
   build_system = "cmake"
+  system_name = "linux"
   patches = ["fix_build_result.patch"]
   dependencies = ["elfutils@0.194"]
   options = [
