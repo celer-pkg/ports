@@ -1,6 +1,6 @@
 [package]
   url = "https://gitlab.com/libeigen/eigen.git"
-  ref = "3.4.0"
+  ref = "3.3.7"
   depth = 1
 
 [[build_configs]]
