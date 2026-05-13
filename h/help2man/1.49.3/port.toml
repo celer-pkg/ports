@@ -1,14 +1,9 @@
 [package]
-  url = "https://ftp.gnu.org/gnu/libtool/libtool-2.5.4.tar.xz"
-  ref = "2.5.4"
-  depth = 1
-  build_tool = true
+  url = "https://ftp.gnu.org/gnu/help2man/help2man-1.49.3.tar.xz"
+  ref = "v1.49.3"
 
 [[build_configs]]
-  system_name = "linux"
   build_system = "makefiles"
-  dependencies = ["m4@1.4.19"]
-  options = ["--disable-nls"]
   envs = [
     "AUTOCONF=:",   # Avoid regenerating configure.ac
     "AUTOMAKE=:",   # Avoid regenerating Makefile.in

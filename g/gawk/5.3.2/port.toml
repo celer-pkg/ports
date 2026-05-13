@@ -7,3 +7,10 @@
   system_name = "linux"
   system_processor = "x86_64"
   build_system = "makefiles"
+  envs = [
+    "AUTOCONF=:",   # Avoid regenerating configure.ac
+    "AUTOMAKE=:",   # Avoid regenerating Makefile.in
+    "ACLOCAL=:",    # Avoid regenerating aclocal.m4
+    "AUTOHEADER=:", # Avoid regenerating config.h.in
+    "MAKEINFO=:",   # Avoid regenerating *.info
+  ]
