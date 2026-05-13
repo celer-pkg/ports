@@ -7,7 +7,14 @@
   build_system = "makefiles"
   dependencies = ["gnulib@1.0"]
   dev_dependencies = ["automake@1.18"]
-  envs = ["GNULIB_SRCDIR=${BUILDTREES_DIR}/gnulib@master/src"]
+  envs = [
+    "GNULIB_SRCDIR=${BUILDTREES_DIR}/gnulib@master/src",
+    "AUTOCONF=:",   # Avoid regenerating configure.ac
+    "AUTOMAKE=:",   # Avoid regenerating Makefile.in
+    "ACLOCAL=:",    # Avoid regenerating aclocal.m4
+    "AUTOHEADER=:", # Avoid regenerating config.h.in
+    "MAKEINFO=:",   # Avoid regenerating *.info
+  ]
   options = [
     "--disable-java",
     "--disable-d",
