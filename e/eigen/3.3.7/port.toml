@@ -5,4 +5,5 @@
 
 [[build_configs]]
   build_system = "cmake"
+  cxx_standard = "c++11"
   options = ["-DEIGEN_TEST_NO_OPENGL=1", "-DBUILD_TESTING=OFF"]
