@@ -50,3 +50,23 @@ ref = "5.1.6"
       "--enable-pic",
       "--enable-gpl",
   ]
+
+# ================ build for QNX ================ #
+[[build_configs]]
+  system_name = "qnx"
+  build_system = "makefiles"
+  envs = [
+      "CFLAGS=-Wno-pointer-sign -Wno-incompatible-pointer-types -Wno-stringop-overread -Wno-stringop-truncation",
+  ]
+  dev_dependencies = ["nasm@2.16.03"]
+  options = [
+      "--sysroot=${SYSROOT}",
+      "--cross-prefix=${CROSSTOOL_PREFIX}",
+      "--arch=${SYSTEM_PROCESSOR}",
+      "--target-os=qnx",
+      "--pkg-config=pkgconf",
+      "--enable-cross-compile",
+      "--disable-doc",
+      "--enable-pic",
+      "--enable-gpl",
+  ]
