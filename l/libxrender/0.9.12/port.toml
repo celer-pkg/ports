@@ -1,15 +1,16 @@
 [package]
-url = "https://gitlab.freedesktop.org/xorg/lib/libxrender.git"
-ref = "libXrender-0.9.12"
-depth = 1
+  url = "https://gitlab.freedesktop.org/xorg/lib/libxrender.git"
+  ref = "libXrender-0.9.12"
+  depth = 1
 
 [[build_configs]]
-system_name = "linux"
-build_system = "makefiles"
-dependencies = ["libx11@1.8.11"]
-dev_dependencies = ["macros@1.20.2", "pkgconf@2.4.3"]
-envs = ["xorg_cv_malloc0_returns_null=yes", "NOCONFIGURE=1"]
-pre_configure = ["./autogen.sh"]
+  system_name = "linux"
+  build_system = "makefiles"
+  dependencies = ["libx11@1.8.11"]
+  dev_dependencies = ["macros@1.20.2", "pkgconf@2.4.3"]
+  envs = ["xorg_cv_malloc0_returns_null=yes", "NOCONFIGURE=1"]
+  pre_configure = ["./autogen.sh"]
+  options = ["--host=${HOST}"]
 
 # Note:
 # This library support linux only.

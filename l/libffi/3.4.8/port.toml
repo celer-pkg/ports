@@ -11,9 +11,10 @@ dev_dependencies = ["macros@1.20.2", "libtool@2.5.4"]
 envs = ["NOCONFIGURE=1"]
 pre_configure = ["./autogen.sh"]
 options = [
-    "--disable-docs",
-    "--enable-portable-binary",
-    "--disable-multi-os-directory",
+  "--host=${HOST}",
+  "--disable-docs",
+  "--enable-portable-binary",
+  "--disable-multi-os-directory",
 ]
 
 # =============== build for windows ============ #
@@ -24,22 +25,22 @@ dev_dependencies = ["macros@1.20.2", "libtool@2.5.4"]
 envs = ["NOCONFIGURE=1"]
 pre_configure = ["./autogen.sh"]
 pre_install = [
-    "cmake -E rename ${BUILD_DIR}/.libs/libffi-8.lib ${BUILD_DIR}/.libs/libffi.lib",
+  "cmake -E rename ${BUILD_DIR}/.libs/libffi-8.lib ${BUILD_DIR}/.libs/libffi.lib",
 ]
 post_install = [
-    "cmake -E make_directory ${PACKAGE_DIR}/bin",
-    "cmake -E copy ${BUILD_DIR}/.libs/libffi.lib ${PACKAGE_DIR}/lib/libffi.lib",
-    "cmake -E rename ${PACKAGE_DIR}/lib/libffi-8.dll ${PACKAGE_DIR}/bin/libffi-8.dll",
+  "cmake -E make_directory ${PACKAGE_DIR}/bin",
+  "cmake -E copy ${BUILD_DIR}/.libs/libffi.lib ${PACKAGE_DIR}/lib/libffi.lib",
+  "cmake -E rename ${PACKAGE_DIR}/lib/libffi-8.dll ${PACKAGE_DIR}/bin/libffi-8.dll",
 ]
 options = [
-    "CC=\"${REPO_DIR}/msvcc.sh -m64\"",
-    "CXX=\"${REPO_DIR}/msvcc.sh -m64\"",
-    "LD=link",
-    "CPP=\"cl -nologo -EP\"",
-    "CXXCPP=\"cl -nologo -EP\"",
-    "CPPFLAGS=\"-DFFI_BUILDING_DLL\"",
-    "--disable-docs",
-    "--enable-portable-binary",
-    "--disable-multi-os-directory",
-    "--disable-dependency-tracking",
+  "CC=\"${REPO_DIR}/msvcc.sh -m64\"",
+  "CXX=\"${REPO_DIR}/msvcc.sh -m64\"",
+  "LD=link",
+  "CPP=\"cl -nologo -EP\"",
+  "CXXCPP=\"cl -nologo -EP\"",
+  "CPPFLAGS=\"-DFFI_BUILDING_DLL\"",
+  "--disable-docs",
+  "--enable-portable-binary",
+  "--disable-multi-os-directory",
+  "--disable-dependency-tracking",
 ]

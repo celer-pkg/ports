@@ -1,11 +1,12 @@
 [package]
-url = "git://git.savannah.gnu.org/readline.git"
-ref = "readline-8.2"
-depth = 1
+  url = "git://git.savannah.gnu.org/readline.git"
+  ref = "readline-8.2"
+  depth = 1
 
 [[build_configs]]
-system_name = "linux"
-build_system = "makefiles"
+  system_name = "linux"
+  build_system = "makefiles"
+  options = ["--host=${HOST}"]
 
 # Note:
 # This library support linux only.

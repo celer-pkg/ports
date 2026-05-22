@@ -1,14 +1,17 @@
 [package]
-url = "https://github.com/p11-glue/p11-kit.git"
-ref = "0.25.5"
-depth = 1
+  url = "https://github.com/p11-glue/p11-kit.git"
+  ref = "0.25.5"
+  depth = 1
 
 [[build_configs]]
-system_name = "linux"
-build_system = "makefiles"
-dependencies = ["libffi@3.4.8"]
-dev_dependencies = ["pkgconf@2.4.3"]
-options = ["--without-libtasn1"]
+  system_name = "linux"
+  build_system = "makefiles"
+  dependencies = ["libffi@3.4.8"]
+  dev_dependencies = ["pkgconf@2.4.3"]
+  options = [
+    "--host=${HOST}",
+    "--without-libtasn1",
+  ]
 
 # Note:
 # This library support linux only.

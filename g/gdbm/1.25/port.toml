@@ -5,5 +5,6 @@
 [[build_configs]]
   build_system = "makefiles"
   system_name  = "linux"
+  options = ["--host=${HOST}"]
 
   # freetype2 and harfbuzz rely on each other by default.

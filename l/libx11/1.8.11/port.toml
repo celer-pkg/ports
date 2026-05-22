@@ -1,20 +1,20 @@
 [package]
-url = "https://gitlab.freedesktop.org/xorg/lib/libx11.git"
-ref = "libX11-1.8.11"
-depth = 1
+  url = "https://gitlab.freedesktop.org/xorg/lib/libx11.git"
+  ref = "libX11-1.8.11"
+  depth = 1
 
 [[build_configs]]
-system_name = "linux"
-build_system = "makefiles"
-dependencies = [
-    "xorgproto@2024.1",
-    "libxcb@1.17.0",
-    "libxtrans@1.5.2"
-]
-dev_dependencies = ["macros@1.20.2", "libxtrans@1.5.2"]
-options = ["--with-keysymdefdir=${DEPS_DIR}/include/X11"]
-envs = ["NOCONFIGURE=1"]
-pre_configure = ["./autogen.sh"]
+  system_name = "linux"
+  build_system = "makefiles"
+  dependencies = [
+  "xorgproto@2024.1",
+  "libxcb@1.17.0",
+  "libxtrans@1.5.2"
+  ]
+  dev_dependencies = ["macros@1.20.2", "libxtrans@1.5.2"]
+  options = ["--host=${HOST}", "--with-keysymdefdir=${DEPS_DIR}/include/X11"]
+  envs = ["NOCONFIGURE=1"]
+  pre_configure = ["./autogen.sh"]
 
 # Note:
 # This library support linux only.

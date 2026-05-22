@@ -1,6 +1,8 @@
 [package]
-url = "https://www.x.org/releases/individual/xcb/libpthread-stubs-0.4.tar.gz"
-ref = "0.4"
+    url = "https://www.x.org/releases/individual/xcb/libpthread-stubs-0.4.tar.gz"
+    ref = "0.4"
 
 [[build_configs]]
-build_system = "makefiles"
+  system_name = "linux"
+  build_system = "makefiles"
+  options = ["--host=${HOST}"]

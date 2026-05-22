@@ -1,17 +1,17 @@
 [package]
-url = "https://archive.mozilla.org/pub/security/nss/releases/NSS_3_55_RTM/src/nss-3.55.tar.gz"
-ref = "3.55"
-src_dir = "nss"
+  url = "https://archive.mozilla.org/pub/security/nss/releases/NSS_3_55_RTM/src/nss-3.55.tar.gz"
+  ref = "3.55"
+  src_dir = "nss"
 
 # ============== build for aarch64-linux ============ #
 [[build_configs]]
-system_name = "linux"
-system_processor = "aarch64"
-patches = ["nss-standalone-1.patch"]
-build_system = "gyp"
-dependencies = ["sqlite3@3.49.0", "zlib@1.3.1", "nspr@4.36"]
-dev_dependencies = ["nspr@4.36"]
-options = [
+  system_name = "linux"
+  system_processor = "aarch64"
+  patches = ["nss-standalone-1.patch"]
+  build_system = "gyp"
+  dependencies = ["sqlite3@3.49.0", "zlib@1.3.1", "nspr@4.36"]
+  dev_dependencies = ["nspr@4.36"]
+  options = [
     "-v",
     "-g",
     "--disable-tests",
@@ -20,18 +20,18 @@ options = [
     "-Duse_hw_aes=1",
     "-Duse_arm_neon=1",
     "-Dsign_libs=0",
-]
+  ]
 
 # ============== build for x86_64-linux ============ #
 [[build_configs]]
-system_name = "linux"
-system_processor = "x86_64"
-patches = ["nss-standalone-1.patch"]
-build_system = "gyp"
-dependencies = ["sqlite3@3.49.0", "zlib@1.3.1", "nspr@4.36"]
-dev_dependencies = ["nspr@4.36"]
-envs = ["CFLAGS=-Wno-error", "CXXFLAGS=-Wno-error"]
-options = [
+  system_name = "linux"
+  system_processor = "x86_64"
+  patches = ["nss-standalone-1.patch"]
+  build_system = "gyp"
+  dependencies = ["sqlite3@3.49.0", "zlib@1.3.1", "nspr@4.36"]
+  dev_dependencies = ["nspr@4.36"]
+  envs = ["CFLAGS=-Wno-error", "CXXFLAGS=-Wno-error"]
+  options = [
     "-v",
     "-g",
     "--disable-tests",
@@ -40,7 +40,7 @@ options = [
     "-Duse_hw_aes=1",
     "-Duse_arm_neon=1",
     "-Dsign_libs=0",
-]
+  ]
 
 # Note:1
 # This library support linux only.

@@ -9,7 +9,10 @@
   system_name = "linux"
   system_processor = "aarch64"
   build_system = "makefiles"
-  options = ["--with-cross-build=${BUILD_DIR}/../x86_64-linux-dev"]
+  options = [
+    "--host=${HOST}",
+    "--with-cross-build=${BUILD_DIR}/../x86_64-linux-dev",
+  ]
   dev_dependencies = ["icu@75.1"]
 
 # ============= build for x86_64-linux ============= #
@@ -17,6 +20,7 @@
   system_name = "linux"
   system_processor = "x86_64"
   build_system = "makefiles"
+  options = ["--host=${HOST}"]
 
 # ============= build for windows ================== #
 [[build_configs]]

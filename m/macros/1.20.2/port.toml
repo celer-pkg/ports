@@ -1,10 +1,13 @@
 [package]
-url = "https://gitlab.freedesktop.org/xorg/util/macros.git"
-ref = "util-macros-1.20.2"
-depth = 1
+  url = "https://gitlab.freedesktop.org/xorg/util/macros.git"
+  ref = "util-macros-1.20.2"
+  depth = 1
 
 [[build_configs]]
-build_system = "makefiles"
-dev_dependencies = ["automake@1.18"]
-envs = ["NOCONFIGURE=1"]
-pre_configure = ["./autogen.sh"]
+  build_system = "makefiles"
+  dev_dependencies = ["automake@1.18"]
+  envs = ["NOCONFIGURE=1"]
+  pre_configure = ["./autogen.sh"]
+
+# Note:
+# This library support linux only.
