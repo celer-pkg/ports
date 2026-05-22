@@ -54,7 +54,7 @@
     "CXX=ntoaarch64-g++",
   ]
   post_configure = [
-    "sed -i 's|CNF_EX_LIBS=-ldl -pthread|CNF_EX_LIBS=-lsocket -pthread|' ${BUILD_DIR}/Makefile",
+    "sed -i 's|CNF_EX_LIBS=-ldl -pthread|CNF_EX_LIBS=-lsocket -lm -pthread|' ${BUILD_DIR}/Makefile",
   ]
   options = [
     "linux-aarch64",
