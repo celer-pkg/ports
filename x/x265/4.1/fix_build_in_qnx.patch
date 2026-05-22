@@ -1,0 +1,44 @@
+diff --git a/source/CMakeLists.txt b/source/CMakeLists.txt
+index 5c6dda9..51257e7 100755
+--- a/source/CMakeLists.txt
++++ b/source/CMakeLists.txt
+@@ -7,10 +7,10 @@ endif()
+ message(STATUS "cmake version ${CMAKE_VERSION}")
+ if(POLICY CMP0025)
+-    cmake_policy(SET CMP0025 OLD) # report Apple's Clang as just Clang
++    cmake_policy(SET CMP0025 NEW) # report Apple's Clang as just Clang
+ endif()
+ if(POLICY CMP0042)
+     cmake_policy(SET CMP0042 NEW) # MACOSX_RPATH
+ endif()
+ if(POLICY CMP0054)
+-    cmake_policy(SET CMP0054 OLD) # Only interpret if() arguments as variables or keywords when unquoted
++    cmake_policy(SET CMP0054 NEW) # Only interpret if() arguments as variables or keywords when unquoted
+ endif()
+@@ -754,7 +754,7 @@ if((MSVC_IDE OR XCODE OR GCC) AND ENABLE_ASSEMBLY)
+                 add_custom_command(
+                     OUTPUT ${ASM}.${SUFFIX}
+                     COMMAND ${CMAKE_CXX_COMPILER}
+-                    ARGS ${ARM_ARGS} ${ASM_FLAGS} ${AARCH64_NEON_DOTPROD_FLAG} -c ${ASM_SRC} -o ${ASM}.${SUFFIX}
++                    ARGS -V${CMAKE_CXX_COMPILER_TARGET} ${ARM_ARGS} ${ASM_FLAGS} ${AARCH64_NEON_DOTPROD_FLAG} -c ${ASM_SRC} -o ${ASM}.${SUFFIX}
+                     DEPENDS ${ASM_SRC})
+             endforeach()
+         endif()
+@@ -766,7 +766,7 @@ if((MSVC_IDE OR XCODE OR GCC) AND ENABLE_ASSEMBLY)
+                 add_custom_command(
+                     OUTPUT ${ASM}.${SUFFIX}
+                     COMMAND ${CMAKE_CXX_COMPILER}
+-                    ARGS ${ARM_ARGS} ${ASM_FLAGS} ${AARCH64_SVE_FLAG} -c ${ASM_SRC} -o ${ASM}.${SUFFIX}
++                    ARGS -V${CMAKE_CXX_COMPILER_TARGET} ${ARM_ARGS} ${ASM_FLAGS} ${AARCH64_SVE_FLAG} -c ${ASM_SRC} -o ${ASM}.${SUFFIX}
+                     DEPENDS ${ASM_SRC})
+             endforeach()
+         endif()
+@@ -778,7 +778,7 @@ if((MSVC_IDE OR XCODE OR GCC) AND ENABLE_ASSEMBLY)
+                 add_custom_command(
+                     OUTPUT ${ASM}.${SUFFIX}
+                     COMMAND ${CMAKE_CXX_COMPILER}
+-                    ARGS ${ARM_ARGS} ${ASM_FLAGS} ${AARCH64_SVE2_FLAG} -c ${ASM_SRC} -o ${ASM}.${SUFFIX}
++                    ARGS -V${CMAKE_CXX_COMPILER_TARGET} ${ARM_ARGS} ${ASM_FLAGS} ${AARCH64_SVE2_FLAG} -c ${ASM_SRC} -o ${ASM}.${SUFFIX}
+                     DEPENDS ${ASM_SRC})
+             endforeach()
+         endif()

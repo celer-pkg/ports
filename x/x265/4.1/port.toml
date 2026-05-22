@@ -1,13 +1,32 @@
 [package]
-url = "https://bitbucket.org/multicoreware/x265_git.git"
-ref = "4.1"
-depth = 1
-src_dir = "source"
+  url = "https://bitbucket.org/multicoreware/x265_git.git"
+  ref = "4.1"
+  depth = 1
+  src_dir = "source"
 
 [[build_configs]]
-build_system = "cmake"
-options = [
+  system_name = "linux"
+  build_system = "cmake"
+  options = [
     "-DENABLE_ASSEMBLY=OFF",
     "-DCMAKE_EXE_LINKER_FLAGS=-ldl",
     "-DCMAKE_SHARED_LINKER_FLAGS=-ldl"
-]
+  ]
+
+[[build_configs]]
+  system_name = "windows"
+  build_system = "cmake"
+  options = [
+    "-DENABLE_ASSEMBLY=OFF",
+    "-DCMAKE_EXE_LINKER_FLAGS=-ldl",
+    "-DCMAKE_SHARED_LINKER_FLAGS=-ldl"
+  ]
+
+[[build_configs]]
+  system_name = "qnx"
+  build_system = "cmake"
+  patches = ["fix_build_in_qnx.patch"]
+  options = [
+    "-DENABLE_ASSEMBLY=OFF",
+    "-DENABLE_HDR10_PLUS=OFF"
+  ]
