@@ -6,6 +6,7 @@
   system_name = "linux"
   build_system = "makefiles"
   dev_dependencies = ["macros@1.20.2", "automake@1.18", "libtool@2.5.4"]
+  dependencies = ["libx11@1.8.11"]
   options = ["--host=${HOST}"]
 
 # Note:

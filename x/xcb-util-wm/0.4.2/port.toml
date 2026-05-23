@@ -7,6 +7,7 @@
   system_name = "linux"
   build_system = "makefiles"
   dev_dependencies = ["macros@1.20.2", "libtool@2.5.4"]
+  dependencies = ["libxcb@1.17.0"]
   options = ["--host=${HOST}"]
 
 # Note:
