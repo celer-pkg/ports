@@ -7,10 +7,10 @@ depth = 1
 system_name = "linux"
 build_system = "cmake"
 dependencies = [
-    "extra-cmake-modules@6.11.0",
-    "xcb-util-keysyms@0.4.1",
-    "libxcb@1.17.0",
-    "xcb-util@0.4.1",
+  "extra-cmake-modules@6.11.0",
+  "xcb-util-keysyms@0.4.1",
+  "libxcb@1.17.0",
+  "xcb-util@0.4.1",
 ]
 
 # Note:

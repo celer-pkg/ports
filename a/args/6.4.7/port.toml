@@ -6,6 +6,6 @@
 [[build_configs]]
   build_system = "cmake"
   options = [
-    "-DARGS_BUILD_EXAMPLES=OFF",
-    "-DARGS_BUILD_UNITTESTS=OFF",
+  "-DARGS_BUILD_EXAMPLES=OFF",
+  "-DARGS_BUILD_UNITTESTS=OFF",
   ]

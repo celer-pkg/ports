@@ -1,10 +1,11 @@
 [package]
-url = "https://www.ijg.org/files/jpegsrc.v9f.tar.gz"
-archive = "jpeg-9f.tar.gz"
-ref = "9f"
+  url = "https://www.ijg.org/files/jpegsrc.v9f.tar.gz"
+  archive = "jpeg-9f.tar.gz"
+  ref = "9f"
 
 [[build_configs]]
-build_system = "makefiles"
-post_install_windows = [
+  build_system = "makefiles"
+  post_install_windows = [
     "cmake -E rename ${PACKAGE_DIR}/lib/jpeg.dll.lib ${PACKAGE_DIR}/lib/libjpeg.lib",
-]
+  ]
+  options = ["--host=${HOST}"]

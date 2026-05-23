@@ -1,15 +1,16 @@
 [package]
-url = "https://ftp.gnu.org/gnu/ncurses/ncurses-6.5.tar.gz"
-ref = "6.5"
+  url = "https://ftp.gnu.org/gnu/ncurses/ncurses-6.5.tar.gz"
+  ref = "6.5"
 
 [[build_configs]]
-system_name = "linux"
-build_system = "makefiles"
-build_shared = "--with-shared"
-options = [
-  "--disable-stripping",
-  "--with-termlib",
-]
+  system_name = "linux"
+  build_system = "makefiles"
+  build_shared = "--with-shared"
+  options = [
+    "--host=${HOST}",
+    "--disable-stripping",
+    "--with-termlib",
+  ]
 
 # Note:
 # This library support linux only.
