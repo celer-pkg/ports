@@ -16,6 +16,7 @@
     "cmake -E copy ${BUILD_DIR}/../x86_64-linux-dev/config/nsinstall ${BUILD_DIR}/config",
   ]
   options = [
+    "--host=${HOST}",
     "--enable-64bit",
     "--with-pthreads",
     "--with-mozilla",

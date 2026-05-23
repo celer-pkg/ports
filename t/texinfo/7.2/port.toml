@@ -6,3 +6,4 @@
 [[build_configs]]
   system_name = "linux"
   build_system = "makefiles"
+  options = ["--host=${HOST}"]

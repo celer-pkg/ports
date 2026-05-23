@@ -9,9 +9,9 @@
   dependencies = ["autoconf@2.72"]
   options = ["--disable-nls"]
   envs = [
-    "AUTOCONF=:",   # Avoid regenerating configure.ac
-    "AUTOMAKE=:",   # Avoid regenerating Makefile.in
-    "ACLOCAL=:",    # Avoid regenerating aclocal.m4
-    "AUTOHEADER=:", # Avoid regenerating config.h.in
-    "MAKEINFO=:",   # Avoid regenerating *.info
+  "AUTOCONF=:",   # Avoid regenerating configure.ac
+  "AUTOMAKE=:",   # Avoid regenerating Makefile.in
+  "ACLOCAL=:",    # Avoid regenerating aclocal.m4
+  "AUTOHEADER=:", # Avoid regenerating config.h.in
+  "MAKEINFO=:",   # Avoid regenerating *.info
   ]

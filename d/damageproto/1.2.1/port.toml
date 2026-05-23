@@ -9,3 +9,4 @@
   patches = ["fix_configure.patch"]
   dev_dependencies = ["macros@1.20.2"]
   pre_configure = ["./autogen.sh"]
+  options = ["--host=${HOST}"]

@@ -7,6 +7,7 @@
   system_name = "linux"
   build_system = "makefiles"
   dev_dependencies = ["gperf@3.1"]
+  options = ["--host=${HOST}"]
 
 # Note:
 # This library support linux only.

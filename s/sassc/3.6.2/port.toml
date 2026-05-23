@@ -9,3 +9,4 @@
   pre_configure = ["autoreconf --force --install"]
   dependencies = ["libsass@3.6.6"]
   dev_dependencies = ["autoconf@2.72", "libtool@2.5.4"]
+  options = ["--host=${HOST}"]

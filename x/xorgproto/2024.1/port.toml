@@ -1,12 +1,12 @@
 [package]
-url = "https://gitlab.freedesktop.org/xorg/proto/xorgproto.git"
-ref = "xorgproto-2024.1"
-depth = 1
+  url = "https://gitlab.freedesktop.org/xorg/proto/xorgproto.git"
+  ref = "xorgproto-2024.1"
+  depth = 1
 
 [[build_configs]]
-build_system = "makefiles"
-patches = ["fix_autogen_error.patch"]
-dev_dependencies = ["macros@1.20.2", "pkgconf@2.4.3"]
-options = ["--without-fop", "--enable-option-checking"]
-envs = ["NOCONFIGURE=1"]
-pre_configure = ["./autogen.sh"]
+  build_system = "makefiles"
+  patches = ["fix_autogen_error.patch"]
+  dev_dependencies = ["macros@1.20.2", "pkgconf@2.4.3"]
+  options = ["--host=${HOST}", "--without-fop", "--enable-option-checking"]
+  envs = ["NOCONFIGURE=1"]
+  pre_configure = ["./autogen.sh"]
