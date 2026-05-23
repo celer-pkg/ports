@@ -11,8 +11,9 @@
   patches = ["fix_windows_build.patch"]
   dev_dependencies = ["nasm@2.16.03"]
   options = [
-    "--sysroot=${SYSROOT}",
     "--cross-prefix=${CROSSTOOL_PREFIX}",
+    "--host=${HOST}",
+    "--sysroot=${SYSROOT}",
   ]
 
 [[build_configs]]
@@ -23,8 +24,9 @@
   patches = ["fix_windows_build.patch"]
   dev_dependencies = ["nasm@2.16.03"]
   options = [
-    "--sysroot=${SYSROOT}",
     "--cross-prefix=${CROSSTOOL_PREFIX}",
+    "--host=${HOST}",
+    "--sysroot=${SYSROOT}",
   ]
 
 [[build_configs]]
@@ -34,8 +36,9 @@
   build_static = "--enable-static"
   dev_dependencies = ["nasm@2.16.03"]
   options = [
-    "--host=${HOST}",
     "--cross-prefix=${CROSSTOOL_PREFIX}",
+    "--host=${HOST}",
+    "--sysroot=${SYSROOT}",
   ]
   post_configure = [
     "sed -i 's|^DEPFLAGS=.*|DEPFLAGS=|' ${BUILD_DIR}/config.mak",
