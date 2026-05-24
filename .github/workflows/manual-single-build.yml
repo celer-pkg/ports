@@ -90,12 +90,12 @@ jobs:
           )
           
           # Make check script executable
-          chmod +x .github/scripts/check-platform-match.sh
+          chmod +x .github/scripts/check_platform_match.sh
           
           # Find matching platforms
           MATCHING_PLATFORMS=()
           for platform in "${AVAILABLE_PLATFORMS[@]}"; do
-            if .github/scripts/check-platform-match.sh "$PORT_TOML" "$platform" 2>/dev/null; then
+            if .github/scripts/check_platform_match.sh "$PORT_TOML" "$platform" 2>/dev/null; then
               echo "✓ -- Platform matches: $platform"
               MATCHING_PLATFORMS+=("$platform")
             else

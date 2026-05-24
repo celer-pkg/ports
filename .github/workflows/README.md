@@ -127,7 +127,7 @@ jobs:
 
 ## 🛠️ Scripts
 
-### check-platform-match.sh
+### check_platform_match.sh
 
 TOML parser to check if a port matches platform selectors.
 
@@ -142,8 +142,8 @@ TOML parser to check if a port matches platform selectors.
 
 **Usage:**
 ```bash
-chmod +x .github/scripts/check-platform-match.sh
-.github/scripts/check-platform-match.sh poco/1.14.2/port.toml x86_64-linux-ubuntu-22.04-gcc-11.5.0
+chmod +x .github/scripts/check_platform_match.sh
+.github/scripts/check_platform_match.sh poco/1.14.2/port.toml x86_64-linux-ubuntu-22.04-gcc-11.5.0
 ```
 
 ## 🎯 Best Practices
