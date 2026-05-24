@@ -158,7 +158,7 @@ jobs:
           fi
           mkdir -p "$LOGS_DIR"
 
-          chmod +x .github/scripts/check-platform-match.sh
+          chmod +x .github/scripts/check_platform_match.sh
 
           mapfile -t PORT_TOMLS < <(find "$GROUP" -type f -name port.toml | sort)
           if [ ${#PORT_TOMLS[@]} -eq 0 ]; then
@@ -183,7 +183,7 @@ jobs:
             echo "Checking $PORT_REF for $PLATFORM"
             echo "========================================="
 
-            if .github/scripts/check-platform-match.sh "$PORT_TOML" "$PLATFORM" >"$MATCH_LOG" 2>&1; then
+            if .github/scripts/check_platform_match.sh "$PORT_TOML" "$PLATFORM" >"$MATCH_LOG" 2>&1; then
               MATCHED_COUNT=$((MATCHED_COUNT + 1))
               cat "$MATCH_LOG"
             else

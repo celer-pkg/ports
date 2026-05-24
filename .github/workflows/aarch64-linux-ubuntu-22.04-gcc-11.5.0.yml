@@ -82,8 +82,8 @@ jobs:
             exit 0
           fi
           
-          chmod +x .github/scripts/check-platform-match.sh
-          if .github/scripts/check-platform-match.sh "$PORT_TOML" "$PLATFORM"; then
+          chmod +x .github/scripts/check_platform_match.sh
+          if .github/scripts/check_platform_match.sh "$PORT_TOML" "$PLATFORM"; then
             echo "should_build=true" >> $GITHUB_OUTPUT
           else
             echo "should_build=false" >> $GITHUB_OUTPUT
