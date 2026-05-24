@@ -7,6 +7,7 @@
 [[build_configs]]
   system_name = "linux"
   build_system = "cmake"
+  patches = ["fix_cmake_compat.patch"]
   dev_dependencies = ["nasm@2.16.03"]
   options = [
     "-DENABLE_ASSEMBLY=OFF",
@@ -17,6 +18,7 @@
 [[build_configs]]
   system_name = "windows"
   build_system = "cmake"
+  patches = ["fix_cmake_compat.patch"]
   dev_dependencies = ["nasm@2.16.03"]
   options = [
     "-DENABLE_ASSEMBLY=OFF",
@@ -27,8 +29,8 @@
 [[build_configs]]
   system_name = "qnx"
   build_system = "cmake"
+  patches = ["fix_qnx_build.patch", "fix_cmake_compat.patch"]
   dev_dependencies = ["nasm@2.16.03"]
-  patches = ["fix_build_in_qnx.patch"]
   options = [
     "-DENABLE_ASSEMBLY=OFF",
     "-DENABLE_HDR10_PLUS=OFF"
