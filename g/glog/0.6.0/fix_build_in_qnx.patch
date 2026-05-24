@@ -1,0 +1,64 @@
+diff --git a/src/glog/platform.h b/src/glog/platform.h
+index e614411..1837421 100644
+--- a/src/glog/platform.h
++++ b/src/glog/platform.h
+@@ -50,6 +50,8 @@
+ #define GLOG_OS_NETBSD
+ #elif defined(__OpenBSD__)
+ #define GLOG_OS_OPENBSD
++#elif defined(__QNX__)
++#define GLOG_OS_QNX
+ #else
+ // TODO(hamaji): Add other platforms.
+ #error Platform not supported by glog. Please consider to contribute platform information by submitting a pull request on Github.
+diff --git a/src/logging.cc b/src/logging.cc
+index 4028ccc..fe8bf5b 100644
+--- a/src/logging.cc
++++ b/src/logging.cc
+@@ -95,7 +95,8 @@ using std::fprintf;
+ using std::perror;
+ 
+ #ifdef __QNX__
+-using std::fdopen;
++//using std::fdopen;
++#include <stdio.h>
+ #endif
+ 
+ #ifdef _WIN32
+diff --git a/src/symbolize.cc b/src/symbolize.cc
+index d979b82..e240657 100644
+--- a/src/symbolize.cc
++++ b/src/symbolize.cc
+@@ -115,6 +115,8 @@ _END_GOOGLE_NAMESPACE_
+ #endif
+ #if defined(GLOG_OS_OPENBSD)
+ #include <sys/exec_elf.h>
++#elif defined(__QNX__)
++#include <sys/elf.h>
+ #else
+ #include <elf.h>
+ #endif
+diff --git a/src/symbolize.h b/src/symbolize.h
+index dcbb194..cb89180 100644
+--- a/src/symbolize.h
++++ b/src/symbolize.h
+@@ -63,13 +63,19 @@
+ #if defined(__ELF__)  // defined by gcc
+ #if defined(__OpenBSD__)
+ #include <sys/exec_elf.h>
++#elif defined(__QNX__)
++#include <sys/elf.h>
+ #else
+ #include <elf.h>
+ #endif
+ 
+ #if !defined(ANDROID)
++#if defined(__QNX__)
++#include <sys/link.h>
++#else
+ #include <link.h>  // For ElfW() macro.
+ #endif
++#endif
+ 
+ // For systems where SIZEOF_VOID_P is not defined, determine it
+ // based on __LP64__ (defined by gcc on 64-bit systems)

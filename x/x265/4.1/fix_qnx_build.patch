@@ -1,0 +1,31 @@
+diff --git a/source/CMakeLists.txt b/source/CMakeLists.txt
+index 5c6dda9..51257e7 100755
+--- a/source/CMakeLists.txt
++++ b/source/CMakeLists.txt
+@@ -754,7 +754,7 @@ if((MSVC_IDE OR XCODE OR GCC) AND ENABLE_ASSEMBLY)
+                 add_custom_command(
+                     OUTPUT ${ASM}.${SUFFIX}
+                     COMMAND ${CMAKE_CXX_COMPILER}
+-                    ARGS ${ARM_ARGS} ${ASM_FLAGS} ${AARCH64_NEON_DOTPROD_FLAG} -c ${ASM_SRC} -o ${ASM}.${SUFFIX}
++                    ARGS -V${CMAKE_CXX_COMPILER_TARGET} ${ARM_ARGS} ${ASM_FLAGS} ${AARCH64_NEON_DOTPROD_FLAG} -c ${ASM_SRC} -o ${ASM}.${SUFFIX}
+                     DEPENDS ${ASM_SRC})
+             endforeach()
+         endif()
+@@ -766,7 +766,7 @@ if((MSVC_IDE OR XCODE OR GCC) AND ENABLE_ASSEMBLY)
+                 add_custom_command(
+                     OUTPUT ${ASM}.${SUFFIX}
+                     COMMAND ${CMAKE_CXX_COMPILER}
+-                    ARGS ${ARM_ARGS} ${ASM_FLAGS} ${AARCH64_SVE_FLAG} -c ${ASM_SRC} -o ${ASM}.${SUFFIX}
++                    ARGS -V${CMAKE_CXX_COMPILER_TARGET} ${ARM_ARGS} ${ASM_FLAGS} ${AARCH64_SVE_FLAG} -c ${ASM_SRC} -o ${ASM}.${SUFFIX}
+                     DEPENDS ${ASM_SRC})
+             endforeach()
+         endif()
+@@ -778,7 +778,7 @@ if((MSVC_IDE OR XCODE OR GCC) AND ENABLE_ASSEMBLY)
+                 add_custom_command(
+                     OUTPUT ${ASM}.${SUFFIX}
+                     COMMAND ${CMAKE_CXX_COMPILER}
+-                    ARGS ${ARM_ARGS} ${ASM_FLAGS} ${AARCH64_SVE2_FLAG} -c ${ASM_SRC} -o ${ASM}.${SUFFIX}
++                    ARGS -V${CMAKE_CXX_COMPILER_TARGET} ${ARM_ARGS} ${ASM_FLAGS} ${AARCH64_SVE2_FLAG} -c ${ASM_SRC} -o ${ASM}.${SUFFIX}
+                     DEPENDS ${ASM_SRC})
+             endforeach()
+         endif()
