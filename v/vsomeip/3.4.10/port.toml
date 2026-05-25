@@ -1,0 +1,10 @@
+[package]
+  url = "https://github.com/COVESA/vsomeip.git"
+  ref = "3.4.10"
+  depth = 1
+
+[[build_configs]]
+  build_system = "cmake"
+  patches = ["make_gtest_optional.patch"]
+  dependencies = ["boost@1.83.0"]
+  options = ['-DBUILD_TESTS=OFF', '-DCMAKE_CXX_FLAGS=-Wno-error']
