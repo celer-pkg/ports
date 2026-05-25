@@ -4,6 +4,7 @@
   depth = 1
 
 [[build_configs]]
+  system_name = "linux"
   build_system = "cmake"
   patches = ["make_gtest_optional.patch"]
   dependencies = ["boost@1.83.0"]
