@@ -104,17 +104,36 @@ if [ "$BUILD_CONFIGS_COUNT" = "0" ] || [ "$BUILD_CONFIGS_COUNT" = "null" ]; then
 fi
 
 for ((i=0; i<BUILD_CONFIGS_COUNT; i++)); do
-  # Read system_names array and convert to space-separated lowercase string
-  SYSTEM_NAMES=$(yq eval ".build_configs[$i].system_names | join(\" \") | ascii_downcase" "$PORT_TOML" 2>/dev/null || echo "")
-  echo "-- Read SYSTEM_NAMES in build_config($i): ${SYSTEM_NAMES}"
+  # Read system_names array as JSON format, then convert to space-separated lowercase
+  # This is more reliable than trying to parse YAML output
+  SYSTEM_NAMES_JSON=$(yq eval ".build_configs[$i].system_names | @json" "$PORT_TOML" 2>/dev/null || echo '""')
+  echo "-- Raw JSON SYSTEM_NAMES: ${SYSTEM_NAMES_JSON}"
+  
+  # Parse JSON array and convert to space-separated string
+  if [ "$SYSTEM_NAMES_JSON" = '""' ] || [ "$SYSTEM_NAMES_JSON" = "null" ] || [ -z "$SYSTEM_NAMES_JSON" ]; then
+    SYSTEM_NAMES=""
+  else
+    # Use jq to parse JSON array, or fallback to manual parsing if jq not available
+    if command -v jq &> /dev/null; then
+      SYSTEM_NAMES=$(echo "$SYSTEM_NAMES_JSON" | jq -r 'if type == "array" then map(ascii_downcase) | join(" ") elif type == "null" then "" else . | ascii_downcase end' 2>/dev/null || echo "")
+    else
+      # Fallback: simple text processing for JSON array
+      SYSTEM_NAMES=$(echo "$SYSTEM_NAMES_JSON" | sed 's/^\[//; s/\]$//; s/"//g; s/,/ /g' | tr -d ' ' | tr '[:upper:]' '[:lower:]')
+    fi
+  fi
+  
+  echo "-- Parsed SYSTEM_NAMES in build_config($i): |${SYSTEM_NAMES}|"
+  
+  SYSTEM_NAME=""
+  
   # If system_names is not specified, fall back to system_name.
   if [ -z "$SYSTEM_NAMES" ]; then
     SYSTEM_NAME=$(read_toml_as_lower ".build_configs[$i].system_name" "$PORT_TOML")
-    echo "-- No SYSTEM_NAMES, fallback to SYSTEM_NAME in build_config($i): ${SYSTEM_NAME}"
+    echo "-- No SYSTEM_NAMES, fallback to SYSTEM_NAME in build_config($i): |${SYSTEM_NAME}|"
   fi
   
   SYSTEM_PROCESSOR=$(read_toml_as_lower ".build_configs[$i].system_processor" "$PORT_TOML")
-  echo "-- Read SYSTEM_PROCESSOR in build_config($i): ${SYSTEM_PROCESSOR}"
+  echo "-- SYSTEM_PROCESSOR in build_config($i): |${SYSTEM_PROCESSOR}|"
 
   # system_names/system_name are extensible, so only validate token format when specified.
   if [ -n "$SYSTEM_NAMES" ]; then
@@ -137,9 +156,9 @@ for ((i=0; i<BUILD_CONFIGS_COUNT; i++)); do
     exit 2
   fi
 
-  # No selector specified => global match (only if SYSTEM_NAMES is explicitly not in TOML)
-  # Check if the build_config section actually has system_names field
+  # No selector specified => global match (only if no selector fields are defined)
   BUILD_CONFIG_RAW=$(yq eval ".build_configs[$i]" "$PORT_TOML" 2>/dev/null | grep -i "system_names\|system_name\|system_processor" | wc -l)
+  echo "-- BUILD_CONFIG_RAW field count: ${BUILD_CONFIG_RAW}"
   
   if [ "$BUILD_CONFIG_RAW" = "0" ] && [ -z "$SYSTEM_NAMES" ] && [ -z "$SYSTEM_NAME" ] && [ -z "$SYSTEM_PROCESSOR" ]; then
     echo "-- No selector specified => matches all platforms"
@@ -167,6 +186,8 @@ for ((i=0; i<BUILD_CONFIGS_COUNT; i++)); do
     SYSTEM_PROCESSOR_MATCH=false
   fi
 
+  echo "-- SYSTEM_NAME_MATCH=${SYSTEM_NAME_MATCH}, SYSTEM_PROCESSOR_MATCH=${SYSTEM_PROCESSOR_MATCH}"
+  
   if [ "$SYSTEM_NAME_MATCH" = "true" ] && [ "$SYSTEM_PROCESSOR_MATCH" = "true" ]; then
     MATCH_FOUND=true
     NAMES_DISPLAY="${SYSTEM_NAMES:-${SYSTEM_NAME:-*}}"
