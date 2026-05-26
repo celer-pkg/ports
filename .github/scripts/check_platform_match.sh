@@ -6,6 +6,9 @@ set -e
 PORT_TOML="$1"
 PLATFORM="$2"
 
+echo "-- Input argument: PORT_TOML=${PORT_TOML}"
+echo "-- Input argument: PLATFORM=${PLATFORM}"
+
 if [ ! -f "$PORT_TOML" ]; then
   echo "ERROR: Port TOML not found: $PORT_TOML" >&2
   exit 1
@@ -60,7 +63,7 @@ read_toml_as_lower() {
   local value
 
   # Step 1: read field and normalize to lowercase.
-  value=$(yq eval "${field}" "$toml_file" | tr '[:upper:]' '[:lower:]')
+  value=$(yq eval "${field}" "$toml_file" 2>/dev/null | tr '[:upper:]' '[:lower:]')
 
   # Step 2: treat empty/null as empty string.
   if [ -z "$value" ] || [ "$value" = "null" ]; then
@@ -73,6 +76,9 @@ read_toml_as_lower() {
 # Parse platform selectors from platform.toml only.
 PLATFORM_SYSTEM_NAME=$(read_toml_as_lower '.toolchain.system_name' "$PLATFORM_TOML")
 PLATFORM_PROCESSOR=$(read_toml_as_lower '.toolchain.system_processor' "$PLATFORM_TOML")
+
+echo "-- Read PLATFORM_SYSTEM_NAME: ${PLATFORM_SYSTEM_NAME}"
+echo "-- Read PLATFORM_PROCESSOR: ${PLATFORM_PROCESSOR}"
 
 # system_name is extensible (e.g. linux/windows/darwin/qnx/mcu...),
 # so only validate format.
@@ -90,7 +96,7 @@ fi
 MATCH_FOUND=false
 
 # Get all build_configs
-BUILD_CONFIGS_COUNT=$(yq eval '.build_configs | length' "$PORT_TOML")
+BUILD_CONFIGS_COUNT=$(yq eval '.build_configs | length' "$PORT_TOML" 2>/dev/null)
 
 if [ "$BUILD_CONFIGS_COUNT" = "0" ] || [ "$BUILD_CONFIGS_COUNT" = "null" ]; then
   echo "ERROR: No build_configs found in $PORT_TOML" >&2
@@ -98,15 +104,17 @@ if [ "$BUILD_CONFIGS_COUNT" = "0" ] || [ "$BUILD_CONFIGS_COUNT" = "null" ]; then
 fi
 
 for ((i=0; i<BUILD_CONFIGS_COUNT; i++)); do
-  SYSTEM_NAMES=$(yq eval ".build_configs[$i].system_names" "$PORT_TOML" | tr '\n' ' ' | sed 's/^- //' | sed 's/ - / /g' | xargs | tr '[:upper:]' '[:lower:]')
-  SYSTEM_NAME=""
-  
+  # Read system_names array and convert to space-separated lowercase string
+  SYSTEM_NAMES=$(yq eval ".build_configs[$i].system_names | join(\" \") | ascii_downcase" "$PORT_TOML" 2>/dev/null || echo "")
+  echo "-- Read SYSTEM_NAMES in build_config($i): ${SYSTEM_NAMES}"
   # If system_names is not specified, fall back to system_name.
   if [ -z "$SYSTEM_NAMES" ]; then
     SYSTEM_NAME=$(read_toml_as_lower ".build_configs[$i].system_name" "$PORT_TOML")
+    echo "-- No SYSTEM_NAMES, fallback to SYSTEM_NAME in build_config($i): ${SYSTEM_NAME}"
   fi
   
   SYSTEM_PROCESSOR=$(read_toml_as_lower ".build_configs[$i].system_processor" "$PORT_TOML")
+  echo "-- Read SYSTEM_PROCESSOR in build_config($i): ${SYSTEM_PROCESSOR}"
 
   # system_names/system_name are extensible, so only validate token format when specified.
   if [ -n "$SYSTEM_NAMES" ]; then
@@ -129,8 +137,12 @@ for ((i=0; i<BUILD_CONFIGS_COUNT; i++)); do
     exit 2
   fi
 
-  # No selector specified => global match.
-  if [ -z "$SYSTEM_NAMES" ] && [ -z "$SYSTEM_NAME" ] && [ -z "$SYSTEM_PROCESSOR" ]; then
+  # No selector specified => global match (only if SYSTEM_NAMES is explicitly not in TOML)
+  # Check if the build_config section actually has system_names field
+  BUILD_CONFIG_RAW=$(yq eval ".build_configs[$i]" "$PORT_TOML" 2>/dev/null | grep -i "system_names\|system_name\|system_processor" | wc -l)
+  
+  if [ "$BUILD_CONFIG_RAW" = "0" ] && [ -z "$SYSTEM_NAMES" ] && [ -z "$SYSTEM_NAME" ] && [ -z "$SYSTEM_PROCESSOR" ]; then
+    echo "-- No selector specified => matches all platforms"
     MATCH_FOUND=true
     break
   fi
@@ -158,15 +170,15 @@ for ((i=0; i<BUILD_CONFIGS_COUNT; i++)); do
   if [ "$SYSTEM_NAME_MATCH" = "true" ] && [ "$SYSTEM_PROCESSOR_MATCH" = "true" ]; then
     MATCH_FOUND=true
     NAMES_DISPLAY="${SYSTEM_NAMES:-${SYSTEM_NAME:-*}}"
-    echo "Match found: system_name='${NAMES_DISPLAY}', system_processor='${SYSTEM_PROCESSOR:-*}' matches platform selectors from '$PLATFORM_TOML'"
+    echo "-- Match found: system_name='${NAMES_DISPLAY}', system_processor='${SYSTEM_PROCESSOR:-*}' matches platform selectors from '$PLATFORM_TOML'"
     break
   fi
 done
 
 if [ "$MATCH_FOUND" = "true" ]; then
-  echo "Platform ($PLATFORM_SYSTEM_NAME/$PLATFORM_PROCESSOR) is supported by this port"
+  echo "-- Platform ($PLATFORM_SYSTEM_NAME/$PLATFORM_PROCESSOR) is supported by this port"
   exit 0
 else
-  echo "Platform ($PLATFORM_SYSTEM_NAME/$PLATFORM_PROCESSOR) is NOT supported by this port"
+  echo "-- Platform ($PLATFORM_SYSTEM_NAME/$PLATFORM_PROCESSOR) is NOT supported by this port"
   exit 1
 fi
