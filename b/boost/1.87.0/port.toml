@@ -4,7 +4,7 @@
 
 [[build_configs]]
   build_system = "b2"
-  system_name = "linux"
+  system_names = ["linux", "qnx"]
   options = ["--without-python", "--without-mpi"]
 
-# In windows, boost-1.87.0 can only build with visual studio 2022 or earlier version.
+# Note: boost-1.87.0 requires visual studio 2022 or earlier, not supported on VS2026+

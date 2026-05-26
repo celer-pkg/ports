@@ -1,0 +1,9 @@
+[package]
+  url = "https://github.com/COVESA/capicxx-someip-runtime.git"
+  ref = "3.2.0"
+  depth = 1
+
+[[build_configs]]
+  system_name = "linux"
+  build_system = "cmake"
+  dependencies = ["capicxx-core-runtime@3.2.0", "vsomeip@3.4.10"]
