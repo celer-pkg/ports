@@ -8,4 +8,3 @@ build_system = "cmake"
 cxx_standard = "c++17"
 envs = ["PATH=${BUILD_DIR}/bin"]
 options = ["-DTHREADS_PREFER_PTHREAD_FLAG=TRUE", "-Dprotobuf_BUILD_TESTS=OFF"]
-dev_dependencies = ["protobuf@3.21.12"]
