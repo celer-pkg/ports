@@ -13,4 +13,3 @@
     "-Dprotobuf_BUILD_TESTS=OFF",
     "-Dprotobuf_BUILD_EXAMPLES=OFF",
   ]
-  dev_dependencies = ["protobuf@3.19.6"]
