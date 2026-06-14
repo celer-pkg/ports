@@ -99,7 +99,6 @@ jobs:
           set -euo pipefail
           curl -L -o celer-amd64-linux.tar.gz https://github.com/celer-pkg/celer/releases/latest/download/celer-amd64-linux.tar.gz
           tar -xvzf celer-amd64-linux.tar.gz -C .
-          mv celer-amd64-linux celer
           chmod +x celer
 
       - name: Download artifact (Windows)
