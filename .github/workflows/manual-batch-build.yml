@@ -109,7 +109,6 @@ jobs:
           set -euo pipefail
           curl -L -o celer-windows-amd64.exe.zip https://github.com/celer-pkg/celer/releases/latest/download/celer-windows-amd64.exe.zip
           unzip celer-windows-amd64.exe.zip
-          mv celer-windows-amd64.exe celer.exe
 
       - name: Setup workspace (Linux)
         if: matrix.platform != 'x86_64-windows-msvc-enterprise-14'
