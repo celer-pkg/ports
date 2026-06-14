@@ -68,7 +68,6 @@ jobs:
         run: |
           curl -L -o celer-amd64-linux.tar.gz https://github.com/celer-pkg/celer/releases/latest/download/celer-amd64-linux.tar.gz
           tar -xvzf celer-amd64-linux.tar.gz -C .
-          mv celer-amd64-linux celer
           chmod +x celer
           ./celer init --url=https://github.com/celer-pkg/test-conf.git
 
@@ -113,7 +112,6 @@ jobs:
           else
             curl -L -o celer-amd64-linux.tar.gz https://github.com/celer-pkg/celer/releases/latest/download/celer-amd64-linux.tar.gz
             tar -xvzf celer-amd64-linux.tar.gz -C .
-            mv celer-amd64-linux celer
             chmod +x celer
           fi
 
