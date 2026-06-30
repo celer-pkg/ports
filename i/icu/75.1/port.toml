@@ -23,14 +23,6 @@
   build_system = "makefiles"
   disable_dev_cache = true
   options = ["--host=${HOST}"]
-
-# ============= build for windows ================== #
-[[build_configs]]
-  system_name = "windows"
-  system_processor = "x86_64"
-  build_system = "makefiles"
-  cxx_standard = "c++17"
-  build_tools = ["python3"]
-
+  
 # Note:
 # This library support linux only.
