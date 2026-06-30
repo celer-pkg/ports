@@ -13,6 +13,7 @@
     "--host=${HOST}",
     "--with-cross-build=${BUILD_DIR}/../x86_64-linux-dev",
   ]
+  envs = ["LDFLAGS=-L${BUILD_DIR}/lib -L${BUILD_DIR}/stubdata -Wl,-rpath-link,${BUILD_DIR}/lib -Wl,-rpath-link,${BUILD_DIR}/stubdata"]
   dev_dependencies = ["icu@75.1"]
 
 # ============= build for x86_64-linux ============= #
@@ -20,6 +21,7 @@
   system_name = "linux"
   system_processor = "x86_64"
   build_system = "makefiles"
+  disable_dev_cache = true
   options = ["--host=${HOST}"]
 
 # ============= build for windows ================== #
