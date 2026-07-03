@@ -1,0 +1,17 @@
+[package]
+  url = "https://github.com/bulletphysics/bullet3.git"
+  ref = "3.25"
+  depth = 1
+
+[[build_configs]]
+  build_system = "cmake"
+  build_shared_windows = false
+  options = [
+  	"-DBUILD_CPU_DEMOS=OFF",
+    "-DUSE_MSVC_EXCEPTIONS=OFF",
+  	"-DBUILD_OPENGL3_DEMOS=OFF",
+  	"-DBUILD_BULLET2_DEMOS=OFF",
+  	"-DBUILD_UNIT_TESTS=OFF",
+    "-DBUILD_BULLET_ROBOTICS_GUI_EXTRA=OFF",
+    "-DCMAKE_WINDOWS_EXPORT_ALL_SYMBOLS=ON",
+  ]

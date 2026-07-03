@@ -6,8 +6,6 @@
 [[build_configs]]
   system_names = ["linux", "windows"]
   build_system = "makefiles"
-  build_shared = "--enable-shared"
-  build_static = "--enable-static"
   patches = ["fix_windows_build.patch"]
   dev_dependencies = ["nasm@2.16.03"]
   options = [
@@ -19,8 +17,6 @@
 [[build_configs]]
   system_name = "qnx"
   build_system = "makefiles"
-  build_shared = "--enable-shared"
-  build_static = "--enable-static"
   dev_dependencies = ["nasm@2.16.03"]
   options = [
     "--cross-prefix=${CROSSTOOL_PREFIX}",

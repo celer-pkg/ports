@@ -9,8 +9,8 @@
   system_name = "linux"
   system_processor = "aarch64"
   build_system = "makefiles"
-  build_shared = "shared"
-  build_static = "_"
+  build_shared_option = "shared"
+  build_static_option = "no-shared"
   options = [
     "linux-aarch64",
     "no-tests",
@@ -22,8 +22,8 @@
   system_name = "linux"
   system_processor = "x86_64"
   build_system = "makefiles"
-  build_shared = "shared"
-  build_static = "_"
+  build_shared_option = "shared"
+  build_static_option = "no-shared"
   options = [
     "linux-x86_64",
     "no-tests",
@@ -34,8 +34,8 @@
 [[build_configs]]
   system_name = "windows"
   build_system = "makefiles"
-  build_shared = "shared"
-  build_static = "_"
+  build_shared_option = "shared"
+  build_static_option = "no-shared"
   options = [
     "VC-WIN64A",
     "no-tests",
@@ -47,8 +47,8 @@
 [[build_configs]]
   system_name = "qnx"
   build_system = "makefiles"
-  build_shared = "shared"
-  build_static = "_"
+  build_shared_option = "shared"
+  build_static_option = "no-shared"
   envs = [
     "CC=ntoaarch64-gcc",
     "CXX=ntoaarch64-g++",

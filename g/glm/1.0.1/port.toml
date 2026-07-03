@@ -6,4 +6,3 @@
 [[build_configs]]
   build_system = "cmake"
   options = ["-DGLM_BUILD_TESTS=OFF"]
-  build_shared = "_"

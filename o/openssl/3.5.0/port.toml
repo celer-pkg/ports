@@ -9,8 +9,8 @@
   system_name = "linux"
   system_processor = "aarch64"
   build_system = "makefiles"
-  build_shared = "shared"
-  build_static = "_"
+  build_shared_option = "shared"
+  build_static_option = "no-shared"
   options = [
     "linux-aarch64",
     "no-docs",
@@ -25,8 +25,8 @@
   system_name = "linux"
   system_processor = "x86_64"
   build_system = "makefiles"
-  build_shared = "shared"
-  build_static = "_"
+  build_shared_option = "shared"
+  build_static_option = "no-shared"
   dev_dependencies = ["nasm@2.16.03"]
   options = [
     "linux-x86_64",
@@ -42,8 +42,8 @@
   system_name = "windows"
   build_system = "makefiles"
   build_tools = ["perl"]
-  build_shared = "shared"
-  build_static = "_"
+  build_shared_option = "shared"
+  build_static_option = "no-shared"
   dev_dependencies = ["nasm@2.16.03"]
   options = [
     "VC-WIN64A",
@@ -58,8 +58,8 @@
 [[build_configs]]
   system_name = "qnx"
   build_system = "makefiles"
-  build_shared = "shared"
-  build_static = "_"
+  build_shared_option = "shared"
+  build_static_option = "no-shared"
   envs = [
     "CC=ntoaarch64-gcc",
     "CXX=ntoaarch64-g++",

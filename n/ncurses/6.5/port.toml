@@ -5,7 +5,8 @@
 [[build_configs]]
   system_name = "linux"
   build_system = "makefiles"
-  build_shared = "--with-shared"
+  build_shared_option = "--with-shared"
+  build_static_option = "--with-static"
   options = [
     "--host=${HOST}",
     "--disable-stripping",
