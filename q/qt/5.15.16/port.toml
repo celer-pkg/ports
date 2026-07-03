@@ -5,13 +5,9 @@
 [[build_configs]]
   system_name = "linux"
   system_processor = "x86_64"
-  patches = ["add-linux-x86_64-gnu-g++.patch"]
+  patches = ["linux-x86_64-gnu-g++.patch"]
   build_system = "qmake"
   build_tools = ["llvm"]
-  envs = [
-    "OPENGL_INC_DIR=${DEPS_DIR}/include",
-    "OPENGL_LIB_DIR=${DEPS_DIR}/lib",
-  ]
   options = [
     "-xplatform linux-x86_64-gnu-g++",
     "-confirm-license",
@@ -71,13 +67,9 @@
 [[build_configs]]
   system_name = "linux"
   system_processor = "aarch64"
-  patches = ["fix-linux-aarch64-gnu-g++.patch"]
+  patches = ["linux-aarch64-gnu-g++.patch"]
   build_system = "qmake"
   build_tools = ["llvm"]
-  envs = [
-    "OPENGL_INC_DIR=${DEPS_DIR}/include",
-    "OPENGL_LIB_DIR=${DEPS_DIR}/lib",
-  ]
   options = [
     "-xplatform linux-aarch64-gnu-g++",
     "-confirm-license",

@@ -17,16 +17,16 @@ index 0000000000..aba10930f4
 +include(../common/g++-unix.conf)
 +
 +# modifications to g++.conf
-+QMAKE_CC                = x86_64-linux-gnu-gcc
-+QMAKE_CXX               = x86_64-linux-gnu-g++
-+QMAKE_LINK              = x86_64-linux-gnu-g++
-+QMAKE_LINK_SHLIB        = x86_64-linux-gnu-g++
++QMAKE_CC                = $$(CC)
++QMAKE_CXX               = $$(CXX)
++QMAKE_LINK              = $$(CXX)
++QMAKE_LINK_SHLIB        = $$(CXX)
 +
 +# modifications to linux.conf
-+QMAKE_AR                = x86_64-linux-gnu-ar cqs
-+QMAKE_OBJCOPY           = x86_64-linux-gnu-objcopy
-+QMAKE_NM                = x86_64-linux-gnu-nm -P
-+QMAKE_STRIP             = x86_64-linux-gnu-strip
++QMAKE_AR                = $$(AR) cqs
++QMAKE_OBJCOPY           = $$(OBJCOPY)
++QMAKE_NM                = $$(NM) -P
++QMAKE_STRIP             = $$(STRIP)
 +
 +# add sysroot paths to rpath
 +QMAKE_RPATHLINKDIR_POST += \

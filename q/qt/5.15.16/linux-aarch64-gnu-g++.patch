@@ -1,0 +1,42 @@
+diff --git a/qtbase/mkspecs/linux-aarch64-gnu-g++/qmake.conf b/qtbase/mkspecs/linux-aarch64-gnu-g++/qmake.conf
+index 2dc57b09fa..c28d987c2c 100644
+--- a/qtbase/mkspecs/linux-aarch64-gnu-g++/qmake.conf
++++ b/qtbase/mkspecs/linux-aarch64-gnu-g++/qmake.conf
+@@ -11,14 +11,29 @@ include(../common/gcc-base-unix.conf)
+ include(../common/g++-unix.conf)
+ 
+ # modifications to g++.conf
+-QMAKE_CC                = aarch64-linux-gnu-gcc
+-QMAKE_CXX               = aarch64-linux-gnu-g++
+-QMAKE_LINK              = aarch64-linux-gnu-g++
+-QMAKE_LINK_SHLIB        = aarch64-linux-gnu-g++
++QMAKE_CC                = $$(CC)
++QMAKE_CXX               = $$(CXX)
++QMAKE_LINK              = $$(CXX)
++QMAKE_LINK_SHLIB        = $$(CXX)
+ 
+ # modifications to linux.conf
+-QMAKE_AR                = aarch64-linux-gnu-ar cqs
+-QMAKE_OBJCOPY           = aarch64-linux-gnu-objcopy
+-QMAKE_NM                = aarch64-linux-gnu-nm -P
+-QMAKE_STRIP             = aarch64-linux-gnu-strip
++QMAKE_AR                = $$(AR) cqs
++QMAKE_OBJCOPY           = $$(OBJCOPY)
++QMAKE_NM                = $$(NM) -P
++QMAKE_STRIP             = $$(STRIP)
++
++QMAKE_INCDIR_OPENGL_ES2 = $$(DEPS_DIR)/include
++QMAKE_LIBDIR_OPENGL_ES2 = $$(DEPS_DIR)/lib
++QMAKE_INCDIR_EGL        = $$(DEPS_DIR)/include
++QMAKE_LIBDIR_EGL        = $$(DEPS_DIR)/lib
++
++# add sysroot paths to rpath
++QMAKE_RPATHLINKDIR_POST += \
++    $$[QT_SYSROOT]/usr/lib \
++    $$[QT_SYSROOT]/usr/lib/aarch64-linux-gnu \
++    $$[QT_SYSROOT]/lib/aarch64-linux-gnu
++
++# pass LDFLAGS from environment to the linker
++QMAKE_LFLAGS += $(LDFLAGS)
++
+ load(qt_config)
