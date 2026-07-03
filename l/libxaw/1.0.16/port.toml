@@ -1,0 +1,20 @@
+[package]
+  url = "https://gitlab.freedesktop.org/xorg/lib/libxaw.git"
+  ref = "libXaw-1.0.16"
+  depth = 1
+
+[[build_configs]]
+  build_system = "makefiles"
+  system_name = "linux"
+  dev_dependencies = ["macros@1.20.2", "libtool@2.5.4", "pkgconf@2.4.3"]
+  dependencies = [
+    "xproto@7.0.31",
+    "libx11@1.8.11",
+    "libxext@1.3.6",
+    "libxt@1.3.1",
+    "libxmu@1.2.1",
+    "libxpm@3.5.19",
+  ]
+  envs = ["NOCONFIGURE=1"]
+  pre_configure = ["./autogen.sh"]
+  options = ["--host=${HOST}"]
