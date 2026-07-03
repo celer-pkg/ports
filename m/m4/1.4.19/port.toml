@@ -6,8 +6,6 @@
 [[build_configs]]
   system_name = "linux"
   build_system = "makefiles"
-  build_shared = "_"
-  build_static = "_"
   dependencies = ["help2man@1.49.3"]
   options = ["--disable-nls"]
   envs = [

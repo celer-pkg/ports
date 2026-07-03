@@ -49,9 +49,10 @@ Core build fields:
 
 Build shape and language:
 
-- `library_type`
 - `build_shared`
 - `build_static`
+- `build_static_option`
+- `build_static_option`
 - `build_type`
 - `c_standard`
 - `cxx_standard`
