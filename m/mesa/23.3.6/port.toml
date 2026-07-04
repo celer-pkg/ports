@@ -43,7 +43,7 @@
     "-Degl=enabled",
     "-Dglx=dri",
     "-Dgbm=enabled",
-    "-Dgallium-drivers=iris,radeonsi,nouveau,swrast",
+    "-Dgallium-drivers=radeonsi,nouveau,swrast",
     "-Dvulkan-drivers=intel,amd",
     "-Dplatforms=x11,wayland",
     "-Dsse2=true",
@@ -92,7 +92,13 @@
     "-Dglx=dri",
     "-Dgbm=enabled",
     "-Dgallium-drivers=panfrost,lima,swrast",
-    "-Dvulkan-drivers=freedreno",
+    # Qualcomm Adreno: freedreno
+    # Arm Mali: panfrost
+    # Raspberry Pi: broadcom
+    # Apple: asahi
+    # Software: swrast
+    # Android simulate: gfxstream
+    "-Dvulkan-drivers=",
     "-Dplatforms=x11,wayland",
     "-Dsse2=false",
     "-Dshader-cache=enabled",
