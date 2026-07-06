@@ -1,0 +1,25 @@
+[package]
+  url = "https://download.qt.io/archive/qt/6.11/6.11.1/single/qt-everywhere-src-6.11.1.tar.xz"
+  ref = "6.11.1"
+  src_dir = "qtbase"
+
+[[build_configs]]
+  system_name = "linux"
+  cmake_generator = "Ninja"
+  build_system = "cmake"
+  dev_dependencies = ["wayland@1.24.0"]
+  options = [
+    "-Ddeveloper-build=ON",
+    "-DQT_BUILD_TESTS=OFF",
+    "-DQT_BUILD_EXAMPLES=OFF",
+    "-DQT_BUILD_TOOLS_ONLY=ON",
+    "-DFEATURE_shader=ON",
+    "-DFEATURE_gui=ON",
+    "-DFEATURE_opengl=OFF",
+    "-DFEATURE_opengles2=OFF",
+    "-DFEATURE_opengles3=OFF",
+    "-DFEATURE_egl=OFF",
+    "-DFEATURE_gui=OFF",
+    "-DFEATURE_widgets=OFF",
+    "-DFEATURE_wayland=ON",
+  ]

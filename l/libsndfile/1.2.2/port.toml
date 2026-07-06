@@ -1,8 +1,12 @@
 [package]
-url = "https://github.com/libsndfile/libsndfile.git"
-ref = "1.2.2"
-depth = 1
+  url = "https://github.com/libsndfile/libsndfile.git"
+  ref = "1.2.2"
+  depth = 1
 
 [[build_configs]]
-build_system = "cmake"
-dependencies = ["opus@1.5.2"]
+  build_system = "cmake@3.31.12"
+  build_tools = ["python3"]
+  dependencies = ["opus@1.5.2"]
+  options = [
+    "-DPYTHON_EXECUTABLE=${PYTHON_VENV_EXE}"
+  ]
