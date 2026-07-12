@@ -6,7 +6,6 @@
 [[build_configs]]
   system_name = "linux"
   build_system = "makefiles"
-  dev_dependencies = ["gperf@3.1"]
   dependencies = ["help2man@1.49.3"]
   options = ["--disable-nls"]
   envs = [
