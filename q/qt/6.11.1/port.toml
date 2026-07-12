@@ -1,0 +1,44 @@
+[package]
+  url = "https://download.qt.io/archive/qt/6.11/6.11.1/single/qt-everywhere-src-6.11.1.tar.xz"
+  ref = "6.11.1"
+
+[[build_configs]]
+  system_name = "linux"
+  build_system = "cmake"
+  cmake_generator = "Ninja"
+  build_tools = ["llvm"]
+  dev_dependencies = ["qt-host@6.11.1"]
+  dependencies = [
+    "mesa@23.3.6",
+    "icu@75.1",
+    "libjpeg@9f",
+    "freetype@2.13.3",
+    "nss@3.55",
+    "libxslt@1.1.42",
+    "wayland@1.24.0",
+    "libxkbcommon@1.6.0",
+    "libsm@1.2.5",
+    "libevent@2.1.12",
+    "fontconfig@2.17.1",
+    "pulseaudio@16.2",
+    "zstd@1.5.7",
+    "pcre2@10.44",
+    "xproto@7.0.31",
+    "libpciaccess@0.18.1",
+  ]
+  options = [
+    "-DQT_HOST_PATH=${DEV_DEPS_DIR}",
+    "-DBUILD_WRAP_PROTOC=ON",
+    "-DBUILD_PROTOBUF_TOOLS=ON",
+    "-DQT_BUILD_SUBMODULES=qtbase;qtshadertools;qtdeclarative;qtwayland",
+    "-DQT_BUILD_EXAMPLES=OFF",
+    "-DQT_BUILD_TESTS=OFF",
+    "-DQT_NO_PACKAGE_VERSION_CHECK=ON",
+    "-DQT_NO_PACKAGE_VERSION_INCOMPATIBLE_WARNING=ON",
+    "-DQT_DEBUG_FIND_PACKAGE=ON",
+    "-DCMAKE_DISABLE_FIND_PACKAGE_X11=ON",
+    "-DCMAKE_DISABLE_FIND_PACKAGE_XCB=ON",
+    "-DFEATURE_xcb=OFF",
+    "-DFEATURE_wayland=ON",
+    "-DQT_FEATURE_wayland=ON",
+  ]

@@ -1,0 +1,25 @@
+[package]
+  url = "https://download.qt.io/archive/qt/6.11/6.11.1/single/qt-everywhere-src-6.11.1.tar.xz"
+  ref = "6.11.1"
+
+[[build_configs]]
+  system_name = "linux"
+  cmake_generator = "Ninja"
+  build_system = "cmake"
+  dev_dependencies = ["wayland@1.24.0"]
+  dependencies = ["zstd@1.5.7", "mesa@23.3.6"] # You can speed up build progress, by remove mesa@23.3.6 and install opengl locally.
+  options = [
+    "-DQT_BUILD_TESTS=OFF",
+    "-DQT_BUILD_EXAMPLES=OFF",
+    "-DQT_BUILD_TOOLS_BY_DEFAULT=ON",
+    "-DQT_BUILD_SUBMODULES=qtbase;qtshadertools;qtdeclarative;qttools",
+    "-DFEATURE_developer_build=ON",
+    "-DFEATURE_doc_snippets=OFF",
+    "-DFEATURE_qtwaylandscanner=ON",
+    "-DFEATURE_gui=ON",
+    "-DFEATURE_widgets=OFF",
+    "-DFEATURE_opengl=OFF",
+    "-DFEATURE_opengles2=OFF",
+    "-DFEATURE_opengles3=OFF",
+    "-DFEATURE_egl=OFF",
+  ]

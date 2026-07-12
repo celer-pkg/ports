@@ -6,11 +6,19 @@
   system_name = "linux"
   build_system = "makefiles"
   build_shared_option = "--with-shared"
-  build_static_option = "--with-static"
   options = [
     "--host=${HOST}",
     "--disable-stripping",
     "--with-termlib",
+    "--with-normal",
+    "--without-tests",
+  ]
+  post_install_linux = [
+    "ln -sf libtinfow.so ${PACKAGE_DIR}/lib/libtinfo.so",
+    "ln -sf libncursesw.so ${PACKAGE_DIR}/lib/libncurses.so",
+    "ln -sf libformw.so ${PACKAGE_DIR}/lib/libform.so",
+    "ln -sf libmenuw.so ${PACKAGE_DIR}/lib/libmenu.so",
+    "ln -sf libpanelw.so ${PACKAGE_DIR}/lib/libpanel.so",
   ]
 
 # Note:

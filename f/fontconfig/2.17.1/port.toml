@@ -6,12 +6,14 @@
 [[build_configs]]
   system_name = "linux"
   build_system = "makefiles"
-  envs = [
-    "CFLAGS=-isystem ${DEPS_DIR}/include/freetype2",
-    "CXXFLAGS=-isystem ${DEPS_DIR}/include/freetype2",
-    "NOCONFIGURE=1",
+  include_dirs = ["${DEPS_DIR}/include/freetype2"]
+  envs = ["NOCONFIGURE=1"]
+  dependencies = [
+    "freetype@2.13.3",
+    "libexpat@2.7.1",
+    "libpng@1.6.49",
+    "json-c@0.18",
   ]
-  dependencies = ["freetype@2.13.3", "libexpat@2.7.1", "libpng@1.6.49"]
   dev_dependencies = [
     "macros@1.20.2",
     "libtool@2.5.4",
