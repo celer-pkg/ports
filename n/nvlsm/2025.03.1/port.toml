@@ -1,0 +1,8 @@
+[package]
+  ref = "2025.03.1"
+
+[[build_configs]]
+  system_name = "linux"
+  system_processor = "x86_64"
+  build_system = "prebuilt"
+  url = "https://developer.download.nvidia.cn/compute/cuda/redist/nvlsm/linux-x86_64/nvlsm-linux-x86_64-2025.03.1-archive.tar.xz"

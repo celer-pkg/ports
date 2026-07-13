@@ -1,0 +1,8 @@
+[package]
+  ref = "4.30.1.510"
+
+[[build_configs]]
+  system_name = "linux"
+  system_processor = "x86_64"
+  build_system = "prebuilt"
+  url = "https://developer.download.nvidia.cn/compute/cuda/redist/mft/linux-x86_64/mft-linux-x86_64-4.30.1.510-archive.tar.xz"

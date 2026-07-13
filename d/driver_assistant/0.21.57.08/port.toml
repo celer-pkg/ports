@@ -1,0 +1,14 @@
+[package]
+  ref = "0.21.57.08"
+
+[[build_configs]]
+  system_name = "linux"
+  system_processor = "aarch64"
+  build_system = "prebuilt"
+  url = "https://developer.download.nvidia.cn/compute/cuda/redist/driver_assistant/source/driver_assistant-0.21.57.08-archive.tar.xz"
+
+[[build_configs]]
+  system_name = "linux"
+  system_processor = "x86_64"
+  build_system = "prebuilt"
+  url = "https://developer.download.nvidia.cn/compute/cuda/redist/driver_assistant/source/driver_assistant-0.21.57.08-archive.tar.xz"

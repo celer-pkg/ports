@@ -1,0 +1,8 @@
+[package]
+  ref = "1.19.13"
+
+[[build_configs]]
+  system_name = "linux"
+  system_processor = "x86_64"
+  build_system = "prebuilt"
+  url = "https://developer.download.nvidia.cn/compute/cuda/redist/collectx_bringup/linux-x86_64/collectx_bringup-linux-x86_64-1.19.13-archive.tar.xz"
