@@ -1,0 +1,8 @@
+[package]
+  ref = "1.18.1.6"
+
+[[build_configs]]
+  system_name = "linux"
+  system_processor = "x86_64"
+  build_system = "prebuilt"
+  url = "https://developer.download.nvidia.cn/compute/cuda/redist/libcufile/linux-x86_64/libcufile-linux-x86_64-1.18.1.6-archive.tar.xz"

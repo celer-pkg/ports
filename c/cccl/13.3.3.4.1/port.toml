@@ -1,0 +1,14 @@
+[package]
+  ref = "13.3.3.4.1"
+
+[[build_configs]]
+  system_name = "linux"
+  system_processor = "x86_64"
+  build_system = "prebuilt"
+  url = "https://developer.download.nvidia.cn/compute/cuda/redist/cccl/linux-x86_64/cccl-linux-x86_64-13.3.3.4.1-archive.tar.xz"
+
+[[build_configs]]
+  system_name = "windows"
+  system_processor = "x86_64"
+  build_system = "prebuilt"
+  url = "https://developer.download.nvidia.cn/compute/cuda/redist/cccl/windows-x86_64/cccl-windows-x86_64-13.3.3.4.1-archive.zip"

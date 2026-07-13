@@ -1,0 +1,8 @@
+[package]
+  ref = "2.29.4"
+
+[[build_configs]]
+  system_name = "linux"
+  system_processor = "x86_64"
+  build_system = "prebuilt"
+  url = "https://developer.download.nvidia.cn/compute/cuda/redist/nvidia_fs/linux-x86_64/nvidia_fs-linux-x86_64-2.29.4-archive.tar.xz"

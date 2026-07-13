@@ -1,0 +1,83 @@
+[package]
+  url = "_"
+  ref = "13.3.1"
+
+# =============== build for x86_64-linux ============ #
+
+[[build_configs]]
+  system_name = "linux"
+  system_processor = "x86_64"
+  build_system = "nobuild"
+  dependencies = [
+    "cuda_cudart@13.3.29",
+    "cuda_nvrtc@13.3.33",
+    "cuda_nvtx@13.3.29",
+    "libcublas@13.6.0.2",
+    "libcufft@12.3.0.29",
+    "libcufile@1.18.1.6",
+    "libcurand@10.4.3.29",
+    "libcusolver@12.2.6.9",
+    "libcusparse@12.8.2.51",
+    "libnpp@13.1.2.81",
+    "libnvjpeg@13.2.1.68",
+    "cuda_cupti@13.3.75",
+    "cuda_nvml_dev@13.3.29",
+    "cuda_profiler_api@13.3.27",
+    "cccl@13.3.3.4.1",
+    "libnvidia_nscq@610.43.02",
+    "nvidia_driver@610.43.02",
+    "nvidia_fs@2.29.4",
+    "fabricmanager@610.43.02",
+    "cuda_documentation@13.3.73",
+    "cuda_nvcc@13.3.73",
+    "cuda_nvprune@13.3.29",
+    "cuda_cuobjdump@13.3.73",
+    "cuda_cuxxfilt@13.3.29",
+    "cuda_nvdisasm@13.3.73",
+    "cuda_sanitizer_api@13.3.75",
+    "nsight_compute@2026.2.1.5",
+    "cuda_crt@13.3.73",
+    "libnvjitlink@13.3.33",
+    "libnvfatbin@13.3.29",
+    "libnvvm@13.3.73",
+    "libnvptxcompiler@13.3.73",
+  ]
+
+# =============== build for x86_64-windows ============ #
+
+[[build_configs]]
+  system_name = "windows"
+  system_processor = "x86_64"
+  build_system = "nobuild"
+  dependencies = [
+    "cuda_cudart@13.3.29",
+    "cuda_nvrtc@13.3.33",
+    "cuda_nvtx@13.3.29",
+    "libcublas@13.6.0.2",
+    "libcufft@12.3.0.29",
+    "libcurand@10.4.3.29",
+    "libcusolver@12.2.6.9",
+    "libcusparse@12.8.2.51",
+    "libnpp@13.1.2.81",
+    "libnvjpeg@13.2.1.68",
+    "cuda_cupti@13.3.75",
+    "cuda_nvml_dev@13.3.29",
+    "cuda_profiler_api@13.3.27",
+    "cccl@13.3.3.4.1",
+    "cuda_documentation@13.3.73",
+    "cuda_nvcc@13.3.73",
+    "cuda_nvprune@13.3.29",
+    "cuda_cuobjdump@13.3.73",
+    "cuda_cuxxfilt@13.3.29",
+    "cuda_nvdisasm@13.3.73",
+    "cuda_sanitizer_api@13.3.75",
+    "nsight_compute@2026.2.1.5",
+    "nsight_vse@2026.2.0.26084",
+    "nsight_systems@2026.1.3.425",
+    "visual_studio_integration@13.3.31",
+    "cuda_crt@13.3.73",
+    "libnvjitlink@13.3.33",
+    "libnvfatbin@13.3.29",
+    "libnvvm@13.3.73",
+    "libnvptxcompiler@13.3.73",
+  ]

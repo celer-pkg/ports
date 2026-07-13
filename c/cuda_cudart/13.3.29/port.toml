@@ -1,0 +1,14 @@
+[package]
+  ref = "13.3.29"
+
+[[build_configs]]
+  system_name = "linux"
+  system_processor = "x86_64"
+  build_system = "prebuilt"
+  url = "https://developer.download.nvidia.cn/compute/cuda/redist/cuda_cudart/linux-x86_64/cuda_cudart-linux-x86_64-13.3.29-archive.tar.xz"
+
+[[build_configs]]
+  system_name = "windows"
+  system_processor = "x86_64"
+  build_system = "prebuilt"
+  url = "https://developer.download.nvidia.cn/compute/cuda/redist/cuda_cudart/windows-x86_64/cuda_cudart-windows-x86_64-13.3.29-archive.zip"

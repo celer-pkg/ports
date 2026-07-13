@@ -1,0 +1,14 @@
+[package]
+  ref = "12.8.2.51"
+
+[[build_configs]]
+  system_name = "linux"
+  system_processor = "x86_64"
+  build_system = "prebuilt"
+  url = "https://developer.download.nvidia.cn/compute/cuda/redist/libcusparse/linux-x86_64/libcusparse-linux-x86_64-12.8.2.51-archive.tar.xz"
+
+[[build_configs]]
+  system_name = "windows"
+  system_processor = "x86_64"
+  build_system = "prebuilt"
+  url = "https://developer.download.nvidia.cn/compute/cuda/redist/libcusparse/windows-x86_64/libcusparse-windows-x86_64-12.8.2.51-archive.zip"

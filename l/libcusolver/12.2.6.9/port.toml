@@ -1,0 +1,14 @@
+[package]
+  ref = "12.2.6.9"
+
+[[build_configs]]
+  system_name = "linux"
+  system_processor = "x86_64"
+  build_system = "prebuilt"
+  url = "https://developer.download.nvidia.cn/compute/cuda/redist/libcusolver/linux-x86_64/libcusolver-linux-x86_64-12.2.6.9-archive.tar.xz"
+
+[[build_configs]]
+  system_name = "windows"
+  system_processor = "x86_64"
+  build_system = "prebuilt"
+  url = "https://developer.download.nvidia.cn/compute/cuda/redist/libcusolver/windows-x86_64/libcusolver-windows-x86_64-12.2.6.9-archive.zip"

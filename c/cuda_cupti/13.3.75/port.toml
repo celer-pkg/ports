@@ -1,0 +1,14 @@
+[package]
+  ref = "13.3.75"
+
+[[build_configs]]
+  system_name = "linux"
+  system_processor = "x86_64"
+  build_system = "prebuilt"
+  url = "https://developer.download.nvidia.cn/compute/cuda/redist/cuda_cupti/linux-x86_64/cuda_cupti-linux-x86_64-13.3.75-archive.tar.xz"
+
+[[build_configs]]
+  system_name = "windows"
+  system_processor = "x86_64"
+  build_system = "prebuilt"
+  url = "https://developer.download.nvidia.cn/compute/cuda/redist/cuda_cupti/windows-x86_64/cuda_cupti-windows-x86_64-13.3.75-archive.zip"

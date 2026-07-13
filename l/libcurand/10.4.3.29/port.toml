@@ -1,0 +1,14 @@
+[package]
+  ref = "10.4.3.29"
+
+[[build_configs]]
+  system_name = "linux"
+  system_processor = "x86_64"
+  build_system = "prebuilt"
+  url = "https://developer.download.nvidia.cn/compute/cuda/redist/libcurand/linux-x86_64/libcurand-linux-x86_64-10.4.3.29-archive.tar.xz"
+
+[[build_configs]]
+  system_name = "windows"
+  system_processor = "x86_64"
+  build_system = "prebuilt"
+  url = "https://developer.download.nvidia.cn/compute/cuda/redist/libcurand/windows-x86_64/libcurand-windows-x86_64-10.4.3.29-archive.zip"

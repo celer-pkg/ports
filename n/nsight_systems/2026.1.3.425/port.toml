@@ -1,0 +1,14 @@
+[package]
+  ref = "2026.1.3.425"
+
+[[build_configs]]
+  system_name = "linux"
+  system_processor = "x86_64"
+  build_system = "prebuilt"
+  url = "https://developer.download.nvidia.cn/compute/cuda/redist/nsight_systems/linux-x86_64/nsight_systems-linux-x86_64-2026.1.3.425-archive.tar.xz"
+
+[[build_configs]]
+  system_name = "windows"
+  system_processor = "x86_64"
+  build_system = "prebuilt"
+  url = "https://developer.download.nvidia.cn/compute/cuda/redist/nsight_systems/windows-x86_64/nsight_systems-windows-x86_64-2026.1.3.425-archive.zip"

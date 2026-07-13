@@ -1,0 +1,8 @@
+[package]
+  ref = "2026.2.0.26084"
+
+[[build_configs]]
+  system_name = "windows"
+  system_processor = "x86_64"
+  build_system = "prebuilt"
+  url = "https://developer.download.nvidia.cn/compute/cuda/redist/nsight_vse/windows-x86_64/nsight_vse-windows-x86_64-2026.2.0.26084-archive.zip"

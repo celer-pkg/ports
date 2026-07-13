@@ -1,0 +1,8 @@
+[package]
+  ref = "13.3.29"
+
+[[build_configs]]
+  system_name = "linux"
+  system_processor = "x86_64"
+  build_system = "prebuilt"
+  url = "https://developer.download.nvidia.cn/compute/cuda/redist/cuda_sandbox_dev/linux-x86_64/cuda_sandbox_dev-linux-x86_64-13.3.29-archive.tar.xz"

@@ -1,0 +1,14 @@
+[package]
+  ref = "13.1.2.81"
+
+[[build_configs]]
+  system_name = "linux"
+  system_processor = "x86_64"
+  build_system = "prebuilt"
+  url = "https://developer.download.nvidia.cn/compute/cuda/redist/libnpp/linux-x86_64/libnpp-linux-x86_64-13.1.2.81-archive.tar.xz"
+
+[[build_configs]]
+  system_name = "windows"
+  system_processor = "x86_64"
+  build_system = "prebuilt"
+  url = "https://developer.download.nvidia.cn/compute/cuda/redist/libnpp/windows-x86_64/libnpp-windows-x86_64-13.1.2.81-archive.zip"
