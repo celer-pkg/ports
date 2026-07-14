@@ -12,9 +12,7 @@
     "sed -i '/^RELEASE/s|^|#|' ${REPO_DIR}/nspr/pr/src/misc/Makefile.in",
     "sed -i 's|$(LIBRARY) ||' ${REPO_DIR}/nspr/config/rules.mk",
   ]
-  fix_build = [
-    "cmake -E copy ${BUILD_DIR}/../x86_64-linux-dev/config/nsinstall ${BUILD_DIR}/config",
-  ]
+  pre_build = ["make -C ${BUILD_DIR}/config nsinstall CC=gcc"]
   options = [
     "--host=${HOST}",
     "--enable-64bit",
