@@ -1,8 +1,9 @@
 [package]
-url = "https://github.com/gflags/gflags.git"
-ref = "v2.2.2"
-depth = 1
+  url = "https://github.com/gflags/gflags.git"
+  ref = "v2.2.2"
+  ignore_submodule = true
+  depth = 1
 
 [[build_configs]]
-build_system = "cmake"
-options = ["-DBUILD_TESTING=OFF"]
+  build_system = "cmake"
+  options = ["-DBUILD_TESTING=OFF"]
