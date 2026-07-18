@@ -30,13 +30,12 @@
     "--enable-gpl",
   ]
 
-# ================ build for Windows ================ #
+# ================ build for Windows (MSVC) ================ #
 [[build_configs]]
   system_name = "windows"
+  toolchain_names = ["msvc", "clang-cl"]
   build_system = "makefiles"
-  patches = [
-    "fix_windows_build.patch",
-  ]
+  patches = ["fix_msvc_build.patch"]
   dev_dependencies = [
     "pkgconf@2.4.3",
     "nasm@2.16.03",
@@ -53,7 +52,25 @@
   ]
   options = [
     "--toolchain=msvc",
-    "--target-os=win64",
+    "--pkg-config=pkgconf",
+    "--disable-programs",
+    "--disable-doc",
+    "--enable-pic",
+    "--enable-gpl",
+  ]
+
+# ================ build for Windows (clang) ================ #
+[[build_configs]]
+  system_name = "windows"
+  toolchain_names = ["clang"]
+  build_system = "makefiles"
+  patches = ["fix_windows_build.patch"]
+  envs = ["CFLAGS=-Wno-incompatible-pointer-types -Wno-stringop-overread -Wno-stringop-truncation"]
+  dev_dependencies = [
+    "pkgconf@2.4.3",
+    "nasm@2.16.03",
+  ]
+  options = [
     "--pkg-config=pkgconf",
     "--disable-programs",
     "--disable-doc",
