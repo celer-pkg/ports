@@ -8,6 +8,7 @@
   patches = ["linux-x86_64-gnu-g++.patch"]
   build_system = "qmake"
   build_tools = ["llvm"]
+  envs = ["PKG_CONFIG_SYSROOT_DIR=/"]
   options = [
     "-xplatform linux-x86_64-gnu-g++",
     "-confirm-license",
@@ -70,6 +71,7 @@
   patches = ["linux-aarch64-gnu-g++.patch"]
   build_system = "qmake"
   build_tools = ["llvm"]
+  envs = ["PKG_CONFIG_SYSROOT_DIR=/"]
   options = [
     "-xplatform linux-aarch64-gnu-g++",
     "-confirm-license",
