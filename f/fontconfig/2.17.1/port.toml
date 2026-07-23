@@ -1,5 +1,5 @@
 [package]
-  url = "http://porin.imotion.ai/gitlab/thirdparty/freedesktop_fontconfig-fontconfig.git"
+  url = "https://gitlab.freedesktop.org/fontconfig/fontconfig.git"
   ref = "2.17.1"
   depth = 1
 
