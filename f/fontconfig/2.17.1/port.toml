@@ -4,22 +4,19 @@
   depth = 1
 
 [[build_configs]]
-  system_names = ["linux", "android"]
+  system_name = "linux"
   build_system = "makefiles"
-  include_dirs = [
-    "${DEPS_DIR}/include/freetype2",
-    "${DEPS_DIR}/include/json-c",
-  ]
+  include_dirs = ["${DEPS_DIR}/include/freetype2"]
   envs = ["NOCONFIGURE=1"]
   patches = ["remove-test-from-SUBDIRS.patch"]
   dependencies = [
     "freetype@2.13.3",
     "libexpat@2.7.1",
     "libpng@1.6.49",
-    "json-c@0.18",
   ]
   dev_dependencies = [
     "macros@1.20.2",
+    "pkgconf@2.4.3",
     "libtool@2.5.4",
     "gettext@0.25",
     "gperf@3.1",
