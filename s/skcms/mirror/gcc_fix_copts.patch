@@ -1,0 +1,43 @@
+diff --git a/BUILD.bazel b/BUILD.bazel
+index 65972c8..bea83ac 100644
+--- a/BUILD.bazel
++++ b/BUILD.bazel
+@@ -58,18 +58,17 @@ container_push(
+ 
+ SHARED_COPTS = select({
+     "//bazel/common_config_settings:debug_build": [
+-        "--optimize=0",
+-        "--debug",
++        "-O0",
++        "-g",
+     ],
+     "//bazel/common_config_settings:release_build": [
+-        "--optimize=3",
++        "-O3",
+         # Strip dead code (in conjunction with linkopts)
+         "-fdata-sections",
+         "-ffunction-sections",
+     ],
+     "//bazel/common_config_settings:fast_build": [
+-        "--optimize=0",
+-        "-gline-tables-only",
++        "-O0",
+     ],
+ })
+ 
+@@ -81,14 +80,7 @@ cc_library(
+         "src/skcms_public.h",
+     ],
+     hdrs = ["skcms.h"],
+-    deps = [":skcms_TransformBaseline"] +
+-           select({
+-               "@platforms//cpu:x86_64": [
+-                   ":skcms_TransformHsw",
+-                   ":skcms_TransformSkx",
+-               ],
+-               "//conditions:default": [],
+-           }),
++    deps = [":skcms_TransformBaseline"],
+            copts = SHARED_COPTS,
+ )
+ 
