@@ -4,7 +4,15 @@
 
 [[build_configs]]
   build_system = "bazel"
+  toolchain_name = "gcc"
   patches = ["gcc_fix_copts.patch"]
+  options = [
+    "//:skcms_public",
+  ]
+
+[[build_configs]]
+  build_system = "bazel"
+  toolchain_name = "clang"
   options = [
     "//:skcms_public",
   ]
