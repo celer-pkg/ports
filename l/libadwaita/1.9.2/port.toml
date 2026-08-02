@@ -1,0 +1,8 @@
+[package]
+  url = "https://gitlab.gnome.org/GNOME/libadwaita.git"
+  ref = "1.9.2"
+  depth = 1
+
+[[build_configs]]
+  build_system = "meson"
+  system_name = "linux"
