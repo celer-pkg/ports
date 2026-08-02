@@ -1,0 +1,6 @@
+[package]
+  url = "https://github.com/jeremy-rifkin/libassert.git"
+  ref = "v2.2.1"
+
+[[build_configs]]
+  build_system = "cmake"
