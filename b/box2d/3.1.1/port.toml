@@ -1,0 +1,6 @@
+[package]
+  url = "https://github.com/erincatto/box2d.git"
+  ref = "v3.1.1"
+
+[[build_configs]]
+  build_system = "cmake"
