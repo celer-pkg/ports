@@ -4,3 +4,4 @@
 
 [[build_configs]]
   build_system = "cmake"
+  dependencies_linux = ["wayland@1.23.1"]
