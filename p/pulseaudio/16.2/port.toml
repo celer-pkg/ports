@@ -19,6 +19,7 @@ options = [
     "-Ddatabase=gdbm",
     "-Ddaemon=false",
     "-Dman=false",
+    "-Ddbus=disabled",
 ]
 
 # Note:
