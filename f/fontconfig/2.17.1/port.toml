@@ -4,8 +4,8 @@
   depth = 1
 
 [[build_configs]]
-  system_name = "linux"
   build_system = "makefiles"
+  system_name_except = "windows"
   include_dirs = ["${DEPS_DIR}/include/freetype2"]
   envs = ["NOCONFIGURE=1"]
   patches = ["remove-test-from-SUBDIRS.patch"]

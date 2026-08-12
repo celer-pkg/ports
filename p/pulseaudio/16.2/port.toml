@@ -1,25 +1,22 @@
 [package]
-url = "https://gitlab.freedesktop.org/pulseaudio/pulseaudio.git"
-ref = "v16.2"
-depth = 1
+  url = "https://gitlab.freedesktop.org/pulseaudio/pulseaudio.git"
+  ref = "v16.2"
+  depth = 1
 
 [[build_configs]]
-system_name = "linux"
-build_system = "meson"
-dependencies = [
+  build_system = "meson"
+  system_name_except = "windows"
+  dependencies = [
     "libsndfile@1.2.2",
     "libxtst@1.2.5",
     "check@0.15.2",
     "gdbm@1.25",
     "libxcb@1.17.0",
     "xz@5.8.1",
-]
-options = [
+  ]
+  options = [
     "-Ddoxygen=false",
     "-Ddatabase=gdbm",
     "-Ddaemon=false",
     "-Dman=false",
-]
-
-# Note:
-# This library support linux only.
+  ]

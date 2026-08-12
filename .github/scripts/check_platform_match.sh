@@ -135,6 +135,19 @@ for ((i=0; i<BUILD_CONFIGS_COUNT; i++)); do
   SYSTEM_PROCESSOR=$(read_toml_as_lower ".build_configs[$i].system_processor" "$PORT_TOML")
   echo "-- SYSTEM_PROCESSOR in build_config($i): |${SYSTEM_PROCESSOR}|"
 
+  # Check system_name_except / system_names_except (platform exclusion list)
+  SYSTEM_NAME_EXCEPT=$(read_toml_as_lower ".build_configs[$i].system_name_except" "$PORT_TOML")
+  echo "-- SYSTEM_NAME_EXCEPT in build_config($i): |${SYSTEM_NAME_EXCEPT}|"
+  if [ -n "$SYSTEM_NAME_EXCEPT" ] && [ "$SYSTEM_NAME_EXCEPT" = "$PLATFORM_SYSTEM_NAME" ]; then
+    echo "-- Platform $PLATFORM_SYSTEM_NAME excluded by system_name_except"
+    continue
+  fi
+  # Check system_names_except (array form) — each element excludes that platform
+  if yq eval ".build_configs[$i].system_names_except[]" "$PORT_TOML" 2>/dev/null | grep -qix "$PLATFORM_SYSTEM_NAME"; then
+    echo "-- Platform $PLATFORM_SYSTEM_NAME excluded by system_names_except"
+    continue
+  fi
+
   # system_names/system_name are extensible, so only validate token format when specified.
   if [ -n "$SYSTEM_NAMES" ]; then
     while IFS=' ' read -r token; do
@@ -157,10 +170,10 @@ for ((i=0; i<BUILD_CONFIGS_COUNT; i++)); do
   fi
 
   # No selector specified => global match (only if no selector fields are defined)
-  BUILD_CONFIG_RAW=$(yq eval ".build_configs[$i]" "$PORT_TOML" 2>/dev/null | grep -i "system_names\|system_name\|system_processor" | wc -l)
+  BUILD_CONFIG_RAW=$(yq eval ".build_configs[$i]" "$PORT_TOML" 2>/dev/null | grep -i "system_names\|system_name\|system_processor\|system_names_except\|system_name_except" | wc -l)
   echo "-- BUILD_CONFIG_RAW field count: ${BUILD_CONFIG_RAW}"
   
-  if [ "$BUILD_CONFIG_RAW" = "0" ] && [ -z "$SYSTEM_NAMES" ] && [ -z "$SYSTEM_NAME" ] && [ -z "$SYSTEM_PROCESSOR" ]; then
+  if [ "$BUILD_CONFIG_RAW" = "0" ] && [ -z "$SYSTEM_NAMES" ] && [ -z "$SYSTEM_NAME" ] && [ -z "$SYSTEM_PROCESSOR" ] && [ -z "$SYSTEM_NAME_EXCEPT" ]; then
     echo "-- No selector specified => matches all platforms"
     MATCH_FOUND=true
     break

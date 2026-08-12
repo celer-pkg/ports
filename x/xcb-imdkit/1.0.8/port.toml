@@ -1,17 +1,14 @@
 [package]
-url = "https://salsa.debian.org/input-method-team/xcb-imdkit.git"
-ref = "upstream/1.0.8"
-depth = 1
+  url = "https://salsa.debian.org/input-method-team/xcb-imdkit.git"
+  ref = "upstream/1.0.8"
+  depth = 1
 
 [[build_configs]]
-system_name = "linux"
-build_system = "cmake"
-dependencies = [
-  "extra-cmake-modules@6.11.0",
-  "xcb-util-keysyms@0.4.1",
-  "libxcb@1.17.0",
-  "xcb-util@0.4.1",
-]
-
-# Note:
-# This library support linux only.
+  build_system = "cmake"
+  system_name_except = "windows"
+  dependencies = [
+    "extra-cmake-modules@6.11.0",
+    "xcb-util-keysyms@0.4.1",
+    "libxcb@1.17.0",
+    "xcb-util@0.4.1",
+  ]

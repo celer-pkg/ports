@@ -4,8 +4,8 @@
   depth = 1
 
 [[build_configs]]
-  system_name = "linux"
   build_system = "meson"
+  system_name_except = "windows"
   build_tools = ["python3:setuptools"]
   options = ["-Dlibmount=enabled", "-Dtests=false"]
   dependencies = ["util-linux@2.41", "zlib@1.3.1", "libffi@3.4.8"]

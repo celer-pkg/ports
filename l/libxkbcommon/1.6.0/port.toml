@@ -3,19 +3,16 @@
   ref = "1.6.0"
 
 [[build_configs]]
-  system_name = "linux"
-  patches = ["fix_cannot_find_wayland_scanner.patch"]
   build_system = "meson"
+  system_name_except = "windows"
+  patches = ["fix_cannot_find_wayland_scanner.patch"]
   include_dirs = ["${DEPS_DIR}/include/libxml2"]
   options = ["-Denable-bash-completion=false", "-Denable-docs=false"]
   dependencies = [
-      "libxcb@1.17.0",
-      "libxml2@2.13.5",
-      "libxdmcp@1.1.5",
-      "wayland@1.24.0",
-      "wayland-protocols@1.44",
+    "libxcb@1.17.0",
+    "libxml2@2.13.5",
+    "libxdmcp@1.1.5",
+    "wayland@1.24.0",
+    "wayland-protocols@1.44",
   ]
   dev_dependencies = ["wayland@1.24.0", "bison@3.8.2"]
-
-  # Note:
-# This library support linux only.

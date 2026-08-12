@@ -1,0 +1,32 @@
+Description: Use OpenSSL imported targets (OpenSSL::SSL, OpenSSL::Crypto) in
+             libevent's exported CMake config so the resulting
+             LibeventTargets-{shared,static}.cmake files are relocatable.
+             Without this, INTERFACE_LINK_LIBRARIES ends up containing
+             absolute paths to libssl.so/libcrypto.so from the build-time
+             tmp/deps/... tree, which trips celer's
+             check_cmake_abs_path_in_config_files guard and breaks install.
+Origin:      Self. The legacy ${OPENSSL_LIBRARIES} variable is the path list
+             returned by CMake's built-in FindOpenSSL module, which is
+             unsuitable for target_link_libraries on an EXPORTed target.
+
+--- src/CMakeLists.txt
++++ src/CMakeLists.txt
+@@ -852,7 +852,7 @@
+
+     list(APPEND SRC_OPENSSL bufferevent_openssl.c)
+     list(APPEND HDR_PUBLIC include/event2/bufferevent_ssl.h)
+-    list(APPEND LIB_APPS ${OPENSSL_LIBRARIES})
++    list(APPEND LIB_APPS OpenSSL::SSL OpenSSL::Crypto)
+ endif()
+
+ if (NOT EVENT__DISABLE_THREAD_SUPPORT)
+@@ -955,8 +955,7 @@
+ if (NOT EVENT__DISABLE_OPENSSL)
+     add_event_library(event_openssl
+         INNER_LIBRARIES event_core
+-        OUTER_INCLUDES ${OPENSSL_INCLUDE_DIR}
+-        LIBRARIES ${OPENSSL_LIBRARIES}
++        LIBRARIES OpenSSL::SSL OpenSSL::Crypto
+         SOURCES ${SRC_OPENSSL})
+ endif()
+

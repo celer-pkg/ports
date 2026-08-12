@@ -4,6 +4,6 @@
   depth = 1
 
 [[build_configs]]
-  system_name = "linux"
   build_system = "meson"
+  system_name_except = "windows"
   options = ["-Ddocs=false"]

@@ -4,14 +4,14 @@
   depth = 1
 
 [[build_configs]]
-  system_name = "linux"
   build_system = "makefiles"
+  system_name_except = "windows"
   build_tools = ["python3"]
   dev_dependencies_linux = ["cpython@3.11.13"]
   options = [
     "--host=x86_64-linux-gnu",
     "--build=${HOST}",
-    "--with-build-python=${DEPS_DEV_DIR}/bin/python3",
+    "--with-build-python=${DEV_DEPS_DIR}/bin/python3",
     "--disable-ipv6",
     "--enable-optimizations",
     "--with-ensurepip=no",
