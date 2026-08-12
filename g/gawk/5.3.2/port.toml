@@ -4,9 +4,9 @@
   build_tool = true
 
 [[build_configs]]
-  system_name = "linux"
-  system_processor = "x86_64"
   build_system = "makefiles"
+  system_name_except = "windows"
+  system_processor = "x86_64"
   envs = [
     "AUTOCONF=:",   # Avoid regenerating configure.ac
     "AUTOMAKE=:",   # Avoid regenerating Makefile.in

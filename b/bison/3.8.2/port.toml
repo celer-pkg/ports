@@ -4,8 +4,8 @@
   build_tool = true
 
 [[build_configs]]
-  system_name = "linux"
   build_system = "makefiles"
+  system_name_except = "windows"
   dependencies = ["m4@1.4.19"]
   envs = [
     "AUTOCONF=:",   # Avoid regenerating configure.ac
@@ -14,6 +14,3 @@
     "AUTOHEADER=:", # Avoid regenerating config.h.in
     "MAKEINFO=:",   # Avoid regenerating *.info
   ]
-
-# Note:
-# This library support linux only.

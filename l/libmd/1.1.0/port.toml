@@ -4,13 +4,10 @@
   depth = 1
 
 [[build_configs]]
-  system_name = "linux"
   build_system = "makefiles"
+  system_name_except = "windows"
   build_in_source = true
   dev_dependencies = ["libtool@2.5.4", "macros@1.20.2"]
   envs = ["NOCONFIGURE=1"]
   pre_configure = ["./autogen"]
   options = ["--host=${HOST}"]
-
-# Note:
-# This library support linux only.

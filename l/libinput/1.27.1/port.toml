@@ -4,11 +4,8 @@
   depth = 1
 
 [[build_configs]]
-  system_name = "linux"
   build_system = "meson"
+  system_name_except = "windows"
   dev_dependencies = ["pkgconf@2.4.3"]
   dependencies = ["mtdev@1.1.7", "libevdev@1.13.6", "libwacom@2.18.0"]
   options = ["-Ddebug-gui=false", "-Dtests=false", "-Ddocumentation=false"]
-
-# Note:
-# This library support linux only.

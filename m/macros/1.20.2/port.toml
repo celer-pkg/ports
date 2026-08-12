@@ -5,9 +5,7 @@
 
 [[build_configs]]
   build_system = "makefiles"
+  system_name_except = "windows"
   dev_dependencies = ["automake@1.18"]
   envs = ["NOCONFIGURE=1"]
   pre_configure = ["./autogen.sh"]
-
-# Note:
-# This library support linux only.

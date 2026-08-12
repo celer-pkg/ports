@@ -4,8 +4,8 @@
   depth = 1
 
 [[build_configs]]
-  system_name = "linux"
   build_system = "meson"
+  system_name_except = "windows"
   build_tools = ["python3:pygments"]
   dev_dependencies = [
     "pkgconf@2.4.3",

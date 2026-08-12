@@ -5,8 +5,9 @@
 
 [[build_configs]]
   build_system = "cmake"
-  system_name = "linux"
+  system_name_except = "windows"
+  patches = ["harfbuzz-fix-glibconfig.patch"]
   dependencies = ["freetype@2.13.3", "glib@2.84.1"]
   options = ["-DHB_HAVE_FREETYPE=ON", "-DHB_HAVE_GLIB=ON"]
 
-# freetype and glib are required for generating hb-glib.h
+# freetype and glib are required for generating hb-glib.hq

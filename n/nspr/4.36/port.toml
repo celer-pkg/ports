@@ -4,8 +4,8 @@
   src_dir = "nspr"
 
 [[build_configs]]
-  system_name = "linux"
   build_system = "makefiles"
+  system_name_except = "windows"
   patches = ["fix_negative_array_size.patch"]
   dev_dependencies = ["nspr@4.36"]
   pre_configure = [
@@ -20,6 +20,3 @@
     "--with-mozilla",
     "$([ $(uname -m) = x86_64 ] && echo --enable-64bit)",
   ]
-
-# Note:
-# This library support linux only.
