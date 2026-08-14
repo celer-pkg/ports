@@ -4,7 +4,7 @@
   build_tool = true
 
 [[build_configs]]
-  system_name = "linux"
   build_system = "makefiles"
+  system_name_except = "windows"
   patches = ["fix_build.patch"]
   post_install = ["ln -sf ${PACKAGE_DIR}/bin/yacc ${PACKAGE_DIR}/bin/byacc"]

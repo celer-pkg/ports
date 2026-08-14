@@ -5,4 +5,5 @@
 
 [[build_configs]]
   build_system = "meson"
-  system_name = "linux"
+  system_name_except = "windows"
+  dependencies = ["glib@2.84.1"]

@@ -4,10 +4,7 @@
   depth = 1
 
 [[build_configs]]
-  system_name = "linux"
   build_system = "meson"
+  system_name_except = "windows"
   dependencies = ["wayland@1.24.0"]
   dev_dependencies = ["pkgconf@2.4.3", "wayland@1.24.0"]
-
-# Note:
-# This library support linux only.

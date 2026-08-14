@@ -11,7 +11,7 @@
   options= [
     "--host=x86_64-linux-gnu",
     "--build=${HOST}",
-    "--with-build-python=${DEPS_DEV_DIR}/bin/python3",
+    "--with-build-python=${DEV_DEPS_DIR}/bin/python3",
     "--disable-ipv6",
     "--enable-optimizations",
     "--with-ensurepip=no",

@@ -1,0 +1,56 @@
+diff --git a/build/cmake/CMakeLists.txt b/build/cmake/CMakeLists.txt
+index 5649972..9b626c6 100755
+--- a/build/cmake/CMakeLists.txt
++++ b/build/cmake/CMakeLists.txt
+@@ -38,17 +38,28 @@ endif()
+ 
+ find_package (OpenGL REQUIRED)
+ 
+-# prefer GLVND
+-if (OPENGL_opengl_LIBRARY)
+-  set (GLEW_LIBRARIES ${OPENGL_opengl_LIBRARY})
++# prefer GLVND - use imported targets to avoid hardcoding absolute paths in export
++if (TARGET OpenGL::OpenGL)
++  set (GLEW_LIBRARIES OpenGL::OpenGL)
++elseif (TARGET OpenGL::GL)
++  set (GLEW_LIBRARIES OpenGL::GL)
+ else ()
+-  set (GLEW_LIBRARIES ${OPENGL_gl_LIBRARY})
++  set (GLEW_LIBRARIES ${OPENGL_opengl_LIBRARY})
+ endif ()
+ 
+ # X11 required except for Windows and Apple OSX platforms
+ if (GLEW_X11 AND NOT WIN32 AND NOT APPLE)
+-  find_package (X11)
+-  list (APPEND GLEW_LIBRARIES ${OPENGL_glx_LIBRARY} ${X11_LIBRARIES})
++  find_package (X11 REQUIRED)
++  if (TARGET OpenGL::GLX)
++    list (APPEND GLEW_LIBRARIES OpenGL::GLX)
++  else ()
++    list (APPEND GLEW_LIBRARIES ${OPENGL_glx_LIBRARY})
++  endif ()
++  if (TARGET X11::X11)
++    list (APPEND GLEW_LIBRARIES X11::X11)
++  else ()
++    list (APPEND GLEW_LIBRARIES ${X11_LIBRARIES})
++  endif ()
+ endif()
+ 
+ if (WIN32)
+diff --git a/build/cmake/glew-config.cmake b/build/cmake/glew-config.cmake
+index 0b79c0b..a1c3907 100755
+--- a/build/cmake/glew-config.cmake
++++ b/build/cmake/glew-config.cmake
+@@ -13,6 +13,12 @@
+ # or static lib for GLEW::GLEW 
+ #
+ 
++include(CMakeFindDependencyMacro)
++find_dependency(OpenGL)
++if(NOT WIN32 AND NOT APPLE)
++  find_dependency(X11)
++endif()
++
+ include(${CMAKE_CURRENT_LIST_DIR}/glew-targets.cmake)
+ include(${CMAKE_CURRENT_LIST_DIR}/CopyImportedTargetProperties.cmake)
+ 

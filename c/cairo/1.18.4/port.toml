@@ -4,8 +4,8 @@
   depth = 1
 
 [[build_configs]]
-  system_name = "linux"
   build_system = "meson"
+  system_name_except = "windows"
   dev_dependencies = ["libtool@2.5.4", "macros@1.20.2", "pkgconf@2.4.3"]
   dependencies = [
     "libexpat@2.7.1",
@@ -14,5 +14,6 @@
     "libxrender@0.9.12",
     "pixman@0.44.2",
     "fontconfig@2.17.1",
+    "glib@2.84.1",
   ]
-  options = ["-Dxlib=enabled"]
+  options = ["-Dxlib=enabled", "-Dglib=enabled"]
