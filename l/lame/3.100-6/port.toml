@@ -5,5 +5,5 @@
 
 [[build_configs]]
   build_system = "makefiles"
-  system_name = "linux"
+  system_name_except = "windows"
   options = ["--host=${HOST}"]

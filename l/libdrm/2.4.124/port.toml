@@ -5,10 +5,8 @@
 
 # ================ build for aarch64-linux ================ #
 [[build_configs]]
-  system_name = "linux"
   build_system = "meson"
+  system_name_except = "windows"
   dependencies = ["xcb-proto@1.17.0", "libpciaccess@0.18.1"]
   dev_dependencies = ["pkgconf@2.4.3"]
   options = ["-Dtests=false", "-Dintel=enabled"]
-# Note:
-# This library support linux only.

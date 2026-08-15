@@ -4,9 +4,6 @@
   ref = "1.2.9"
 
 [[build_configs]]
-  system_name = "linux"
+  system_name_except = "windows"
   build_system = "makefiles"
   options = ["--host=${HOST}"]
-
-# Note:
-# This library support linux only.

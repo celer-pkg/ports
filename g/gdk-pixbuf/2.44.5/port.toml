@@ -5,6 +5,6 @@
 
 [[build_configs]]
   build_system = "meson"
-  system_name = "linux"
+  system_name_except = "windows"
   dependencies = ["shared-mime-info@2.4"]
   options = ["-Dglycin=disabled", "-Dman=false"]

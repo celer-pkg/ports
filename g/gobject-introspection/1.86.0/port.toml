@@ -4,8 +4,8 @@
   depth = 1
 
 [[build_configs]]
-  system_name = "linux"
   build_system = "meson"
+  system_name_except = "windows"
   dev_dependencies = [
     "cpython@3.11.13",
     "flex@2.6.4",
@@ -14,6 +14,6 @@
   ]
   dependencies = ["glib@2.84.1"]
   options = [
-    "-Dpython=${DEPS_DEV_DIR}/bin/python3",
+    "-Dpython=${DEV_DEPS_DIR}/bin/python3",
     "-Dbuild_introspection_data=false"
   ]

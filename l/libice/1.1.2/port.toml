@@ -4,8 +4,8 @@
   depth = 1
 
 [[build_configs]]
-  system_name = "linux"
   build_system = "makefiles"
+  system_name_except = "windows"
   dependencies = ["xorgproto@2024.1", "libxtrans@1.5.2"]
   dev_dependencies = ["macros@1.20.2", "libtool@2.5.4"]
   envs = [

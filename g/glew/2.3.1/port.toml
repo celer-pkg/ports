@@ -7,6 +7,7 @@
 
 [[build_configs]]
   build_system = "cmake"
-  system_name = "linux"
+  system_name_except = "windows"
+  patches = ["fix_imported_targets.patch"]
   dependencies = ["mesa@23.3.6"]
   options = ["-DBUILD_UTILS=OFF"]
