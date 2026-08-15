@@ -2,6 +2,7 @@
   url = "https://gitlab.freedesktop.org/xorg/util/macros.git"
   ref = "util-macros-1.20.2"
   depth = 1
+  build_tool = true
 
 [[build_configs]]
   build_system = "makefiles"

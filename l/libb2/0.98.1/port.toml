@@ -1,0 +1,19 @@
+[package]
+  url = "https://github.com/BLAKE2/libb2.git"
+  ref = "v0.98.1"
+
+[[build_configs]]
+  build_system = "makefiles"
+  patches = ["fix-pkgconfigdir.patch"]
+  dev_dependencies = [
+    "macros@1.20.2", 
+    "libtool@2.5.4", 
+    "pkgconf@2.4.3",
+  ]
+  envs = ["NOCONFIGURE=1"]
+  pre_configure = ["./autogen.sh"]
+  options = [
+    "--host=${HOST}", 
+    "--disable-native", 
+    "--disable-static",
+  ]
