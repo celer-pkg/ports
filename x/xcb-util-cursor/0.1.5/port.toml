@@ -3,11 +3,8 @@
   ref = "0.1.5"
 
 [[build_configs]]
-  system_name = "linux"
   build_system = "makefiles"
+  system_name_except = "windows"
   dependencies = ["libxcb-image@0.1.5", "xcb-util-renderutil@0.3.10"]
   dev_dependencies = ["macros@1.20.2", "libtool@2.5.4"]
   options = ["--host=${HOST}"]
-
-# Note:
-# This library support linux only.

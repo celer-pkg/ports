@@ -4,5 +4,5 @@
   depth = 1
 
 [[build_configs]]
-  system_name = "linux"
   build_system = "cmake"
+  system_name_except = "windows"

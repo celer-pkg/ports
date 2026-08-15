@@ -1,9 +1,11 @@
 [package]
-url = "https://github.com/libevent/libevent.git"
-ref = "release-2.1.12-stable"
-depth = 1
+  url = "https://github.com/libevent/libevent.git"
+  ref = "release-2.1.12-stable"
+  depth = 1
 
 [[build_configs]]
-build_system = "cmake"
-dependencies = ["openssl@1.1.1w"]
-options = ["-DEVENT__DISABLE_TESTS=ON"]
+  build_system = "cmake"
+  system_name_except = "windows"
+  patches = ["fix_openssl_imported_targets.patch"]
+  dependencies = ["openssl@1.1.1w"]
+  options = ["-DEVENT__DISABLE_TESTS=ON"]

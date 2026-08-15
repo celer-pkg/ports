@@ -4,17 +4,14 @@
   depth = 1
 
 [[build_configs]]
-  system_name = "linux"
   build_system = "makefiles"
-  dependencies = [
-  "xorgproto@2024.1",
-  "libxcb@1.17.0",
-  "libxtrans@1.5.2"
-  ]
-  dev_dependencies = ["macros@1.20.2", "libxtrans@1.5.2"]
+  system_name_except = "windows"
   options = ["--host=${HOST}", "--with-keysymdefdir=${DEPS_DIR}/include/X11"]
   envs = ["NOCONFIGURE=1"]
   pre_configure = ["./autogen.sh"]
-
-# Note:
-# This library support linux only.
+  dependencies = [
+    "xorgproto@2024.1",
+    "libxcb@1.17.0",
+    "libxtrans@1.5.2"
+  ]
+  dev_dependencies = ["macros@1.20.2", "libxtrans@1.5.2"]

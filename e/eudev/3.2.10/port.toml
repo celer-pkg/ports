@@ -4,10 +4,7 @@
   depth = 1
 
 [[build_configs]]
-  system_name = "linux"
   build_system = "makefiles"
+  system_name_except = "windows"
   dev_dependencies = ["gperf@3.1"]
   options = ["--host=${HOST}"]
-
-# Note:
-# This library support linux only.

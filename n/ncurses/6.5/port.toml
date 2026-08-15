@@ -3,8 +3,8 @@
   ref = "6.5"
 
 [[build_configs]]
-  system_name = "linux"
   build_system = "makefiles"
+  system_name_except = "windows"
   build_shared_option = "--with-shared"
   options = [
     "--host=${HOST}",
@@ -20,6 +20,3 @@
     "ln -sf libmenuw.so ${PACKAGE_DIR}/lib/libmenu.so",
     "ln -sf libpanelw.so ${PACKAGE_DIR}/lib/libpanel.so",
   ]
-
-# Note:
-# This library support linux only.

@@ -6,7 +6,9 @@
 [[build_configs]]
   system_name = "linux"
   build_system = "makefiles"
+  system_name_except = "windows"
   envs = ["NOCONFIGURE=1"]
+  dependencies = ["sqlite3@3.49.0"]
   dev_dependencies = [
     "autoconf@2.72",
     "gettext@0.25",
@@ -22,8 +24,4 @@
     "--disable-makeinstall-chown",
     "--without-systemdsystemunitdir",
     "--disable-bash-completion",
-    "--disable-liblastlog2",
   ]
-
-# Note:
-# This library support linux only.

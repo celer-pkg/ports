@@ -5,7 +5,7 @@
 
 [[build_configs]]
   build_system = "cmake"
-  system_name = "linux"
+  system_name_except = "windows"
   dependencies = [
     "libx11@1.8.11",
     "libxrandr@1.5.4",
@@ -19,5 +19,5 @@
     "-DGLFW_BUILD_EXAMPLES=OFF",
     "-DGLFW_BUILD_TESTS=OFF",
     "-DGLFW_BUILD_DOCS=OFF",
-    "-DWAYLAND_SCANNER_EXECUTABLE=${DEPS_DEV_DIR}/bin/wayland-scanner"
+    "-DWAYLAND_SCANNER_EXECUTABLE=${DEV_DEPS_DIR}/bin/wayland-scanner"
   ]

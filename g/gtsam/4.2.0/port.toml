@@ -5,7 +5,7 @@
 
 [[build_configs]]
   build_system = "cmake"
-  system_name = "linux"
+  system_name_except = "windows"
   dependencies = ["boost@1.87.0", "eigen@3.4.0"]
   options = [
     "-DGTSAM_BUILD_EXAMPLES_ALWAYS=OFF",

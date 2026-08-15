@@ -4,8 +4,8 @@
   depth = 1
 
 [[build_configs]]
-  system_name = "linux"
   build_system = "makefiles"
+  system_name_except = "windows"
   dependencies = [
     "xorgproto@2024.1",
     "libx11@1.8.11",
@@ -16,6 +16,3 @@
   envs = ["NOCONFIGURE=1"]
   pre_configure = ["./autogen.sh"]
   options = ["--host=${HOST}"]
-
-# Note:
-# This library support linux only.

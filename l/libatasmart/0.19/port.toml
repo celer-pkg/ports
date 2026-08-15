@@ -1,0 +1,12 @@
+[package]
+  url = "https://github.com/libatasmart/libatasmart.git"
+  ref = "v0.19"
+  depth = 1
+
+[[build_configs]]
+  build_system = "makefiles"
+  system_name_except = "windows"
+  envs = ["NOCONFIGURE=1"]
+  dev_dependencies = ["macros@1.20.2", "pkgconf@2.4.3", "libtool@2.5.4"]
+  pre_configure = ["./autogen.sh"]
+  options = ["--host=${HOST}"]

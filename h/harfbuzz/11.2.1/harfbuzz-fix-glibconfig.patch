@@ -1,0 +1,56 @@
+diff --git a/CMakeLists.txt b/CMakeLists.txt
+index 05a1f1d..b822e61 100644
+--- a/CMakeLists.txt
++++ b/CMakeLists.txt
+@@ -220,6 +220,16 @@ set (subset_project_headers
+ )
+ 
+ ## Find and include needed header folders and libraries
++if (HB_HAVE_FREETYPE)
++  # Try CONFIG mode first to use the freetype imported target (avoids absolute paths in export)
++  find_package(freetype CONFIG QUIET)
++  if (TARGET freetype)
++    # freetype found via CONFIG mode creates the imported target but skips the
++    # module-mode block below, so set HAVE_FREETYPE and install hb-ft.h here too.
++    add_definitions(-DHAVE_FREETYPE=1)
++    list(APPEND project_headers ${PROJECT_SOURCE_DIR}/src/hb-ft.h)
++  endif ()
++endif ()
+ if (HB_HAVE_FREETYPE AND NOT TARGET freetype)
+   include (FindFreetype)
+   if (NOT FREETYPE_FOUND)
+@@ -268,14 +278,23 @@ if (HB_HAVE_GLIB)
+   pkg_check_modules(PC_GLIB QUIET glib-2.0)
+ 
+   find_library(GLIB_LIBRARIES NAMES glib-2.0 HINTS ${PC_GLIB_LIBDIR} ${PC_GLIB_LIBRARY_DIRS})
+-  find_path(GLIBCONFIG_INCLUDE_DIR NAMES glibconfig.h HINTS ${PC_LIBDIR} ${PC_LIBRARY_DIRS} ${PC_GLIB_INCLUDEDIR} ${PC_GLIB_INCLUDE_DIRS} PATH_SUFFIXES glib-2.0/include)
++  get_filename_component(_GLIB_LIB_DIR "${GLIB_LIBRARIES}" DIRECTORY)
++  find_path(GLIBCONFIG_INCLUDE_DIR NAMES glibconfig.h HINTS "${_GLIB_LIB_DIR}" ${PC_GLIB_LIBDIR} ${PC_GLIB_LIBRARY_DIRS} ${PC_GLIB_INCLUDEDIR} ${PC_GLIB_INCLUDE_DIRS} PATH_SUFFIXES glib-2.0/include)
+   find_path(GLIB_INCLUDE_DIR NAMES glib.h HINTS ${PC_GLIB_INCLUDEDIR} ${PC_GLIB_INCLUDE_DIRS} PATH_SUFFIXES glib-2.0)
+ 
+   include_directories(${GLIBCONFIG_INCLUDE_DIR} ${GLIB_INCLUDE_DIR})
+ 
+   list(APPEND project_headers ${PROJECT_SOURCE_DIR}/src/hb-glib.h)
+ 
+-  list(APPEND THIRD_PARTY_LIBS ${GLIB_LIBRARIES})
++  # Create imported target to avoid absolute path in cmake export
++  if(NOT TARGET glib::glib)
++    add_library(glib::glib UNKNOWN IMPORTED)
++    set_target_properties(glib::glib PROPERTIES
++      IMPORTED_LOCATION "${GLIB_LIBRARIES}"
++      INTERFACE_INCLUDE_DIRECTORIES "${GLIBCONFIG_INCLUDE_DIR};${GLIB_INCLUDE_DIR}"
++    )
++  endif()
++  list(APPEND THIRD_PARTY_LIBS glib::glib)
+ 
+   list(APPEND PC_REQUIRES_PRIV "glib-2.0 >= 2.19.1")
+ 
+@@ -489,7 +508,7 @@ add_library(harfbuzz ${project_sources} ${project_extra_sources} ${project_heade
+ target_link_libraries(harfbuzz ${THIRD_PARTY_LIBS})
+ target_include_directories(harfbuzz PUBLIC
+                            "$<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/src>"
+-                           "$<INSTALL_INTERFACE:${CMAKE_INSTALL_INCLUDEDIR}/harfbuzz>")
++                           "$<INSTALL_INTERFACE:include/harfbuzz>")
+ if (HB_HAVE_FREETYPE AND TARGET freetype)
+   target_link_libraries(harfbuzz freetype)
+ endif ()
