@@ -7,4 +7,5 @@
   build_system = "meson"
   system_name = "linux"
   dependencies = ["glib@2.84.1"]
+  dev_dependencies = ["glib@2.84.1"]
   options = ["-Dtests=disabled", "-Dintrospection=disabled", "-Dgtk_doc=false"]
