@@ -7,4 +7,4 @@
   build_system = "meson"
   system_name = "linux"
   dev_dependencies = ["pkgconf@2.4.3"]
-  dependencies = ["glib@2.84.1", "gtk@4.22.0"]
+  dependencies = ["glib@2.84.1", "gtk@4.22.0", "appstream@1.1.6"]
