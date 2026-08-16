@@ -73,12 +73,23 @@ read_toml_as_lower() {
   fi
 }
 
+# Extract major.minor from a version string (e.g. "14.50.35717" -> "14.50").
+minor_version() {
+  local v="$1"
+  local major="${v%%.*}"
+  local rest="${v#*.}"
+  local minor="${rest%%.*}"
+  echo "${major}.${minor}"
+}
+
 # Parse platform selectors from platform.toml only.
 PLATFORM_SYSTEM_NAME=$(read_toml_as_lower '.toolchain.system_name' "$PLATFORM_TOML")
 PLATFORM_PROCESSOR=$(read_toml_as_lower '.toolchain.system_processor' "$PLATFORM_TOML")
+PLATFORM_TOOLCHAIN_VERSION=$(read_toml_as_lower '.toolchain.version' "$PLATFORM_TOML")
 
 echo "-- Read PLATFORM_SYSTEM_NAME: ${PLATFORM_SYSTEM_NAME}"
 echo "-- Read PLATFORM_PROCESSOR: ${PLATFORM_PROCESSOR}"
+echo "-- Read PLATFORM_TOOLCHAIN_VERSION: ${PLATFORM_TOOLCHAIN_VERSION}"
 
 # system_name is extensible (e.g. linux/windows/darwin/qnx/mcu...),
 # so only validate format.
@@ -135,6 +146,9 @@ for ((i=0; i<BUILD_CONFIGS_COUNT; i++)); do
   SYSTEM_PROCESSOR=$(read_toml_as_lower ".build_configs[$i].system_processor" "$PORT_TOML")
   echo "-- SYSTEM_PROCESSOR in build_config($i): |${SYSTEM_PROCESSOR}|"
 
+  TOOLCHAIN_VERSION=$(read_toml_as_lower ".build_configs[$i].toolchain_version" "$PORT_TOML")
+  echo "-- TOOLCHAIN_VERSION in build_config($i): |${TOOLCHAIN_VERSION}|"
+
   # Check system_name_except / system_names_except (platform exclusion list)
   SYSTEM_NAME_EXCEPT=$(read_toml_as_lower ".build_configs[$i].system_name_except" "$PORT_TOML")
   echo "-- SYSTEM_NAME_EXCEPT in build_config($i): |${SYSTEM_NAME_EXCEPT}|"
@@ -170,10 +184,10 @@ for ((i=0; i<BUILD_CONFIGS_COUNT; i++)); do
   fi
 
   # No selector specified => global match (only if no selector fields are defined)
-  BUILD_CONFIG_RAW=$(yq eval ".build_configs[$i]" "$PORT_TOML" 2>/dev/null | grep -i "system_names\|system_name\|system_processor\|system_names_except\|system_name_except" | wc -l)
+  BUILD_CONFIG_RAW=$(yq eval ".build_configs[$i]" "$PORT_TOML" 2>/dev/null | grep -i "system_names\|system_name\|system_processor\|system_names_except\|system_name_except\|toolchain_version" | wc -l)
   echo "-- BUILD_CONFIG_RAW field count: ${BUILD_CONFIG_RAW}"
   
-  if [ "$BUILD_CONFIG_RAW" = "0" ] && [ -z "$SYSTEM_NAMES" ] && [ -z "$SYSTEM_NAME" ] && [ -z "$SYSTEM_PROCESSOR" ] && [ -z "$SYSTEM_NAME_EXCEPT" ]; then
+  if [ "$BUILD_CONFIG_RAW" = "0" ] && [ -z "$SYSTEM_NAMES" ] && [ -z "$SYSTEM_NAME" ] && [ -z "$SYSTEM_PROCESSOR" ] && [ -z "$SYSTEM_NAME_EXCEPT" ] && [ -z "$TOOLCHAIN_VERSION" ]; then
     echo "-- No selector specified => matches all platforms"
     MATCH_FOUND=true
     break
@@ -181,6 +195,7 @@ for ((i=0; i<BUILD_CONFIGS_COUNT; i++)); do
 
   SYSTEM_NAME_MATCH=true
   SYSTEM_PROCESSOR_MATCH=true
+  TOOLCHAIN_VERSION_MATCH=true
 
   # Check system_names list first (takes precedence over system_name)
   if [ -n "$SYSTEM_NAMES" ]; then
@@ -199,9 +214,16 @@ for ((i=0; i<BUILD_CONFIGS_COUNT; i++)); do
     SYSTEM_PROCESSOR_MATCH=false
   fi
 
-  echo "-- SYSTEM_NAME_MATCH=${SYSTEM_NAME_MATCH}, SYSTEM_PROCESSOR_MATCH=${SYSTEM_PROCESSOR_MATCH}"
+  # Check toolchain_version (compare major.minor part).
+  if [ -n "$TOOLCHAIN_VERSION" ]; then
+    if [ "$(minor_version "$PLATFORM_TOOLCHAIN_VERSION")" != "$(minor_version "$TOOLCHAIN_VERSION")" ]; then
+      TOOLCHAIN_VERSION_MATCH=false
+    fi
+  fi
+
+  echo "-- SYSTEM_NAME_MATCH=${SYSTEM_NAME_MATCH}, SYSTEM_PROCESSOR_MATCH=${SYSTEM_PROCESSOR_MATCH}, TOOLCHAIN_VERSION_MATCH=${TOOLCHAIN_VERSION_MATCH}"
   
-  if [ "$SYSTEM_NAME_MATCH" = "true" ] && [ "$SYSTEM_PROCESSOR_MATCH" = "true" ]; then
+  if [ "$SYSTEM_NAME_MATCH" = "true" ] && [ "$SYSTEM_PROCESSOR_MATCH" = "true" ] && [ "$TOOLCHAIN_VERSION_MATCH" = "true" ]; then
     MATCH_FOUND=true
     NAMES_DISPLAY="${SYSTEM_NAMES:-${SYSTEM_NAME:-*}}"
     echo "-- Match found: system_name='${NAMES_DISPLAY}', system_processor='${SYSTEM_PROCESSOR:-*}' matches platform selectors from '$PLATFORM_TOML'"
