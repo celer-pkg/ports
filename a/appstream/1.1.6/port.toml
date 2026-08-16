@@ -5,6 +5,7 @@
 
 [[build_configs]]
   build_system = "meson"
+  system_name_except = "windows"
   patches = ["fix-cross-build-native-appstream.patch"]
   dev_dependencies = ["pkgconf@2.4.3", "gperf@3.1", "glib@2.84.1"]
   dependencies = [
