@@ -1,0 +1,17 @@
+[package]
+  url = "https://github.com/erincatto/box2d.git"
+  ref = "v3.1.1"
+
+[[build_configs]]
+  build_system = "cmake"
+  dependencies_linux = [
+    "wayland@1.24.0", 
+    "libxkbcommon@1.6.0", 
+    "libx11@1.8.11",
+    "libxrandr@1.5.4",
+    "libxinerama@1.1.6",
+    "libxcursor@1.2.3",
+    "libinput@1.27.1",
+    "libxi@1.8.2",
+    "mesa@23.3.6",
+  ]
