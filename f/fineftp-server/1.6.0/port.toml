@@ -4,7 +4,7 @@
 
 [[build_configs]]
   build_system = "cmake"
-  dependencies = ["asio@1.38.2"]
+  dependencies_linux = ["asio@1.38.2"]
   options = [
     "-DFINEFTP_SERVER_BUILD_SAMPLES=OFF",
     "-DFINEFTP_SERVER_BUILD_TESTS=OFF",
