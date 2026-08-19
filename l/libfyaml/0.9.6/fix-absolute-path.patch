@@ -1,0 +1,15 @@
+diff --git a/CMakeLists.txt b/CMakeLists.txt
+index ef0c3ae..12aeebe 100644
+--- a/CMakeLists.txt
++++ b/CMakeLists.txt
+@@ -1191,8 +1191,8 @@ endif()
+ # macOS includes math in libSystem; Windows has no libm.
+ find_library(LIBM m)
+ if(LIBM)
+-    target_link_libraries(fyaml PUBLIC ${LIBM})
+-    target_link_libraries(fyaml_static PUBLIC ${LIBM})
++    target_link_libraries(fyaml PUBLIC m)
++    target_link_libraries(fyaml_static PUBLIC m)
+ endif()
+ 
+ # Add libclang support if available

@@ -5,4 +5,6 @@
 
 [[build_configs]]
   build_system = "cmake"
+  dev_dependencies = ["pkgconf@2.4.3"]
   dependencies = ["libzmq@4.3.5"]
+  options = ["-DCPPZMQ_BUILD_TESTS=OFF"]

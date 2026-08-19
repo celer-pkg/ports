@@ -1,0 +1,11 @@
+[package]
+  url = "https://github.com/ArthurSonzogni/FTXUI.git"
+  ref = "v7.0.3"
+
+[[build_configs]]
+  build_system = "cmake"
+  options = [
+    "-DFTXUI_BUILD_DOCS=OFF",
+    "-DFTXUI_BUILD_EXAMPLES=OFF",
+    "-DFTXUI_BUILD_TESTS_FUZZER=OFF",
+  ]
