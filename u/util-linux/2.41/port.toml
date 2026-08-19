@@ -6,8 +6,8 @@
 [[build_configs]]
   build_system = "makefiles"
   system_name_except = "windows"
-  dependencies = ["sqlite3@3.49.0"]
   envs = ["NOCONFIGURE=1"]
+  dependencies = ["sqlite3@3.49.0"]
   dev_dependencies = [
     "autoconf@2.72",
     "gettext@0.25",
