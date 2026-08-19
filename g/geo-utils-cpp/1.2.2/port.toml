@@ -1,0 +1,12 @@
+[package]
+  url = "https://github.com/gistrec/geo-utils-cpp.git"
+  ref = "v1.2.2"
+
+[[build_configs]]
+  build_system = "cmake"
+  options = [
+    "-DGEO_UTILS_CPP_BUILD_TESTS=OFF",
+    "-DGEO_UTILS_CPP_BUILD_EXAMPLES=OFF",
+    "-DGEO_UTILS_CPP_BUILD_BENCHMARKS=OFF",
+    "-DGEO_UTILS_CPP_BUILD_FUZZERS=OFF",
+  ]
