@@ -1,0 +1,8 @@
+[package]
+  url = "https://github.com/davea42/libdwarf-code.git"
+  ref = "v2.3.2"
+  depth = 1
+
+[[build_configs]]
+  build_system = "cmake"
+  system_name_except = "windows"
