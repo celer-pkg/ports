@@ -1,0 +1,6 @@
+[package]
+  url = "https://github.com/p-ranav/glob.git"
+  ref = "v0.0.1"
+
+[[build_configs]]
+  build_system = "cmake"
