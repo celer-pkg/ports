@@ -1,0 +1,14 @@
+[package]
+  url = "https://github.com/libigl/libigl.git"
+  ref = "v2.6.0"
+
+[[build_configs]]
+  build_system = "cmake"
+  dependencies = ["mesa@23.3.6", "libxinerama@1.1.6", "libxcursor@1.2.3", "libxi@1.8.2"]
+  options = [
+    "-DLIBIGL_BUILD_TESTS=OFF",
+    "-DLIBIGL_BUILD_TUTORIALS=OFF",
+    "-DLIBIGL_GLFW_TESTS=OFF",
+    "-DLIBIGL_COPYLEFT_CGAL=OFF",
+    "-DLIBIGL_COPYLEFT_TETGEN=OFF",
+  ]
