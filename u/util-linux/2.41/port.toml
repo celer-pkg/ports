@@ -6,14 +6,15 @@
 [[build_configs]]
   build_system = "makefiles"
   system_name_except = "windows"
-  dependencies = ["sqlite3@3.49.0"]
   envs = ["NOCONFIGURE=1"]
+  dependencies = ["sqlite3@3.49.0"]
   dev_dependencies = [
     "autoconf@2.72",
     "gettext@0.25",
     "flex@2.6.4",
     "bison@3.8.2",
     "libtool@2.5.4",
+    "pkgconf@2.4.3",
   ]
   pre_configure = ["./autogen.sh"]
   options = [

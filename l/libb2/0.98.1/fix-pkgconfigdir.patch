@@ -1,0 +1,10 @@
+diff --git a/Makefile.am b/Makefile.am
+index 33a20e0..edc073f 100644
+--- a/Makefile.am
++++ b/Makefile.am
+@@ -4,4 +4,5 @@ EXTRA_DIST = COPYING
+ 
+ SUBDIRS = src
+ 
++pkgconfigdir = $(libdir)/pkgconfig
+ pkgconfig_DATA = libb2.pc
