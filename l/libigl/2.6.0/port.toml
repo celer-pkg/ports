@@ -4,7 +4,12 @@
 
 [[build_configs]]
   build_system = "cmake"
-  dependencies = ["mesa@23.3.6", "libxinerama@1.1.6", "libxcursor@1.2.3", "libxi@1.8.2"]
+  dependencies_linux = [
+    "mesa@23.3.6",
+    "libxinerama@1.1.6",
+    "libxcursor@1.2.3",
+    "libxi@1.8.2",
+  ]
   options = [
     "-DLIBIGL_BUILD_TESTS=OFF",
     "-DLIBIGL_BUILD_TUTORIALS=OFF",
