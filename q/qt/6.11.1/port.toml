@@ -28,17 +28,38 @@
   ]
   options = [
     "-DQT_HOST_PATH=${DEV_DEPS_DIR}",
-    "-DBUILD_WRAP_PROTOC=ON",
-    "-DBUILD_PROTOBUF_TOOLS=ON",
     "-DQT_BUILD_SUBMODULES=qtbase;qtshadertools;qtdeclarative;qtwayland",
     "-DQT_BUILD_EXAMPLES=OFF",
     "-DQT_BUILD_TESTS=OFF",
     "-DQT_NO_PACKAGE_VERSION_CHECK=ON",
     "-DQT_NO_PACKAGE_VERSION_INCOMPATIBLE_WARNING=ON",
     "-DQT_DEBUG_FIND_PACKAGE=ON",
+    "-DQT_FEATURE_wayland=ON",
+    "-DBUILD_WRAP_PROTOC=ON",
+    "-DBUILD_PROTOBUF_TOOLS=ON",
     "-DCMAKE_DISABLE_FIND_PACKAGE_X11=ON",
     "-DCMAKE_DISABLE_FIND_PACKAGE_XCB=ON",
     "-DFEATURE_xcb=OFF",
     "-DFEATURE_wayland=ON",
-    "-DQT_FEATURE_wayland=ON",
   ]
+
+  [[build_configs]]
+    build_system = "cmake"
+    cmake_generator = "Ninja"
+    system_name = "widows"
+    shorten_build_folder = true
+    dev_dependencies = ["qt-host@6.11.1"]
+    options = [
+      "-DQT_HOST_PATH=${DEV_DEPS_DIR}",
+      "-DQT_BUILD_SUBMODULES=qtbase;qtshadertools;qtdeclarative",
+      "-DQT_BUILD_EXAMPLES=OFF",
+      "-DQT_BUILD_TESTS=OFF",
+      "-DQT_NO_PACKAGE_VERSION_CHECK=ON",
+      "-DQT_NO_PACKAGE_VERSION_INCOMPATIBLE_WARNING=ON",
+      "-DQT_DEBUG_FIND_PACKAGE=ON",
+      "-DQT_FEATURE_wayland=OFF",
+      "-DBUILD_WRAP_PROTOC=ON",
+      "-DBUILD_PROTOBUF_TOOLS=ON",
+      "-DCMAKE_DISABLE_FIND_PACKAGE_X11=ON",
+      "-DCMAKE_DISABLE_FIND_PACKAGE_XCB=ON",
+    ]

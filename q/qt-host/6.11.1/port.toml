@@ -3,11 +3,11 @@
   ref = "6.11.1"
 
 [[build_configs]]
+  build_system = "cmake"
   system_name = "linux"
   cmake_generator = "Ninja"
-  build_system = "cmake"
   dev_dependencies = ["wayland@1.24.0"]
-  dependencies = ["zstd@1.5.7", "mesa@23.3.6"] # You can speed up build progress, by remove mesa@23.3.6 and install opengl locally.
+  dependencies = ["zstd@1.5.7", "mesa@23.3.6"]
   options = [
     "-DQT_BUILD_TESTS=OFF",
     "-DQT_BUILD_EXAMPLES=OFF",
@@ -22,4 +22,22 @@
     "-DFEATURE_opengles2=OFF",
     "-DFEATURE_opengles3=OFF",
     "-DFEATURE_egl=OFF",
+  ]
+
+[[build_configs]]
+  build_system = "cmake"
+  cmake_generator = "Ninja"
+  system_name = "windows"
+  build_tools = ["python3"]
+  options = [
+    "-DPython_EXECUTABLE=${PYTHON_PATH}",
+    "-DQT_BUILD_TESTS=OFF",
+    "-DQT_BUILD_EXAMPLES=OFF",
+    "-DQT_BUILD_TOOLS_BY_DEFAULT=ON",
+    "-DQT_BUILD_SUBMODULES=qtbase;qtshadertools;qtdeclarative;qttools",
+    "-DFEATURE_gui=ON",
+    "-DFEATURE_widgets=OFF",
+    "-DINPUT_opengl=no",
+    "-DFEATURE_developer_build=ON",
+    "-DFEATURE_doc_snippets=OFF",
   ]
