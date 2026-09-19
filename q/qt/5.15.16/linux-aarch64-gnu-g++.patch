@@ -25,10 +25,10 @@ index 2dc57b09fa..c28d987c2c 100644
 +QMAKE_NM                = $$(NM) -P
 +QMAKE_STRIP             = $$(STRIP)
 +
-+QMAKE_INCDIR_OPENGL_ES2 = $$(DEPS_DIR)/include
-+QMAKE_LIBDIR_OPENGL_ES2 = $$(DEPS_DIR)/lib
-+QMAKE_INCDIR_EGL        = $$(DEPS_DIR)/include
-+QMAKE_LIBDIR_EGL        = $$(DEPS_DIR)/lib
++QMAKE_INCDIR_OPENGL_ES2 = $$(STAGING_DIR)/include
++QMAKE_LIBDIR_OPENGL_ES2 = $$(STAGING_DIR)/lib
++QMAKE_INCDIR_EGL        = $$(STAGING_DIR)/include
++QMAKE_LIBDIR_EGL        = $$(STAGING_DIR)/lib
 +
 +# add sysroot paths to rpath
 +QMAKE_RPATHLINKDIR_POST += \

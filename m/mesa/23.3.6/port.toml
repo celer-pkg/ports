@@ -7,8 +7,8 @@
   system_processor = "x86_64"
   build_system = "meson"
   build_tools = ["python3:mako", "python3:packaging"]
-  include_dirs = ["${DEPS_DIR}/include/valgrind"]
-  envs = ["LLVM_CONFIG=${DEPS_DIR}/bin/llvm-config"]
+  include_dirs = ["${STAGING_DIR}/include/valgrind"]
+  envs = ["LLVM_CONFIG=${STAGING_DIR}/bin/llvm-config"]
   dependencies = [
     "libxshmfence@1.3.3",
     "libxext@1.3.6",
@@ -55,7 +55,7 @@
   system_processor = "aarch64"
   build_system = "meson"
   build_tools = ["python3:mako", "python3:packaging"]
-  include_dirs = ["${DEPS_DIR}/include/valgrind"]
+  include_dirs = ["${STAGING_DIR}/include/valgrind"]
   dependencies = [
     "libxshmfence@1.3.3",
     "libxext@1.3.6",

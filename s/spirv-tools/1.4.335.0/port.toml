@@ -7,4 +7,4 @@
   build_system = "cmake"
   build_tools = ["python3"]
   dependencies = ["spirv-headers@1.4.335.0"]
-  options = ["-DSPIRV-Headers_SOURCE_DIR=${DEPS_DIR}"]
+  options = ["-DSPIRV-Headers_SOURCE_DIR=${STAGING_DIR}"]

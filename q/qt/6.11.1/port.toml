@@ -27,7 +27,7 @@
     "libpciaccess@0.18.1",
   ]
   options = [
-    "-DQT_HOST_PATH=${DEV_DEPS_DIR}",
+    "-DQT_HOST_PATH=${DEV_STAGING_DIR}",
     "-DQT_BUILD_SUBMODULES=qtbase;qtshadertools;qtdeclarative;qtwayland",
     "-DQT_BUILD_EXAMPLES=OFF",
     "-DQT_BUILD_TESTS=OFF",
@@ -50,7 +50,7 @@
     shorten_build_folder = true
     dev_dependencies = ["qt-host@6.11.1"]
     options = [
-      "-DQT_HOST_PATH=${DEV_DEPS_DIR}",
+      "-DQT_HOST_PATH=${DEV_STAGING_DIR}",
       "-DQT_BUILD_SUBMODULES=qtbase;qtshadertools;qtdeclarative",
       "-DQT_BUILD_EXAMPLES=OFF",
       "-DQT_BUILD_TESTS=OFF",

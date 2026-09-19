@@ -14,6 +14,6 @@
   ]
   dependencies = ["glib@2.84.1"]
   options = [
-    "-Dpython=${DEV_DEPS_DIR}/bin/python3",
+    "-Dpython=${DEV_STAGING_DIR}/bin/python3",
     "-Dbuild_introspection_data=false"
   ]

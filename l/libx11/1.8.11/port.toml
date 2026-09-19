@@ -6,7 +6,7 @@
 [[build_configs]]
   build_system = "makefiles"
   system_name_except = "windows"
-  options = ["--host=${HOST}", "--with-keysymdefdir=${DEPS_DIR}/include/X11"]
+  options = ["--host=${HOST}", "--with-keysymdefdir=${STAGING_DIR}/include/X11"]
   envs = ["NOCONFIGURE=1"]
   pre_configure = ["./autogen.sh"]
   dependencies = [

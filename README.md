@@ -95,8 +95,8 @@ Celer expands variables in `options`, hooks, and related string fields. The most
 - `${SRC_DIR}`
 - `${BUILD_DIR}`
 - `${PACKAGE_DIR}`
-- `${DEPS_DIR}`
-- `${DEV_DEPS_DIR}`
+- `${STAGING_DIR}`
+- `${DEV_STAGING_DIR}`
 
 See `docs/en-US/article_port.md` and `docs/en-US/article_expvars.md` for deeper background.
 
