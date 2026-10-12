@@ -1,6 +1,27 @@
 [package]
-url = "https://sqlite.org/2025/sqlite-amalgamation-3490100.zip"
-ref = "3.49.0"
+  url = "https://github.com/sqlite/sqlite.git"
+  ref = "version-3.49.0"
 
+# =============== build for linux ============ #
 [[build_configs]]
-build_system = "cmake"
+  build_system = "makefiles"
+  system_name = "linux"
+  options = ["--disable-tcl"]
+
+# =============== build for windows ============ #
+[[build_configs]]
+  build_system = "makefiles"
+  system_name = "windows"
+  options = [
+    "NO_TCL=1",
+    "sqlite3.exe",
+    "sqlite3.dll",
+  ]
+  post_install_windows = [
+    "cmake -E make_directory ${PACKAGE_DIR}/bin ${PACKAGE_DIR}/lib ${PACKAGE_DIR}/include",
+    "cmake -E copy ${BUILD_DIR}/sqlite3.dll ${PACKAGE_DIR}/bin",
+    "cmake -E copy ${BUILD_DIR}/sqlite3.exe ${PACKAGE_DIR}/bin",
+    "cmake -E copy ${BUILD_DIR}/sqlite3.lib ${PACKAGE_DIR}/lib",
+    "cmake -E copy ${BUILD_DIR}/sqlite3.h ${PACKAGE_DIR}/include",
+    "cmake -E copy ${BUILD_DIR}/sqlite3ext.h ${PACKAGE_DIR}/include",
+  ]
