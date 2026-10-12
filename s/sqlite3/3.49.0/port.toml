@@ -17,7 +17,7 @@
     "sqlite3.exe",
     "sqlite3.dll",
   ]
-  post_install_windows = [
+  post_install = [
     "cmake -E make_directory ${PACKAGE_DIR}/bin ${PACKAGE_DIR}/lib ${PACKAGE_DIR}/include",
     "cmake -E copy ${BUILD_DIR}/sqlite3.dll ${PACKAGE_DIR}/bin",
     "cmake -E copy ${BUILD_DIR}/sqlite3.exe ${PACKAGE_DIR}/bin",
