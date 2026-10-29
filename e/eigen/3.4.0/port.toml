@@ -7,3 +7,7 @@
   build_system = "cmake"
   cxx_standard = "c++11"
   options = ["-DEIGEN_TEST_NO_OPENGL=1", "-DBUILD_TESTING=OFF"]
+  post_install = [
+    "cmake -E rename ${PACKAGE_DIR}/share/eigen3/cmake ${PACKAGE_DIR}/share/cmake",
+    "cmake -E remove_directory ${PACKAGE_DIR}/share/eigen3",
+  ]
