@@ -4,7 +4,7 @@
   depth = 1
 
 [[build_configs]]
-  build_system = "meson"
+  build_system = "meson@1.12.1"
   system_name_except = "windows"
   patches = ["skip_cross_introspection.patch"]
   dependencies = ["gobject-introspection@1.86.0"]

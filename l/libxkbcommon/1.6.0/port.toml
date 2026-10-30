@@ -3,7 +3,7 @@
   ref = "1.6.0"
 
 [[build_configs]]
-  build_system = "meson"
+  build_system = "meson@1.12.1"
   system_name_except = "windows"
   patches = ["fix_cannot_find_wayland_scanner.patch"]
   include_dirs = ["${STAGING_DIR}/include/libxml2"]

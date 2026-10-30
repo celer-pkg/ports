@@ -4,5 +4,5 @@ ref = "main"
 depth = 1
 
 [[build_configs]]
-build_system = "meson"
+build_system = "meson@1.12.1"
 options = ["-Dtests=false"]
