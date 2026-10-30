@@ -1,6 +1,6 @@
 [package]
   url = "https://gitlab.freedesktop.org/gstreamer/meson-ports/libdv.git"
-  ref = "meson@1.12.1"
+  ref = "meson"
   depth = 1
 
 [[build_configs]]
