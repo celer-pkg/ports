@@ -4,7 +4,7 @@
   depth = 1
 
 [[build_configs]]
-  build_system = "meson"
+  build_system = "meson@1.12.1"
   system_name_except = "windows"
   options = ["-Ddocumentation=false"]
   dependencies = ["libffi@3.4.8", "libxml2@2.13.5", "libexpat@2.7.1"]

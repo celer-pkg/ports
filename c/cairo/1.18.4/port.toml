@@ -4,7 +4,7 @@
   depth = 1
 
 [[build_configs]]
-  build_system = "meson"
+  build_system = "meson@1.12.1"
   system_name_except = "windows"
   dev_dependencies = ["libtool@2.5.4", "macros@1.20.2", "pkgconf@2.4.3"]
   dependencies = [

@@ -4,7 +4,7 @@
   depth = 1
 
 [[build_configs]]
-  build_system = "meson"
+  build_system = "meson@1.12.1"
   system_name = "linux"
   dependencies = ["glib@2.84.1"]
   dev_dependencies = ["glib@2.84.1"]

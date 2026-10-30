@@ -4,7 +4,7 @@ ref = "pkgconf-2.4.3"
 depth = 1
 
 [[build_configs]]
-build_system = "meson"
+build_system = "meson@1.12.1"
 options = ["-Db_lundef=false", "-Dtests=disabled"]
 post_install_linux = ["cmake -E copy ${PACKAGE_DIR}/bin/pkgconf ${PACKAGE_DIR}/bin/pkg-config"]
 post_install_windows = ["cmake -E copy ${PACKAGE_DIR}/bin/pkgconf.exe ${PACKAGE_DIR}/bin/pkg-config.exe"]

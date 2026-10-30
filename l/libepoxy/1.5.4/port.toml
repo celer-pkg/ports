@@ -4,7 +4,7 @@
   depth = 1
 
 [[build_configs]]
-  build_system = "meson"
+  build_system = "meson@1.12.1"
   dependencies = ["libglvnd@1.7.0"]
   system_name_except = "windows"
   options = [
