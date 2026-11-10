@@ -9,8 +9,8 @@
   build_tools = ["python3"]
   dev_dependencies_linux = ["cpython@3.11.13"]
   options = [
-    "--host=x86_64-linux-gnu",
-    "--build=${HOST}",
+    "--host=${HOST}",
+    "--build=${BUILD_HOST}",
     "--with-build-python=${DEV_STAGING_DIR}/bin/python3",
     "--disable-ipv6",
     "--enable-optimizations",
